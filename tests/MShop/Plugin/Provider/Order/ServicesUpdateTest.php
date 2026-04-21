@@ -53,15 +53,14 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 		$priceItem = $priceManager->create();
 		$localeItem = $localeManager->create();
-		$orderProduct = $orderBaseProductManager->create();
+		$orderProduct = $orderBaseProductManager->create()->setProductCode( 'test' );
 
 		$serviceDelivery = $orderBaseServiceManager->create()->setServiceId( 1 );
 		$servicePayment = $orderBaseServiceManager->create()->setServiceId( 2 );
 
 
-		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
-			->setConstructorArgs( ['order.', ['.price' => $priceItem, '.locale' => $localeItem]] )
-			->onlyMethods( ['getProducts'] )->getMock();
+		$orderStub = new \Aimeos\MShop\Order\Item\Standard( 'order.', ['.price' => $priceItem, '.locale' => $localeItem] );
+		$orderStub->off();
 
 		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
 			->setConstructorArgs( [$this->context] )->onlyMethods( ['search', 'getProvider'] )->getMock();
@@ -69,6 +68,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop::inject( \Aimeos\MShop\Service\Manager\Standard::class, $serviceStub );
 
 
+		$orderStub->addProduct( $orderProduct );
 		$orderStub->addService( $serviceDelivery, 'delivery' );
 		$orderStub->addService( $servicePayment, 'payment' );
 
@@ -79,9 +79,6 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$providerStub = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Delivery\Standard::class )
 			->setConstructorArgs( [$this->context, $serviceStub->create()] )
 			->onlyMethods( ['isAvailable'] )->getMock();
-
-		$orderStub->expects( $this->any() )->method( 'getProducts' )
-			->willReturn( map( [$orderProduct] ) );
 
 		$serviceStub->expects( $this->once() )->method( 'search' )
 			->willReturn( map( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) );
@@ -109,15 +106,14 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 		$priceItem = $priceManager->create();
 		$localeItem = $localeManager->create();
-		$orderProduct = $orderBaseProductManager->create();
+		$orderProduct = $orderBaseProductManager->create()->setProductCode( 'test' );
 
 		$serviceDelivery = $orderBaseServiceManager->create()->setServiceId( 1 );
 		$servicePayment = $orderBaseServiceManager->create()->setServiceId( 2 );
 
 
-		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
-			->setConstructorArgs( ['order.', ['.price' => $priceItem, '.locale' => $localeItem]] )
-			->onlyMethods( ['getProducts'] )->getMock();
+		$orderStub = new \Aimeos\MShop\Order\Item\Standard( 'order.', ['.price' => $priceItem, '.locale' => $localeItem] );
+		$orderStub->off();
 
 		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
 			->setConstructorArgs( [$this->context] )->onlyMethods( ['search', 'getProvider'] )->getMock();
@@ -125,6 +121,7 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop::inject( \Aimeos\MShop\Service\Manager\Standard::class, $serviceStub );
 
 
+		$orderStub->addProduct( $orderProduct );
 		$orderStub->addService( $serviceDelivery, 'delivery' );
 		$orderStub->addService( $servicePayment, 'payment' );
 
@@ -135,9 +132,6 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 		$providerStub = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Delivery\Standard::class )
 			->setConstructorArgs( [$this->context, $serviceStub->create()] )
 			->onlyMethods( ['isAvailable'] )->getMock();
-
-		$orderStub->expects( $this->once() )->method( 'getProducts' )
-			->willReturn( map( [$orderProduct] ) );
 
 		$serviceStub->expects( $this->once() )->method( 'search' )
 			->willReturn( map( [1 => $serviceItemDelivery, 2 => $serviceItemPayment] ) );
@@ -163,23 +157,19 @@ class ServicesUpdateTest extends \PHPUnit\Framework\TestCase
 
 		$priceItem = $priceManager->create();
 		$localeItem = $localeManager->create();
-		$orderProduct = $orderBaseProductManager->create();
+		$orderProduct = $orderBaseProductManager->create()->setProductCode( 'test' );
 
 		$serviceDelivery = $orderBaseServiceManager->create()->setServiceId( -1 );
 		$servicePayment = $orderBaseServiceManager->create()->setServiceId( -2 );
 
 
-		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Standard::class )
-			->setConstructorArgs( ['order.', ['.price' => $priceItem, '.locale' => $localeItem]] )
-			->onlyMethods( ['getProducts'] )->getMock();
+		$orderStub = new \Aimeos\MShop\Order\Item\Standard( 'order.', ['.price' => $priceItem, '.locale' => $localeItem] );
+		$orderStub->off();
 
 
+		$orderStub->addProduct( $orderProduct );
 		$orderStub->addService( $serviceDelivery, 'delivery' );
 		$orderStub->addService( $servicePayment, 'payment' );
-
-
-		$orderStub->expects( $this->once() )->method( 'getProducts' )
-			->willReturn( map( [$orderProduct] ) );
 
 
 		$this->assertEquals( null, $this->object->update( $orderStub, 'addAddress.after' ) );

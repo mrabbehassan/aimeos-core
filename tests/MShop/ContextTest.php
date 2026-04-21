@@ -292,7 +292,7 @@ class ContextTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSetUser()
 	{
-		$mock = $this->getMockBuilder( \Aimeos\MShop\Customer\Item\Iface::class )->getMock();
+		$mock = $this->createStub( \Aimeos\MShop\Customer\Item\Iface::class );
 		$fcn = function() use ( $mock ) {
 			return $mock;
 		};

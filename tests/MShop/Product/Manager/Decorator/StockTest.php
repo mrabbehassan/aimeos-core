@@ -8,7 +8,10 @@
 
 namespace Aimeos\MShop\Product\Manager\Decorator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+
+#[AllowMockObjectsWithoutExpectations]
 class StockTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;

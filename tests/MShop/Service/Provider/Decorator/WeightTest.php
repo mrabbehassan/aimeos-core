@@ -8,7 +8,10 @@
 
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+
+#[AllowMockObjectsWithoutExpectations]
 class WeightTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;

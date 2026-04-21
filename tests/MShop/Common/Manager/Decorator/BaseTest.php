@@ -8,12 +8,15 @@
 
 namespace Aimeos\MShop\Common\Manager\Decorator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+
 
 class Example extends \Aimeos\MShop\Common\Manager\Decorator\Base
 {
 }
 
 
+#[AllowMockObjectsWithoutExpectations]
 class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;

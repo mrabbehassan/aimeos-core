@@ -84,7 +84,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdatePush()
 	{
-		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
+		$request = $this->createStub( \Psr\Http\Message\ServerRequestInterface::class );
 		$response = $this->getMockBuilder( \Psr\Http\Message\ResponseInterface::class )->getMock();
 
 		$response->expects( $this->once() )->method( 'withStatus' )->willReturn( $response );
@@ -98,7 +98,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateSync()
 	{
 		$orderItem = \Aimeos\MShop::create( $this->context, 'order' )->create();
-		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
+		$request = $this->createStub( \Psr\Http\Message\ServerRequestInterface::class );
 
 		$result = $this->object->updateSync( $request, $orderItem );
 

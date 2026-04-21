@@ -8,7 +8,10 @@
 
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+
+#[AllowMockObjectsWithoutExpectations]
 class DownloadTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;

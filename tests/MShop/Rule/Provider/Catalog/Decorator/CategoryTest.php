@@ -8,7 +8,10 @@
 
 namespace Aimeos\MShop\Rule\Provider\Catalog\Decorator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+
+#[AllowMockObjectsWithoutExpectations]
 class CategoryTest extends \PHPUnit\Framework\TestCase
 {
 	private $item;

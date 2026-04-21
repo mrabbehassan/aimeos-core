@@ -9,7 +9,10 @@
 
 namespace Aimeos\MShop\Service\Provider\Payment;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+
+#[AllowMockObjectsWithoutExpectations]
 class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
