@@ -1,137 +1,127 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# 
-# 
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# danijel marinovic <danijel06@gmail.com>, 2015
 msgid ""
 msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: sr\n"
+"Language-Team: Serbian (http://app.transifex.com/aimeos/aimeos-core/language/sr/)\n"
+"Last-Translator: danijel marinovic <danijel06@gmail.com>, 2015\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:35+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-07-09 20:35+0000\n"
-"Last-Translator: danijel marinovic <danijel06@gmail.com>, 2015\n"
-"Language-Team: Serbian (http://app.transifex.com/aimeos/aimeos-core/language/sr/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: sr\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "aa"
-msgstr ""
+msgstr "Афар"
 
 msgid "ab"
-msgstr ""
+msgstr "Абхазски"
 
 msgid "ae"
-msgstr ""
+msgstr "авестански"
 
 msgid "af"
-msgstr ""
+msgstr "Африканс"
 
 msgid "ak"
-msgstr ""
+msgstr "Акан"
 
 msgid "am"
-msgstr ""
+msgstr "Амхарски"
 
 msgid "an"
-msgstr ""
+msgstr "Арагонско"
 
 msgid "ar"
-msgstr ""
+msgstr "арапски"
 
 msgid "as"
-msgstr ""
+msgstr "Ассамски"
 
 msgid "av"
-msgstr ""
+msgstr "Авар"
 
 msgid "ay"
-msgstr ""
+msgstr "Ајмара"
 
 msgid "az"
-msgstr ""
+msgstr "Азербејџански"
 
 msgid "ba"
-msgstr ""
+msgstr "Башҡорт"
 
 msgid "be"
-msgstr ""
+msgstr "Беларускі"
 
 msgid "bg"
-msgstr ""
+msgstr "Бугарски"
 
 msgid "bh"
-msgstr ""
+msgstr "Бихари"
 
 msgid "bi"
-msgstr ""
+msgstr "Бислама"
 
 msgid "bm"
-msgstr ""
+msgstr "Бамбара"
 
 msgid "bn"
-msgstr ""
+msgstr "Бенгалски"
 
 msgid "bo"
-msgstr ""
+msgstr "Тибетски"
 
 msgid "br"
-msgstr ""
+msgstr "Бретон"
 
 msgid "bs"
-msgstr ""
+msgstr "Бошњачки"
 
 msgid "ca"
-msgstr ""
+msgstr "Каталонски"
 
 msgid "ce"
-msgstr ""
+msgstr "Чеченец"
 
 msgid "ch"
-msgstr ""
+msgstr "Чаморо"
 
 msgid "co"
-msgstr ""
+msgstr "Корсикански"
 
 msgid "cr"
-msgstr ""
+msgstr "Кри"
 
 msgid "cs"
-msgstr ""
+msgstr "Чешки"
 
 msgid "cu"
-msgstr ""
+msgstr "Црквенословенски"
 
 msgid "cv"
-msgstr ""
+msgstr "Чуваш"
 
 msgid "cy"
-msgstr ""
+msgstr "Велшки"
 
 msgid "da"
 msgstr "Danski"
 
 msgid "de"
-msgstr ""
+msgstr "Немачки"
 
 msgid "dv"
-msgstr ""
+msgstr "дхивехи"
 
 msgid "dz"
-msgstr ""
+msgstr "Џонгка"
 
 msgid "ee"
-msgstr ""
+msgstr "Овца"
 
 msgid "el"
-msgstr ""
+msgstr "Грчки"
 
 msgid "en"
 msgstr "Engleski"
@@ -140,34 +130,34 @@ msgid "eo"
 msgstr "Esperanto"
 
 msgid "es"
-msgstr ""
+msgstr "Шпански"
 
 msgid "et"
 msgstr "Estonski"
 
 msgid "eu"
-msgstr ""
+msgstr "Баскијски"
 
 msgid "fa"
 msgstr "Persijski"
 
 msgid "ff"
-msgstr ""
+msgstr "Фула"
 
 msgid "fi"
 msgstr "Finski"
 
 msgid "fj"
-msgstr ""
+msgstr "Фиджијски"
 
 msgid "fo"
-msgstr ""
+msgstr "Фарнезе"
 
 msgid "fr"
 msgstr "Francuski"
 
 msgid "fy"
-msgstr ""
+msgstr "Фризијски"
 
 msgid "ga"
 msgstr "Irski"
@@ -176,19 +166,19 @@ msgid "gd"
 msgstr "Skotski Galik"
 
 msgid "gl"
-msgstr ""
+msgstr "Галицијански"
 
 msgid "gn"
-msgstr ""
+msgstr "Гuarani"
 
 msgid "gu"
-msgstr ""
+msgstr "Гуджарати"
 
 msgid "gv"
-msgstr ""
+msgstr "Менкс"
 
 msgid "ha"
-msgstr ""
+msgstr "Хауса"
 
 msgid "he"
 msgstr "Jevrejski"
@@ -197,217 +187,217 @@ msgid "hi"
 msgstr "Hindu"
 
 msgid "ho"
-msgstr ""
+msgstr "Хири моту"
 
 msgid "hr"
 msgstr "Hrvatski"
 
 msgid "ht"
-msgstr ""
+msgstr "Хаићански креолски"
 
 msgid "hu"
 msgstr "Madarski"
 
 msgid "hy"
-msgstr ""
+msgstr "Јерменски"
 
 msgid "hz"
-msgstr ""
+msgstr "Хереро"
 
 msgid "ia"
-msgstr ""
+msgstr "Интерлингва"
 
 msgid "id"
 msgstr "Indonezanski"
 
 msgid "ie"
-msgstr ""
+msgstr "Интерлингве"
 
 msgid "ig"
-msgstr ""
+msgstr "Игбо"
 
 msgid "ii"
-msgstr ""
+msgstr "И"
 
 msgid "ik"
-msgstr ""
+msgstr "Инупијак"
 
 msgid "io"
-msgstr ""
+msgstr "Идо"
 
 msgid "is"
-msgstr ""
+msgstr "Исландски"
 
 msgid "it"
 msgstr "Italijanski"
 
 msgid "iu"
-msgstr ""
+msgstr "Инуктитут"
 
 msgid "ja"
 msgstr "Japanski"
 
 msgid "jv"
-msgstr ""
+msgstr "Џаванесе"
 
 msgid "ka"
-msgstr ""
+msgstr "Грузијски"
 
 msgid "kg"
-msgstr ""
+msgstr "Конго"
 
 msgid "ki"
 msgstr "Kikuju"
 
 msgid "kj"
-msgstr ""
+msgstr "Куанјама"
 
 msgid "kk"
-msgstr ""
+msgstr "Казах"
 
 msgid "kl"
-msgstr ""
+msgstr "Гренландски"
 
 msgid "km"
-msgstr ""
+msgstr "Кхмер"
 
 msgid "kn"
-msgstr ""
+msgstr "Каннада"
 
 msgid "ko"
 msgstr "Korejski"
 
 msgid "kr"
-msgstr ""
+msgstr "Канури"
 
 msgid "ks"
-msgstr ""
+msgstr "Кашмирски"
 
 msgid "ku"
-msgstr ""
+msgstr "Курдски"
 
 msgid "kv"
-msgstr ""
+msgstr "Коми"
 
 msgid "kw"
-msgstr ""
+msgstr "Корнски"
 
 msgid "ky"
-msgstr ""
+msgstr "Киргиз"
 
 msgid "la"
 msgstr "Latinski"
 
 msgid "lb"
-msgstr ""
+msgstr "Луксембургски"
 
 msgid "lg"
-msgstr ""
+msgstr "Луганда"
 
 msgid "li"
-msgstr ""
+msgstr "лимбургски"
 
 msgid "ln"
-msgstr ""
+msgstr "Лингала"
 
 msgid "lo"
-msgstr ""
+msgstr "Лао"
 
 msgid "lt"
-msgstr ""
+msgstr "Литвански"
 
 msgid "lu"
-msgstr ""
+msgstr "Луба-Катанга"
 
 msgid "lv"
-msgstr ""
+msgstr "Латвијски"
 
 msgid "mg"
-msgstr ""
+msgstr "Малагаси"
 
 msgid "mh"
-msgstr ""
+msgstr "Маршалски"
 
 msgid "mi"
-msgstr ""
+msgstr "Маори"
 
 msgid "mk"
 msgstr "Makedonski"
 
 msgid "ml"
-msgstr ""
+msgstr "Малајалам"
 
 msgid "mn"
 msgstr "Mongolski"
 
 msgid "mo"
-msgstr ""
+msgstr "Молдавски"
 
 msgid "mr"
-msgstr ""
+msgstr "Марати"
 
 msgid "ms"
-msgstr ""
+msgstr "Малај"
 
 msgid "mt"
-msgstr ""
+msgstr "Малтешки"
 
 msgid "my"
-msgstr ""
+msgstr "Бурмански"
 
 msgid "na"
-msgstr ""
+msgstr "Науру"
 
 msgid "nb"
-msgstr ""
+msgstr "Норвешки букмол"
 
 msgid "nd"
-msgstr ""
+msgstr "Северни Ндебеле"
 
 msgid "ne"
-msgstr ""
+msgstr "Непалски"
 
 msgid "ng"
-msgstr ""
+msgstr "Ндонгa"
 
 msgid "nl"
-msgstr ""
+msgstr "Холандски"
 
 msgid "nn"
-msgstr ""
+msgstr "Норвешки Нинорск"
 
 msgid "no"
 msgstr "Norveski"
 
 msgid "nr"
-msgstr ""
+msgstr "Јужни Ндебеле"
 
 msgid "nv"
-msgstr ""
+msgstr "Навахо"
 
 msgid "ny"
-msgstr ""
+msgstr "Чичева"
 
 msgid "oc"
-msgstr ""
+msgstr "Окситан"
 
 msgid "oj"
-msgstr ""
+msgstr "Оџибва"
 
 msgid "om"
-msgstr ""
+msgstr "Или"
 
 msgid "or"
-msgstr ""
+msgstr "Оријски"
 
 msgid "os"
-msgstr ""
+msgstr "Осетински"
 
 msgid "pa"
-msgstr ""
+msgstr "Пенџаби"
 
 msgid "pi"
-msgstr ""
+msgstr "Паљи"
 
 msgid "pl"
 msgstr "Poljski"
@@ -419,43 +409,43 @@ msgid "pt"
 msgstr "Portugalski"
 
 msgid "pt_BR"
-msgstr ""
+msgstr "Португалски (Бразил)"
 
 msgid "qu"
-msgstr ""
+msgstr "Кечуа"
 
 msgid "rm"
-msgstr ""
+msgstr "Рето-романијски"
 
 msgid "rn"
-msgstr ""
+msgstr "Кирунди"
 
 msgid "ro"
-msgstr ""
+msgstr "Румунски"
 
 msgid "ru"
-msgstr ""
+msgstr "Руски"
 
 msgid "rw"
-msgstr ""
+msgstr "Кињаруанда"
 
 msgid "sa"
-msgstr ""
+msgstr "Санскрит"
 
 msgid "sc"
-msgstr ""
+msgstr "Сардински"
 
 msgid "sd"
-msgstr ""
+msgstr "Синди"
 
 msgid "se"
-msgstr ""
+msgstr "Северни сами"
 
 msgid "sg"
-msgstr ""
+msgstr "Санго"
 
 msgid "si"
-msgstr ""
+msgstr "Синхала"
 
 msgid "sk"
 msgstr "Slovacki"
@@ -464,13 +454,13 @@ msgid "sl"
 msgstr "Slovenacki"
 
 msgid "sm"
-msgstr ""
+msgstr "Самоански"
 
 msgid "sn"
-msgstr ""
+msgstr "Шона"
 
 msgid "so"
-msgstr ""
+msgstr "Сомали"
 
 msgid "sq"
 msgstr "Albanski"
@@ -479,13 +469,13 @@ msgid "sr"
 msgstr "Srpski"
 
 msgid "ss"
-msgstr ""
+msgstr "Свати"
 
 msgid "st"
-msgstr ""
+msgstr "Сесото"
 
 msgid "su"
-msgstr ""
+msgstr "Сундански"
 
 msgid "sv"
 msgstr "Svedski"
@@ -494,49 +484,49 @@ msgid "sw"
 msgstr "Svahili"
 
 msgid "ta"
-msgstr ""
+msgstr "Тамил"
 
 msgid "te"
-msgstr ""
+msgstr "Телугу"
 
 msgid "tg"
-msgstr ""
+msgstr "Таџик"
 
 msgid "th"
-msgstr ""
+msgstr "Тајландски"
 
 msgid "ti"
-msgstr ""
+msgstr "Тигриња"
 
 msgid "tk"
-msgstr ""
+msgstr "Туркмен"
 
 msgid "tl"
-msgstr ""
+msgstr "Тагалог"
 
 msgid "tn"
-msgstr ""
+msgstr "Сетсвана"
 
 msgid "to"
-msgstr ""
+msgstr "тонгански"
 
 msgid "tr"
 msgstr "Turski"
 
 msgid "ts"
-msgstr ""
+msgstr "Цонга"
 
 msgid "tt"
-msgstr ""
+msgstr "Татар"
 
 msgid "tw"
-msgstr ""
+msgstr "Тви"
 
 msgid "ty"
-msgstr ""
+msgstr "Таитијански"
 
 msgid "ug"
-msgstr ""
+msgstr "Уйғур"
 
 msgid "uk"
 msgstr "Ukrajinski"
@@ -545,37 +535,37 @@ msgid "ur"
 msgstr "Urdu"
 
 msgid "uz"
-msgstr ""
+msgstr "Узбек"
 
 msgid "ve"
-msgstr ""
+msgstr "Венда"
 
 msgid "vi"
-msgstr ""
+msgstr "Вијетнамски"
 
 msgid "vo"
-msgstr ""
+msgstr "Волапюк"
 
 msgid "wa"
-msgstr ""
+msgstr "Валлонски"
 
 msgid "wo"
-msgstr ""
+msgstr "волоф"
 
 msgid "xh"
-msgstr ""
+msgstr "Ксоза"
 
 msgid "yi"
-msgstr ""
+msgstr "јидиш"
 
 msgid "yo"
-msgstr ""
+msgstr "Јораба"
 
 msgid "za"
-msgstr ""
+msgstr "Жуанг"
 
 msgid "zh"
-msgstr ""
+msgstr "Кинески"
 
 msgid "zu"
-msgstr ""
+msgstr "Зулу"

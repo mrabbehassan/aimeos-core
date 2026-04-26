@@ -1,29 +1,19 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# 
-# 
-# Translators:
-# Translators:
-# Translators:
-# Translators:
-# Shoon Lae Won <wonshoonlae@gmail.com>, 2018
 msgid ""
 msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: my\n"
+"Language-Team: Burmese (http://app.transifex.com/aimeos/aimeos-core/language/my/)\n"
+"Last-Translator: Shoon Lae Won <wonshoonlae@gmail.com>, 2018\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:34+0000\n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-07-09 20:34+0000\n"
-"Last-Translator: Shoon Lae Won <wonshoonlae@gmail.com>, 2018\n"
-"Language-Team: Burmese (http://app.transifex.com/aimeos/aimeos-core/language/my/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: my\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "AD"
-msgstr ""
+msgstr "အန်ဒိုရာ"
 
 msgid "AE"
 msgstr "အာရပ်စော်ဘွားများပြည်ထောင်စု"
@@ -32,10 +22,10 @@ msgid "AF"
 msgstr "အာဖဂန်နစ္စတန်"
 
 msgid "AG"
-msgstr ""
+msgstr "အန်တီဂွါနှင့်ဘာဘူဒါ"
 
 msgid "AI"
-msgstr ""
+msgstr "အန်ဂွီလာ"
 
 msgid "AL"
 msgstr "အယ်လ်ဘေးနီးယား"
@@ -53,7 +43,7 @@ msgid "AR"
 msgstr "အာဂျင်တီးနား"
 
 msgid "AS"
-msgstr ""
+msgstr "အမေရိကန်ဆိုမိုအာ"
 
 msgid "AT"
 msgstr "ဩစတြီးယား"
@@ -62,88 +52,88 @@ msgid "AU"
 msgstr "ဩစတြေးလျ"
 
 msgid "AW"
-msgstr ""
+msgstr "အာရူဘာ"
 
 msgid "AX"
-msgstr ""
+msgstr "အလန်ဒ်ကျွန်းများ"
 
 msgid "AZ"
-msgstr ""
+msgstr "အာဇာဘိုင်ဂျန်"
 
 msgid "BA"
-msgstr ""
+msgstr "ဘော့စ်နီးယားနှင့် ဟက်ဇီဂိုဗီနား"
 
 msgid "BB"
-msgstr ""
+msgstr "ဘာဘာဒော့စ်"
 
 msgid "BD"
-msgstr ""
+msgstr "ဘင်္ဂလားဒေ့ရှ်"
 
 msgid "BE"
 msgstr "ဘယ်လ်ဂျီယမ်"
 
 msgid "BF"
-msgstr ""
+msgstr "ဘူရကီနာဖာဆို"
 
 msgid "BG"
-msgstr ""
+msgstr "ဘူလ်ဂေးရီးယား"
 
 msgid "BH"
-msgstr ""
+msgstr "ဘာရိန်း"
 
 msgid "BI"
-msgstr ""
+msgstr "ဘူရွန်ဒီ"
 
 msgid "BJ"
-msgstr ""
+msgstr "ဘီနင်"
 
 msgid "BL"
-msgstr ""
+msgstr "စိန့်ဘာသာလေမိ"
 
 msgid "BM"
-msgstr ""
+msgstr "ဘားမူဒါ"
 
 msgid "BN"
 msgstr "ဘရူနိုင်းဒါရူဆလမ်"
 
 msgid "BO"
-msgstr ""
+msgstr "ဘိုလီးဗီးယား၊ အမျိုးမျိုးပေါင်းစုံနိုင်ငံတော်"
 
 msgid "BQ"
-msgstr ""
+msgstr "ဘိုနိုင်း၊ စင့်တူးစတီးယပ်စ်နှင့် ဆာဘာ"
 
 msgid "BR"
 msgstr "ဘရာဇီး"
 
 msgid "BS"
-msgstr ""
+msgstr "ဘဟာမတ်"
 
 msgid "BT"
 msgstr "ဘူတန်"
 
 msgid "BV"
-msgstr ""
+msgstr "ဘူဗက်ကျွန်း"
 
 msgid "BW"
-msgstr ""
+msgstr "ဘော့စ်ဝါနာ"
 
 msgid "BY"
-msgstr ""
+msgstr "ဘီလာရုစ်"
 
 msgid "BZ"
-msgstr ""
+msgstr "ဘယ်လီဇ်"
 
 msgid "CA"
 msgstr "ကနေဒါ"
 
 msgid "CC"
-msgstr ""
+msgstr "ကော့ကော့စ် (ကီးလင်း) ကျွန်းများ"
 
 msgid "CD"
-msgstr ""
+msgstr "ကွန်ဂို၊ ဒီမိုကရက်တစ် ပြည်ထောင်စု"
 
 msgid "CF"
-msgstr ""
+msgstr "အာဖရိကအလယ်ပိုင်းသမ္မတနိုင်ငံ"
 
 msgid "CG"
 msgstr "ကွန်ဂို"
@@ -152,175 +142,175 @@ msgid "CH"
 msgstr "ဆွစ်ဇာလန်"
 
 msgid "CI"
-msgstr ""
+msgstr "ကိုးတဒီဗာ"
 
 msgid "CK"
-msgstr ""
+msgstr "ကူခ်ကျွန်းများ"
 
 msgid "CL"
 msgstr "ချီလီ"
 
 msgid "CM"
-msgstr ""
+msgstr "ကင်မရွန်း"
 
 msgid "CN"
 msgstr "တရုတ်"
 
 msgid "CO"
-msgstr ""
+msgstr "ကိုလံဘီယာ"
 
 msgid "CR"
-msgstr ""
+msgstr "ကိုစတာရီကာ"
 
 msgid "CU"
-msgstr ""
+msgstr "ကူဘာ"
 
 msgid "CV"
-msgstr ""
+msgstr "ကေပေဗာဒေး"
 
 msgid "CW"
-msgstr ""
+msgstr "ကူရာဆို"
 
 msgid "CX"
-msgstr ""
+msgstr "ခရစ္စမတ်ကျွန်း"
 
 msgid "CY"
-msgstr ""
+msgstr "ဆိုပရပ်စ်"
 
 msgid "CZ"
-msgstr ""
+msgstr "ချက်ပြည်ထောင်စု"
 
 msgid "DE"
 msgstr "ဂျာမနီ"
 
 msgid "DJ"
-msgstr ""
+msgstr "ဂျီဘူတီ"
 
 msgid "DK"
 msgstr "ဒိန်းမတ်"
 
 msgid "DM"
-msgstr ""
+msgstr "ဒိုမီနီကာ"
 
 msgid "DO"
-msgstr ""
+msgstr "ဒိုမီနီကန်သမ္မတနိုင်ငံ"
 
 msgid "DZ"
-msgstr ""
+msgstr "အယ်လ်ဂျီးရီးယား"
 
 msgid "EC"
 msgstr "အီကွေဒေါ"
 
 msgid "EE"
-msgstr ""
+msgstr "အက်စ်တိုးနီးယား"
 
 msgid "EG"
 msgstr "အီဂျစ်"
 
 msgid "EH"
-msgstr ""
+msgstr "အနောက်ဆာဟာရာ"
 
 msgid "ER"
-msgstr ""
+msgstr "အဲရီထရီးယား"
 
 msgid "ES"
 msgstr "စပိန်"
 
 msgid "ET"
-msgstr ""
+msgstr "အီသီယိုးပီးယား"
 
 msgid "FI"
 msgstr "ဖင်လန်"
 
 msgid "FJ"
-msgstr ""
+msgstr "ဖီဂျီ"
 
 msgid "FK"
-msgstr ""
+msgstr "ဖော့ခ်လန်ကျွန်းစု (မာလ်ဗီနပ်စ်)"
 
 msgid "FM"
-msgstr ""
+msgstr "မိုက်ခရိုနီးရှား ဖက်ဒရေးရှင်းနိုင်ငံများ"
 
 msgid "FO"
-msgstr ""
+msgstr "ဖာရိုကျွန်းစု"
 
 msgid "FR"
 msgstr "ပြင်သစ်"
 
 msgid "GA"
-msgstr ""
+msgstr "ဂါဘွန်"
 
 msgid "GB"
-msgstr ""
+msgstr "ယူနိုက်တက်ကင်းဒမ်း"
 
 msgid "GD"
-msgstr ""
+msgstr "ဂရေနဒါ"
 
 msgid "GE"
-msgstr ""
+msgstr "ဂျော်ဂျီယာ"
 
 msgid "GF"
-msgstr ""
+msgstr "ပြင်သစ်ဂွိုင်ယာနာ"
 
 msgid "GG"
-msgstr ""
+msgstr "ဂျာနဆီ"
 
 msgid "GH"
-msgstr ""
+msgstr "ဂါနာ"
 
 msgid "GI"
-msgstr ""
+msgstr "ဂျီဘရယ်တာ"
 
 msgid "GL"
-msgstr ""
+msgstr "ဂရင်းလန်ဒ်"
 
 msgid "GM"
-msgstr ""
+msgstr "ဂမ်ဘီယာ"
 
 msgid "GN"
-msgstr ""
+msgstr "ဂီနီ"
 
 msgid "GP"
-msgstr ""
+msgstr "ဂွါဒဲလူပ"
 
 msgid "GQ"
-msgstr ""
+msgstr "အီကွေတာရီယယ် ဂီနီ"
 
 msgid "GR"
 msgstr "ဂရိ"
 
 msgid "GS"
-msgstr ""
+msgstr "တောင်ဂျော်ဂျီယာနှင့် တောင်ဆန်ဒဝစ်ကျွန်းစု"
 
 msgid "GT"
-msgstr ""
+msgstr "ဂွာတီမာလာ"
 
 msgid "GU"
-msgstr ""
+msgstr "ဂွမ်"
 
 msgid "GW"
-msgstr ""
+msgstr "ဂီနီဘီဆော"
 
 msgid "GY"
-msgstr ""
+msgstr "ဂိုင်ယာနာ"
 
 msgid "HK"
 msgstr "ဟောင်ကောင်"
 
 msgid "HM"
-msgstr ""
+msgstr "ဟတ်ဒ်ကျွန်းနှင့် မက်ကဒေါနယ်ကျွန်းများ"
 
 msgid "HN"
-msgstr ""
+msgstr "ဟွန်ဒူးရာစ်"
 
 msgid "HR"
-msgstr ""
+msgstr "ခရိုအေးရှား"
 
 msgid "HT"
-msgstr ""
+msgstr "ဟေတီ"
 
 msgid "HU"
-msgstr ""
+msgstr "ဟန်ဂေရီ"
 
 msgid "ID"
 msgstr "အင်ဒိုနီးရှား"
@@ -332,28 +322,28 @@ msgid "IL"
 msgstr "အစ္စရေး"
 
 msgid "IM"
-msgstr ""
+msgstr "မန်ကျွန်း"
 
 msgid "IN"
 msgstr "အိန္ဒိယ"
 
 msgid "IO"
-msgstr ""
+msgstr "ဗြိတိသျှ အိန္ဒိယ သမုဒ္ဒရာဒေသ"
 
 msgid "IQ"
 msgstr "အီရတ်"
 
 msgid "IR"
-msgstr ""
+msgstr "အီရန် အစ္စလာမ် သမ္မတနိုင်ငံ"
 
 msgid "IS"
-msgstr ""
+msgstr "အိုက်စ်လန်"
 
 msgid "IT"
 msgstr "အီတလီ"
 
 msgid "JE"
-msgstr ""
+msgstr "ဂျာဆီ"
 
 msgid "JM"
 msgstr "ဂျမေကာ"
@@ -365,25 +355,25 @@ msgid "JP"
 msgstr "ဂျပန်"
 
 msgid "KE"
-msgstr ""
+msgstr "ကင်ညာ"
 
 msgid "KG"
-msgstr ""
+msgstr "ကီရဂစ်စတန်"
 
 msgid "KH"
 msgstr "ကမ္ဘောဒီးယား"
 
 msgid "KI"
-msgstr ""
+msgstr "ကီရီဘာတီ"
 
 msgid "KM"
-msgstr ""
+msgstr "ကော်မိုရိုစ်"
 
 msgid "KN"
-msgstr ""
+msgstr "ဆိန့်ကစ်နှင့်နီဗစ်"
 
 msgid "KP"
-msgstr ""
+msgstr "ကိုရီးယား ပြည်သူ့ဒီမိုကရက်တစ် သမ္မတနိုင်ငံ"
 
 msgid "KR"
 msgstr "ကိုရီးယား"
@@ -392,130 +382,130 @@ msgid "KW"
 msgstr "ကူဝိတ်"
 
 msgid "KY"
-msgstr ""
+msgstr "ကိမ်းနားကျွန်းစု"
 
 msgid "KZ"
-msgstr ""
+msgstr "ကာဇက်စတန်"
 
 msgid "LA"
-msgstr ""
+msgstr "လောပြည်သူ့ဒီမိုကရေစီသမ္မတနိုင်ငံ"
 
 msgid "LB"
 msgstr "လက်ဘနွန်"
 
 msgid "LC"
-msgstr ""
+msgstr "စိန့်လူစီယာ"
 
 msgid "LI"
-msgstr ""
+msgstr "လစ်ခတင်စတိုင်း"
 
 msgid "LK"
-msgstr ""
+msgstr "သီရိလင်္ကာ"
 
 msgid "LR"
-msgstr ""
+msgstr "လီဘေးရီးယား"
 
 msgid "LS"
-msgstr ""
+msgstr "လက်ဆိုသို"
 
 msgid "LT"
-msgstr ""
+msgstr "လစ်သူအေးနီးယား"
 
 msgid "LU"
 msgstr "လူဇင်ဘတ်"
 
 msgid "LV"
-msgstr ""
+msgstr "လတ်ဗီးယား"
 
 msgid "LY"
-msgstr ""
+msgstr "လစ်ဘီးယား"
 
 msgid "MA"
-msgstr ""
+msgstr "မိုရိုကို"
 
 msgid "MC"
-msgstr ""
+msgstr "မိုနာကို"
 
 msgid "MD"
-msgstr ""
+msgstr "မော်ဒိုဗာ သမ္မတနိုင်ငံ"
 
 msgid "ME"
-msgstr ""
+msgstr "မောန်တီနီဂရို"
 
 msgid "MF"
-msgstr ""
+msgstr "ဆိန့်မာတင် (ပြင်သစ်ပိုင်း)"
 
 msgid "MG"
-msgstr ""
+msgstr "မဒဂတ်စကာ"
 
 msgid "MH"
-msgstr ""
+msgstr "မာရှယ်ကျွန်းစု"
 
 msgid "MK"
-msgstr ""
+msgstr "မက်ဆီဒိုးနီးယား"
 
 msgid "ML"
-msgstr ""
+msgstr "မာလီ"
 
 msgid "MM"
 msgstr "မြန်မာ"
 
 msgid "MN"
-msgstr ""
+msgstr "မန်ဂိုလီးယား"
 
 msgid "MO"
 msgstr "မကာအို"
 
 msgid "MP"
-msgstr ""
+msgstr "မြောက်မာရီယာနာကျွန်းစု"
 
 msgid "MQ"
-msgstr ""
+msgstr "မာတီနစ်"
 
 msgid "MR"
-msgstr ""
+msgstr "မော်ရီတေးနီးယား"
 
 msgid "MS"
-msgstr ""
+msgstr "မောင့်ဆရာတ်"
 
 msgid "MT"
-msgstr ""
+msgstr "မော်လ်တာ"
 
 msgid "MU"
-msgstr ""
+msgstr "မော်ရီရှပ်"
 
 msgid "MV"
-msgstr ""
+msgstr "မော်လဒိုက်"
 
 msgid "MW"
-msgstr ""
+msgstr "မာလာဝီ"
 
 msgid "MX"
-msgstr ""
+msgstr "မက္ကဆီကို"
 
 msgid "MY"
 msgstr "မလေးရှား"
 
 msgid "MZ"
-msgstr ""
+msgstr "မိုဇမ်ဘစ်"
 
 msgid "NA"
-msgstr ""
+msgstr "နာမီဘီးယား"
 
 msgid "NC"
-msgstr ""
+msgstr "နယူးကယ်လီဒိုးနီးယား"
 
 msgid "NE"
-msgstr ""
+msgstr "နိုင်းဂျီးရီးယား"
 
 msgid "NF"
-msgstr ""
+msgstr "နော်ဖော့ခ်ကျွန်း"
 
 msgid "NG"
-msgstr ""
+msgstr "နိုင်းဂျီးရီးယား"
 
 msgid "NI"
-msgstr ""
+msgstr "နီကာရာဂွာ"
 
 msgid "NL"
 msgstr "နယ်သာလန်"
@@ -527,28 +517,28 @@ msgid "NP"
 msgstr "နီပေါ"
 
 msgid "NR"
-msgstr ""
+msgstr "နော်ရူး"
 
 msgid "NU"
-msgstr ""
+msgstr "နီယူ"
 
 msgid "NZ"
 msgstr "နယူးဇီလန်"
 
 msgid "OM"
-msgstr ""
+msgstr "အိုမန်"
 
 msgid "PA"
-msgstr ""
+msgstr "ပနားမား"
 
 msgid "PE"
 msgstr "ပီရူး"
 
 msgid "PF"
-msgstr ""
+msgstr "ပြင်သစ်ပိုလီနီးရှား"
 
 msgid "PG"
-msgstr ""
+msgstr "ပါပူအာ နယူးဂီနီ"
 
 msgid "PH"
 msgstr "ဖိလစ်ပိုင်"
@@ -560,52 +550,52 @@ msgid "PL"
 msgstr "ပိုလန်"
 
 msgid "PM"
-msgstr ""
+msgstr "ဆိန့်ပီယာနှင့်မီကွီလွန်"
 
 msgid "PN"
-msgstr ""
+msgstr "ပစ်ကာန့်"
 
 msgid "PR"
-msgstr ""
+msgstr "ပူအဲတိုရီကို"
 
 msgid "PS"
-msgstr ""
+msgstr "ပါလက်စတိုင်းနိုင်ငံ"
 
 msgid "PT"
-msgstr ""
+msgstr "ပေါ်တူဂီ"
 
 msgid "PW"
-msgstr ""
+msgstr "ပါလူး"
 
 msgid "PY"
-msgstr ""
+msgstr "ပါရာဂွေ"
 
 msgid "QA"
-msgstr ""
+msgstr "ကာတာ"
 
 msgid "RE"
-msgstr ""
+msgstr "အစည်းအဝေး"
 
 msgid "RO"
-msgstr ""
+msgstr "ရိုမေးနီးယား"
 
 msgid "RS"
-msgstr ""
+msgstr "ဆားဘီးယား"
 
 msgid "RU"
 msgstr "ရရှား"
 
 msgid "RW"
-msgstr ""
+msgstr "ရဝန်ဒါ"
 
 msgid "SA"
-msgstr ""
+msgstr "ဆော်ဒီအာရေဗျ"
 
 msgid "SB"
-msgstr ""
+msgstr "ဆလိုမန်ကျွန်းများ"
 
 msgid "SC"
-msgstr ""
+msgstr "ဆီရှဲလ်"
 
 msgid "SD"
 msgstr "ဆူဒန်"
@@ -614,109 +604,109 @@ msgid "SE"
 msgstr "ဆွီဒင်"
 
 msgid "SG"
-msgstr ""
+msgstr "စင်ကာပူ"
 
 msgid "SH"
-msgstr ""
+msgstr "ဆိန့်ဟီလီနာ၊ အက်ဆင်ရှင်းနှင့် ထရစ်စတန် ဒေါ့ ကွန်ဟာ"
 
 msgid "SI"
-msgstr ""
+msgstr "စလိုဗေးနီးယား"
 
 msgid "SJ"
-msgstr ""
+msgstr "စဗာလ်ဘာ့ဒ်နှင့် ဂျန် မိုင်ယန်"
 
 msgid "SK"
-msgstr ""
+msgstr "စလိုဗေးကီးယား"
 
 msgid "SL"
-msgstr ""
+msgstr "ဆီယာလီယွန်"
 
 msgid "SM"
-msgstr ""
+msgstr "ဆန်မာရီနို"
 
 msgid "SN"
-msgstr ""
+msgstr "ဆင်နီဂေါ"
 
 msgid "SO"
-msgstr ""
+msgstr "ဆိုမာလီယာ"
 
 msgid "SR"
-msgstr ""
+msgstr "ဆူရီနမ်"
 
 msgid "SS"
-msgstr ""
+msgstr "တောင်ဆူဒန်"
 
 msgid "ST"
-msgstr ""
+msgstr "ဆိုအိုတိုမေ နှင့် ပရင်စီပီ"
 
 msgid "SV"
-msgstr ""
+msgstr "အဲလ်ဆယ်ဗာဒိုး"
 
 msgid "SX"
-msgstr ""
+msgstr "ဆင့့်တမတ် (ဒတ်ချ်ပိုင်း)"
 
 msgid "SY"
-msgstr ""
+msgstr "ဆီးရီးယား အာရပ် သမ္မတနိုင်ငံ"
 
 msgid "SZ"
-msgstr ""
+msgstr "စွာဇီလန်"
 
 msgid "TC"
-msgstr ""
+msgstr "တုခ်နှင့်ကေကိုစ်ကျွန်းများ"
 
 msgid "TD"
-msgstr ""
+msgstr "ချက်"
 
 msgid "TF"
-msgstr ""
+msgstr "ပြင်သစ်တောင်ပိုင်းဒေသများ"
 
 msgid "TG"
-msgstr ""
+msgstr "တိုဂို"
 
 msgid "TH"
 msgstr "ထိုင်း"
 
 msgid "TJ"
-msgstr ""
+msgstr "တာဂျစ်စတန်"
 
 msgid "TK"
-msgstr ""
+msgstr "တိုကဲလား"
 
 msgid "TL"
-msgstr ""
+msgstr "တီမော-လက်စ်တေး"
 
 msgid "TM"
-msgstr ""
+msgstr "တူရကမန်နစ္စတန်"
 
 msgid "TN"
 msgstr "တူနီးရှား"
 
 msgid "TO"
-msgstr ""
+msgstr "တုံဂါ"
 
 msgid "TR"
 msgstr "တူရကီ"
 
 msgid "TT"
-msgstr ""
+msgstr "ထရီနီဒါနှင့်တိုဘာဂို"
 
 msgid "TV"
-msgstr ""
+msgstr "တူဗာလူ"
 
 msgid "TW"
 msgstr "ထိုင်ဝမ်"
 
 msgid "TZ"
-msgstr ""
+msgstr "တန်ဇေးနီးယား ပြည်ထောင်စု"
 
 msgid "UA"
 msgstr "ယူကရိန်း"
 
 msgid "UG"
-msgstr ""
+msgstr "ယူဂန္ဒါ"
 
 msgid "UM"
-msgstr ""
+msgstr "အမေရိကန်ပြည်ထောင်စု၏ ကျယ်ပြန့်သော ကျွန်းငယ်များ"
 
 msgid "US"
 msgstr "အမေရိက"
@@ -728,46 +718,46 @@ msgid "UZ"
 msgstr "ဥဇဘက်ကစ္စတန်"
 
 msgid "VA"
-msgstr ""
+msgstr "ဗာတီကန်မြို့ပြနိုင်ငံ (သန့်ရှင်းသောထိုင်ခုံ)"
 
 msgid "VC"
-msgstr ""
+msgstr "ဆိန့်ဗင်ဆင့်နှင့် ဂရနာဒင်းစ်"
 
 msgid "VE"
-msgstr ""
+msgstr "ဗင်ဇွဲလာ ဘိုလီဗာရီယန် သမ္မတနိုင်ငံ"
 
 msgid "VG"
-msgstr ""
+msgstr "ဗာဂျင်ကျွန်းများ၊ ဗြိတိသျှ"
 
 msgid "VI"
-msgstr ""
+msgstr "အမေရိကန် ဗာဂျင်ကျွန်းများ"
 
 msgid "VN"
 msgstr "ဗီယက်နမ်"
 
 msgid "VU"
-msgstr ""
+msgstr "ဗာနူအာတူ"
 
 msgid "WF"
-msgstr ""
+msgstr "ဝေါလစ်နှင့်ဖူတူနာ"
 
 msgid "WS"
-msgstr ""
+msgstr "ဆိုမိုအာ"
 
 msgid "XK"
-msgstr ""
+msgstr "ကိုဆိုဗို"
 
 msgid "YE"
 msgstr "ယီမင်"
 
 msgid "YT"
-msgstr ""
+msgstr "မိုင်ယော့"
 
 msgid "ZA"
 msgstr "တောင်အာဖရိက"
 
 msgid "ZM"
-msgstr ""
+msgstr "ဇမ်ဘီးယား"
 
 msgid "ZW"
 msgstr "ဇင်ဘာဘွေ"

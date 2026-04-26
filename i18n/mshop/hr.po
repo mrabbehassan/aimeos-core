@@ -1,29 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# 
-# Translators:
-# Miro Sertić <miro.sertic0606@gmail.com>, 2018
 msgid ""
 msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: hr\n"
+"Language-Team: Croatian (http://app.transifex.com/aimeos/aimeos-core/language/hr/)\n"
+"Last-Translator: Miro Sertić <miro.sertic0606@gmail.com>, 2018\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"POT-Creation-Date: 2026-04-25 11:20+0200\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-09 12:21+0100\n"
-"PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: Miro Sertić <miro.sertic0606@gmail.com>, 2018\n"
-"Language-Team: Croatian (http://app.transifex.com/aimeos/aimeos-core/language/hr/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: hr\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -37,13 +29,21 @@ msgid ""
 "%12$s\n"
 "%13$s"
 msgstr ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -56,53 +56,63 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
+""
+msgstr ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+""
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
-msgstr ""
+msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
-msgstr ""
+msgstr "Adresa za domenu \"%1$s\" nije dostupna"
 
 #, php-format
 msgid "Address for type \"%1$s\" not available"
-msgstr ""
+msgstr "Adresa za tip \"%1$s\" nije dostupna"
 
 #, php-format
 msgid "Address item for removal not found"
-msgstr ""
+msgstr "Adresa stavke za uklanjanje nije pronađena"
 
 #, php-format
 msgid "Address not available"
-msgstr ""
+msgstr "Adresa nije dostupna"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Adresa pozdrava \"%1$s\" nije unutar dopuštenog raspona"
 
 #, php-format
 msgid "Address search configuration not available"
-msgstr ""
+msgstr "Konfiguracija pretraživanja adrese nije dostupna"
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Tip adrese \"%1$s\" nije unutar dopuštenog raspona"
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr ""
+msgstr "Dogodila se nepoznata pogreška s kodom %1$d"
 
 #, php-format
 msgid "At least one key is required for aggregation"
-msgstr ""
+msgstr "Za agregaciju je potreban barem jedan ključ."
 
 #, php-format
 msgid "Basket empty"
@@ -110,35 +120,35 @@ msgstr "Košarica je prazna"
 
 #, php-format
 msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
-msgstr ""
+msgstr "Kupon je kupljen u valuti \"%1$s\", a košarica koristi \"%2$s\""
 
 #, php-format
 msgid "Cache object not available"
-msgstr ""
+msgstr "Predmet predmemorije nije dostupan"
 
 #, php-format
 msgid "Called unknown method \"%1$s\" on class \"%2$s\""
-msgstr ""
+msgstr "Pozvan je nepoznati metod \"%1$s\" na klasi \"%2$s\""
 
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
-msgstr ""
+msgstr "Čvor kataloga za ID \"%1$s\" nije dostupan"
 
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
-msgstr ""
+msgstr "Staza kataloga za ID \"%1$s\" nije pronađena"
 
 #, php-format
 msgid "Checks for available addresses in basket failed"
-msgstr ""
+msgstr "Provjera dostupnih adresa u košarici nije uspjela"
 
 #, php-format
 msgid "Checks for available service items in basket failed"
-msgstr ""
+msgstr "Provjera dostupnih stavki usluge u košarici nije uspjela"
 
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
-msgstr ""
+msgstr "Podređeni čvor s indeksom \"%1$d\" nije dostupan"
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
@@ -150,31 +160,31 @@ msgstr "Klasa \"%1$s\" nije dostupna"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
-msgstr ""
+msgstr "Kod \"%1$s\" ne smije biti duži od %2$d znakova"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
-msgstr ""
+msgstr "Kod \"%1$s\" ne smije biti duži od 32 znaka."
 
 #, php-format
 msgid "Code contains invalid characters: \"%1$s\""
-msgstr ""
+msgstr "Kod sadrži nevažeće znakove: \"%1$s\""
 
 #, php-format
 msgid "Code is too long"
-msgstr ""
+msgstr "Kod je predug"
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr ""
+msgstr "Kod ne smije biti duži od 255 znakova."
 
 #, php-format
 msgid "Code must not be longer than 32 characters"
-msgstr ""
+msgstr "Kod ne smije biti duži od 32 znaka"
 
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr ""
+msgstr "Konfiguracija za \"%1$s\" nedostaje"
 
 #, php-format
 msgid "Configuration invalid"
@@ -182,38 +192,38 @@ msgstr "Neispravne postavke"
 
 #, php-format
 msgid "Configuration not available"
-msgstr ""
+msgstr "Konfiguracija nije dostupna"
 
 #, php-format
 msgid "Configuration object not available"
-msgstr ""
+msgstr "Konfiguracijski objekt nije dostupan"
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr ""
+msgstr "Konfiguracija potrebne SQL naredbe za \"%1$s\" nije dostupna"
 
 #, php-format
 msgid "Coupon in basket is not available any more"
-msgstr ""
+msgstr "Kupon u košarici više nije dostupan"
 
 msgid "Coupon is not available any more"
-msgstr ""
+msgstr "Kupon više nije dostupan"
 
 #, php-format
 msgid "Curl could not be initialized"
-msgstr ""
+msgstr "Curl se nije mogao inicijalizirati"
 
 #, php-format
 msgid "Curl error: \"%1$s\" - \"%2$s\""
-msgstr ""
+msgstr "Greška pri uvijanju: \"%1$s\" - \"%2$s\""
 
 #, php-format
 msgid "Database manager object not available"
-msgstr ""
+msgstr "Objekt upravitelja baze podataka nije dostupan"
 
 #, php-format
 msgid "Date value before \"%1$s\""
-msgstr ""
+msgstr "Datum vrijednosti prije \"%1$s\""
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
@@ -221,15 +231,15 @@ msgstr "Preuzimanje datoteke \"%1$s\" nije uspjelo"
 
 #, php-format
 msgid "Duplicate coupon code"
-msgstr ""
+msgstr "Duplikat koda kupona"
 
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
-msgstr ""
+msgstr "Duplikat koda kupona \"%1$s\""
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
-msgstr ""
+msgstr "Proširenje čvora \"%1$s\" nije uspjelo"
 
 #, php-format
 msgid "File \"%1$s\" not found"
@@ -237,137 +247,135 @@ msgstr "Dokument \"%1$s\" nije pronađjen"
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr ""
+msgstr "Datoteka ili direktorij \"%1$s\" ne postoji"
 
 #, php-format
 msgid "File system manager object not available"
-msgstr ""
+msgstr "Objekt upravitelja datotečnog sustava nije dostupan"
 
 #, php-format
 msgid "Finished order status import from \"%1$s\""
-msgstr ""
+msgstr "Završen uvoz statusa narudžbi iz \"%1$s\""
 
 #, php-format
 msgid "Finished order status import from file \"%1$s\""
-msgstr ""
+msgstr "Završeno uvoženje statusa narudžbi iz datoteke \"%1$s\""
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Zastavice \"%1$s\" nisu unutar dopuštenog raspona"
 
 #, php-format
 msgid "Flags not within allowed range"
-msgstr ""
+msgstr "Zastave izvan dopuštenog raspona"
 
 #, php-format
 msgid "ID of last inserted database record not available"
-msgstr ""
+msgstr "ID posljednjeg umetnutog zapisa u bazi podataka nije dostupan"
 
 #. / Locale ID %1$s
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
-msgstr ""
+msgstr "Objekt za internacionalizaciju nije dostupan za \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO country code"
-msgstr ""
+msgstr "Neispravan ISO kod zemlje"
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
-msgstr ""
+msgstr "Neispravan ISO kod zemlje \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO currency code"
-msgstr ""
+msgstr "Neispravan ISO kod valute"
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Neispravan ISO kod valute \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO language code"
-msgstr ""
+msgstr "Neispravan ISO kod jezika"
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
-msgstr ""
+msgstr "Neispravan ISO jezični kod \"%1$s\""
 
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
-msgstr ""
+msgstr "Neispravan JSON kao rezultat pretraživanja ID-a \"%2$s\" u \"%1$s\": %3$s"
 
 #, php-format
 msgid "Invalid attribute at position \"%1$d\""
-msgstr ""
+msgstr "Neispravan atribut na položaju \"%1$d\""
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Neispravni znakovi u ISO kodu valute \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr ""
+msgstr "Neispravni znakovi u ISO kodu jezika \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Nedozvoljen simbol u imenu klase \"%1$s\""
 
 #, php-format
-msgid ""
-"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
-"expected."
-msgstr ""
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgstr "Neispravni znakovi u datumu \"%1$s\". Očekivan ISO format \"GGGG-MM-DD hh:mm:ss\"."
 
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr ""
+msgstr "Neispravni znakovi u datumu \"%1$s\". Očekivan ISO format \"GGGG-MM-DD\"."
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
-msgstr ""
+msgstr "Neispravni znakovi u datumu, očekivan ISO format \"GGGG-MM-DD hh:mm:ss\""
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
-msgstr ""
+msgstr "Neispravni znakovi u datumu, očekivan ISO format \"GGGG-MM-DD\""
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
-msgstr ""
+msgstr "Neispravni znakovi u nazivu domene \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
-msgstr ""
+msgstr "Neispravni znakovi u adresi e-pošte: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
-msgstr ""
+msgstr "Neispravni znakovi u nazivu menadžera \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Neispravni znakovi u nazivu menadžera \"%1$s\" u \"%2$s\""
 
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
-msgstr ""
+msgstr "Neispravni znakovi u cijeni \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
-msgstr ""
+msgstr "Neispravni znakovi u nazivu pružatelja \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
-msgstr ""
+msgstr "Neispravni znakovi u datumu kupnje \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in type name \"%1$s\""
-msgstr ""
+msgstr "Neispravni znakovi u nazivu tipa \"%1$s\""
 
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
-msgstr ""
+msgstr "Neispravna konfiguracija za pružatelja kupona \"%1$s\", potrebna je \"%2$s\""
 
 msgid "Invalid delivery type"
-msgstr ""
+msgstr "Neispravna vrsta dostave"
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
@@ -375,201 +383,199 @@ msgstr "Invalid factory \"%1$s\""
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
-msgstr ""
+msgstr "Neispravan MIME tip \"%1$s\""
 
 #, php-format
 msgid "Invalid provider name \"%1$s\""
-msgstr ""
+msgstr "Neispravan naziv pružatelja \"%1$s\""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
-msgstr ""
+msgstr "Neispravna serijalizirana košarica. \"%1$s\" vraća \"%2$s\"."
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
-msgstr ""
+msgstr "Neispravna serijalizirana košarica. \"%1$s\" vraća \"%2$s\"."
 
 #, php-format
 msgid "Invalid time interval format \"%1$s\""
-msgstr ""
+msgstr "Neispravan format vremenskog razdoblja \"%1$s\""
 
 #, php-format
 msgid "Invalid type \"%1$s\""
-msgstr ""
+msgstr "Neispravan tip \"%1$s\""
 
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr ""
+msgstr "Neispravna URL adresa web stranice \"%1$s\""
 
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr ""
+msgstr "Element se ne može izbrisati. ID lokacije elementa razlikuje se od trenutnog ID-a lokacije."
 
 #, php-format
 msgid "Item could not be saved using method save(). Item ID not available."
-msgstr ""
+msgstr "Predmet nije mogao biti spremljen metodom save(). ID predmeta nije dostupan."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr ""
+msgstr "Predmet referiran u domeni \"%1$s\" nije pronađen: %2$s"
 
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Stavka s ID-om \"%1$s\" nije pronađena"
 
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Stavka s ID-om \"%2$s\" u \"%1$s\" nije pronađena"
 
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Posao s ID-om \"%1$s\" nije pronađen"
 
 #, php-format
 msgid "List item for removal from domain \"%1$s\" not found"
-msgstr ""
+msgstr "Stavka za uklanjanje iz domene \"%1$s\" nije pronađena"
 
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Nije pronađen element popisa s ID-om \"%2$s\" u \"%1$s\""
 
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Nije dostupan tip popisa za atributni element s ID-om \"%1$s\""
 
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Tip popisa za stavku cijene s ID-om \"%1$s\" nije dostupan"
 
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Tip popisa za tekstualni element s ID-om \"%1$s\" nije dostupan"
 
 #, php-format
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
-msgstr ""
+msgstr "Učitavanje XML odgovora \"%1$s\" od pružatelja usluge dostave nije uspjelo"
 
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
-msgstr ""
+msgstr "Element lokalizacije za lokaciju \"%1$s\" nije pronađen"
 
 #, php-format
 msgid "Locale object not available"
-msgstr ""
+msgstr "Predmet lokalizacije nije dostupan"
 
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
-msgstr ""
+msgstr "Zastavica zaključavanja \"%1$d\" nije u dopuštenom rasponu"
 
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Zapis dnevnika s ID-om \"%1$s\" nije pronađen"
 
 #, php-format
 msgid "Log manager object not available"
-msgstr ""
+msgstr "Objekt upravitelja dnevnika nije dostupan"
 
 #, php-format
 msgid "Mail object not available"
-msgstr ""
+msgstr "Poštanski objekt nije dostupan"
 
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
-msgstr ""
+msgstr "Putanja menadžera \"%1$s\" je neispravna"
 
 #, php-format
 msgid "Manager path is empty"
-msgstr ""
+msgstr "Staza menadžera je prazna"
 
 #, php-format
 msgid "Message queue object not available"
-msgstr ""
+msgstr "Objekt reda poruka nije dostupan"
 
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
-msgstr ""
+msgstr "Metoda \"%1$s\" za upravitelja lokala nije dostupna"
 
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
-msgstr ""
+msgstr "Metoda \"%1$s\" za pružatelja nije dostupna"
 
 #, php-format
 msgid "Missing configuration \"%1$s\""
-msgstr ""
+msgstr "Fali konfiguracija \"%1$s\""
 
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
-msgstr ""
+msgstr "Novi ID \"%1$s\" za stavku razlikuje se od starog ID-a \"%2$s\""
 
 #, php-format
-msgid ""
-"Newly created site can not be saved using method \"save()\". Try using "
-"method \"insert()\" instead."
-msgstr ""
+msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
+msgstr "Novo stvorena stranica se ne može spremiti metodom \"save()\". Pokušajte umjesto toga koristiti metodu \"insert()\"."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
-msgstr ""
+msgstr "Nije pronađena XML datoteka \"%1$s\""
 
 #, php-format
 msgid "No bought voucher for code \"%1$s\" available"
-msgstr ""
+msgstr "Nije dostupna kupljena bon za kod \"%1$s\""
 
 #, php-format
 msgid "No catalog node for ID \"%1$s\""
-msgstr ""
+msgstr "Nema katalogskog čvora za ID \"%1$s\""
 
 #, php-format
 msgid "No item found for conditions: %1$s"
-msgstr ""
+msgstr "Nije pronađen nijedan element za uvjete: %1$s"
 
 #, php-format
 msgid "No item with \"%2$s\" in \"%1$s\" found"
-msgstr ""
+msgstr "Nije pronađen nijedan element s \"%2$s\" u \"%1$s\""
 
 #, php-format
 msgid "No more credit available for voucher \"%1$s\""
-msgstr ""
+msgstr "Nema više dostupnog kredita za kupon \"%1$s\""
 
 #, php-format
 msgid "No order for ID \"%1$s\" found"
-msgstr ""
+msgstr "Nije pronađen nalog za ID \"%1$s\""
 
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr ""
+msgstr "Nema cijene za ID proizvoda \"%1$s\" ili šifru proizvoda \"%2$s\"."
 
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "Nije pronađen nijedan proizvod s kodom \"%1$s\""
 
 #, php-format
 msgid "No rebate for currency \"%1$s\" available"
-msgstr ""
+msgstr "Nema povrata za valutu \"%1$s\""
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr ""
+msgstr "Nije dostupna nijedna konfiguracija pretraživanja za \"%1$s\""
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr ""
+msgstr "Nema dostupne konfiguracije pretraživanja za domenu \"%1$s\""
 
 #, php-format
 msgid "No search keys available"
-msgstr ""
+msgstr "Nema dostupnih ključeva za pretraživanje"
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"
-msgstr ""
+msgstr "Nije pronađen nijedan tip za kôd \"%1$s\""
 
 #, php-format
 msgid "No type for code \"%1$s\" found"
-msgstr ""
+msgstr "Nije pronađen tip za kôd \"%1$s\""
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr ""
+msgstr "Nije pronađeno skladište za kod \"%1$s\""
 
 #, php-format
 msgid "Not a date"
@@ -577,19 +583,19 @@ msgstr "Nije datum"
 
 #, php-format
 msgid "Not a date and time"
-msgstr ""
+msgstr "Nije datum i vrijeme"
 
 #, php-format
 msgid "Not a key/value map"
-msgstr ""
+msgstr "Nije mapa ključ/vrijednost"
 
 #, php-format
 msgid "Not a list item"
-msgstr ""
+msgstr "Nije stavka popisa"
 
 #, php-format
 msgid "Not a listed value"
-msgstr ""
+msgstr "Nije navedena vrijednost"
 
 #, php-format
 msgid "Not a number"
@@ -597,7 +603,7 @@ msgstr "Nije broj"
 
 #, php-format
 msgid "Not a string"
-msgstr ""
+msgstr "Nije niz"
 
 #, php-format
 msgid "Not a time"
@@ -605,146 +611,138 @@ msgstr "Nije vrijeme"
 
 #, php-format
 msgid "Not a true/false value"
-msgstr ""
+msgstr "Nije vrijednost istinito/neistinito"
 
 #, php-format
 msgid "Not an integer number"
-msgstr ""
+msgstr "Nije cjelobrojni broj"
 
 #, php-format
 msgid "Object is not of required type \"%1$s\""
-msgstr ""
+msgstr "Objekt nije potrebnog tipa \"%1$s\""
 
 #, php-format
 msgid "Operation not supported"
-msgstr ""
+msgstr "Operacija nije podržana"
 
 #, php-format
-msgid ""
-"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
-"invoice ID \"%2$s\" of the order"
-msgstr ""
+msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgstr "ID narudžbe \"%1$s\" u XML odgovoru pružatelja dostave razlikuje se od pohranjenog ID-a računa \"%2$s\" narudžbe."
 
 #, php-format
 msgid "Order address position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Pozicija adrese narudžbe \"%1$s\" mora biti veća od 0"
 
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr ""
+msgstr "Nije pronađen osnovni artikl narudžbe s ID-om \"%1$s\""
 
 #, php-format
-msgid ""
-"Order data sent to delivery provider was rejected with code \"%1$s\" "
-"according to XML response"
-msgstr ""
+msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgstr "Podaci o narudžbi poslani dostavnoj službi odbijeni su kodom \"%1$s\" prema XML odgovoru"
 
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Status narudžbe \"%1$s\" nije unutar dopuštenog raspona"
 
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Status uplate \"%1$s\" nije unutar dopuštenog raspona"
 
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Redoslijed proizvoda \"%1$s\" mora biti veći od 0"
 
 #, php-format
 msgid "Order service position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Pozicija usluge \"%1$s\" mora biti veća od 0"
 
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Tip narudžbe \"%1$s\" nije unutar dopuštenog raspona"
 
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
-msgstr ""
+msgstr "Narudžba s ID-om \"%1$s\" odbijena je kodom \"%2$s\": %3$s"
 
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
-msgstr ""
+msgstr "Parametar \"%1$s\" za konfiguraciju nije dostupan"
 
 #, php-format
 msgid "Password object not available"
-msgstr ""
+msgstr "Predmet lozinke nije dostupan"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Duplicirana transakcija s ID-om \"%1$s\" i statusom \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr ""
+msgstr "PayPal Express: Duplicirana transakcija s ID-om \"%1$s\" i statusom \"%2$s\" "
 
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Neispravan zahtjev \"%1$s\""
 
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr ""
+msgstr "PayPal Express: ID transakcije za ID narudžbe \"%1$s\" nije dostupan"
 
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Zahtjev za ID narudžbe \"%1$s\" nije uspio s \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Pogrešan iznos uplate \"%1$s\" za ID narudžbe \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Wrong receiver email \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Pogrešna adresa primatelja \"%1$s\""
 
 msgid "Payment costs"
-msgstr ""
+msgstr "Troškovi plaćanja"
 
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
-msgstr ""
+msgstr "Molimo pogledajte cijene proizvoda u vašoj košarici."
 
 #, php-format
-msgid ""
-"Price can not be added. Currency ID \"%1$s\" of price item and currently "
-"used currency ID \"%2$s\" does not match."
-msgstr ""
+msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgstr "Cijena se ne može dodati. ID valute \"%1$s\" stavke cijene i trenutno korišteni ID valute \"%2$s\" ne podudaraju se."
 
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr ""
+msgstr "Cijena za navedenu količinu \"%1$d\" nije dostupna"
 
 #, php-format
 msgid "Price for the given quantity \"%1$s\" not available"
-msgstr ""
+msgstr "Cijena za navedenu količinu \"%1$s\" nije dostupna"
 
 #, php-format
 msgid "Price item not available"
-msgstr ""
+msgstr "Cijena artikla nije dostupna"
 
 #, php-format
 msgid "Process object not available"
-msgstr ""
+msgstr "Predmet procesa nije dostupan"
 
 #, php-format
 msgid "Product  not available"
 msgstr "Proizvod nedostupan"
 
 #, php-format
-msgid ""
-"Product does not contain all required values. Product code for item not "
-"available."
-msgstr ""
+msgid "Product does not contain all required values. Product code for item not available."
+msgstr "Proizvod ne sadrži sve potrebne vrijednosti. Šifra proizvoda za stavku nije dostupna."
 
 #, php-format
 msgid "Product does not contain the SKU code"
-msgstr ""
+msgstr "Proizvod ne sadrži SKU kod"
 
 #, php-format
 msgid "Product matching given properties not found"
-msgstr ""
+msgstr "Proizvod koji odgovara zadatim svojstvima nije pronađen"
 
 #, php-format
 msgid "Product not available"
@@ -752,11 +750,11 @@ msgstr "Proizvod nedostupan"
 
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
-msgstr ""
+msgstr "Proizvod s ključem niza \"%1$d\" nije dostupan"
 
 #, php-format
 msgid "Products in basket not available"
-msgstr ""
+msgstr "Proizvodi u košarici nisu dostupni"
 
 #, php-format
 msgid "Products out of stock"
@@ -764,63 +762,63 @@ msgstr "Nema proizvoda na stanju"
 
 #, php-format
 msgid "Property item for removal not found"
-msgstr ""
+msgstr "Predmet za uklanjanje nije pronađen"
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Naziv nekretnine \"%1$s\" nije unutar dopuštenog raspona"
 
 #, php-format
 msgid "Provider in \"%1$s\" not available"
-msgstr ""
+msgstr "Provajder u \"%1$s\" nije dostupan"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed %1$d"
-msgstr ""
+msgstr "Količina mora biti 0 ili veća i ne smije prelaziti %1$d"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
-msgstr ""
+msgstr "Količina mora biti 0 ili veća i ne smije prelaziti naručenu količinu."
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
-msgstr ""
+msgstr "Količina mora biti veća od 0 i ne smije prelaziti %1$d"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
-msgstr ""
+msgstr "Količina mora biti veća od 0 i ne smije prelaziti 2147483647"
 
 #, php-format
 msgid "Quantity scale must be greater than 0"
-msgstr ""
+msgstr "Mjera količine mora biti veća od 0"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
-msgstr ""
+msgstr "Potrebni parametar \"%1$s\" nedostaje"
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
-msgstr ""
+msgstr "Falta potrebna vrijednost za \"%1$s\""
 
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
-msgstr ""
+msgstr "Konfiguracija pretraživanja za \"%1$s\" nije dostupna"
 
 #, php-format
 msgid "Search configuration not available"
-msgstr ""
+msgstr "Konfiguracija pretraživanja nije dostupna"
 
 #, php-format
 msgid "Sending order failed: \"%1$s\""
-msgstr ""
+msgstr "Pošiljanje narudžbe nije uspjelo: \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
-msgstr ""
+msgstr "Pošiljanje naloga dostavnoj službi nije uspjelo s HTTP statusom \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
-msgstr ""
+msgstr "Pošiljanje naloga dostavnoj službi nije uspjelo: \"%1$s\""
 
 #, php-format
 msgid "Service not available"
@@ -828,99 +826,95 @@ msgstr "Usluga nije dostupna"
 
 #, php-format
 msgid "Service of type \"%1$s\" not available"
-msgstr ""
+msgstr "Usluga tipa \"%1$s\" nije dostupna"
 
 #, php-format
 msgid "Session object not available"
-msgstr ""
+msgstr "Objekt sesije nije dostupan"
 
 #, php-format
-msgid ""
-"Site can not be inserted. Site ID of site differs from site ID of parent "
-"site."
-msgstr ""
+msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgstr "Mjesto se ne može umetnuti. ID mjesta se razlikuje od ID-a roditeljskog mjesta."
 
 #, php-format
-msgid ""
-"Site can not be moved. Site ID of site differs from present site id, site ID"
-" of existing parent site or site id of new parent site."
-msgstr ""
+msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgstr "Mjesto se ne može premjestiti. ID mjesta razlikuje se od trenutnog ID-a mjesta, ID-a postojećeg roditeljskog mjesta ili ID-a novog roditeljskog mjesta."
 
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr ""
+msgstr "Stranica za kod \"%1$s\" nije pronađena"
 
 #, php-format
 msgid "Started order status import from \"%1$s\""
-msgstr ""
+msgstr "Pokrenut je uvoz statusa narudžbi iz \"%1$s\""
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
-msgstr ""
+msgstr "Pokrenut je uvoz statusa narudžbe iz datoteke \"%1$s\""
 
 #, php-format
 msgid "Status not available"
-msgstr ""
+msgstr "Status nije dostupan"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"
-msgstr ""
+msgstr "Algoritam \"%1$s\" nije podržan."
 
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
-msgstr ""
+msgstr "Prekoračena je maksimalna vrijednost košarice od %1$s"
 
 #, php-format
 msgid "The maximum product quantity is %1$d"
-msgstr ""
+msgstr "Maksimalna količina proizvoda je %1$d"
 
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
-msgstr ""
+msgstr "Prekoračena je maksimalna količina proizvoda %1$d"
 
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr ""
+msgstr "Maksimalna vrijednost proizvoda je %1$s"
 
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
-msgstr ""
+msgstr "Maksimalna količina svih proizvoda je %1$d"
 
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr ""
+msgstr "Maksimalna vrijednost svih proizvoda je %1$s"
 
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
-msgstr ""
+msgstr "Minimalna vrijednost košarice od %1$s nije postignuta"
 
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
-msgstr ""
+msgstr "Minimalna količina proizvoda od %1$d nije dostignuta"
 
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr ""
+msgstr "Tip opcije konfiguracije s ključem \"%1$s\" mora biti \"%2$s\""
 
 #, php-format
 msgid "Time value after \"%1$s\""
-msgstr ""
+msgstr "Vrijednost vremena nakon \"%1$s\""
 
 #, php-format
 msgid "Time value before \"%1$s\""
-msgstr ""
+msgstr "Vrijednost vremena prije \"%1$s\""
 
 #, php-format
 msgid "Total results value not found"
-msgstr ""
+msgstr "Ukupna vrijednost rezultata nije pronađena"
 
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Korijen stabla s kodom \"%1$s\" u \"%2$s\" nije pronađen"
 
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Tip stavke s ID-om \"%1$s\" u \"%2$s\" nije pronađen"
 
 #, php-format
 msgid "Unable to call method \"%1$s\""
@@ -928,26 +922,24 @@ msgstr "Nemožemo pozvati metodu \"%1$s\""
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""
-msgstr ""
+msgstr "Nije moguće stvoriti XML datoteku narudžbe \"%1$s\""
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr ""
+msgstr "Ne može se premjestiti uvezena datoteka \"%1$s\" u \"%2$s\""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
-msgstr ""
+msgstr "Nije moguće sortirati državne praznike: \"%1$s\""
 
 #, php-format
 msgid "Unknown search key \"%1$s\""
-msgstr ""
+msgstr "Nepoznati ključ pretraživanja \"%1$s\""
 
 #, php-format
-msgid ""
-"Validation of XML response from delivery provider against schema \"%1$s\" "
-"failed"
-msgstr ""
+msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgstr "Validacija XML odgovora od pružatelja usluge dostave prema shemi \"%1$s\" nije uspjela"
 
 #, php-format
 msgid "View object not available"
-msgstr ""
+msgstr "Prikaz objekta nije dostupan"

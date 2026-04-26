@@ -1,28 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# 
-# Translators:
 msgid ""
 msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: vi\n"
+"Language-Team: Vietnamese (http://app.transifex.com/aimeos/aimeos-core/language/vi/)\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"POT-Creation-Date: 2026-04-25 11:20+0200\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-09 12:21+0100\n"
-"PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Vietnamese (http://app.transifex.com/aimeos/aimeos-core/language/vi/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: vi\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -36,13 +29,21 @@ msgid ""
 "%12$s\n"
 "%13$s"
 msgstr ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -55,93 +56,103 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
+""
 msgstr ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+""
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
-msgstr ""
+msgstr "%1$s, %2$s, %3$s, %4$s, %6$s, %7$s"
 
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
-msgstr ""
+msgstr "Không tìm thấy địa chỉ cho tên miền \"%1$s\""
 
 #, php-format
 msgid "Address for type \"%1$s\" not available"
-msgstr ""
+msgstr "Không tìm thấy địa chỉ cho loại \"%1$s\""
 
 #, php-format
 msgid "Address item for removal not found"
-msgstr ""
+msgstr "Không tìm thấy mục địa chỉ cần xóa"
 
 #, php-format
 msgid "Address not available"
-msgstr ""
+msgstr "Không có địa chỉ"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Lời chào trong địa chỉ \"%1$s\" nằm ngoài phạm vi cho phép"
 
 #, php-format
 msgid "Address search configuration not available"
-msgstr ""
+msgstr "Không có cấu hình tìm kiếm địa chỉ"
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Loại địa chỉ \"%1$s\" nằm ngoài phạm vi cho phép"
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr ""
+msgstr "Đã xảy ra lỗi không xác định với mã %1$d"
 
 #, php-format
 msgid "At least one key is required for aggregation"
-msgstr ""
+msgstr "Cần có ít nhất một khóa để thực hiện tổng hợp"
 
 #, php-format
 msgid "Basket empty"
-msgstr ""
+msgstr "Giỏ hàng trống"
 
 #, php-format
 msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
-msgstr ""
+msgstr "Phiếu mua hàng đã mua được tính bằng đơn vị tiền tệ \"%1$s\", giỏ hàng sử dụng \"%2$s\""
 
 #, php-format
 msgid "Cache object not available"
-msgstr ""
+msgstr "Không tìm thấy đối tượng bộ nhớ đệm"
 
 #, php-format
 msgid "Called unknown method \"%1$s\" on class \"%2$s\""
-msgstr ""
+msgstr "Đã gọi phương thức không xác định \"%1$s\" trên lớp \"%2$s\""
 
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
-msgstr ""
+msgstr "Không tìm thấy mục danh mục có ID \"%1$s\""
 
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy đường dẫn danh mục cho ID \"%1$s\""
 
 #, php-format
 msgid "Checks for available addresses in basket failed"
-msgstr ""
+msgstr "Không thể kiểm tra các địa chỉ có sẵn trong giỏ hàng"
 
 #, php-format
 msgid "Checks for available service items in basket failed"
-msgstr ""
+msgstr "Không thể kiểm tra các mặt hàng có sẵn trong giỏ hàng"
 
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
-msgstr ""
+msgstr "Nút con có chỉ số \"%1$d\" không có sẵn"
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Lớp \"%1$s\" không triển khai giao diện \"%2$s\""
 
 #, php-format
 msgid "Class \"%1$s\" not available"
@@ -149,82 +160,82 @@ msgstr "Lớp \"%1$s\" không có sẵn"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
-msgstr ""
+msgstr "Mã \"%1$s\" không được dài quá %2$d ký tự"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
-msgstr ""
+msgstr "Mã \"%1$s\" không được dài quá 32 ký tự"
 
 #, php-format
 msgid "Code contains invalid characters: \"%1$s\""
-msgstr ""
+msgstr "Mã chứa các ký tự không hợp lệ: \"%1$s\""
 
 #, php-format
 msgid "Code is too long"
-msgstr ""
+msgstr "Mã quá dài"
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr ""
+msgstr "Mã không được dài quá 255 ký tự"
 
 #, php-format
 msgid "Code must not be longer than 32 characters"
-msgstr ""
+msgstr "Mã không được dài quá 32 ký tự"
 
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr ""
+msgstr "Thiếu cấu hình cho \"%1$s\""
 
 #, php-format
 msgid "Configuration invalid"
-msgstr ""
+msgstr "Cấu hình không hợp lệ"
 
 #, php-format
 msgid "Configuration not available"
-msgstr ""
+msgstr "Không có tùy chọn cấu hình"
 
 #, php-format
 msgid "Configuration object not available"
-msgstr ""
+msgstr "Không tìm thấy đối tượng cấu hình"
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr ""
+msgstr "Không thể định cấu hình câu lệnh SQL cần thiết cho \"%1$s\""
 
 #, php-format
 msgid "Coupon in basket is not available any more"
-msgstr ""
+msgstr "Phiếu giảm giá trong giỏ hàng hiện không còn hiệu lực"
 
 msgid "Coupon is not available any more"
-msgstr ""
+msgstr "Phiếu giảm giá hiện không còn hiệu lực"
 
 #, php-format
 msgid "Curl could not be initialized"
-msgstr ""
+msgstr "Không thể khởi tạo Curl"
 
 #, php-format
 msgid "Curl error: \"%1$s\" - \"%2$s\""
-msgstr ""
+msgstr "Lỗi Curl: \"%1$s\" - \"%2$s\""
 
 #, php-format
 msgid "Database manager object not available"
-msgstr ""
+msgstr "Không có đối tượng quản lý cơ sở dữ liệu"
 
 #, php-format
 msgid "Date value before \"%1$s\""
-msgstr ""
+msgstr "Giá trị ngày tháng trước \"%1$s\""
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "Không tải xuống được tệp \"%1$s\""
 
 #, php-format
 msgid "Duplicate coupon code"
-msgstr ""
+msgstr "Mã giảm giá trùng lặp"
 
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
-msgstr ""
+msgstr "Mã phiếu giảm giá trùng lặp \"%1$s\""
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
@@ -232,141 +243,139 @@ msgstr "Mở rộng nút \"%1$s\" không thành công"
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy tệp \"%1$s\""
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr ""
+msgstr "Tệp hoặc thư mục \"%1$s\" không tồn tại"
 
 #, php-format
 msgid "File system manager object not available"
-msgstr ""
+msgstr "Không có đối tượng quản lý hệ thống tệp"
 
 #, php-format
 msgid "Finished order status import from \"%1$s\""
-msgstr ""
+msgstr "Đã hoàn tất việc nhập trạng thái đơn hàng từ \"%1$s\""
 
 #, php-format
 msgid "Finished order status import from file \"%1$s\""
-msgstr ""
+msgstr "Đã hoàn tất việc nhập trạng thái đơn hàng từ tệp \"%1$s\""
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Các cờ \"%1$s\" nằm ngoài phạm vi cho phép"
 
 #, php-format
 msgid "Flags not within allowed range"
-msgstr ""
+msgstr "Các cờ nằm ngoài phạm vi cho phép"
 
 #, php-format
 msgid "ID of last inserted database record not available"
-msgstr ""
+msgstr "Không thể truy cập ID của bản ghi cơ sở dữ liệu được chèn gần đây nhất"
 
 #. / Locale ID %1$s
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
-msgstr ""
+msgstr "Không có đối tượng quốc tế hóa cho \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO country code"
-msgstr ""
+msgstr "Mã quốc gia ISO không hợp lệ"
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
-msgstr ""
+msgstr "Mã quốc gia ISO không hợp lệ \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO currency code"
-msgstr ""
+msgstr "Mã tiền tệ ISO không hợp lệ"
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Mã tiền tệ ISO không hợp lệ \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO language code"
-msgstr ""
+msgstr "Mã ngôn ngữ ISO không hợp lệ"
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
-msgstr ""
+msgstr "Mã ngôn ngữ ISO không hợp lệ \"%1$s\""
 
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
-msgstr ""
+msgstr "Kết quả tìm kiếm ID \"%2$s\" trong \"%1$s\" không hợp lệ: %3$s"
 
 #, php-format
 msgid "Invalid attribute at position \"%1$d\""
-msgstr ""
+msgstr "Thuộc tính không hợp lệ tại vị trí \"%1$d\""
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong mã tiền tệ ISO \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong mã ngôn ngữ ISO \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Có ký tự không hợp lệ trong tên lớp \"%1$s\""
 
 #, php-format
-msgid ""
-"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
-"expected."
-msgstr ""
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgstr "Có ký tự không hợp lệ trong ngày tháng \"%1$s\". Định dạng ISO \"YYYY-MM-DD hh:mm:ss\" được yêu cầu."
 
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong ngày tháng \"%1$s\". Định dạng ISO \"YYYY-MM-DD\" được yêu cầu."
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong ngày tháng; cần phải ở định dạng ISO \"YYYY-MM-DD hh:mm:ss\""
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong ngày tháng; yêu cầu định dạng ISO \"YYYY-MM-DD\""
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong tên miền \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong địa chỉ email: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong tên người quản lý \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong tên người quản lý \"%1$s\" trong \"%2$s\""
 
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong giá \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong tên nhà cung cấp \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong ngày mua hàng \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in type name \"%1$s\""
-msgstr ""
+msgstr "Có ký tự không hợp lệ trong tên kiểu \"%1$s\""
 
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
-msgstr ""
+msgstr "Cấu hình không hợp lệ cho nhà cung cấp phiếu giảm giá \"%1$s\", cần có \"%2$s\""
 
 msgid "Invalid delivery type"
-msgstr ""
+msgstr "Loại hình giao hàng không hợp lệ"
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
@@ -374,137 +383,135 @@ msgstr "Thiết bị không hợp lệ \"%1$s\""
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
-msgstr ""
+msgstr "Loại MIME không hợp lệ \"%1$s\""
 
 #, php-format
 msgid "Invalid provider name \"%1$s\""
-msgstr ""
+msgstr "Tên nhà cung cấp không hợp lệ \"%1$s\""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
-msgstr ""
+msgstr "Giỏ hàng đã được tuần tự hóa không hợp lệ. \"%1$s\" trả về \"%2$s\"."
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
-msgstr ""
+msgstr "Giỏ hàng đã được chuyển đổi không hợp lệ. \"%1$s\" trả về \"%2$s\"."
 
 #, php-format
 msgid "Invalid time interval format \"%1$s\""
-msgstr ""
+msgstr "Định dạng khoảng thời gian không hợp lệ \"%1$s\""
 
 #, php-format
 msgid "Invalid type \"%1$s\""
-msgstr ""
+msgstr "Loại không hợp lệ \"%1$s\""
 
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr ""
+msgstr "Địa chỉ trang web không hợp lệ \"%1$s\""
 
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr ""
+msgstr "Không thể xóa mục này. Mã trang web của mục này khác với mã trang web hiện tại."
 
 #, php-format
 msgid "Item could not be saved using method save(). Item ID not available."
-msgstr ""
+msgstr "Không thể lưu mục bằng phương thức save(). Không tìm thấy ID mục."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr ""
+msgstr "Không tìm thấy mục được đề cập trong miền \"%1$s\": %2$s"
 
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy mục có ID \"%1$s\""
 
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy mục có ID \"%2$s\" trong \"%1$s\""
 
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy công việc có ID \"%1$s\""
 
 #, php-format
 msgid "List item for removal from domain \"%1$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy mục cần xóa khỏi miền \"%1$s\""
 
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy mục danh sách có ID \"%2$s\" trong \"%1$s\""
 
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Không có loại danh sách cho mục thuộc tính có ID là \"%1$s\""
 
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Không có loại danh sách cho mục giá có ID \"%1$s\""
 
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Không có loại danh sách cho mục văn bản có ID \"%1$s\""
 
 #, php-format
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
-msgstr ""
+msgstr "Không thể tải phản hồi XML \"%1$s\" từ nhà cung cấp dịch vụ phân phối"
 
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy mục cài đặt ngôn ngữ cho trang web \"%1$s\""
 
 #, php-format
 msgid "Locale object not available"
-msgstr ""
+msgstr "Không tìm thấy đối tượng Locale"
 
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
-msgstr ""
+msgstr "Cờ khóa \"%1$d\" nằm ngoài phạm vi cho phép"
 
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy mục nhật ký có ID \"%1$s\""
 
 #, php-format
 msgid "Log manager object not available"
-msgstr ""
+msgstr "Không có đối tượng quản lý nhật ký"
 
 #, php-format
 msgid "Mail object not available"
-msgstr ""
+msgstr "Không có đối tượng thư"
 
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
-msgstr ""
+msgstr "Đường dẫn quản lý \"%1$s\" không hợp lệ"
 
 #, php-format
 msgid "Manager path is empty"
-msgstr ""
+msgstr "Đường dẫn quản lý trống"
 
 #, php-format
 msgid "Message queue object not available"
-msgstr ""
+msgstr "Không có đối tượng hàng đợi tin nhắn"
 
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
-msgstr ""
+msgstr "Phương thức \"%1$s\" dành cho trình quản lý ngôn ngữ địa phương không khả dụng"
 
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
-msgstr ""
+msgstr "Phương thức \"%1$s\" cho nhà cung cấp không khả dụng"
 
 #, php-format
 msgid "Missing configuration \"%1$s\""
-msgstr ""
+msgstr "Thiếu cấu hình \"%1$s\""
 
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
-msgstr ""
+msgstr "ID mới \"%1$s\" của mặt hàng khác với ID cũ \"%2$s\""
 
 #, php-format
-msgid ""
-"Newly created site can not be saved using method \"save()\". Try using "
-"method \"insert()\" instead."
-msgstr ""
+msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
+msgstr "Trang web vừa được tạo không thể được lưu bằng phương thức \"save()\". Hãy thử sử dụng phương thức \"insert()\" thay thế."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
@@ -512,286 +519,278 @@ msgstr "Không tìm thấy tệp XML \"%1$s\""
 
 #, php-format
 msgid "No bought voucher for code \"%1$s\" available"
-msgstr ""
+msgstr "Không có phiếu mua hàng nào cho mã \"%1$s\""
 
 #, php-format
 msgid "No catalog node for ID \"%1$s\""
-msgstr ""
+msgstr "Không tìm thấy nút danh mục cho ID \"%1$s\""
 
 #, php-format
 msgid "No item found for conditions: %1$s"
-msgstr ""
+msgstr "Không tìm thấy kết quả nào phù hợp với điều kiện: %1$s"
 
 #, php-format
 msgid "No item with \"%2$s\" in \"%1$s\" found"
-msgstr ""
+msgstr "Không tìm thấy mục nào có \"%2$s\" trong \"%1$s\""
 
 #, php-format
 msgid "No more credit available for voucher \"%1$s\""
-msgstr ""
+msgstr "Không còn hạn mức tín dụng cho phiếu giảm giá \"%1$s\""
 
 #, php-format
 msgid "No order for ID \"%1$s\" found"
-msgstr ""
+msgstr "Không tìm thấy đơn hàng nào cho ID \"%1$s\""
 
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr ""
+msgstr "Không có giá cho mã sản phẩm \"%1$s\" hoặc mã hàng \"%2$s\""
 
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "Không tìm thấy sản phẩm nào có mã \"%1$s\""
 
 #, php-format
 msgid "No rebate for currency \"%1$s\" available"
-msgstr ""
+msgstr "Không có chương trình hoàn tiền cho loại tiền tệ \"%1$s\""
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr ""
+msgstr "Không có cấu hình tìm kiếm nào cho \"%1$s\""
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr ""
+msgstr "Không có cấu hình tìm kiếm nào cho miền \"%1$s\""
 
 #, php-format
 msgid "No search keys available"
-msgstr ""
+msgstr "Không có từ khóa tìm kiếm nào"
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"
-msgstr ""
+msgstr "Không tìm thấy loại cổ phiếu nào cho mã \"%1$s\""
 
 #, php-format
 msgid "No type for code \"%1$s\" found"
-msgstr ""
+msgstr "Không tìm thấy kiểu cho mã \"%1$s\""
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr ""
+msgstr "Không tìm thấy kho hàng nào cho mã \"%1$s\""
 
 #, php-format
 msgid "Not a date"
-msgstr ""
+msgstr "Không phải là một cuộc hẹn"
 
 #, php-format
 msgid "Not a date and time"
-msgstr ""
+msgstr "Không phải ngày và giờ"
 
 #, php-format
 msgid "Not a key/value map"
-msgstr ""
+msgstr "Không phải là bảng khóa-giá trị"
 
 #, php-format
 msgid "Not a list item"
-msgstr ""
+msgstr "Không phải là một mục trong danh sách"
 
 #, php-format
 msgid "Not a listed value"
-msgstr ""
+msgstr "Không phải là giá trị có trong danh sách"
 
 #, php-format
 msgid "Not a number"
-msgstr ""
+msgstr "Không phải là một số"
 
 #, php-format
 msgid "Not a string"
-msgstr ""
+msgstr "Không phải chuỗi"
 
 #, php-format
 msgid "Not a time"
-msgstr ""
+msgstr "Không phải lúc này"
 
 #, php-format
 msgid "Not a true/false value"
-msgstr ""
+msgstr "Không phải là giá trị đúng/sai"
 
 #, php-format
 msgid "Not an integer number"
-msgstr ""
+msgstr "Không phải là số nguyên"
 
 #, php-format
 msgid "Object is not of required type \"%1$s\""
-msgstr ""
+msgstr "Đối tượng không thuộc loại bắt buộc \"%1$s\""
 
 #, php-format
 msgid "Operation not supported"
-msgstr ""
+msgstr "Chức năng này không được hỗ trợ"
 
 #, php-format
-msgid ""
-"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
-"invoice ID \"%2$s\" of the order"
-msgstr ""
+msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgstr "Mã đơn hàng \"%1$s\" trong phản hồi XML của nhà cung cấp dịch vụ giao hàng khác với mã hóa đơn \"%2$s\" đã lưu của đơn hàng"
 
 #, php-format
 msgid "Order address position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Vị trí địa chỉ đơn hàng \"%1$s\" phải lớn hơn 0"
 
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy mặt hàng cơ bản có ID đơn hàng \"%1$s\""
 
 #, php-format
-msgid ""
-"Order data sent to delivery provider was rejected with code \"%1$s\" "
-"according to XML response"
-msgstr ""
+msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgstr "Dữ liệu đơn hàng được gửi đến nhà cung cấp dịch vụ giao hàng đã bị từ chối với mã lỗi \"%1$s\" theo phản hồi XML"
 
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Trạng thái giao hàng của đơn hàng \"%1$s\" nằm ngoài phạm vi cho phép"
 
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Trạng thái thanh toán đơn hàng \"%1$s\" nằm ngoài phạm vi cho phép"
 
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Vị trí sản phẩm \"%1$s\" phải lớn hơn 0"
 
 #, php-format
 msgid "Order service position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Vị trí dịch vụ đặt hàng \"%1$s\" phải lớn hơn 0"
 
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Loại đơn hàng \"%1$s\" nằm ngoài phạm vi cho phép"
 
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
-msgstr ""
+msgstr "Đơn hàng có ID \"%1$s\" đã bị từ chối với mã lỗi \"%2$s\": %3$s"
 
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
-msgstr ""
+msgstr "Tham số \"%1$s\" cho cấu hình không có sẵn"
 
 #, php-format
 msgid "Password object not available"
-msgstr ""
+msgstr "Không có đối tượng mật khẩu"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Giao dịch trùng lặp có ID \"%1$s\" và trạng thái \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr ""
+msgstr "PayPal Express: Giao dịch trùng lặp có ID \"%1$s\" và trạng thái \"%2$s\" "
 
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Yêu cầu không hợp lệ \"%1$s\""
 
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr ""
+msgstr "PayPal Express: Không tìm thấy mã giao dịch thanh toán cho đơn hàng có mã \"%1$s\""
 
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Lỗi khi yêu cầu mã đơn hàng \"%1$s\" với thông báo \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Số tiền thanh toán không chính xác \"%1$s\" cho đơn hàng có ID \"%2$s\""
 
 #, php-format
 msgid "PayPal Express: Wrong receiver email \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Địa chỉ email người nhận không chính xác \"%1$s\""
 
 msgid "Payment costs"
 msgstr "Chi phí chi trả"
 
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
-msgstr ""
+msgstr "Vui lòng xem giá của các sản phẩm trong giỏ hàng của bạn"
 
 #, php-format
-msgid ""
-"Price can not be added. Currency ID \"%1$s\" of price item and currently "
-"used currency ID \"%2$s\" does not match."
-msgstr ""
+msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgstr "Không thể thêm giá. Mã tiền tệ \"%1$s\" của mặt hàng và mã tiền tệ hiện đang được sử dụng \"%2$s\" không khớp nhau."
 
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr ""
+msgstr "Giá cho số lượng \"%1$d\" hiện không có sẵn"
 
 #, php-format
 msgid "Price for the given quantity \"%1$s\" not available"
-msgstr ""
+msgstr "Giá cho số lượng \"%1$s\" hiện không có sẵn"
 
 #, php-format
 msgid "Price item not available"
-msgstr ""
+msgstr "Giá sản phẩm này hiện không có sẵn"
 
 #, php-format
 msgid "Process object not available"
-msgstr ""
+msgstr "Không tìm thấy đối tượng quy trình"
 
 #, php-format
 msgid "Product  not available"
-msgstr ""
+msgstr "Sản phẩm  hiện không có sẵn"
 
 #, php-format
-msgid ""
-"Product does not contain all required values. Product code for item not "
-"available."
-msgstr ""
+msgid "Product does not contain all required values. Product code for item not available."
+msgstr "Sản phẩm không chứa đầy đủ các thông tin cần thiết. Mã sản phẩm của mặt hàng này không có sẵn."
 
 #, php-format
 msgid "Product does not contain the SKU code"
-msgstr ""
+msgstr "Sản phẩm không có mã SKU"
 
 #, php-format
 msgid "Product matching given properties not found"
-msgstr ""
+msgstr "Không tìm thấy sản phẩm phù hợp với các thuộc tính đã cho"
 
 #, php-format
 msgid "Product not available"
-msgstr ""
+msgstr "Sản phẩm hiện không có sẵn"
 
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
-msgstr ""
+msgstr "Sản phẩm có khóa mảng \"%1$d\" hiện không có sẵn"
 
 #, php-format
 msgid "Products in basket not available"
-msgstr ""
+msgstr "Các sản phẩm trong giỏ hàng hiện không có sẵn"
 
 #, php-format
 msgid "Products out of stock"
-msgstr ""
+msgstr "Sản phẩm đã hết hàng"
 
 #, php-format
 msgid "Property item for removal not found"
-msgstr ""
+msgstr "Không tìm thấy mục tài sản cần xóa"
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Tên tài sản \"%1$s\" nằm ngoài phạm vi cho phép"
 
 #, php-format
 msgid "Provider in \"%1$s\" not available"
-msgstr ""
+msgstr "Nhà cung cấp tại \"%1$s\" hiện không có sẵn"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed %1$d"
-msgstr ""
+msgstr "Số lượng phải là 0 trở lên và không được vượt quá %1$d"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
-msgstr ""
+msgstr "Số lượng phải từ 0 trở lên và không được vượt quá số lượng đã đặt hàng"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
-msgstr ""
+msgstr "Số lượng phải lớn hơn 0 và không được vượt quá %1$d"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
-msgstr ""
+msgstr "Số lượng phải lớn hơn 0 và không được vượt quá 2147483647"
 
 #, php-format
 msgid "Quantity scale must be greater than 0"
-msgstr ""
+msgstr "Thang đo số lượng phải lớn hơn 0"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
@@ -799,127 +798,123 @@ msgstr "Tham số bắt buộc \"%1$s\" bị thiếu."
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
-msgstr ""
+msgstr "Thiếu giá trị bắt buộc cho \"%1$s\""
 
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
-msgstr ""
+msgstr "Không tìm thấy cấu hình tìm kiếm cho \"%1$s\""
 
 #, php-format
 msgid "Search configuration not available"
-msgstr ""
+msgstr "Không có cấu hình tìm kiếm"
 
 #, php-format
 msgid "Sending order failed: \"%1$s\""
-msgstr ""
+msgstr "Lỗi khi gửi đơn hàng: \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
-msgstr ""
+msgstr "Việc gửi đơn hàng đến nhà cung cấp dịch vụ giao hàng đã thất bại với trạng thái HTTP \"%1$s\""
 
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
-msgstr ""
+msgstr "Không thể gửi đơn hàng đến nhà cung cấp dịch vụ giao hàng: \"%1$s\""
 
 #, php-format
 msgid "Service not available"
-msgstr ""
+msgstr "Dịch vụ không khả dụng"
 
 #, php-format
 msgid "Service of type \"%1$s\" not available"
-msgstr ""
+msgstr "Dịch vụ loại \"%1$s\" không khả dụng"
 
 #, php-format
 msgid "Session object not available"
-msgstr ""
+msgstr "Không có đối tượng phiên"
 
 #, php-format
-msgid ""
-"Site can not be inserted. Site ID of site differs from site ID of parent "
-"site."
-msgstr ""
+msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgstr "Không thể thêm trang web. Mã trang web của trang này khác với mã trang web của trang cha."
 
 #, php-format
-msgid ""
-"Site can not be moved. Site ID of site differs from present site id, site ID"
-" of existing parent site or site id of new parent site."
-msgstr ""
+msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgstr "Không thể di chuyển trang web. Mã trang web này khác với mã trang web hiện tại, mã trang web của trang web cha hiện tại hoặc mã trang web của trang web cha mới."
 
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy trang cho mã \"%1$s\""
 
 #, php-format
 msgid "Started order status import from \"%1$s\""
-msgstr ""
+msgstr "Đã bắt đầu nhập trạng thái đơn hàng từ \"%1$s\""
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
-msgstr ""
+msgstr "Đã bắt đầu nhập trạng thái đơn hàng từ tệp \"%1$s\""
 
 #, php-format
 msgid "Status not available"
-msgstr ""
+msgstr "Tình trạng không có sẵn"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"
-msgstr ""
+msgstr "Thuật toán \"%1$s\" không được hỗ trợ"
 
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
-msgstr ""
+msgstr "Giá trị tối đa của giỏ hàng là %1$s đã bị vượt quá"
 
 #, php-format
 msgid "The maximum product quantity is %1$d"
-msgstr ""
+msgstr "Số lượng sản phẩm tối đa là %1$d"
 
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
-msgstr ""
+msgstr "Số lượng sản phẩm tối đa của %1$d đã bị vượt quá"
 
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr ""
+msgstr "Giá trị tối đa của sản phẩm là %1$s"
 
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
-msgstr ""
+msgstr "Số lượng tối đa của tất cả các sản phẩm là %1$d"
 
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr ""
+msgstr "Tổng giá trị tối đa của tất cả các sản phẩm là %1$s"
 
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
-msgstr ""
+msgstr "Giá trị giỏ hàng tối thiểu là %1$s chưa đạt được"
 
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
-msgstr ""
+msgstr "Số lượng sản phẩm tối thiểu của %1$d chưa đạt"
 
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr ""
+msgstr "Loại tùy chọn cấu hình có khóa \"%1$s\" phải là \"%2$s\""
 
 #, php-format
 msgid "Time value after \"%1$s\""
-msgstr ""
+msgstr "Giá trị thời gian sau \"%1$s\""
 
 #, php-format
 msgid "Time value before \"%1$s\""
-msgstr ""
+msgstr "Giá trị thời gian trước \"%1$s\""
 
 #, php-format
 msgid "Total results value not found"
-msgstr ""
+msgstr "Không tìm thấy tổng giá trị kết quả"
 
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy rễ cây có mã \"%1$s\" trong \"%2$s\""
 
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Không tìm thấy mục có ID \"%1$s\" trong \"%2$s\""
 
 #, php-format
 msgid "Unable to call method \"%1$s\""
@@ -927,26 +922,24 @@ msgstr "Không thể gọi phương thức \"%1$s\""
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""
-msgstr ""
+msgstr "Không thể tạo tệp XML đơn hàng \"%1$s\""
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr ""
+msgstr "Không thể di chuyển tệp đã nhập \"%1$s\" sang \"%2$s\""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
-msgstr ""
+msgstr "Không thể sắp xếp các ngày lễ: \"%1$s\""
 
 #, php-format
 msgid "Unknown search key \"%1$s\""
-msgstr ""
+msgstr "Không tìm thấy khóa tìm kiếm \"%1$s\""
 
 #, php-format
-msgid ""
-"Validation of XML response from delivery provider against schema \"%1$s\" "
-"failed"
-msgstr ""
+msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgstr "Không xác thực được phản hồi XML từ nhà cung cấp dịch vụ chuyển phát theo lược đồ \"%1$s\""
 
 #, php-format
 msgid "View object not available"
-msgstr ""
+msgstr "Không thể xem đối tượng"

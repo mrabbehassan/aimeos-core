@@ -1,28 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# 
-# Translators:
 msgid ""
 msgstr ""
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: no\n"
+"Language-Team: Norwegian (http://app.transifex.com/aimeos/aimeos-core/language/no/)\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"POT-Creation-Date: 2026-04-25 11:20+0200\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-09 12:21+0100\n"
-"PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Norwegian (http://app.transifex.com/aimeos/aimeos-core/language/no/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: no\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -36,13 +29,21 @@ msgid ""
 "%12$s\n"
 "%13$s"
 msgstr ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -55,137 +56,147 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
+""
 msgstr ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+""
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
-#. number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
-#. (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
-msgstr ""
+msgstr "%1$s, %2$s, %3$s, %4$s, %6$s, %7$s"
 
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
-msgstr ""
+msgstr "Adressen for domenet «%1$s» er ikke tilgjengelig"
 
 #, php-format
 msgid "Address for type \"%1$s\" not available"
-msgstr ""
+msgstr "Adressen for typen «%1$s» er ikke tilgjengelig"
 
 #, php-format
 msgid "Address item for removal not found"
-msgstr ""
+msgstr "Elementet som skal fjernes, ble ikke funnet"
 
 #, php-format
 msgid "Address not available"
-msgstr ""
+msgstr "Adressen er ikke tilgjengelig"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Adressens tiltaleform «%1$s» ligger utenfor det tillatte området"
 
 #, php-format
 msgid "Address search configuration not available"
-msgstr ""
+msgstr "Konfigurasjon for adressesøk er ikke tilgjengelig"
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Adressetypen «%1$s» ligger ikke innenfor det tillatte området"
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr ""
+msgstr "Det oppstod en ukjent feil med koden %1$d"
 
 #, php-format
 msgid "At least one key is required for aggregation"
-msgstr ""
+msgstr "Det kreves minst én nøkkel for aggregering"
 
 #, php-format
 msgid "Basket empty"
-msgstr ""
+msgstr "Handlekurven er tom"
 
 #, php-format
 msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
-msgstr ""
+msgstr "Den kjøpte kupongen er i valutaen «%1$s», mens handlekurven bruker «%2$s»"
 
 #, php-format
 msgid "Cache object not available"
-msgstr ""
+msgstr "Cache-objektet er ikke tilgjengelig"
 
 #, php-format
 msgid "Called unknown method \"%1$s\" on class \"%2$s\""
-msgstr ""
+msgstr "Det ble påkalt en ukjent metode «%1$s» i klassen «%2$s»"
 
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
-msgstr ""
+msgstr "Katalognoden for ID «%1$s» er ikke tilgjengelig"
 
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
-msgstr ""
+msgstr "Katalogbanen for ID «%1$s» ble ikke funnet"
 
 #, php-format
 msgid "Checks for available addresses in basket failed"
-msgstr ""
+msgstr "Det gikk ikke å finne ledige adresser i handlekurven"
 
 #, php-format
 msgid "Checks for available service items in basket failed"
-msgstr ""
+msgstr "Det gikk ikke å sjekke om det var tilgjengelige tjenester i handlekurven"
 
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
-msgstr ""
+msgstr "Undernode med indeks «%1$d» er ikke tilgjengelig"
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Klassen «%1$s» implementerer ikke grensesnittet «%2$s»"
 
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Klassen «%1$s» er ikke tilgjengelig"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
-msgstr ""
+msgstr "Koden «%1$s» må ikke være lengre enn %2$d tegn"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
-msgstr ""
+msgstr "Koden «%1$s» må ikke være lengre enn 32 tegn"
 
 #, php-format
 msgid "Code contains invalid characters: \"%1$s\""
-msgstr ""
+msgstr "Koden inneholder ugyldige tegn: \"%1$s\""
 
 #, php-format
 msgid "Code is too long"
-msgstr ""
+msgstr "Koden er for lang"
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr ""
+msgstr "Koden må ikke være lengre enn 255 tegn"
 
 #, php-format
 msgid "Code must not be longer than 32 characters"
-msgstr ""
+msgstr "Koden må ikke være lengre enn 32 tegn"
 
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr ""
+msgstr "Konfigurasjonen for «%1$s» mangler"
 
 #, php-format
 msgid "Configuration invalid"
-msgstr ""
+msgstr "Konfigurasjonen er ugyldig"
 
 #, php-format
 msgid "Configuration not available"
-msgstr ""
+msgstr "Konfigurasjonen er ikke tilgjengelig"
 
 #, php-format
 msgid "Configuration object not available"
-msgstr ""
+msgstr "Konfigurasjonsobjektet er ikke tilgjengelig"
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
@@ -193,228 +204,226 @@ msgstr "Configuration of necessary SQL statement for \"%1$s\" not available"
 
 #, php-format
 msgid "Coupon in basket is not available any more"
-msgstr ""
+msgstr "Kupongen i handlekurven er ikke lenger tilgjengelig"
 
 msgid "Coupon is not available any more"
-msgstr ""
+msgstr "Kupongen er ikke lenger tilgjengelig"
 
 #, php-format
 msgid "Curl could not be initialized"
-msgstr ""
+msgstr "Curl kunne ikke initialiseres"
 
 #, php-format
 msgid "Curl error: \"%1$s\" - \"%2$s\""
-msgstr ""
+msgstr "Curl-feil: «%1$s» – «%2$s»"
 
 #, php-format
 msgid "Database manager object not available"
-msgstr ""
+msgstr "Databaseadministratorobjektet er ikke tilgjengelig"
 
 #, php-format
 msgid "Date value before \"%1$s\""
-msgstr ""
+msgstr "Datoverdi før «%1$s»"
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "Det gikk ikke å laste ned filen «%1$s»"
 
 #, php-format
 msgid "Duplicate coupon code"
-msgstr ""
+msgstr "Duplisert kupongkode"
 
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
-msgstr ""
+msgstr "Kupongkoden «%1$s» finnes allerede"
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
-msgstr ""
+msgstr "Det gikk ikke å utvide noden «%1$s»"
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "Filen «%1$s» ble ikke funnet"
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr ""
+msgstr "Filen eller mappen «%1$s» finnes ikke"
 
 #, php-format
 msgid "File system manager object not available"
-msgstr ""
+msgstr "Filsystemadministratorobjektet er ikke tilgjengelig"
 
 #, php-format
 msgid "Finished order status import from \"%1$s\""
-msgstr ""
+msgstr "Import av status for fullførte bestillinger fra «%1$s»"
 
 #, php-format
 msgid "Finished order status import from file \"%1$s\""
-msgstr ""
+msgstr "Import av status for fullførte bestillinger fra filen «%1$s»"
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Flaggene «%1$s» ligger utenfor det tillatte området"
 
 #, php-format
 msgid "Flags not within allowed range"
-msgstr ""
+msgstr "Flaggene ligger utenfor det tillatte området"
 
 #, php-format
 msgid "ID of last inserted database record not available"
-msgstr ""
+msgstr "ID-en til den sist lagt inn databaseposten er ikke tilgjengelig"
 
 #. / Locale ID %1$s
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
-msgstr ""
+msgstr "Internasjonaliseringsobjektet er ikke tilgjengelig for «%1$s»"
 
 #, php-format
 msgid "Invalid ISO country code"
-msgstr ""
+msgstr "Ugyldig ISO-landskode"
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
-msgstr ""
+msgstr "Ugyldig ISO-landskode «%1$s»"
 
 #, php-format
 msgid "Invalid ISO currency code"
-msgstr ""
+msgstr "Ugyldig ISO-valutakode"
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Ugyldig ISO-valutakode «%1$s»"
 
 #, php-format
 msgid "Invalid ISO language code"
-msgstr ""
+msgstr "Ugyldig ISO-språkkode"
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
-msgstr ""
+msgstr "Ugyldig ISO-språkkode «%1$s»"
 
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
-msgstr ""
+msgstr "Ugyldig JSON som resultat av søket etter ID «%2$s» i «%1$s»: %3$s"
 
 #, php-format
 msgid "Invalid attribute at position \"%1$d\""
-msgstr ""
+msgstr "Ugyldig attributt på posisjon «%1$d»"
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Ugyldige tegn i ISO-valutakoden «%1$s»"
 
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr ""
+msgstr "Ugyldige tegn i ISO-språkkoden «%1$s»"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "Ugyldige tegn i klassenavnet «%1$s»"
 
 #, php-format
-msgid ""
-"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
-"expected."
-msgstr ""
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgstr "Ugyldige tegn i datoen «%1$s». Forventet ISO-format: «ÅÅÅÅ-MM-DD hh:mm:ss»."
 
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr ""
+msgstr "Ugyldige tegn i datoen «%1$s». Forventet ISO-format «ÅÅÅÅ-MM-DD»."
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
-msgstr ""
+msgstr "Ugyldige tegn i datoen; forventet ISO-format «ÅÅÅÅ-MM-DD hh:mm:ss»"
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
-msgstr ""
+msgstr "Ugyldige tegn i datoen; ISO-formatet «ÅÅÅÅ-MM-DD» forventes"
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
-msgstr ""
+msgstr "Ugyldige tegn i domenenavnet «%1$s»"
 
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
-msgstr ""
+msgstr "Ugyldige tegn i e-postadressen: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
-msgstr ""
+msgstr "Ugyldige tegn i navnet på lederen «%1$s»"
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Ugyldige tegn i navnet på lederen «%1$s» i «%2$s»"
 
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
-msgstr ""
+msgstr "Ugyldige tegn i prisen «%1$s»"
 
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
-msgstr ""
+msgstr "Ugyldige tegn i leverandørnavnet «%1$s»"
 
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
-msgstr ""
+msgstr "Ugyldige tegn i kjøpsdatoen «%1$s»"
 
 #, php-format
 msgid "Invalid characters in type name \"%1$s\""
-msgstr ""
+msgstr "Ugyldige tegn i typenavnet «%1$s»"
 
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
-msgstr ""
+msgstr "Ugyldig konfigurasjon for kupongleverandøren «%1$s», krever «%2$s»"
 
 msgid "Invalid delivery type"
-msgstr ""
+msgstr "Ugyldig leveringstype"
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Ugyldig fabrikk «%1$s»"
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
-msgstr ""
+msgstr "Ugyldig MIME-type «%1$s»"
 
 #, php-format
 msgid "Invalid provider name \"%1$s\""
-msgstr ""
+msgstr "Ugyldig leverandørnavn «%1$s»"
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
-msgstr ""
+msgstr "Ugyldig serialisert kurv. «%1$s» returnerte «%2$s»."
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
-msgstr ""
+msgstr "Ugyldig serialisert kurv. «%1$s» returnerer «%2$s»."
 
 #, php-format
 msgid "Invalid time interval format \"%1$s\""
-msgstr ""
+msgstr "Ugyldig tidsintervallformat «%1$s»"
 
 #, php-format
 msgid "Invalid type \"%1$s\""
-msgstr ""
+msgstr "Ugyldig type «%1$s»"
 
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr ""
+msgstr "Ugyldig nettadresse «%1$s»"
 
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr ""
+msgstr "Elementet kan ikke slettes. Elementets nettsteds-ID avviker fra det nåværende nettsteds-ID-et."
 
 #, php-format
 msgid "Item could not be saved using method save(). Item ID not available."
-msgstr ""
+msgstr "Elementet kunne ikke lagres ved hjelp av metoden save(). Element-ID er ikke tilgjengelig."
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr ""
+msgstr "Elementet som det henvises til i domenet «%1$s» ble ikke funnet: %2$s"
 
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Elementet med ID «%1$s» ble ikke funnet"
 
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
@@ -422,500 +431,486 @@ msgstr "Item with ID \"%2$s\" in \"%1$s\" not found"
 
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Jobben med ID «%1$s» ble ikke funnet"
 
 #, php-format
 msgid "List item for removal from domain \"%1$s\" not found"
-msgstr ""
+msgstr "Elementet som skal fjernes fra domenet «%1$s» ble ikke funnet"
 
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Element med ID «%2$s» i «%1$s» ble ikke funnet"
 
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Listetypen for attributtelementet med ID «%1$s» er ikke tilgjengelig"
 
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Listetype for priselement med ID «%1$s» er ikke tilgjengelig"
 
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr ""
+msgstr "Listetype for tekstelement med ID «%1$s» er ikke tilgjengelig"
 
 #, php-format
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
-msgstr ""
+msgstr "Det gikk ikke å laste inn XML-svaret «%1$s» fra leverandøren"
 
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
-msgstr ""
+msgstr "Lokaliseringselement for nettstedet «%1$s» ble ikke funnet"
 
 #, php-format
 msgid "Locale object not available"
-msgstr ""
+msgstr "Lokalobjektet er ikke tilgjengelig"
 
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
-msgstr ""
+msgstr "Låseflagget «%1$d» ligger ikke innenfor det tillatte området"
 
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Loggoppføring med ID «%1$s» ble ikke funnet"
 
 #, php-format
 msgid "Log manager object not available"
-msgstr ""
+msgstr "Objektet «Log manager» er ikke tilgjengelig"
 
 #, php-format
 msgid "Mail object not available"
-msgstr ""
+msgstr "E-postobjektet er ikke tilgjengelig"
 
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
-msgstr ""
+msgstr "Søkeveien til mappen «%1$s» er ugyldig"
 
 #, php-format
 msgid "Manager path is empty"
-msgstr ""
+msgstr "Søkeveien til Manager er tom"
 
 #, php-format
 msgid "Message queue object not available"
-msgstr ""
+msgstr "Meldingskøobjektet er ikke tilgjengelig"
 
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
-msgstr ""
+msgstr "Metoden «%1$s» for lokalitetsadministratoren er ikke tilgjengelig"
 
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
-msgstr ""
+msgstr "Metoden «%1$s» er ikke tilgjengelig for leverandøren"
 
 #, php-format
 msgid "Missing configuration \"%1$s\""
-msgstr ""
+msgstr "Manglende konfigurasjon «%1$s»"
 
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
-msgstr ""
+msgstr "Den nye ID-en «%1$s» for varen avviker fra den gamle ID-en «%2$s»"
 
 #, php-format
-msgid ""
-"Newly created site can not be saved using method \"save()\". Try using "
-"method \"insert()\" instead."
-msgstr ""
+msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
+msgstr "Det nyopprettede nettstedet kan ikke lagres ved hjelp av metoden «save()». Prøv å bruke metoden «insert()» i stedet."
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
-msgstr ""
+msgstr "Det ble ikke funnet noen XML-fil med navnet «%1$s»"
 
 #, php-format
 msgid "No bought voucher for code \"%1$s\" available"
-msgstr ""
+msgstr "Det finnes ingen kjøpt kupong for koden «%1$s»"
 
 #, php-format
 msgid "No catalog node for ID \"%1$s\""
-msgstr ""
+msgstr "Ingen katalognode for ID «%1$s»"
 
 #, php-format
 msgid "No item found for conditions: %1$s"
-msgstr ""
+msgstr "Det ble ikke funnet noen varer som oppfyller kriteriene: %1$s"
 
 #, php-format
 msgid "No item with \"%2$s\" in \"%1$s\" found"
-msgstr ""
+msgstr "Det ble ikke funnet noen varer med «%2$s» i «%1$s»"
 
 #, php-format
 msgid "No more credit available for voucher \"%1$s\""
-msgstr ""
+msgstr "Det er ikke mer kreditt tilgjengelig for kupongen «%1$s»"
 
 #, php-format
 msgid "No order for ID \"%1$s\" found"
-msgstr ""
+msgstr "Det ble ikke funnet noen ordre for ID «%1$s»"
 
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr ""
+msgstr "Det finnes ingen pris for produkt-ID «%1$s» eller produktkode «%2$s»"
 
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "Det ble ikke funnet noe produkt med koden «%1$s»"
 
 #, php-format
 msgid "No rebate for currency \"%1$s\" available"
-msgstr ""
+msgstr "Det er ingen rabatt tilgjengelig for valutaen «%1$s»"
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr ""
+msgstr "Det finnes ingen søkekonfigurasjon for «%1$s»"
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr ""
+msgstr "Det finnes ingen søkekonfigurasjon for domenet «%1$s»"
 
 #, php-format
 msgid "No search keys available"
-msgstr ""
+msgstr "Ingen søkeord tilgjengelig"
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"
-msgstr ""
+msgstr "Det ble ikke funnet noen lagertype for koden «%1$s»"
 
 #, php-format
 msgid "No type for code \"%1$s\" found"
-msgstr ""
+msgstr "Det ble ikke funnet noen type for koden «%1$s»"
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr ""
+msgstr "Det ble ikke funnet noe lager for koden «%1$s»"
 
 #, php-format
 msgid "Not a date"
-msgstr ""
+msgstr "Ikke en date"
 
 #, php-format
 msgid "Not a date and time"
-msgstr ""
+msgstr "Ikke dato og klokkeslett"
 
 #, php-format
 msgid "Not a key/value map"
-msgstr ""
+msgstr "Ikke et nøkkel/verdi-kart"
 
 #, php-format
 msgid "Not a list item"
-msgstr ""
+msgstr "Ikke et listeelement"
 
 #, php-format
 msgid "Not a listed value"
-msgstr ""
+msgstr "Ikke en oppført verdi"
 
 #, php-format
 msgid "Not a number"
-msgstr ""
+msgstr "Ikke et tall"
 
 #, php-format
 msgid "Not a string"
-msgstr ""
+msgstr "Ikke en streng"
 
 #, php-format
 msgid "Not a time"
-msgstr ""
+msgstr "Ikke nå"
 
 #, php-format
 msgid "Not a true/false value"
-msgstr ""
+msgstr "Ikke en sant/usant-verdi"
 
 #, php-format
 msgid "Not an integer number"
-msgstr ""
+msgstr "Ikke et heltall"
 
 #, php-format
 msgid "Object is not of required type \"%1$s\""
-msgstr ""
+msgstr "Objektet er ikke av den nødvendige typen «%1$s»"
 
 #, php-format
 msgid "Operation not supported"
-msgstr ""
+msgstr "Funksjonen støttes ikke"
 
 #, php-format
-msgid ""
-"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
-"invoice ID \"%2$s\" of the order"
-msgstr ""
+msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgstr "Ordre-ID «%1$s» i leverandørens XML-svar stemmer ikke overens med den lagrede faktura-ID-en «%2$s» for ordren"
 
 #, php-format
 msgid "Order address position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Plasseringen av bestillingsadressen «%1$s» må være større enn 0"
 
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr ""
+msgstr "Bestillingspost med bestillings-ID «%1$s» ble ikke funnet"
 
 #, php-format
-msgid ""
-"Order data sent to delivery provider was rejected with code \"%1$s\" "
-"according to XML response"
-msgstr ""
+msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgstr "Bestillingsdataene som ble sendt til leverandøren, ble avvist med koden «%1$s» ifølge XML-svaret"
 
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Leveringsstatusen for bestillingen «%1$s» ligger utenfor det tillatte området"
 
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Betalingsstatusen for bestillingen «%1$s» ligger utenfor det tillatte området"
 
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Produktposisjonen «%1$s» må være større enn 0"
 
 #, php-format
 msgid "Order service position \"%1$s\" must be greater than 0"
-msgstr ""
+msgstr "Ordrenummeret «%1$s» må være større enn 0"
 
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Ordretypen «%1$s» ligger ikke innenfor det tillatte området"
 
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
-msgstr ""
+msgstr "Bestillingen med ID «%1$s» ble avvist med feilkode «%2$s»: %3$s"
 
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
-msgstr ""
+msgstr "Parameteren «%1$s» for konfigurasjonen er ikke tilgjengelig"
 
 #, php-format
 msgid "Password object not available"
-msgstr ""
+msgstr "Passordobjektet er ikke tilgjengelig"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Duplikat av transaksjon med ID «%1$s» og status «%2$s»"
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr ""
+msgstr "PayPal Express: Duplikat av transaksjon med ID «%1$s» og status «%2$s» "
 
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Ugyldig forespørsel «%1$s»"
 
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr ""
+msgstr "PayPal Express: Betalingstransaksjons-ID for ordre-ID «%1$s» er ikke tilgjengelig"
 
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Det gikk ikke å hente ordre-ID «%1$s» på grunn av «%2$s»"
 
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr ""
+msgstr "PayPal Express: Feil betalingsbeløp «%1$s» for ordre-ID «%2$s»"
 
 #, php-format
 msgid "PayPal Express: Wrong receiver email \"%1$s\""
-msgstr ""
+msgstr "PayPal Express: Feil e-postadresse til mottaker «%1$s»"
 
 msgid "Payment costs"
-msgstr ""
+msgstr "Betalingskostnader"
 
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
-msgstr ""
+msgstr "Ta en titt på prisene på varene i handlekurven din"
 
 #, php-format
-msgid ""
-"Price can not be added. Currency ID \"%1$s\" of price item and currently "
-"used currency ID \"%2$s\" does not match."
-msgstr ""
+msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgstr "Prisen kan ikke legges til. Valuta-ID-en «%1$s» for priselementet og den valutasiden som brukes for øyeblikket, «%2$s», stemmer ikke overens."
 
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr ""
+msgstr "Prisen for den angitte mengden «%1$d» er ikke tilgjengelig"
 
 #, php-format
 msgid "Price for the given quantity \"%1$s\" not available"
-msgstr ""
+msgstr "Prisen for den angitte mengden «%1$s» er ikke tilgjengelig"
 
 #, php-format
 msgid "Price item not available"
-msgstr ""
+msgstr "Prisen på varen er ikke tilgjengelig"
 
 #, php-format
 msgid "Process object not available"
-msgstr ""
+msgstr "Prosessobjektet er ikke tilgjengelig"
 
 #, php-format
 msgid "Product  not available"
-msgstr ""
+msgstr "Produktet er ikke tilgjengelig"
 
 #, php-format
-msgid ""
-"Product does not contain all required values. Product code for item not "
-"available."
-msgstr ""
+msgid "Product does not contain all required values. Product code for item not available."
+msgstr "Produktet inneholder ikke alle nødvendige opplysninger. Produktkoden for varen er ikke tilgjengelig."
 
 #, php-format
 msgid "Product does not contain the SKU code"
-msgstr ""
+msgstr "Produktet har ikke noen varenummer"
 
 #, php-format
 msgid "Product matching given properties not found"
-msgstr ""
+msgstr "Det ble ikke funnet produkter som samsvarer med de angitte egenskapene"
 
 #, php-format
 msgid "Product not available"
-msgstr ""
+msgstr "Produktet er ikke tilgjengelig"
 
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
-msgstr ""
+msgstr "Produktet med matrisenøkkel «%1$d» er ikke tilgjengelig"
 
 #, php-format
 msgid "Products in basket not available"
-msgstr ""
+msgstr "Varene i handlekurven er ikke tilgjengelige"
 
 #, php-format
 msgid "Products out of stock"
-msgstr ""
+msgstr "Produkter som er utsolgt"
 
 #, php-format
 msgid "Property item for removal not found"
-msgstr ""
+msgstr "Eiendomsobjektet som skal fjernes, ble ikke funnet"
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Eiendomsnavnet «%1$s» ligger ikke innenfor det tillatte området"
 
 #, php-format
 msgid "Provider in \"%1$s\" not available"
-msgstr ""
+msgstr "Tjenesteleverandøren i «%1$s» er ikke tilgjengelig"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed %1$d"
-msgstr ""
+msgstr "Antallet må være 0 eller større og må ikke overstige %1$d"
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
-msgstr ""
+msgstr "Antallet må være 0 eller større og må ikke overstige bestilt antall"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
-msgstr ""
+msgstr "Antallet må være større enn 0 og må ikke overstige %1$d"
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
-msgstr ""
+msgstr "Antallet må være større enn 0 og må ikke overstige 2147483647"
 
 #, php-format
 msgid "Quantity scale must be greater than 0"
-msgstr ""
+msgstr "Mengdeskalaen må være større enn 0"
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
-msgstr ""
+msgstr "Den obligatoriske parameteren «%1$s» mangler"
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
-msgstr ""
+msgstr "Den obligatoriske verdien for «%1$s» mangler"
 
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
-msgstr ""
+msgstr "Søkekonfigurasjonen for «%1$s» er ikke tilgjengelig"
 
 #, php-format
 msgid "Search configuration not available"
-msgstr ""
+msgstr "Søkekonfigurasjonen er ikke tilgjengelig"
 
 #, php-format
 msgid "Sending order failed: \"%1$s\""
-msgstr ""
+msgstr "Det gikk ikke å sende bestillingen: «%1$s»"
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
-msgstr ""
+msgstr "Det gikk ikke å sende bestillingen til leverandøren, med HTTP-status «%1$s»"
 
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
-msgstr ""
+msgstr "Det gikk ikke å sende bestillingen til leverandøren: «%1$s»"
 
 #, php-format
 msgid "Service not available"
-msgstr ""
+msgstr "Tjenesten er ikke tilgjengelig"
 
 #, php-format
 msgid "Service of type \"%1$s\" not available"
-msgstr ""
+msgstr "Tjenesten av typen «%1$s» er ikke tilgjengelig"
 
 #, php-format
 msgid "Session object not available"
-msgstr ""
+msgstr "Sesjonsobjektet er ikke tilgjengelig"
 
 #, php-format
-msgid ""
-"Site can not be inserted. Site ID of site differs from site ID of parent "
-"site."
-msgstr ""
+msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgstr "Stedet kan ikke legges til. Stedets ID avviker fra overordnet steds ID."
 
 #, php-format
-msgid ""
-"Site can not be moved. Site ID of site differs from present site id, site ID"
-" of existing parent site or site id of new parent site."
-msgstr ""
+msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgstr "Området kan ikke flyttes. Områdets ID avviker fra det nåværende områdets ID, det eksisterende overordnede områdets ID eller det nye overordnede områdets ID."
 
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr ""
+msgstr "Siden for koden «%1$s» ble ikke funnet"
 
 #, php-format
 msgid "Started order status import from \"%1$s\""
-msgstr ""
+msgstr "Import av ordrestatus fra «%1$s» er startet"
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
-msgstr ""
+msgstr "Import av ordrestatus fra filen «%1$s» er startet"
 
 #, php-format
 msgid "Status not available"
-msgstr ""
+msgstr "Status ikke tilgjengelig"
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"
-msgstr ""
+msgstr "Algoritmen «%1$s» støttes ikke"
 
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
-msgstr ""
+msgstr "Maksimumsverdien for handlekurven på %1$s er overskredet"
 
 #, php-format
 msgid "The maximum product quantity is %1$d"
-msgstr ""
+msgstr "Maksimalt antall produkter er %1$d"
 
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
-msgstr ""
+msgstr "Maksimumsmengden for produktet %1$d er overskredet"
 
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr ""
+msgstr "Maksimal produktverdi er %1$s"
 
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
-msgstr ""
+msgstr "Maksimalt antall av alle produkter er %1$d"
 
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr ""
+msgstr "Den totale verdien av alle produktene er %1$s"
 
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
-msgstr ""
+msgstr "Minimumsverdien på %1$s er ikke nådd"
 
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
-msgstr ""
+msgstr "Minimumsantall for produktet %1$d er ikke nådd"
 
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr ""
+msgstr "Konfigurasjonsalternativet med nøkkelen «%1$s» må ha typen «%2$s»"
 
 #, php-format
 msgid "Time value after \"%1$s\""
-msgstr ""
+msgstr "Tidsverdi etter «%1$s»"
 
 #, php-format
 msgid "Time value before \"%1$s\""
-msgstr ""
+msgstr "Tidsverdi før «%1$s»"
 
 #, php-format
 msgid "Total results value not found"
-msgstr ""
+msgstr "Totalverdien for resultatene ble ikke funnet"
 
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Trerot med koden «%1$s» i «%2$s» ble ikke funnet"
 
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
@@ -923,30 +918,28 @@ msgstr "Type item with ID \"%1$s\" in \"%2$s\" not found"
 
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "Kan ikke kalle opp metoden «%1$s»"
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""
-msgstr ""
+msgstr "Det går ikke an å opprette XML-filen for bestillingen «%1$s»"
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr ""
+msgstr "Det var ikke mulig å flytte den importerte filen «%1$s» til «%2$s»"
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
-msgstr ""
+msgstr "Kan ikke sortere helligdager: «%1$s»"
 
 #, php-format
 msgid "Unknown search key \"%1$s\""
-msgstr ""
+msgstr "Ukjent søkeord «%1$s»"
 
 #, php-format
-msgid ""
-"Validation of XML response from delivery provider against schema \"%1$s\" "
-"failed"
-msgstr ""
+msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgstr "Validering av XML-svaret fra leverandøren mot skjemaet «%1$s» mislyktes"
 
 #, php-format
 msgid "View object not available"
-msgstr ""
+msgstr "Objektet er ikke tilgjengelig"
