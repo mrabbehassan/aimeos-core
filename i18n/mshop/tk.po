@@ -1,21 +1,28 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Content-Transfer-Encoding: 8bit\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Language: tk\n"
-"Language-Team: Turkmen (http://app.transifex.com/aimeos/aimeos-core/language/tk/)\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"MIME-Version: 1.0\n"
-"PO-Revision-Date: 2015-07-09 20:36+0000\n"
-"POT-Creation-Date: 2026-04-25 11:20+0200\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-09 12:21+0100\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Turkmen (http://app.transifex.com/aimeos/aimeos-core/language/tk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tk\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -29,21 +36,13 @@ msgid ""
 "%12$s\n"
 "%13$s"
 msgstr ""
-"%1$s\n"
-"%2$s\n"
-"%3$s %4$s\n"
-"%5$s\n"
-"%6$s %7$s\n"
-"%8$s %9$s\n"
-"%10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s"
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid ""
 "%1$s\n"
@@ -56,99 +55,89 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
-""
 msgstr ""
-"%1$s\n"
-"%2$s\n"
-"%3$s %4$s\n"
-"%5$s\n"
-"%6$s %7$s\n"
-"%8$s %9$s\n"
-"%10$s\n"
-"%11$s\n"
-"%12$s\n"
-"%13$s\n"
-""
 
 #. / Supplier address format with label (%1$s), company (%2$s),
-#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
 #. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
 #, php-format
 msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
-msgstr "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
+msgstr ""
 
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
-msgstr "Domen \"%1$s\" üçin salgylanma elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Address for type \"%1$s\" not available"
-msgstr "\"%1$s\" görnüşi üçin salgylanma elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Address item for removal not found"
-msgstr "Aýyrmak üçin salgylanýan element tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Address not available"
-msgstr "Salgyt elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
-msgstr "Salamlama ýüzlenişi \"%1$s\" rugsat berlen çäkden daşarda"
+msgstr ""
 
 #, php-format
 msgid "Address search configuration not available"
-msgstr "Salgyt gözleg konfigurasiýasy elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
-msgstr "Adres görnüşi \"%1$s\" rugsat berlen aralyga laýyk gelmeýär"
+msgstr ""
 
 #, php-format
 msgid "An unknown error occured with code %1$d"
-msgstr "Näbelli bir säwlik %1$d kodynda ýüze çykdy."
+msgstr ""
 
 #, php-format
 msgid "At least one key is required for aggregation"
-msgstr "Agregasiýa üçin azyndan bir açar zerurdyr."
+msgstr ""
 
 #, php-format
 msgid "Basket empty"
-msgstr "Sabyň boş"
+msgstr ""
 
 #, php-format
 msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
-msgstr "Satyn alnan kupon \"%1$s\" walýutasynda, sepet \"%2$s\" walýutasyny ulanýar."
+msgstr ""
 
 #, php-format
 msgid "Cache object not available"
-msgstr "Kesh obýekti elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Called unknown method \"%1$s\" on class \"%2$s\""
-msgstr "Näbelli \"%1$s\" metodyny \"%2$s\" klasynda çagyrdy"
+msgstr ""
 
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
-msgstr "ID \"%1$s\" üçin katalog düwmesi elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Catalog path for ID \"%1$s\" not found"
-msgstr "ID \"%1$s\" üçin katalog ýoly tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Checks for available addresses in basket failed"
-msgstr "Sabynda elýeterli salgylary barlamak başa barmady"
+msgstr ""
 
 #, php-format
 msgid "Checks for available service items in basket failed"
-msgstr "Sabynda elýeterli hyzmat elementlerini barlamak synagy şowsuz boldy"
+msgstr ""
 
 #, php-format
 msgid "Child node with index \"%1$d\" not available"
-msgstr "Indeksi \"%1$d\" bolan çaga düwmesi elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
@@ -160,82 +149,82 @@ msgstr "\"%1$s\" klas elýeterli däl"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than %2$d characters"
-msgstr "Kod \"%1$s\" %2$d belgiden uzaga bolmaly däl."
+msgstr ""
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
-msgstr "Kod \"%1$s\" 32 belgiden uzaga bolmaly däl."
+msgstr ""
 
 #, php-format
 msgid "Code contains invalid characters: \"%1$s\""
-msgstr "Kod nädogry nyşanlary öz içine alýar: \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Code is too long"
-msgstr "Kod gaty uzyn"
+msgstr ""
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr "Kod 255 belgiden artyk bolmaly däldir."
+msgstr ""
 
 #, php-format
 msgid "Code must not be longer than 32 characters"
-msgstr "Kod 32 belgiden uzaga bolmaly däl."
+msgstr ""
 
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr "\"%1$s\" üçin konfigurasiýa ýok."
+msgstr ""
 
 #, php-format
 msgid "Configuration invalid"
-msgstr "Konfigurasiýa nädogry"
+msgstr ""
 
 #, php-format
 msgid "Configuration not available"
-msgstr "Konfigurasiýa elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Configuration object not available"
-msgstr "Konfigurasiýa obýekti elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr "\"%1$s\" üçin zerur SQL beýanatynyň konfigurasiýasy elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Coupon in basket is not available any more"
-msgstr "Sabynda sepetdäki kupon indi elýeterli däl."
+msgstr ""
 
 msgid "Coupon is not available any more"
-msgstr "Kupon indi elýeterli däl."
+msgstr ""
 
 #, php-format
 msgid "Curl could not be initialized"
-msgstr "Curl başlangyçlaşdyrylyp bilmedi"
+msgstr ""
 
 #, php-format
 msgid "Curl error: \"%1$s\" - \"%2$s\""
-msgstr "Curl säwligi: \"%1$s\" - \"%2$s\""
+msgstr ""
 
 #, php-format
 msgid "Database manager object not available"
-msgstr "Maglumatlar bazasy dolandyryjysy obýekti elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Date value before \"%1$s\""
-msgstr "\"%1$s\" öňündäki senenama gymmatyny"
+msgstr ""
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr "\"%1$s\" faýlyny ýükläp bolmady"
+msgstr ""
 
 #, php-format
 msgid "Duplicate coupon code"
-msgstr "Kupon koduny gaýtalamak"
+msgstr ""
 
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
-msgstr "Takyk kupon kody \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Expanding \"%1$s\" node failed"
@@ -243,139 +232,141 @@ msgstr "\"%1$s\" düwünini giňeltmek şowsuz boldy"
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr "\"%1$s\" faýly tapylmady"
+msgstr ""
 
 #, php-format
 msgid "File or directory \"%1$s\" doesn't exist"
-msgstr "Faýl ýa-da bukja \"%1$s\" ýok."
+msgstr ""
 
 #, php-format
 msgid "File system manager object not available"
-msgstr "Faýl ulgamy dolandyryjysy obýekti elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Finished order status import from \"%1$s\""
-msgstr "\"%1$s\"-den sargyt statusynyň importy tamamlandy"
+msgstr ""
 
 #, php-format
 msgid "Finished order status import from file \"%1$s\""
-msgstr "\"%1$s\" faýlyndan sargyt statusynyň importy tamamlandy"
+msgstr ""
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
-msgstr "Bayraklar \"%1$s\" rugsat berlen aralyga laýyk gelmeýär"
+msgstr ""
 
 #, php-format
 msgid "Flags not within allowed range"
-msgstr "Ruhsat berlen çäklerden daşyndaky baýdaklar"
+msgstr ""
 
 #, php-format
 msgid "ID of last inserted database record not available"
-msgstr "Soňky girizilen maglumatlar bazasy ýazgynyň ID-si elýeterli däl."
+msgstr ""
 
 #. / Locale ID %1$s
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
-msgstr "\"%1$s\" üçin halkara obýekti elýeterli däl."
+msgstr ""
 
 #, php-format
 msgid "Invalid ISO country code"
-msgstr "Ýatylmaýan ISO ýurt kody"
+msgstr ""
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
-msgstr "Nädogry ISO ýurt kody \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid ISO currency code"
-msgstr "Nädogry ISO walýuta kody"
+msgstr ""
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
-msgstr "Nädogry ISO walýuta kody \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid ISO language code"
-msgstr "Nädogry ISO dil kody"
+msgstr ""
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
-msgstr "Nädogry ISO dil kody \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
-msgstr "ID \"%2$s\" üçin \"%1$s\"-de gözlegiň netijesinde nädogry JSON: %3$s"
+msgstr ""
 
 #, php-format
 msgid "Invalid attribute at position \"%1$d\""
-msgstr "\"%1$d\" pozisiýasynda ýalňyş aýratynlyk"
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
-msgstr "ISO walýuta kodunda \"%1$s\" ýersiz simwollar"
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr "ISO dil kody \"%1$s\"-de ýatylmaýan nyşanlar"
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "\"%1$s\" klass adynda nädogry nyşanlar bar"
 
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
-msgstr "Senede \"%1$s\" ýersiz simwollar bar. ISO format \"YYYY-MM-DD hh:mm:ss\" garaşylýar."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr "Senede \"%1$s\" ýersiz belgiler bar. ISO format \"YYYY-MM-DD\" garaşylýar."
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD hh:mm:ss\" expected"
-msgstr "Senende nädogry nyşanlar, ISO formaty \"YYYY-MM-DD hh:mm:ss\" garaşylýar."
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in date, ISO format \"YYYY-MM-DD\" expected"
-msgstr "Senende nädogry nyşanlar, ISO \"YYYY-MM-DD\" formaty garaşylýar."
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
-msgstr "Domen adyndaky nädogry belgiler \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
-msgstr "E-poçta salgysyndaky nädogry belgiler: \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
-msgstr "Dolandyryjynyň adyndaky nädogry belgiler \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
-msgstr "Dolandyryjynyň adyndaky nädogry belgiler \"%1$s\" we \"%2$s\"-de"
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
-msgstr "Bahadaky ýatylýan nyşan \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
-msgstr "Täminleýjiniň adyndaky nädogry belgiler \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
-msgstr "Satyn alyş senenindäki ýalňyş belgiler \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in type name \"%1$s\""
-msgstr "Tip adyndaky nädogry belgiler \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
-msgstr "Kupon üpjün edijisi \"%1$s\" üçin nädogry konfigurasiýa, \"%2$s\" gerek."
+msgstr ""
 
 msgid "Invalid delivery type"
-msgstr "Ýetirme görnüşi ýatylmaýar"
+msgstr ""
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
@@ -383,135 +374,137 @@ msgstr "Nädogry fabrika \"%1$s\""
 
 #, php-format
 msgid "Invalid mime type \"%1$s\""
-msgstr "Nädogry MIME görnüşi \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid provider name \"%1$s\""
-msgstr "Nädogry üpjün ediji ady \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returned \"%2$s\"."
-msgstr "Nädogry seriýalaşdyrylan sepet. \"%1$s\" \"%2$s\"-i gaýtardy."
+msgstr ""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
-msgstr "Nädogry seriýalaşdyrylan sepet. \"%1$s\" \"%2$s\" gaýtarýar."
+msgstr ""
 
 #, php-format
 msgid "Invalid time interval format \"%1$s\""
-msgstr "Wagt aralygynyň nädogry formasy \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid type \"%1$s\""
-msgstr "Nädogry tip \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr "Nädogry web sahypasy URL-i \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
-msgstr "Elementi pozup bolmaýar. Elementiň sahypa ID-si häzirki sahypa ID-den tapawutlydyr."
+msgstr ""
 
 #, php-format
 msgid "Item could not be saved using method save(). Item ID not available."
-msgstr "Elementi save() usuly bilen saklap bolmady. Elementiň ID-si elýeterli däl."
+msgstr ""
 
 #, php-format
 msgid "Item referenced in domain \"%1$s\" not found: %2$s"
-msgstr "Domeýn \"%1$s\"-de agzalan element tapylmady: %2$s"
+msgstr ""
 
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
-msgstr "ID \"%1$s\" bilen element tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr "ID-si \"%2$s\" bolan \"%1$s\" elementi tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr "ID \"%1$s\" bilen iş tapylmady"
+msgstr ""
 
 #, php-format
 msgid "List item for removal from domain \"%1$s\" not found"
-msgstr "Domen \"%1$s\"den aýyrmak üçin sanawdaky element tapylmady"
+msgstr ""
 
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr "ID \"%2$s\" bilen \"%1$s\"-de sanaw elementi tapylmady"
+msgstr ""
 
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr "ID \"%1$s\" bolan atribut elementiň görnüşi elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr "ID \"%1$s\" bilen bahaly element üçin sanaw görnüşi elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr "ID \"%1$s\" bolan tekst elementi üçin sanaw görnüşi elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Loading of XML response \"%1$s\" from delivery provider failed"
-msgstr "Gönderiş üpjün edijisinden XML jogaby \"%1$s\"-i ýüklemek şowsuz boldy"
+msgstr ""
 
 #, php-format
 msgid "Locale item for site \"%1$s\" not found"
-msgstr "Saýt \"%1$s\" üçin ýerleşýän element tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Locale object not available"
-msgstr "Ýerleşýän ýer obýekti elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Lock flag \"%1$d\" not within allowed range"
-msgstr "Kilid belgisi \"%1$d\" rugsat berlen çäkde däl"
+msgstr ""
 
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr "ID \"%1$s\" bilen ýazgy tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Log manager object not available"
-msgstr "Ýazgy dolandyryjy obýekti elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Mail object not available"
-msgstr "Poçta obýekti elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Manager path \"%1$s\" is invalid"
-msgstr "Dolandyryjy ýoly \"%1$s\" ýatylmaýar"
+msgstr ""
 
 #, php-format
 msgid "Manager path is empty"
-msgstr "Dolandyryjynyň ýoly boşdur"
+msgstr ""
 
 #, php-format
 msgid "Message queue object not available"
-msgstr "Habar nobat obýekti elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Method \"%1$s\" for locale site manager not available"
-msgstr "Ýerelleşdiriş saýt dolandyryjysy üçin \"%1$s\" usuly elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Method \"%1$s\" for provider not available"
-msgstr "Üpjün ediji üçin \"%1$s\" usuly elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Missing configuration \"%1$s\""
-msgstr "Konfigurasiýa ýitdi \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
-msgstr "Zatyň täze ID-si \"%1$s\" köne ID-den \"%2$s\" tapawutlydyr."
+msgstr ""
 
 #, php-format
-msgid "Newly created site can not be saved using method \"save()\". Try using method \"insert()\" instead."
-msgstr "Täze döredilen sahypa \"save()\" usuly bilen saklap bolmaýar. Munuň ýerine \"insert()\" usulyny ulanmagy synanyşyň."
+msgid ""
+"Newly created site can not be saved using method \"save()\". Try using "
+"method \"insert()\" instead."
+msgstr ""
 
 #, php-format
 msgid "No XML file \"%1$s\" found"
@@ -519,278 +512,286 @@ msgstr "\"%1$s\" atly XML faýly tapylmady"
 
 #, php-format
 msgid "No bought voucher for code \"%1$s\" available"
-msgstr "Kod \"%1$s\" üçin satyn alnan kupon ýok."
+msgstr ""
 
 #, php-format
 msgid "No catalog node for ID \"%1$s\""
-msgstr "ID \"%1$s\" üçin katalog düwmesi ýok."
+msgstr ""
 
 #, php-format
 msgid "No item found for conditions: %1$s"
-msgstr "Şertler: %1$s boýunça hiç bir element tapylmady."
+msgstr ""
 
 #, php-format
 msgid "No item with \"%2$s\" in \"%1$s\" found"
-msgstr "\"%1$s\"-de \"%2$s\" bolan hiç bir element tapylmady"
+msgstr ""
 
 #, php-format
 msgid "No more credit available for voucher \"%1$s\""
-msgstr "Wauçer \"%1$s\" üçin has köp kredit elýeterli däl."
+msgstr ""
 
 #, php-format
 msgid "No order for ID \"%1$s\" found"
-msgstr "ID \"%1$s\" üçin hiç bir buýruk tapylmady"
+msgstr ""
 
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr "Önüm ID \"%1$s\" ýa-da önüm kody \"%2$s\" üçin bahasy ýok."
+msgstr ""
 
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr "Kod \"%1$s\" bilen hiç bir önüm tapylmady"
+msgstr ""
 
 #, php-format
 msgid "No rebate for currency \"%1$s\" available"
-msgstr "Walýuta \"%1$s\" üçin gaýtaryp beriş elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "No search configuration available for \"%1$s\""
-msgstr "\"%1$s\" üçin gözleg konfigurasiýasy ýok."
+msgstr ""
 
 #, php-format
 msgid "No search configuration available for domain \"%1$s\""
-msgstr "\"%1$s\" domeni üçin gözleg konfigurasiýasy ýok."
+msgstr ""
 
 #, php-format
 msgid "No search keys available"
-msgstr "Gözleg açarlary elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"
-msgstr "Kod \"%1$s\" üçin hiç bir stok görnüşi tapylmady"
+msgstr ""
 
 #, php-format
 msgid "No type for code \"%1$s\" found"
-msgstr "Kod \"%1$s\" üçin hiç bir görnüş tapylmady"
+msgstr ""
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr "Kod \"%1$s\" üçin ammary tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Not a date"
-msgstr "Duýuş däl"
+msgstr ""
 
 #, php-format
 msgid "Not a date and time"
-msgstr "Sen we sagat däl"
+msgstr ""
 
 #, php-format
 msgid "Not a key/value map"
-msgstr "Açar/değer kartasy däl"
+msgstr ""
 
 #, php-format
 msgid "Not a list item"
-msgstr "Sanaw elementi däl"
+msgstr ""
 
 #, php-format
 msgid "Not a listed value"
-msgstr "Sanawda görkezilmedik gymmatlyk"
+msgstr ""
 
 #, php-format
 msgid "Not a number"
-msgstr "Sana däl"
+msgstr ""
 
 #, php-format
 msgid "Not a string"
-msgstr "Setir däl"
+msgstr ""
 
 #, php-format
 msgid "Not a time"
-msgstr "Wagt däl"
+msgstr ""
 
 #, php-format
 msgid "Not a true/false value"
-msgstr "Dogry/ýalňyş däl gymmat"
+msgstr ""
 
 #, php-format
 msgid "Not an integer number"
-msgstr "Bütin san däl"
+msgstr ""
 
 #, php-format
 msgid "Object is not of required type \"%1$s\""
-msgstr "Obýekt talap edilýän \"%1$s\" görnüşine degişli däl."
+msgstr ""
 
 #, php-format
 msgid "Operation not supported"
-msgstr "Operasiýa goldanylmaýar"
+msgstr ""
 
 #, php-format
-msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
-msgstr "Gönderiş üpjün edijisiniň XML jogabyndaky \"%1$s\" sargyt ID-si sargydyň saklanan faktura ID-si \"%2$s\"-den tapawutlanýar."
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
+msgstr ""
 
 #, php-format
 msgid "Order address position \"%1$s\" must be greater than 0"
-msgstr "Sargyt salgysynyň pozisiýasy \"%1$s\" 0-dan uly bolmaly"
+msgstr ""
 
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr "Sargyt ID-si \"%1$s\" bolan sargyt esasy önümi tapylmady"
+msgstr ""
 
 #, php-format
-msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
-msgstr "Jeteriýet hyzmaty üpjünçisine iberilen sargyt maglumatlary XML jogabyna görä \"%1$s\" kody bilen ret edildi."
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
+msgstr ""
 
 #, php-format
 msgid "Order delivery status \"%1$s\" not within allowed range"
-msgstr "Ýetiriş statusy \"%1$s\" rugsat berlen aralyga laýyk gelmeýär"
+msgstr ""
 
 #, php-format
 msgid "Order payment status \"%1$s\" not within allowed range"
-msgstr "Töleg statusy \"%1$s\" rugsat berlen aralyga laýyk gelmeýär"
+msgstr ""
 
 #, php-format
 msgid "Order product position \"%1$s\" must be greater than 0"
-msgstr "Önümiň pozisiýasy \"%1$s\" 0-dan uly bolmaly"
+msgstr ""
 
 #, php-format
 msgid "Order service position \"%1$s\" must be greater than 0"
-msgstr "Sargyt hyzmat pozisiýasy \"%1$s\" 0-den uly bolmaly"
+msgstr ""
 
 #, php-format
 msgid "Order type \"%1$s\" not within allowed range"
-msgstr "Bu \"%1$s\" görnüşi rugsat berlen aralyga laýyk gelmeýär"
+msgstr ""
 
 #, php-format
 msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
-msgstr "ID \"%1$s\" bilen edilen sargyt \"%2$s\" kody bilen ret edildi: %3$s"
+msgstr ""
 
 #, php-format
 msgid "Parameter \"%1$s\" for configuration not available"
-msgstr "Konfigurasiýa üçin \"%1$s\" parametr elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Password object not available"
-msgstr "Parol obýekti elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\""
-msgstr "PayPal Express: ID \"%1$s\" we status \"%2$s\" bolan gaýtalanýan tranzaksiýa"
+msgstr ""
 
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr "PayPal Express: ID \"%1$s\" we status \"%2$s\" bolan gaýtalanýan tranzaksiýa "
+msgstr ""
 
 #, php-format
 msgid "PayPal Express: Invalid request \"%1$s\""
-msgstr "PayPal Express: Nädogry haýyş \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr "PayPal Express: \"%1$s\" sargyt ID üçin töleg amalynyň ID-si elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr "PayPal Express: Sargyt ID-si \"%1$s\" üçin haýyş \"%2$s\" bilen şowsuz boldy"
+msgstr ""
 
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr "PayPal Express: Sipariş ID \"%2$s\" üçin nädogry töleg mukdary \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "PayPal Express: Wrong receiver email \"%1$s\""
-msgstr "PayPal Express: Nädogry alyjy e-poçta \"%1$s\""
+msgstr ""
 
 msgid "Payment costs"
 msgstr "Töleg çykdajylary"
 
 #, php-format
 msgid "Please have a look at the prices of the products in your basket"
-msgstr "Haýyş edýärin, sepetiňizdeki önümleriň bahalaryna serediň."
+msgstr ""
 
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
-msgstr "Baha goşulmady. Bahanyň walýuta ID-si \"%1$s\" bilen häzirki ulanylýan walýuta ID-si \"%2$s\" gabat gelmeýär."
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
+msgstr ""
 
 #, php-format
 msgid "Price for the given quantity \"%1$d\" not available"
-msgstr "Berilen mukdar \"%1$d\" üçin bahasy elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Price for the given quantity \"%1$s\" not available"
-msgstr "Berilen mukdardaky \"%1$s\" bahasy elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Price item not available"
-msgstr "Baha elementi elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Process object not available"
-msgstr "Proses obýekti elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Product  not available"
-msgstr "Önüm elýeterli däl"
+msgstr ""
 
 #, php-format
-msgid "Product does not contain all required values. Product code for item not available."
-msgstr "Önümde ähli zerur bolan gymmatlyklar ýok. Önümiň kody elýeterli däl."
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
+msgstr ""
 
 #, php-format
 msgid "Product does not contain the SKU code"
-msgstr "Önüm SKU koduny öz içine almaýar."
+msgstr ""
 
 #, php-format
 msgid "Product matching given properties not found"
-msgstr "Berilen häsiýetlere laýyk gelýän önüm tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Product not available"
-msgstr "Önüm elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
-msgstr "\"%1$d\" sahypasynyň açary bolan önüm elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Products in basket not available"
-msgstr "Sabynda harytlar ýok"
+msgstr ""
 
 #, php-format
 msgid "Products out of stock"
-msgstr "Önümler stokuňda ýok"
+msgstr ""
 
 #, php-format
 msgid "Property item for removal not found"
-msgstr "Aýryp atmak üçin emläk elementi tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"
-msgstr "Mülk ady \"%1$s\" rugsat berlen aralyga laýyk gelmeýär"
+msgstr ""
 
 #, php-format
 msgid "Provider in \"%1$s\" not available"
-msgstr "\"%1$s\"-de üpjün ediji elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed %1$d"
-msgstr "Miktar 0 ýa-da ondan köp bolmaly we %1-den ýokary bolmaly däl."
+msgstr ""
 
 #, php-format
 msgid "Quantity must be 0 or greater and must not exceed ordered quantity"
-msgstr "Miktar 0 ýa-da ondan köp bolmaly we sargyt edilen mukdardan geçmezligi gerek."
+msgstr ""
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed %1$d"
-msgstr "Miktar 0-den uly bolmaly we %1-den geçmezligi gerek"
+msgstr ""
 
 #, php-format
 msgid "Quantity must be greater than 0 and must not exceed 2147483647"
-msgstr "Miktar 0-den uly bolmaly we 2147483647-den geçmezligi gerek."
+msgstr ""
 
 #, php-format
 msgid "Quantity scale must be greater than 0"
-msgstr "Miktar şkalasy 0-dan uly bolmaly"
+msgstr ""
 
 #, php-format
 msgid "Required parameter \"%1$s\" is missing"
@@ -798,123 +799,127 @@ msgstr "Talap edilýän parametr \"%1$s\" ýok."
 
 #, php-format
 msgid "Required value for \"%1$s\" is missing"
-msgstr "\"%1$s\" üçin zerur bolan gymmat ýok."
+msgstr ""
 
 #, php-format
 msgid "Search configuration for \"%1$s\" not available"
-msgstr "\"%1$s\" üçin gözleg konfigurasiýasy elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Search configuration not available"
-msgstr "Gözleg konfigurasiýasy elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Sending order failed: \"%1$s\""
-msgstr "Sargyt ibermek şowsuz boldy: \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
-msgstr "Sargyt beriş hyzmaty üpjün edijisine ibermek HTTP statusy \"%1$s\" bilen şowsuz boldy."
+msgstr ""
 
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
-msgstr "Sargyt iberiş hyzmat üpjünçisine ugratmak başa barmady: \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Service not available"
-msgstr "Hyzmat elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Service of type \"%1$s\" not available"
-msgstr "\"%1$s\" görnüşli hyzmat elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "Session object not available"
-msgstr "Sessia obýekti elýeterli däl"
+msgstr ""
 
 #, php-format
-msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
-msgstr "Saýt girizilip bolmaýar. Saýtyň ID-si ene saýtyň ID-sinden tapawutlydyr."
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
+msgstr ""
 
 #, php-format
-msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
-msgstr "Saýt göçürilip bilinmeýär. Saýtyň ID-si häzirki saýtyň ID-sinden, bar bolan ene saýtyň ID-sinden ýa-da täze ene saýtyň ID-sinden tapawutlydyr."
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
+msgstr ""
 
 #, php-format
 msgid "Site for code \"%1$s\" not found"
-msgstr "Kod \"%1$s\" tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Started order status import from \"%1$s\""
-msgstr "\"%1$s\"-den sargyt statusyny import etmegi başlady"
+msgstr ""
 
 #, php-format
 msgid "Started order status import from file \"%1$s\""
-msgstr "\"%1$s\" faýlyndan sargyt statusyny import etmegi başlady"
+msgstr ""
 
 #, php-format
 msgid "Status not available"
-msgstr "Status elýeterli däl"
+msgstr ""
 
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"
-msgstr "\"%1$s\" algoritmi goldanylmaýar."
+msgstr ""
 
 #, php-format
 msgid "The maximum basket value of %1$s is exceeded"
-msgstr "%1$s-iň iň ýokary sepet bahasy aşyldy"
+msgstr ""
 
 #, php-format
 msgid "The maximum product quantity is %1$d"
-msgstr "Önümiň iň ýokary mukdary %1$d"
+msgstr ""
 
 #, php-format
 msgid "The maximum product quantity of %1$d is exceeded"
-msgstr "%1$d önümiň iň ýokary mukdary aşyldy"
+msgstr ""
 
 #, php-format
 msgid "The maximum product value is %1$s"
-msgstr "Önümiň iň ýokary bahasy %1$s"
+msgstr ""
 
 #, php-format
 msgid "The maximum quantity of all products is %1$d"
-msgstr "Ähli önümleriň iň ýokary mukdary %1$d"
+msgstr ""
 
 #, php-format
 msgid "The maximum value of all products is %1$s"
-msgstr "Ähli önümleriň iň ýokary bahasy %1$s"
+msgstr ""
 
 #, php-format
 msgid "The minimum basket value of %1$s isn't reached"
-msgstr "%1$s sepetiniň iň az bahasy ýetirilmedi"
+msgstr ""
 
 #, php-format
 msgid "The minimum product quantity of %1$d isn't reached"
-msgstr "%1$d-iň iň az önüm mukdary ýetirilmeýär"
+msgstr ""
 
 #, php-format
 msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
-msgstr "\"%1$s\" açary bilen konfigurasiýa opsiýasynyň görnüşi \"%2$s\" bolmaly."
+msgstr ""
 
 #, php-format
 msgid "Time value after \"%1$s\""
-msgstr "\"%1$s\" soňky wagt gymmaty"
+msgstr ""
 
 #, php-format
 msgid "Time value before \"%1$s\""
-msgstr "\"%1$s\"-den öňki wagt gymmaty"
+msgstr ""
 
 #, php-format
 msgid "Total results value not found"
-msgstr "Jemi netijäniň bahasy tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
-msgstr "\"%1$s\"-de \"%2$s\" kody bolan agaç kökü tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr "ID-si \"%1$s\" bolan element \"%2$s\"-de tapylmady"
+msgstr ""
 
 #, php-format
 msgid "Unable to call method \"%1$s\""
@@ -922,24 +927,26 @@ msgstr "\"%1$s\" metodyny işledip bolmaýar"
 
 #, php-format
 msgid "Unable to create order XML file \"%1$s\""
-msgstr "Sargyt XML faýlyny \"%1$s\" döretmek mümkin däl"
+msgstr ""
 
 #, php-format
 msgid "Unable to move imported file \"%1$s\" to \"%2$s\""
-msgstr "Girizilen \"%1$s\" faýlyny \"%2$s\" faýlyna göçürip bolmady."
+msgstr ""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
-msgstr "Döwlet dynç günlerini tertiplemek mümkin däl: \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Unknown search key \"%1$s\""
-msgstr "Näbelli gözleg açary \"%1$s\""
+msgstr ""
 
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
-msgstr "Gowşuryş üpjünçisinden gelen XML jogabyň \"%1$s\" skemasyna görä barlagy başa barmady."
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
+msgstr ""
 
 #, php-format
 msgid "View object not available"
-msgstr "Obýekti görmek mümkin däl"
+msgstr ""

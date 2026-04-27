@@ -47,7 +47,7 @@ msgstr "Comunicació"
 
 #. Address salutation
 msgid "mr"
-msgstr ""
+msgstr "senyor"
 
 #. Address salutation
 msgid "ms"
@@ -55,11 +55,11 @@ msgstr ""
 
 #. Address salutation
 msgid "mrs"
-msgstr ""
+msgstr "senyora"
 
 #. Address salutation
 msgid "miss"
-msgstr ""
+msgstr "miss"
 
 #. Order type value
 msgid "order:repeat"
@@ -75,7 +75,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:-1"
-msgstr ""
+msgstr "pagament"
 
 #. Subscription reason code
 msgid "reason:0"
@@ -83,7 +83,7 @@ msgstr ""
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr ""
+msgstr "raó:1"
 
 #. Payment status value
 msgid "pay:-1"
@@ -91,31 +91,31 @@ msgstr ""
 
 #. Payment status value
 msgid "pay:0"
-msgstr ""
+msgstr "estat:0"
 
 #. Payment status value
 msgid "pay:1"
-msgstr ""
+msgstr "raó:1"
 
 #. Payment status value
 msgid "pay:2"
-msgstr ""
+msgstr "estat:6"
 
 #. Payment status value
 msgid "pay:3"
-msgstr ""
+msgstr "paga:3"
 
 #. Payment status value
 msgid "pay:4"
-msgstr ""
+msgstr "estadística:1"
 
 #. Payment status value
 msgid "pay:5"
-msgstr ""
+msgstr "paga:5"
 
 #. Payment status value
 msgid "pay:6"
-msgstr ""
+msgstr "paga:6"
 
 #. Payment status value
 msgid "pay:7"
@@ -127,35 +127,35 @@ msgstr ""
 
 #. Delivery status value
 msgid "stat:0"
-msgstr ""
+msgstr "estat:0"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr ""
+msgstr "estadística:1"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr ""
+msgstr "estadística:2"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr ""
+msgstr "estadística:3"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr ""
+msgstr "estat:4"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr ""
+msgstr "estat:5"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr ""
+msgstr "estat:6"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr ""
+msgstr "estat:7"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
