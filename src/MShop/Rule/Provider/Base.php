@@ -79,9 +79,9 @@ abstract class Base
 	 * Injects the outer object into the decorator stack
 	 *
 	 * @param \Aimeos\MShop\Rule\Provider\Iface $object First object of the decorator stack
-	 * @return \Aimeos\MShop\Rule\Provider\Iface Rule object for chaining method calls
+	 * @return static Rule object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Rule\Provider\Iface $object ) : \Aimeos\MShop\Rule\Provider\Iface
+	public function setObject( \Aimeos\MShop\Rule\Provider\Iface $object ) : static
 	{
 		$this->object = $object;
 		return $this;
@@ -113,7 +113,7 @@ abstract class Base
 		$list = [];
 
 		foreach( $configList as $key => $config ) {
-			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $config );
+			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( (array) $config );
 		}
 
 		return $list;
@@ -131,7 +131,7 @@ abstract class Base
 			return $this->object;
 		}
 
-		return $this;
+		return $this; // @phpstan-ignore return.type
 	}
 
 

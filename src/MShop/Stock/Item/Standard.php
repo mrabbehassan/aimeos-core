@@ -32,6 +32,7 @@ class Standard
 	 */
 	public function getDateBack() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'stock.dateback' );
 	}
 
@@ -40,9 +41,9 @@ class Standard
 	 * Sets the product back in stock date.
 	 *
 	 * @param string|null $dateback New back in stock date of the product
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
+	 * @return static Stock item for chaining method calls
 	 */
-	public function setDateBack( ?string $dateback ) : \Aimeos\MShop\Stock\Item\Iface
+	public function setDateBack( ?string $dateback ) : static
 	{
 		return $this->set( 'stock.dateback', \Aimeos\Utils::datetime( $dateback ) );
 	}
@@ -55,7 +56,7 @@ class Standard
 	 */
 	public function getProductId() : string
 	{
-		return $this->get( 'stock.productid', '' );
+		return (string) $this->get( 'stock.productid', '' );
 	}
 
 
@@ -63,9 +64,9 @@ class Standard
 	 * Sets a new product ID the stock item belongs to.
 	 *
 	 * @param string $value New product ID
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
+	 * @return static Stock item for chaining method calls
 	 */
-	public function setProductId( string $value ) : \Aimeos\MShop\Stock\Item\Iface
+	public function setProductId( string $value ) : static
 	{
 		return $this->set( 'stock.productid', $value );
 	}
@@ -78,6 +79,7 @@ class Standard
 	 */
 	public function getStockLevel() : ?int
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'stock.stocklevel' );
 	}
 
@@ -86,9 +88,9 @@ class Standard
 	 * Sets the stock level.
 	 *
 	 * @param int|null $stocklevel New stock level
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
+	 * @return static Stock item for chaining method calls
 	 */
-	public function setStockLevel( $stocklevel = null ) : \Aimeos\MShop\Stock\Item\Iface
+	public function setStockLevel( $stocklevel = null ) : static
 	{
 		return $this->set( 'stock.stocklevel', is_numeric( $stocklevel ) ? (int) $stocklevel : null );
 	}
@@ -101,7 +103,7 @@ class Standard
 	 */
 	public function getTimeframe() : string
 	{
-		return $this->get( 'stock.timeframe', '' );
+		return (string) $this->get( 'stock.timeframe', '' );
 	}
 
 
@@ -109,9 +111,9 @@ class Standard
 	 * Sets the expected delivery time frame
 	 *
 	 * @param string $timeframe Expected delivery time frame
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
+	 * @return static Stock stock item for chaining method calls
 	 */
-	public function setTimeframe( ?string $timeframe ) : \Aimeos\MShop\Stock\Item\Iface
+	public function setTimeframe( ?string $timeframe ) : static
 	{
 		return $this->set( 'stock.timeframe', (string) $timeframe );
 	}
@@ -125,18 +127,18 @@ class Standard
 	 */
 	public function getType() : string
 	{
-		return $this->get( 'stock.type', 'default' );
+		return (string) $this->get( 'stock.type', 'default' );
 	}
 
 
 	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Stock item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -144,11 +146,11 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'stock.productid': $item->setProductId( $value ); break;
-				case 'stock.stocklevel': $item->setStockLevel( $value ); break;
-				case 'stock.timeframe': $item->setTimeFrame( $value ); break;
-				case 'stock.dateback': $item->setDateBack( $value ); break;
-				case 'stock.type': $item->setType( $value ); break;
+				case 'stock.productid': $item->setProductId( (string) $value ); break;
+				case 'stock.stocklevel': $item->setStockLevel( $value !== null ? (int) $value : null ); break;
+				case 'stock.timeframe': $item->setTimeFrame( $value ? (string) $value : null ); break;
+				case 'stock.dateback': $item->setDateBack( $value ? (string) $value : null ); break;
+				case 'stock.type': $item->setType( (string) $value ); break;
 				default: continue 2;
 			}
 
@@ -162,7 +164,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

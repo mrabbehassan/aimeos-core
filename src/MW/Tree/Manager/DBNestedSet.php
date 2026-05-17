@@ -80,8 +80,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			throw new \Aimeos\MW\Tree\Exception( 'SQL config is missing' );
 		}
 
-		$this->checkSearchConfig( $config['search'] );
-		$this->checkSqlConfig( $config['sql'] );
+		$this->checkSearchConfig( (array) $config['search'] );
+		$this->checkSqlConfig( (array) $config['sql'] );
 
 		$this->searchConfig = $config['search'];
 		$this->config = $config['sql'];
@@ -99,6 +99,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$attributes = [];
 
 		foreach( $this->searchConfig as $values ) {
+			// @phpstan-ignore argument.type
 			$attributes[] = new \Aimeos\Base\Criteria\Attribute\Standard( $values );
 		}
 
@@ -138,21 +139,21 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	{
 		$node = $this->getNode( $id, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
-		$stmt = $this->conn->create( $this->config['delete'] );
+		$stmt = $this->conn->create( (string) $this->config['delete'] );
 		$stmt->bind( 1, $node->left, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, $node->right, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->execute()->finish();
 
 		$diff = $node->right - $node->left + 1;
 
-		$stmt = $this->conn->create( $this->config['move-left'] );
+		$stmt = $this->conn->create( (string) $this->config['move-left'] );
 		$stmt->bind( 1, -$diff, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 3, $node->right + 1, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 4, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->execute()->finish();
 
-		$stmt = $this->conn->create( $this->config['move-right'] );
+		$stmt = $this->conn->create( (string) $this->config['move-right'] );
 		$stmt->bind( 1, -$diff, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, $node->right + 1, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 3, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
@@ -203,7 +204,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$conditions = $search->getConditionSource( $types, $translations, [], $funcs );
 
 
-		$stmt = $this->conn->create( str_replace( ':cond', $conditions, $this->config['get'] ) );
+		$stmt = $this->conn->create( str_replace( ':cond', (string) $conditions, (string) $this->config['get'] ) );
 		$stmt->bind( 1, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, $numlevel, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$result = $stmt->execute();
@@ -260,20 +261,20 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		}
 
 
-		$stmt = $this->conn->create( $this->config['move-left'] );
+		$stmt = $this->conn->create( (string) $this->config['move-left'] );
 		$stmt->bind( 1, 2, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 3, $node->left, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 4, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->execute()->finish();
 
-		$stmt = $this->conn->create( $this->config['move-right'] );
+		$stmt = $this->conn->create( (string) $this->config['move-right'] );
 		$stmt->bind( 1, 2, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, $node->left, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 3, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->execute()->finish();
 
-		$stmt = $this->conn->create( $this->config['insert'] );
+		$stmt = $this->conn->create( (string) $this->config['insert'] );
 		$stmt->bind( 1, $node->getLabel(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 		$stmt->bind( 2, $node->getCode(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 		$stmt->bind( 3, $node->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
@@ -284,14 +285,14 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$stmt->execute()->finish();
 
 
-		$result = $this->conn->create( $this->config['newid'] )->execute();
+		$result = $this->conn->create( (string) $this->config['newid'] )->execute();
 
-		if( ( $row = $result->fetch( \Aimeos\Base\DB\Result\Base::FETCH_NUM ) ) === false ) {
+		if( ( $row = $result->fetch( \Aimeos\Base\DB\Result\Base::FETCH_NUM ) ) === null ) {
 			throw new \Aimeos\MW\Tree\Exception( sprintf( 'No new record ID available' ) );
 		}
 		$result->finish();
 
-		$node->setId( $row[0] );
+		$node->setId( (string) $row[0] );
 
 		return $node;
 	}
@@ -381,9 +382,9 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		}
 
 
-		$stmtLeft = $this->conn->create( $this->config['move-left'] );
-		$stmtRight = $this->conn->create( $this->config['move-right'] );
-		$updateParentId = $this->conn->create( $this->config['update-parentid'] );
+		$stmtLeft = $this->conn->create( (string) $this->config['move-left'] );
+		$stmtRight = $this->conn->create( (string) $this->config['move-right'] );
+		$updateParentId = $this->conn->create( (string) $this->config['update-parentid'] );
 		// open gap for inserting node or subtree
 
 		$stmtLeft->bind( 1, $diff, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
@@ -451,7 +452,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			return $node;
 		}
 
-		$stmt = $this->conn->create( $this->config['update'] );
+		$stmt = $this->conn->create( (string) $this->config['update'] );
 		$stmt->bind( 1, $node->getLabel(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 		$stmt->bind( 2, $node->getCode(), \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 		$stmt->bind( 3, $node->getStatus(), \Aimeos\Base\DB\Statement\Base::PARAM_INT );
@@ -483,7 +484,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		}
 
 		if( $search->getSortations() === [] ) {
-			$search->setSortations( [$search->sort( '+', $this->searchConfig['left']['code'] )] );
+			// @phpstan-ignore argument.type
+			$search->setSortations( [$search->sort( '+', (string) $this->searchConfig['left']['code'] )] );
 		}
 
 		$types = $this->getSearchTypes( $this->searchConfig );
@@ -494,8 +496,8 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 
 		$sql = str_replace(
 			[':cond', ':order', ':size', ':start'],
-			[$conditions, $sortations, $search->getLimit(), $search->getOffset()],
-			$this->config['search']
+			[(string) $conditions, (string) $sortations, (string) $search->getLimit(), (string) $search->getOffset()],
+			(string) $this->config['search']
 		);
 
 		$stmt = $this->conn->create( $sql );
@@ -534,12 +536,13 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		$search = $this->createSearch();
 
 		$expr = array(
-			$search->compare( '<=', $this->searchConfig['left']['code'], $node->left ),
-			$search->compare( '>=', $this->searchConfig['right']['code'], $node->right ),
+			$search->compare( '<=', (string) $this->searchConfig['left']['code'], $node->left ),
+			$search->compare( '>=', (string) $this->searchConfig['right']['code'], $node->right ),
 		);
 
 		$search->setConditions( $search->and( $expr ) );
-		$search->setSortations( array( $search->sort( '+', $this->searchConfig['left']['code'] ) ) );
+		// @phpstan-ignore argument.type
+		$search->setSortations( array( $search->sort( '+', (string) $this->searchConfig['left']['code'] ) ) );
 
 		foreach( $this->searchNodes( $search ) as $item ) {
 			$result[$item->getId()] = $item;
@@ -553,9 +556,10 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * Checks if all required search configurations are available.
 	 *
 	 * @param array $config Associative list of search configurations
+	 * @return void
 	 * @throws \Aimeos\MW\Tree\Exception If one ore more search configurations are missing
 	 */
-	protected function checkSearchConfig( array $config )
+	protected function checkSearchConfig( array $config ) : void
 	{
 		$required = array( 'id', 'label', 'status', 'level', 'left', 'right' );
 
@@ -578,9 +582,10 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * Checks if all required SQL statements are available.
 	 *
 	 * @param array $config Associative list of SQL statements
+	 * @return void
 	 * @throws \Aimeos\MW\Tree\Exception If one ore more SQL statements are missing
 	 */
-	protected function checkSqlConfig( array $config )
+	protected function checkSqlConfig( array $config ) : void
 	{
 		$required = array(
 			'delete', 'get', 'insert', 'move-left',
@@ -693,7 +698,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 */
 	protected function getNodeById( string $id ) : \Aimeos\MW\Tree\Node\Iface
 	{
-		$stmt = $this->conn->create( str_replace( ':cond', '1=1', $this->config['get'] ) );
+		$stmt = $this->conn->create( str_replace( ':cond', '1=1', (string) $this->config['get'] ) );
 		$stmt->bind( 1, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$result = $stmt->execute();
@@ -715,8 +720,9 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	protected function getRootNode( string $sort = '+' ) : ?\Aimeos\MW\Tree\Node\Iface
 	{
 		$search = $this->createSearch();
-		$search->setConditions( $search->compare( '==', $this->searchConfig['level']['code'], 0 ) );
-		$search->setSortations( array( $search->sort( $sort, $this->searchConfig['left']['code'] ) ) );
+		$search->setConditions( $search->compare( '==', (string) $this->searchConfig['level']['code'], 0 ) );
+		// @phpstan-ignore argument.type
+		$search->setSortations( array( $search->sort( $sort, (string) $this->searchConfig['left']['code'] ) ) );
 		$nodes = $this->searchNodes( $search );
 
 		if( ( $node = reset( $nodes ) ) !== false ) {

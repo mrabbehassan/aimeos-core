@@ -42,9 +42,9 @@ trait Traits
 	 * Sets the config property of the catalog item.
 	 *
 	 * @param array $config Configuration to be set for the catalog node
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface
+	public function setConfig( array $config ) : static
 	{
 		if( !$this->compareConfig( $this->getConfig(), $config ) ) {
 			$this->set( $this->prefix() . 'config', $config );
@@ -71,9 +71,9 @@ trait Traits
 	 * Sets all configuration values at once
 	 *
 	 * @param array $flat Associative list of keys (with "/" for nested arrays) and values
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setConfigFlat( array $flat ) : \Aimeos\MShop\Common\Item\Iface
+	public function setConfigFlat( array $flat ) : static
 	{
 		$config = [];
 
@@ -101,9 +101,9 @@ trait Traits
 	 *
 	 * @param string $key Key of the associative array or path to value like "path/to/value"
 	 * @param mixed $value Value to set for the key
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setConfigValue( string $key, $value ) : \Aimeos\MShop\Common\Item\Iface
+	public function setConfigValue( string $key, $value ) : static
 	{
 		return $this->setConfig( $this->setArrayValue( $this->getConfig(), explode( '/', trim( $key, '/' ) ), $value ) );
 	}
@@ -183,7 +183,7 @@ trait Traits
 		$current = array_shift( $parts );
 
 		if( !empty( $parts ) ) {
-			$config[$current] = $this->setArrayValue( $config[$current] ?? [], $parts, $value );
+			$config[$current] = $this->setArrayValue( (array) ( $config[$current] ?? [] ), $parts, $value );
 		} else {
 			$config[$current] = $value;
 		}

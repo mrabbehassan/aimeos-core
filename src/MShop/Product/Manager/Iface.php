@@ -26,7 +26,7 @@ interface Iface
 	 *
 	 * @param string $id ID of the procuct item
 	 * @param int $value "0" or "1" if product is in stock or not
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function stock( string $id, int $value ) : \Aimeos\MShop\Common\Manager\Iface;
+	public function stock( string $id, int $value ) : static;
 }

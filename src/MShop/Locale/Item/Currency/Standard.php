@@ -25,9 +25,9 @@ class Standard
 	 * Sets the ID of the currency.
 	 *
 	 * @param string|null $key ID of the currency
-	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
+	 * @return static Locale currency item for chaining method calls
 	 */
-	public function setId( ?string $key ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $key ) : static
 	{
 		return parent::setId( \Aimeos\Utils::currency( $key ) );
 	}
@@ -40,7 +40,7 @@ class Standard
 	 */
 	public function getCode() : string
 	{
-		return $this->get( 'locale.currency.code', $this->get( 'locale.currency.id', '' ) );
+		return (string) $this->get( 'locale.currency.code', $this->get( 'locale.currency.id', '' ) );
 	}
 
 
@@ -48,9 +48,9 @@ class Standard
 	 * Sets the code of the currency.
 	 *
 	 * @param string $code Code of the currency
-	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
+	 * @return static Locale currency item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Iface
+	public function setCode( string $code ) : static
 	{
 		return $this->set( 'locale.currency.code', \Aimeos\Utils::currency( $code, false ) );
 	}
@@ -63,7 +63,7 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'locale.currency.label', '' );
+		return (string) $this->get( 'locale.currency.label', '' );
 	}
 
 
@@ -71,9 +71,9 @@ class Standard
 	 * Sets the label or symbol of the currency.
 	 *
 	 * @param string $label Label or symbol of the currency
-	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
+	 * @return static Locale currency item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Locale\Item\Currency\Iface
+	public function setLabel( string $label ) : static
 	{
 		return $this->set( 'locale.currency.label', $label );
 	}
@@ -86,7 +86,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'locale.currency.status', 1 );
+		return (int) $this->get( 'locale.currency.status', 1 );
 	}
 
 
@@ -94,9 +94,9 @@ class Standard
 	 * Sets the status of the item.
 	 *
 	 * @param int $status Status of the item
-	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
+	 * @return static Locale currency item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'locale.currency.status', $status );
 	}
@@ -116,11 +116,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Currency item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Currency item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -128,8 +128,8 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'locale.currency.code': $item->setCode( $value ); break;
-				case 'locale.currency.label': $item->setLabel( $value ); break;
+				case 'locale.currency.code': $item->setCode( (string) $value ); break;
+				case 'locale.currency.label': $item->setLabel( (string) $value ); break;
 				case 'locale.currency.status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
@@ -144,7 +144,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

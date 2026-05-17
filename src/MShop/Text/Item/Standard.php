@@ -35,7 +35,7 @@ class Standard
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->initListItems( $values['.listitems'] ?? [] );
+		$this->initListItems( (array) ( $values['.listitems'] ?? [] ) );
 	}
 
 
@@ -46,6 +46,7 @@ class Standard
 	 */
 	public function getLanguageId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'text.languageid' );
 	}
 
@@ -54,10 +55,10 @@ class Standard
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $id ISO language code (e.g. de or de_DE)
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
+	 * @return static Text item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Text\Item\Iface
+	public function setLanguageId( ?string $id ) : static
 	{
 		return $this->set( 'text.languageid', \Aimeos\Utils::language( $id ) );
 	}
@@ -70,7 +71,7 @@ class Standard
 	 */
 	public function getDomain() : string
 	{
-		return $this->get( 'text.domain', '' );
+		return (string) $this->get( 'text.domain', '' );
 	}
 
 
@@ -78,9 +79,9 @@ class Standard
 	 * Sets the domain of the text item.
 	 *
 	 * @param string $domain Domain of the text item
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
+	 * @return static Text item for chaining method calls
 	 */
-	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDomain( string $domain ) : static
 	{
 		return $this->set( 'text.domain', $domain );
 	}
@@ -93,7 +94,7 @@ class Standard
 	 */
 	public function getContent() : string
 	{
-		return $this->get( 'text.content', '' );
+		return (string) $this->get( 'text.content', '' );
 	}
 
 
@@ -101,9 +102,9 @@ class Standard
 	 * Sets the content of the text item.
 	 *
 	 * @param string $text Content of the text item
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
+	 * @return static Text item for chaining method calls
 	 */
-	public function setContent( string $text ) : \Aimeos\MShop\Text\Item\Iface
+	public function setContent( string $text ) : static
 	{
 		ini_set( 'mbstring.substitute_character', 'none' );
 		return $this->set( 'text.content', @mb_convert_encoding( $text, 'UTF-8', 'UTF-8' ) );
@@ -117,7 +118,7 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'text.label', '' );
+		return (string) $this->get( 'text.label', '' );
 	}
 
 
@@ -125,9 +126,9 @@ class Standard
 	 * Sets the new label of the attribute item.
 	 *
 	 * @param string $label Type label of the attribute item
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
+	 * @return static Text item for chaining method calls
 	 */
-	public function setLabel( ?string $label ) : \Aimeos\MShop\Text\Item\Iface
+	public function setLabel( ?string $label ) : static
 	{
 		return $this->set( 'text.label', (string) $label );
 	}
@@ -140,7 +141,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'text.status', 1 );
+		return (int) $this->get( 'text.status', 1 );
 	}
 
 
@@ -148,9 +149,9 @@ class Standard
 	 * Sets the status of the text item.
 	 *
 	 * @param int $status true/false for enabled/disabled
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
+	 * @return static Text item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'text.status', $status );
 	}
@@ -173,11 +174,11 @@ class Standard
 	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Text item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -185,11 +186,11 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'text.languageid': $item->setLanguageId( $value ); break;
-				case 'text.type': $item->setType( $value ); break;
-				case 'text.label': $item->setLabel( $value ); break;
-				case 'text.domain': $item->setDomain( $value ); break;
-				case 'text.content': $item->setContent( $value ); break;
+				case 'text.languageid': $item->setLanguageId( $value ? (string) $value : null ); break;
+				case 'text.type': $item->setType( (string) $value ); break;
+				case 'text.label': $item->setLabel( $value ? (string) $value : null ); break;
+				case 'text.domain': $item->setDomain( (string) $value ); break;
+				case 'text.content': $item->setContent( (string) $value ); break;
 				case 'text.status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
@@ -204,7 +205,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

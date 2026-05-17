@@ -31,9 +31,9 @@ class ProductFreeOptions
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
+	 * @return static Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static
 	{
 		$plugin = $this->object();
 
@@ -57,11 +57,13 @@ class ProductFreeOptions
 		if( is_array( $value ) )
 		{
 			foreach( $value as $key => $product ) {
+				// @phpstan-ignore argument.type
 				$value[$key] = $this->updatePrice( $product );
 			}
 		}
 		else
 		{
+			// @phpstan-ignore argument.type
 			$value = $this->updatePrice( $value );
 		}
 
@@ -97,6 +99,7 @@ class ProductFreeOptions
 				if( $quantity > 0 )
 				{
 					$priceItem = $priceManager->getLowestPrice( $prices, $quantity );
+					// @phpstan-ignore argument.type
 					$price = $price->addItem( $priceItem, $quantity );
 				}
 			}
@@ -189,6 +192,7 @@ class ProductFreeOptions
 			$attrTypes[] = $attr->getCode();
 		}
 
+		// @phpstan-ignore argument.type, argument.type
 		if( array_intersect( $attrTypes, array_keys( $prodConf ) ) === [] ) {
 			return $product;
 		}
@@ -201,15 +205,19 @@ class ProductFreeOptions
 		{
 			if( isset( $prodConf[$type] ) )
 			{
+				// @phpstan-ignore argument.type
 				$list = $this->sortByPrice( $list, $attrQtys );
+				// @phpstan-ignore argument.type
 				$priceItem = $this->addPrices( $priceItem, $list, $attrQtys, (int) $prodConf[$type] );
 			}
 			else
 			{
+				// @phpstan-ignore argument.type, argument.type
 				$priceItem = $this->addPrices( $priceItem, $list, $attrQtys, 0 );
 			}
 		}
 
+		// @phpstan-ignore argument.type
 		return $product->setPrice( $priceItem );
 	}
 }

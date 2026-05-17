@@ -37,7 +37,7 @@ interface Iface
 	 * Sets the new type of the item.
 	 *
 	 * @param string $type Type of the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setType( string $type ) : static;
 }

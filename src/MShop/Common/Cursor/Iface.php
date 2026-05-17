@@ -23,7 +23,6 @@ interface Iface
 	 * Initializes the object
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
-	 * @param \Aimeos\Base\DB\Result\Iface $result Result set to iterate over
 	 */
 	public function __construct( \Aimeos\Base\Criteria\Iface $filter );
 
@@ -37,9 +36,9 @@ interface Iface
 	/**
 	 * Sets the new cursor value
 	 *
-	 * @return mixed $value Cursor value
+	 * @return \Aimeos\MShop\Common\Cursor\Iface Cursor object
 	 */
-	public function setValue( $value ) : \Aimeos\MShop\Common\Cursor\Iface;
+	public function setValue( mixed $value ) : \Aimeos\MShop\Common\Cursor\Iface;
 
 	/**
 	 * Returns the cursor value

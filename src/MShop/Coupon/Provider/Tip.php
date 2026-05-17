@@ -101,9 +101,9 @@ class Tip
 		}
 
 		$price = $this->object()->calcPrice( $order->setCoupon( $this->getCode(), [] ) );
-		$tip = $this->round( $price->getValue() * $percent / 100 );
+		$tip = $this->round( $price->getValue() * $percent / 100 ); // @phpstan-ignore binaryOp.invalid
 
-		$orderProduct = $this->createProduct( $prodcode, 1, 'default' );
+		$orderProduct = $this->createProduct( (string) $prodcode, 1, 'default' );
 		$price = $orderProduct->getPrice()->setValue( $tip );
 
 		$order->setCoupon( $this->getCode(), [$orderProduct->setPrice( $price )] );
@@ -120,7 +120,7 @@ class Tip
 	 */
 	protected function round( float $number ) : float
 	{
-		$prec = $this->getConfigValue( 'tip.precision', 2 );
+		$prec = (int) $this->getConfigValue( 'tip.precision', 2 );
 		$value = $this->getConfigValue( 'tip.roundvalue', 0 );
 
 		if( $value == 0 ) {

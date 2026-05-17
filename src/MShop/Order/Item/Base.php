@@ -16,6 +16,7 @@ namespace Aimeos\MShop\Order\Item;
  *
  * @package MShop
  * @subpackage Order
+ * @implements \ArrayAccess<string, mixed>
  */
 abstract class Base
 	extends \Aimeos\MShop\Common\Item\Base
@@ -217,7 +218,7 @@ abstract class Base
 	/**
 	 * Specifies the data which should be serialized to JSON by json_encode().
 	 *
-	 * @return array<string,mixed> Data to serialize to JSON
+	 * @return array Data to serialize to JSON
 	 */
 	#[\ReturnTypeWillChange]
 	public function jsonSerialize()
@@ -266,10 +267,10 @@ abstract class Base
 	 * Tests if all necessary items are available to create the order.
 	 *
 	 * @param array $what Type of data
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 * @throws \Aimeos\MShop\Order\Exception if there are no products in the basket
 	 */
-	public function check( array $what = ['order/address', 'order/coupon', 'order/product', 'order/service'] ) : \Aimeos\MShop\Order\Item\Iface
+	public function check( array $what = ['order/address', 'order/coupon', 'order/product', 'order/service'] ) : static
 	{
 		$this->notify( 'check.before', $what );
 
@@ -286,9 +287,9 @@ abstract class Base
 	/**
 	 * Notifies listeners before the basket becomes an order.
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 * @return static Order base item for chaining method calls
 	 */
-	public function finish() : \Aimeos\MShop\Order\Item\Iface
+	public function finish() : static
 	{
 		$this->notify( 'setOrder.before' );
 		return $this;
@@ -301,14 +302,14 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Address\Iface $address Order address item for the given type
 	 * @param string $type Address type, usually "billing" or "delivery"
 	 * @param int|null $position Position of the address in the list
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function addAddress( \Aimeos\MShop\Order\Item\Address\Iface $address, string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface
+	public function addAddress( \Aimeos\MShop\Order\Item\Address\Iface $address, string $type, ?int $position = null ) : static
 	{
 		$address = $this->notify( 'addAddress.before', $address );
 
-		$address = clone $address;
-		$address = $address->setType( $type );
+		$address = clone $address; // @phpstan-ignore clone.nonObject
+		$address = $address->setType( $type ); // @phpstan-ignore method.notFound
 
 		if( $position !== null ) {
 			$this->addresses[$type][$position] = $address;
@@ -330,9 +331,9 @@ abstract class Base
 	 *
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Address\Base
 	 * @param int|null $position Position of the address in the list
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function deleteAddress( string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface
+	public function deleteAddress( string $type, ?int $position = null ) : static
 	{
 		if( ( $position === null && isset( $this->addresses[$type] ) ) || ( $position !== null && isset( $this->addresses[$type][$position] ) ) )
 		{
@@ -367,12 +368,14 @@ abstract class Base
 		if( $position !== null )
 		{
 			if( isset( $this->addresses[$type][$position] ) ) {
+				// @phpstan-ignore return.type
 				return $this->addresses[$type][$position];
 			}
 
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Address not available' ) );
 		}
 
+		// @phpstan-ignore return.type
 		return ( isset( $this->addresses[$type] ) ? $this->addresses[$type] : [] );
 	}
 
@@ -393,14 +396,15 @@ abstract class Base
 	 * Replaces all addresses in the current basket with the new ones
 	 *
 	 * @param \Aimeos\Map|array $map Associative list of order addresses as returned by getAddresses()
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function setAddresses( iterable $map ) : \Aimeos\MShop\Order\Item\Iface
+	public function setAddresses( iterable $map ) : static
 	{
 		$map = $this->notify( 'setAddresses.before', $map );
 
 		foreach( $map as $type => $items ) {
-			$this->checkAddresses( $items, $type );
+			// @phpstan-ignore argument.type
+			$this->checkAddresses( $items, (string) $type );
 		}
 
 		$old = $this->addresses;
@@ -419,9 +423,9 @@ abstract class Base
 	 * Adds a coupon code and the given product item to the basket
 	 *
 	 * @param string $code Coupon code
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function addCoupon( string $code ) : \Aimeos\MShop\Order\Item\Iface
+	public function addCoupon( string $code ) : static
 	{
 		if( !isset( $this->coupons[$code] ) )
 		{
@@ -442,9 +446,9 @@ abstract class Base
 	 * Removes a coupon and the related product items from the basket
 	 *
 	 * @param string $code Coupon code
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function deleteCoupon( string $code ) : \Aimeos\MShop\Order\Item\Iface
+	public function deleteCoupon( string $code ) : static
 	{
 		if( isset( $this->coupons[$code] ) )
 		{
@@ -487,12 +491,13 @@ abstract class Base
 	 *
 	 * @param string $code Coupon code
 	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $products List of coupon products
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function setCoupon( string $code, iterable $products = [] ) : \Aimeos\MShop\Order\Item\Iface
+	public function setCoupon( string $code, iterable $products = [] ) : static
 	{
 		$new = $this->notify( 'setCoupon.before', [$code => $products] );
 
+		// @phpstan-ignore argument.type
 		$products = $this->checkProducts( map( $new )->first( [] ) );
 
 		if( isset( $this->coupons[$code] ) )
@@ -525,13 +530,14 @@ abstract class Base
 	 * Replaces all coupons in the current basket with the new ones
 	 *
 	 * @param iterable $map Associative list of order coupons as returned by getCoupons()
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function setCoupons( iterable $map ) : \Aimeos\MShop\Order\Item\Iface
+	public function setCoupons( iterable $map ) : static
 	{
 		$map = $this->notify( 'setCoupons.before', $map );
 
 		foreach( $map as $code => $products ) {
+			// @phpstan-ignore argument.type
 			$map[$code] = $this->checkProducts( $products );
 		}
 
@@ -570,16 +576,18 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Product\Iface $item Order product item to be added
 	 * @param int|null $position position of the new order product item
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function addProduct( \Aimeos\MShop\Order\Item\Product\Iface $item, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface
+	public function addProduct( \Aimeos\MShop\Order\Item\Product\Iface $item, ?int $position = null ) : static
 	{
 		$item = $this->notify( 'addProduct.before', $item );
 
+		// @phpstan-ignore argument.type
 		$this->checkProducts( [$item] );
 
 		if( $position !== null ) {
 			$this->products[$position] = $item;
+		// @phpstan-ignore argument.type, argument.type
 		} elseif( ( $pos = $this->getSameProduct( $item, $this->products ) ) !== null ) {
 			$item = $this->products[$pos]->setQuantity( $this->products[$pos]->getQuantity() + $item->getQuantity() );
 		} else {
@@ -601,9 +609,9 @@ abstract class Base
 	 * Deletes an order product item from the basket
 	 *
 	 * @param int $position Position of the order product item
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function deleteProduct( int $position ) : \Aimeos\MShop\Order\Item\Iface
+	public function deleteProduct( int $position ) : static
 	{
 		if( isset( $this->products[$position] ) )
 		{
@@ -634,6 +642,7 @@ abstract class Base
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Product not available' ) );
 		}
 
+		// @phpstan-ignore return.type
 		return $this->products[$key];
 	}
 
@@ -653,12 +662,13 @@ abstract class Base
 	 * Replaces all products in the current basket with the new ones
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $map Associative list of ordered products as returned by getProducts()
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function setProducts( iterable $map ) : \Aimeos\MShop\Order\Item\Iface
+	public function setProducts( iterable $map ) : static
 	{
 		$map = $this->notify( 'setProducts.before', $map );
 
+		// @phpstan-ignore argument.type
 		$this->checkProducts( $map );
 
 		$old = $this->products;
@@ -679,16 +689,17 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Service\Iface $service Order service item for the given domain
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
 	 * @param int|null $position Position of the service in the list to overwrite
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function addService( \Aimeos\MShop\Order\Item\Service\Iface $service, string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface
+	public function addService( \Aimeos\MShop\Order\Item\Service\Iface $service, string $type, ?int $position = null ) : static
 	{
 		$service = $this->notify( 'addService.before', $service );
 
+		// @phpstan-ignore argument.type
 		$this->checkPrice( $service->getPrice() );
 
-		$service = clone $service;
-		$service = $service->setType( $type );
+		$service = clone $service; // @phpstan-ignore clone.nonObject
+		$service = $service->setType( $type ); // @phpstan-ignore method.notFound
 
 		if( $position !== null ) {
 			$this->services[$type][$position] = $service;
@@ -710,9 +721,9 @@ abstract class Base
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
 	 * @param int|null $position Position of the service in the list to delete
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function deleteService( string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface
+	public function deleteService( string $type, ?int $position = null ) : static
 	{
 		if( ( $position === null && isset( $this->services[$type] ) ) || ( $position !== null && isset( $this->services[$type][$position] ) ) )
 		{
@@ -749,12 +760,14 @@ abstract class Base
 		if( $position !== null )
 		{
 			if( isset( $this->services[$type][$position] ) ) {
+				// @phpstan-ignore return.type
 				return $this->services[$type][$position];
 			}
 
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Service not available' ) );
 		}
 
+		// @phpstan-ignore return.type
 		return ( isset( $this->services[$type] ) ? $this->services[$type] : [] );
 	}
 
@@ -775,14 +788,15 @@ abstract class Base
 	 * Replaces all services in the current basket with the new ones
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Service\Iface[] $map Associative list of order services as returned by getServices()
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function setServices( iterable $map ) : \Aimeos\MShop\Order\Item\Iface
+	public function setServices( iterable $map ) : static
 	{
 		$map = $this->notify( 'setServices.before', $map );
 
 		foreach( $map as $type => $services ) {
-			$map[$type] = $this->checkServices( $services, $type );
+			// @phpstan-ignore argument.type, argument.type
+			$map[$type] = $this->checkServices( $services, (string) $type );
 		}
 
 		$old = $this->services;
@@ -801,14 +815,15 @@ abstract class Base
 	 * Adds a status item to the order
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Status\Iface $item Order status item
-	 * @return \Aimeos\MShop\Order\Item\Iface Order item for method chaining
+	 * @return static Order item for method chaining
 	 */
-	public function addStatus( \Aimeos\MShop\Order\Item\Status\Iface $item ) : \Aimeos\MShop\Order\Item\Iface
+	public function addStatus( \Aimeos\MShop\Order\Item\Status\Iface $item ) : static
 	{
 		$type = $item->getType();
 		$value = $item->getValue();
 
 		if( isset( $this->statuses[$type][$value] ) ) {
+			// @phpstan-ignore argument.type
 			$this->statuses[$type][$value] = $item->setId( $this->statuses[$type][$value]->getId() );
 		} else {
 			$this->statuses[$type][$value] = $item;
@@ -827,6 +842,7 @@ abstract class Base
 	 */
 	public function getStatus( string $type, string $value ) : ?\Aimeos\MShop\Order\Item\Status\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->statuses[$type][$value] ?? null;
 	}
 
@@ -854,16 +870,17 @@ abstract class Base
 		$costs = 0;
 
 		foreach( $this->getService( $type ) as $service ) {
-			$costs += $service->getPrice()->getCosts();
+			$costs += $service->getPrice()->getCosts(); // @phpstan-ignore assignOp.invalid
 		}
 
 		if( $type === 'delivery' )
 		{
 			foreach( $this->getProducts() as $product ) {
-				$costs += $product->getPrice()->getCosts() * $product->getQuantity();
+				$costs += $product->getPrice()->getCosts() * $product->getQuantity(); // @phpstan-ignore assignOp.invalid
 			}
 		}
 
+		// @phpstan-ignore return.type
 		return $costs;
 	}
 
@@ -882,11 +899,13 @@ abstract class Base
 			foreach( $this->getServices() as $list )
 			{
 				foreach( $list as $service ) {
+					// @phpstan-ignore argument.type
 					$price = $price->addItem( $service->getPrice() );
 				}
 			}
 
 			foreach( $this->getProducts() as $product ) {
+				// @phpstan-ignore argument.type, argument.type
 				$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
 			}
 
@@ -912,7 +931,7 @@ abstract class Base
 
 			foreach( $price->getTaxrates() as $name => $taxrate )
 			{
-				$price = ( clone $price )->setTaxRate( $taxrate );
+				$price = ( clone $price )->setTaxRate( $taxrate ); // @phpstan-ignore clone.nonObject, method.notFound
 
 				if( isset( $taxes[$name][$taxrate] ) ) {
 					$taxes[$name][$taxrate]->addItem( $price, $product->getQuantity() );
@@ -930,7 +949,7 @@ abstract class Base
 
 				foreach( $price->getTaxrates() as $name => $taxrate )
 				{
-					$price = ( clone $price )->setTaxRate( $taxrate );
+					$price = ( clone $price )->setTaxRate( $taxrate ); // @phpstan-ignore clone.nonObject, method.notFound
 
 					if( isset( $taxes[$name][$taxrate] ) ) {
 						$taxes[$name][$taxrate]->addItem( $price );
@@ -962,9 +981,9 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Object containing information
 	 *  about site, language, country and currency
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 * @return static Order base item for chaining method calls
 	 */
-	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale ) : \Aimeos\MShop\Order\Item\Iface
+	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale ) : static
 	{
 		$this->notify( 'setLocale.before', $locale );
 		$this->locale = clone $locale;
@@ -977,7 +996,7 @@ abstract class Base
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array
@@ -1000,8 +1019,9 @@ abstract class Base
 	 * Checks if the price uses the same currency as the price in the basket.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item
+	 * @return void
 	 */
-	protected function checkPrice( \Aimeos\MShop\Price\Item\Iface $item )
+	protected function checkPrice( \Aimeos\MShop\Price\Item\Iface $item ) : void
 	{
 		$price = clone $this->getPrice();
 		$price->addItem( $item );
@@ -1032,7 +1052,7 @@ abstract class Base
 	 * Checks if all order products are valid
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $items Order product items
-	 * @return \Aimeos\MShop\Order\Item\Product\Iface[] List of checked items
+	 * @return \Aimeos\Map List of checked items
 	 * @throws \Aimeos\MShop\Exception If one of the order products is invalid
 	 */
 	protected function checkProducts( iterable $items ) : \Aimeos\Map
@@ -1117,6 +1137,7 @@ abstract class Base
 				}
 			}
 
+			// @phpstan-ignore return.type
 			return $position;
 		}
 

@@ -63,9 +63,9 @@ trait Traits
 	 * Removes the items referenced by the given list items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\ListsRef\Iface[]|\Aimeos\Map|array $items List of items with deleted list items
-	 * @return \Aimeos\MShop\Common\Manager\ListsRef\Iface Manager object for method chaining
+	 * @return static Manager object for method chaining
 	 */
-	protected function deleteRefItems( $items ) : \Aimeos\MShop\Common\Manager\ListsRef\Iface
+	protected function deleteRefItems( $items ) : static
 	{
 		if( ( $items = map( $items ) )->isEmpty() ) {
 			return $this;
@@ -133,10 +133,10 @@ trait Traits
 			}
 		}
 
-		if( !empty( $list ) ) {
-			$expr[] = $search->or( $list );
-		}
+		// @phpstan-ignore argument.type
+		$expr[] = $search->or( $list );
 
+		// @phpstan-ignore argument.type
 		return $manager->search( $search->add( $search->and( $expr ) ), $ref )
 			->uasort( fn( $a, $b ) => $a->getPosition() <=> $b->getPosition() )
 			->all();
@@ -190,18 +190,20 @@ trait Traits
 				{
 					if( !isset( $refManager[$refDomain] ) )
 					{
-						$refManager[$refDomain] = \Aimeos\MShop::create( $context, $refDomain );
+						$refManager[$refDomain] = \Aimeos\MShop::create( $context, (string) $refDomain );
 						$refManager[$refDomain]->begin();
 					}
 
+					// @phpstan-ignore argument.type
 					$refItem = $refManager[$refDomain]->save( $refItem );
-					$listItem->setRefId( $refItem->getId() );
+					$listItem->setRefId( (string) $refItem->getId() );
 				}
 
 				if( $listItem->getParentId() && $listItem->getParentId() != $item->getId() ) {
 					$listItem->setId( null ); // create new list item if copied
 				}
 
+				// @phpstan-ignore argument.type
 				$listManager->save( $listItem->setParentId( $item->getId() ), $fetch );
 			}
 

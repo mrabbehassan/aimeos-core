@@ -63,7 +63,7 @@ abstract class Base
 		 * "\Aimeos\MShop\Coupon\Provider\Decorator\Decorator1" to all coupon provider
 		 * objects.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.05
 		 * @see client/html/common/decorators/default
 		 * @see client/html/account/favorite/decorators/excludes
@@ -71,8 +71,10 @@ abstract class Base
 		 */
 		$decorators = $context->config()->get( 'mshop/coupon/provider/decorators', [] );
 
-		$object = $this->addCouponDecorators( $item, $code, $provider, $names );
-		$object = $this->addCouponDecorators( $item, $code, $object, $decorators );
+		// @phpstan-ignore argument.type
+		$object = $this->addCouponDecorators( $item, $code, $provider, (array) $names );
+		// @phpstan-ignore argument.type
+		$object = $this->addCouponDecorators( $item, $code, $object, (array) $decorators );
 
 		return $object->setObject( $object );
 	}
@@ -104,6 +106,7 @@ abstract class Base
 			$provider = \Aimeos\Utils::create( $classprefix . $name, [$provider, $context, $item, $code], $interface );
 		}
 
+		// @phpstan-ignore return.type
 		return $provider;
 	}
 }

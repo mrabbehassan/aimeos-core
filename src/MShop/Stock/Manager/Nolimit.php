@@ -25,9 +25,9 @@ class Nolimit
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		return $this;
 	}
@@ -50,9 +50,9 @@ class Nolimit
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Stock\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : static
 	{
 		return $this;
 	}
@@ -70,7 +70,7 @@ class Nolimit
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$values = ['stock.id' => $id, 'stock.type' => 'default'];
-		return $this->object()->create( $values );
+		return $this->object()->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -92,7 +92,7 @@ class Nolimit
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
+	 * @type int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Stock\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -116,7 +116,7 @@ class Nolimit
 	 * Returns the product IDs from the conditions
 	 *
 	 * @param \Aimeos\Base\Criteria\Expression\Iface|null $cond Criteria object
-	 * @return string[] List of product IDs
+	 * @return array List of product IDs
 	 */
 	protected function getProductIds( ?\Aimeos\Base\Criteria\Expression\Iface $cond = null ) : array
 	{
@@ -125,6 +125,7 @@ class Nolimit
 		if( $cond instanceof \Aimeos\Base\Criteria\Expression\Combine\Iface )
 		{
 			foreach( $cond->getExpressions() as $expr ) {
+				// @phpstan-ignore argument.type
 				$list = array_merge( $list, $this->getProductIds( $expr ) );
 			}
 		}
@@ -148,6 +149,6 @@ class Nolimit
 	 */
 	protected function saveBase( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Stock\Item\Iface
 	{
-		return $item;
+		return $item; // @phpstan-ignore return.type
 	}
 }

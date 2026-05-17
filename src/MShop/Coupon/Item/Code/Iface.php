@@ -34,9 +34,9 @@ interface Iface
 	 * Sets the new code for the coupon item.
 	 *
 	 * @param string $code Coupon code
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
+	 * @return static Coupon code item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Coupon\Item\Code\Iface;
+	public function setCode( string $code ) : static;
 
 
 	/**
@@ -51,9 +51,9 @@ interface Iface
 	 * Sets the new number of tries the code is valid.
 	 *
 	 * @param int|null $count Number of tries or null for unlimited
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
+	 * @return static Coupon code item for chaining method calls
 	 */
-	public function setCount( $count = null ) : \Aimeos\MShop\Coupon\Item\Code\Iface;
+	public function setCount( $count = null ) : static;
 
 
 	/**
@@ -70,7 +70,7 @@ interface Iface
 	 * This can be an arbitrary value used by the coupon provider
 	 *
 	 * @param string|null $ref Arbitrary value depending on the coupon provider
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
+	 * @return static Coupon code item for chaining method calls
 	 */
-	public function setRef( ?string $ref ) : \Aimeos\MShop\Coupon\Item\Code\Iface;
+	public function setRef( ?string $ref ) : static;
 }

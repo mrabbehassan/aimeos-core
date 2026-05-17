@@ -84,7 +84,7 @@ class Present
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		$order->setCoupon( $this->getCode(), [$this->createProduct( $prodcode, $quantity )] );
+		$order->setCoupon( $this->getCode(), [$this->createProduct( (string) $prodcode, $quantity )] );
 		return $this;
 	}
 }

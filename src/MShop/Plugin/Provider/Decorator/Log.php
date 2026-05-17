@@ -26,7 +26,7 @@ class Log
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static
 	{
 		$this->context()->logger()->debug( 'Plugin::register: ' . get_class( $this->getProvider() ), 'core/plugin' );
 		$this->getProvider()->register( $p );

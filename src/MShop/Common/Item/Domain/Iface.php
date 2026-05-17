@@ -30,7 +30,7 @@ interface Iface
 	 * Set the domain name the item is stored for
 	 *
 	 * @param string $domain Domain name e.g. catalog, product, service, ...
-	 * @return \Aimeos\MShop\Common\Item\Iface Item object for chaining method calls
+	 * @return static Item object for chaining method calls
 	 */
-	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setDomain( string $domain ) : static;
 }

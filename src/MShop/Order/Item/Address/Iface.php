@@ -31,15 +31,15 @@ interface Iface
 	 * Sets the original customer address ID.
 	 *
 	 * @param string $addrid New customer address ID
-	 * @return \Aimeos\MShop\Order\Item\Address\Iface Order base address item for chaining method calls
+	 * @return static Order base address item for chaining method calls
 	 */
-	public function setAddressId( string $addrid ) : \Aimeos\MShop\Order\Item\Address\Iface;
+	public function setAddressId( string $addrid ) : static;
 
 	/**
 	 * Copys all data from a given address.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address New address
-	 * @return \Aimeos\MShop\Order\Item\Address\Iface Order base address item for chaining method calls
+	 * @return static Order base address item for chaining method calls
 	 */
-	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $address ) : \Aimeos\MShop\Common\Item\Address\Iface;
+	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $address ) : static;
 }

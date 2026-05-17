@@ -31,9 +31,9 @@ interface Iface
 	 * Sets the new comment for the reviewed item
 	 *
 	 * @param string|null $value New comment for the reviewed item
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setComment( ?string $value ) : \Aimeos\MShop\Review\Item\Iface;
+	public function setComment( ?string $value ) : static;
 
 	/**
 	 * Returns the ID of the reviewer
@@ -46,9 +46,9 @@ interface Iface
 	 * Sets the ID of the reviewer
 	 *
 	 * @param string $value New ID of the customer item
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setCustomerId( string $value ) : \Aimeos\MShop\Review\Item\Iface;
+	public function setCustomerId( string $value ) : static;
 
 	/**
 	 * Returns the name of the reviewer
@@ -61,9 +61,9 @@ interface Iface
 	 * Sets the new name of the reviewer
 	 *
 	 * @param string $value New name of the reviewer
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setName( string $value ) : \Aimeos\MShop\Review\Item\Iface;
+	public function setName( string $value ) : static;
 
 	/**
 	 * Returns the ID of the ordered product
@@ -76,9 +76,9 @@ interface Iface
 	 * Sets the ID of the ordered product item which the customer subscribed for
 	 *
 	 * @param string $value ID of the ordered product
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setOrderProductId( string $value ) : \Aimeos\MShop\Review\Item\Iface;
+	public function setOrderProductId( string $value ) : static;
 
 	/**
 	 * Returns the rating for the reviewed item
@@ -91,9 +91,9 @@ interface Iface
 	 * Sets the new rating for the reviewed item
 	 *
 	 * @param int $value Rating for the reviewed item (higher is better)
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setRating( int $value ) : \Aimeos\MShop\Review\Item\Iface;
+	public function setRating( int $value ) : static;
 
 	/**
 	 * Returns the reference ID of the reviewed item, like the unique ID of a product item or a customer item
@@ -106,9 +106,9 @@ interface Iface
 	 * Sets the new reference ID of the common list item, like the unique ID of a product item or a customer item
 	 *
 	 * @param string $value New reference ID of the common list item
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setRefId( string $value ) : \Aimeos\MShop\Review\Item\Iface;
+	public function setRefId( string $value ) : static;
 
 	/**
 	 * Returns the response to the review
@@ -121,7 +121,7 @@ interface Iface
 	 * Sets the new response to the review
 	 *
 	 * @param string|null $value New response to the review
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setResponse( ?string $value ) : \Aimeos\MShop\Review\Item\Iface;
+	public function setResponse( ?string $value ) : static;
 }

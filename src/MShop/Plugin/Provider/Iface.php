@@ -41,18 +41,18 @@ interface Iface
 	 * Injects the outer object into the decorator stack
 	 *
 	 * @param \Aimeos\MShop\Plugin\Provider\Iface $object First object of the decorator stack
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for chaining method calls
+	 * @return static Plugin object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object ) : \Aimeos\MShop\Plugin\Provider\Iface;
+	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object ) : static;
 
 
 	/**
 	 * Subscribes itself to a publisher.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
+	 * @return static Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface;
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static;
 
 	/**
 	 * Receives a notification from a publisher object.

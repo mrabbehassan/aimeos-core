@@ -61,6 +61,7 @@ class Standard
 	 */
 	public function getLanguageId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( $this->prefix . 'languageid' );
 	}
 
@@ -69,9 +70,9 @@ class Standard
 	 *  Sets the language ID of the property item.
 	 *
 	 * @param string|null $id Language ID of the property item
-	 * @return \Aimeos\MShop\Common\Item\Property\Iface Common property item for chaining method calls
+	 * @return static Common property item for chaining method calls
 	 */
-	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Common\Item\Property\Iface
+	public function setLanguageId( ?string $id ) : static
 	{
 		return $this->set( $this->prefix . 'languageid', \Aimeos\Utils::language( $id ) );
 	}
@@ -84,6 +85,7 @@ class Standard
 	 */
 	public function getParentId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( $this->prefix . 'parentid' );
 	}
 
@@ -92,9 +94,9 @@ class Standard
 	 * Sets the new parent ID of the property item
 	 *
 	 * @param string|null $id Parent ID of the property item
-	 * @return \Aimeos\MShop\Common\Item\Property\Iface Common property item for chaining method calls
+	 * @return static Common property item for chaining method calls
 	 */
-	public function setParentId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
+	public function setParentId( ?string $id ) : static
 	{
 		return $this->set( $this->prefix . 'parentid', $id );
 	}
@@ -107,7 +109,7 @@ class Standard
 	 */
 	public function getValue() : string
 	{
-		return $this->get( $this->prefix . 'value', '' );
+		return (string) $this->get( $this->prefix . 'value', '' );
 	}
 
 
@@ -115,9 +117,9 @@ class Standard
 	 * Sets the new value of the property item.
 	 *
 	 * @param string $value Value of the property item
-	 * @return \Aimeos\MShop\Common\Item\Property\Iface Common property item for chaining method calls
+	 * @return static Common property item for chaining method calls
 	 */
-	public function setValue( ?string $value ) : \Aimeos\MShop\Common\Item\Property\Iface
+	public function setValue( ?string $value ) : static
 	{
 		return $this->set( $this->prefix . 'value', (string) $value );
 	}
@@ -139,11 +141,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Common\Item\Property\Iface Property item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Property item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -151,10 +153,10 @@ class Standard
 		{
 			switch( $key )
 			{
-				case $this->prefix . 'parentid': !$private ?: $item->setParentId( $value ); break;
-				case $this->prefix . 'languageid': $item->setLanguageId( $value ); break;
-				case $this->prefix . 'value': $item->setValue( $value ); break;
-				case $this->prefix . 'type': $item->setType( $value ); break;
+				case $this->prefix . 'parentid': !$private ?: $item->setParentId( (string) $value ); break;
+				case $this->prefix . 'languageid': $item->setLanguageId( $value !== null ? (string) $value : null ); break;
+				case $this->prefix . 'value': $item->setValue( (string) $value ); break;
+				case $this->prefix . 'type': $item->setType( (string) $value ); break;
 				default: continue 2;
 			}
 
@@ -168,7 +170,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

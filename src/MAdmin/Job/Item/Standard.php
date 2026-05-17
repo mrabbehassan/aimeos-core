@@ -40,7 +40,8 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'job.label', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( 'job.label', '' );
 	}
 
 
@@ -48,9 +49,9 @@ class Standard
 	 * Sets the new label of the job item.
 	 *
 	 * @param string|null $label Type label of the job item
-	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
+	 * @return static Job item for chaining method calls
 	 */
-	public function setLabel( ?string $label ) : \Aimeos\MAdmin\Job\Item\Iface
+	public function setLabel( ?string $label ) : static
 	{
 		return $this->set( 'job.label', (string) $label );
 	}
@@ -63,7 +64,8 @@ class Standard
 	 */
 	public function getPath() : string
 	{
-		return $this->get( 'job.path', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( 'job.path', '' );
 	}
 
 
@@ -71,9 +73,9 @@ class Standard
 	 * Sets the new generated file path of the job.
 	 *
 	 * @param string|null $path Relative filesystem path to the generated file
-	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
+	 * @return static Job item for chaining method calls
 	 */
-	public function setPath( ?string $path ) : \Aimeos\MAdmin\Job\Item\Iface
+	public function setPath( ?string $path ) : static
 	{
 		return $this->set( 'job.path', (string) $path );
 	}
@@ -86,7 +88,8 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'job.status', 1 );
+		// @phpstan-ignore return.type
+		return (int) $this->get( 'job.status', 1 );
 	}
 
 
@@ -94,9 +97,9 @@ class Standard
 	 * Sets the new status of the job item.
 	 *
 	 * @param int $status Status of the item
-	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
+	 * @return static Job item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'job.status', $status );
 	}
@@ -105,11 +108,11 @@ class Standard
 	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Job item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -133,7 +136,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

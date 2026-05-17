@@ -28,6 +28,7 @@ class Standard
 	 */
 	public function getParentId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'coupon.code.parentid' );
 	}
 
@@ -36,9 +37,9 @@ class Standard
 	 * Sets the new unique ID of the coupon item the code belongs to.
 	 *
 	 * @param string|null $id Unique ID of the coupon item
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
+	 * @return static Coupon code item for chaining method calls
 	 */
-	public function setParentId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
+	public function setParentId( ?string $id ) : static
 	{
 		return $this->set( 'coupon.code.parentid', $id );
 	}
@@ -51,6 +52,7 @@ class Standard
 	 */
 	public function getCode() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'coupon.code.code' );
 	}
 
@@ -59,9 +61,9 @@ class Standard
 	 * Sets the new code for the coupon item.
 	 *
 	 * @param string $code Coupon code
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
+	 * @return static Coupon code item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Coupon\Item\Code\Iface
+	public function setCode( string $code ) : static
 	{
 		return $this->set( 'coupon.code.code', \Aimeos\Utils::code( $code ) );
 	}
@@ -75,6 +77,7 @@ class Standard
 	public function getCount() : ?int
 	{
 		if( ( $result = $this->get( 'coupon.code.count', 0 ) ) !== null ) {
+			// @phpstan-ignore return.type
 			return $result;
 		}
 
@@ -86,9 +89,9 @@ class Standard
 	 * Sets the new number of tries the code is valid.
 	 *
 	 * @param int|null $count Number of tries or null for unlimited
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
+	 * @return static Coupon code item for chaining method calls
 	 */
-	public function setCount( $count = null ) : \Aimeos\MShop\Coupon\Item\Code\Iface
+	public function setCount( $count = null ) : static
 	{
 		return $this->set( 'coupon.code.count', is_numeric( $count ) ? (int) $count : null );
 	}
@@ -102,7 +105,7 @@ class Standard
 	public function getDateStart() : ?string
 	{
 		$value = $this->get( 'coupon.code.datestart' );
-		return $value ? substr( $value, 0, 19 ) : null;
+		return $value ? substr( (string) $value, 0, 19 ) : null;
 	}
 
 
@@ -110,9 +113,9 @@ class Standard
 	 * Sets a new starting point of time, in which the code is available.
 	 *
 	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
+	 * @return static Coupon code item for chaining method calls
 	 */
-	public function setDateStart( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDateStart( ?string $date ) : static
 	{
 		return $this->set( 'coupon.code.datestart', \Aimeos\Utils::datetime( $date ) );
 	}
@@ -126,17 +129,17 @@ class Standard
 	public function getDateEnd() : ?string
 	{
 		$value = $this->get( 'coupon.code.dateend' );
-		return $value ? substr( $value, 0, 19 ) : null;
+		return $value ? substr( (string) $value, 0, 19 ) : null;
 	}
 
 
 	/**
 	 * Sets a new ending point of time, in which the code is available.
 	 *
-	 * @param string|null New ISO date in YYYY-MM-DD hh:mm:ss format
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
+	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return static Coupon code item for chaining method calls
 	 */
-	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDateEnd( ?string $date ) : static
 	{
 		return $this->set( 'coupon.code.dateend', \Aimeos\Utils::datetime( $date ) );
 	}
@@ -150,7 +153,7 @@ class Standard
 	 */
 	public function getRef() : string
 	{
-		return $this->get( 'coupon.code.ref', '' );
+		return (string) $this->get( 'coupon.code.ref', '' );
 	}
 
 
@@ -159,9 +162,9 @@ class Standard
 	 * This can be an arbitrary value used by the coupon provider
 	 *
 	 * @param string|null $ref Arbitrary value depending on the coupon provider
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
+	 * @return static Coupon code item for chaining method calls
 	 */
-	public function setRef( ?string $ref ) : \Aimeos\MShop\Coupon\Item\Code\Iface
+	public function setRef( ?string $ref ) : static
 	{
 		return $this->set( 'coupon.code.ref', (string) $ref );
 	}
@@ -185,11 +188,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Coupon code item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -197,12 +200,12 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'coupon.code.parentid': !$private ?: $item->setParentId( $value ); break;
-				case 'coupon.code.datestart': $item->setDateStart( $value ); break;
-				case 'coupon.code.dateend': $item->setDateEnd( $value ); break;
-				case 'coupon.code.count': $item->setCount( $value ); break;
-				case 'coupon.code.code': $item->setCode( $value ); break;
-				case 'coupon.code.ref': $item->setRef( $value ); break;
+				case 'coupon.code.parentid': !$private ?: $item->setParentId( $value ? (string) $value : null ); break;
+				case 'coupon.code.datestart': $item->setDateStart( $value ? (string) $value : null ); break;
+				case 'coupon.code.dateend': $item->setDateEnd( $value ? (string) $value : null ); break;
+				case 'coupon.code.count': $item->setCount( $value !== null ? (int) $value : null ); break;
+				case 'coupon.code.code': $item->setCode( (string) $value ); break;
+				case 'coupon.code.ref': $item->setRef( $value ? (string) $value : null ); break;
 				default: continue 2;
 			}
 
@@ -216,7 +219,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

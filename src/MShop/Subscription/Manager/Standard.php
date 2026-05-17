@@ -87,10 +87,10 @@ class Standard
 		 * It's also possible to use the same database connection for different
 		 * data domains by configuring the same connection name using this setting.
 		 *
-		 * @param string Database connection name
+		 * @type string Database connection name
 		 * @since 2023.04
 		 */
-		$this->setResourceName( $context->config()->get( 'mshop/subscription/manager/resource', 'db-order' ) );
+		$this->setResourceName( (string) $context->config()->get( 'mshop/subscription/manager/resource', 'db-order' ) );
 	}
 
 
@@ -144,7 +144,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for aggregating subscription items
+		 * @type string SQL statement for aggregating subscription items
 		 * @since 2018.04
 		 * @see mshop/subscription/manager/insert/ansi
 		 * @see mshop/subscription/manager/update/ansi
@@ -227,7 +227,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
+	 * @type int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Subscription\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -258,12 +258,12 @@ class Standard
 		 * this domain, then items wil be only inherited. Thus, you have full
 		 * control over inheritance and aggregation in each domain.
 		 *
-		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
+		 * @type int Constant from Aimeos\MShop\Locale\Manager\Base class
 		 * @since 2018.04
 		 * @see mshop/locale/manager/sitelevel
 		 */
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
-		$level = $context->config()->get( 'mshop/subscription/manager/sitemode', $level );
+		$level = (int) $context->config()->get( 'mshop/subscription/manager/sitemode', $level );
 
 		/** mshop/subscription/manager/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -309,7 +309,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for searching items
+		 * @type string SQL statement for searching items
 		 * @since 2018.04
 		 * @see mshop/subscription/manager/insert/ansi
 		 * @see mshop/subscription/manager/update/ansi
@@ -361,7 +361,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for counting items
+		 * @type string SQL statement for counting items
 		 * @since 2018.04
 		 * @see mshop/subscription/manager/insert/ansi
 		 * @see mshop/subscription/manager/update/ansi
@@ -400,7 +400,7 @@ class Standard
 			$orderItems = $manager->search( $search, $ref );
 
 			foreach( $items as $item ) {
-				$item->set( '.orderitem', $orderItems[$item['subscription.orderid']] ?? null );
+				$item->set( '.orderitem', $orderItems[$item['subscription.orderid']] ?? null ); // @phpstan-ignore method.notFound
 			}
 		}
 
@@ -433,10 +433,11 @@ class Standard
 		}
 
 		if( $orderItem = $item->getOrderItem() ) {
+			// @phpstan-ignore argument.type
 			\Aimeos\MShop::create( $this->context(), 'order' )->save( $orderItem );
 		}
 
-		return parent::saveBase( $item, $fetch );
+		return parent::saveBase( $item, $fetch ); // @phpstan-ignore return.type
 	}
 
 
@@ -469,7 +470,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
-	 * @param string Last part of the class name
+	 * @type string Last part of the class name
 	 * @since 2018.04
 	 */
 
@@ -491,7 +492,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the subscription manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2018.04
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/subscription/manager/decorators/global
@@ -515,7 +516,7 @@ class Standard
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the subscription
 	 * manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2018.04
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/subscription/manager/decorators/excludes
@@ -539,7 +540,7 @@ class Standard
 	 * "\Aimeos\MShop\Subscription\Manager\Decorator\Decorator2" only to the subscription
 	 * manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2018.04
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/subscription/manager/decorators/excludes
@@ -567,7 +568,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for deleting items
+	 * @type string SQL statement for deleting items
 	 * @since 2018.04
 	 * @see mshop/subscription/manager/insert/ansi
 	 * @see mshop/subscription/manager/update/ansi
@@ -589,7 +590,7 @@ class Standard
 	 * using the search keys of the sub-managers to further limit the
 	 * retrieved list of items.
 	 *
-	 * @param array List of sub-manager names
+	 * @type array List of sub-manager names
 	 * @since 2018.04
 	 */
 
@@ -619,7 +620,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for inserting records
+	 * @type string SQL statement for inserting records
 	 * @since 2018.04
 	 * @see mshop/subscription/manager/update/ansi
 	 * @see mshop/subscription/manager/newid/ansi
@@ -651,7 +652,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for updating records
+	 * @type string SQL statement for updating records
 	 * @since 2018.04
 	 * @see mshop/subscription/manager/insert/ansi
 	 * @see mshop/subscription/manager/newid/ansi
@@ -687,7 +688,7 @@ class Standard
 	 * fits for most database servers as they implement their own
 	 * specific way.
 	 *
-	 * @param string SQL statement for retrieving the last inserted record ID
+	 * @type string SQL statement for retrieving the last inserted record ID
 	 * @since 2018.04
 	 * @see mshop/subscription/manager/insert/ansi
 	 * @see mshop/subscription/manager/update/ansi

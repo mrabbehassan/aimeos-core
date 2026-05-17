@@ -62,6 +62,7 @@ class Standard
 		),
 	);
 
+	/** @var string[]|null */
 	private ?array $languageIds = null;
 	private ?array $subManagers = null;
 
@@ -82,8 +83,8 @@ class Standard
 
 		foreach( ['index.text:name', 'index.text:url', 'index.text:relevance'] as $key )
 		{
-			$expr = $this->siteString( 'mindte."siteid"', $level );
-			$this->searchConfig[$key]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$key]['internalcode'] );
+			$expr = $this->siteString( 'mindte."siteid"', (int) $level );
+			$this->searchConfig[$key]['internalcode'] = str_replace( ':site', $expr, (string) $this->searchConfig[$key]['internalcode'] );
 		}
 	}
 
@@ -99,7 +100,7 @@ class Standard
 	 */
 	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, ?string $value = null, ?string $type = null ) : \Aimeos\Map
 	{
-		return [];
+		return map();
 	}
 
 
@@ -107,9 +108,9 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		parent::clear( $siteids );
 
@@ -122,9 +123,9 @@ class Standard
 	 * This can be a long lasting operation.
 	 *
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface
+	public function cleanup( string $timestamp ) : static
 	{
 		/** mshop/index/manager/text/cleanup/mysql
 		 * Deletes the index text records that haven't been touched
@@ -148,7 +149,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for deleting the outdated text index records
+		 * @type string SQL statement for deleting the outdated text index records
 		 * @since 2014.03
 		 * @see mshop/index/manager/text/count/ansi
 		 * @see mshop/index/manager/text/delete/ansi
@@ -164,9 +165,9 @@ class Standard
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : static
 	{
 		/** mshop/index/manager/text/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -189,7 +190,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for deleting index text records
+		 * @type string SQL statement for deleting index text records
 		 * @since 2014.03
 		 * @see mshop/index/manager/text/count/ansi
 		 * @see mshop/index/manager/text/cleanup/ansi
@@ -197,6 +198,7 @@ class Standard
 		 * @see mshop/index/manager/text/search/ansi
 		 * @see mshop/index/manager/text/text/ansi
 		 */
+		// @phpstan-ignore argument.type
 		return $this->deleteItemsBase( $itemIds, 'mshop/index/manager/text/delete', true, 'prodid' );
 	}
 
@@ -224,7 +226,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @param array List of sub-manager names
+		 * @type array List of sub-manager names
 		 * @since 2014.03
 		 */
 		$path = 'mshop/index/manager/text/submanagers';
@@ -271,7 +273,7 @@ class Standard
 		 * name with an upper case character and continue only with lower case characters
 		 * or numbers. Avoid chamel case names like "MyText"!
 		 *
-		 * @param string Last part of the class name
+		 * @type string Last part of the class name
 		 * @since 2014.03
 		 */
 
@@ -293,7 +295,7 @@ class Standard
 		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the index text manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/text/decorators/global
@@ -318,7 +320,7 @@ class Standard
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the index
 		 * text manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/text/decorators/excludes
@@ -343,7 +345,7 @@ class Standard
 		 * "\Aimeos\MShop\Index\Manager\Text\Decorator\Decorator2" only to the index
 		 * text manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/text/decorators/excludes
@@ -359,9 +361,9 @@ class Standard
 	 * Execution of this operation can take a very long time and shouldn't be
 	 * called through a web server enviroment.
 	 *
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function optimize() : \Aimeos\MShop\Index\Manager\Iface
+	public function optimize() : static
 	{
 		/** mshop/index/manager/text/optimize/mysql
 		 * Optimizes the stored text data for retrieving the records faster
@@ -381,7 +383,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for optimizing the stored text data
+		 * @type string SQL statement for optimizing the stored text data
 		 * @since 2014.09
 		 * @see mshop/index/manager/text/aggregate/ansi
 		 * @see mshop/index/manager/text/cleanup/ansi
@@ -399,9 +401,9 @@ class Standard
 	 * This can be a long lasting operation.
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rebuild( iterable $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
+	public function rebuild( iterable $items = [] ) : static
 	{
 		if( ( $items = map( $items ) )->isEmpty() ) { return $this; }
 
@@ -436,7 +438,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for inserting records
+			 * @type string SQL statement for inserting records
 			 * @since 2014.03
 			 * @see mshop/index/manager/text/cleanup/ansi
 			 * @see mshop/index/manager/text/count/ansi
@@ -448,6 +450,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/text/insert' );
 
 			foreach( $items as $item ) {
+				// @phpstan-ignore argument.type
 				$this->saveTexts( $stmt, $item );
 			}
 
@@ -463,10 +466,11 @@ class Standard
 	 * Removes the products from the product index.
 	 *
 	 * @param iterable|string $ids Product ID or list of IDs
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function remove( $ids ) : \Aimeos\MShop\Index\Manager\Iface
+	public function remove( $ids ) : static
 	{
+		// @phpstan-ignore argument.type
 		parent::remove( $ids )->delete( $ids );
 		return $this;
 	}
@@ -477,7 +481,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
+	 * @type int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -528,7 +532,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for searching items
+		 * @type string SQL statement for searching items
 		 * @since 2014.03
 		 * @see mshop/index/manager/text/aggregate/ansi
 		 * @see mshop/index/manager/text/cleanup/ansi
@@ -581,7 +585,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for counting items
+		 * @type string SQL statement for counting items
 		 * @since 2014.03
 		 * @see mshop/index/manager/text/aggregate/ansi
 		 * @see mshop/index/manager/text/cleanup/ansi
@@ -606,7 +610,7 @@ class Standard
 		return function( $source, array $params ) {
 
 			if( isset( $params[1] ) ) {
-				$params[1] = mb_strtolower( $params[1] );
+				$params[1] = mb_strtolower( (string) $params[1] );
 			}
 
 			return $params;
@@ -643,8 +647,9 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item containing associated text items
+	 * @return void
 	 */
-	protected function saveTexts( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
+	protected function saveTexts( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item ) : void
 	{
 		$texts = [];
 		$config = $this->context()->config();
@@ -658,7 +663,7 @@ class Standard
 		 * for words that are part of those skipped texts. This is most useful
 		 * for avoiding product matches due to texts that should be internal only.
 		 *
-		 * @param array|string|null Type name or list of type names, null for all
+		 * @type array|string|null Type name or list of type names, null for all
 		 * @since 2019.04
 		 */
 		$types = $config->get( 'mshop/index/manager/text/types' );
@@ -671,7 +676,7 @@ class Standard
 		 * others will be left out so products won't be found if users search
 		 * for words that are part of those skipped attributes.
 		 *
-		 * @param array|string|null Type name or list of type names, null for all
+		 * @type array|string|null Type name or list of type names, null for all
 		 * @since 2020.10
 		 */
 		$attrTypes = $config->get( 'mshop/index/manager/text/attribute-types', ['variant', 'default'] );
@@ -723,9 +728,10 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item containing associated text items
-	 * @param array $map Associative list of text types as keys and content as value
+	 * @param array $texts Associative list of text types as keys and content as value
+	 * @return void
 	 */
-	protected function saveTextMap( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item, array $texts )
+	protected function saveTextMap( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item, array $texts ) : void
 	{
 		$context = $this->context();
 		$date = $context->datetime();
@@ -740,15 +746,16 @@ class Standard
 			$url = $map['url'] ?? $item->getName( 'url', $langId );
 
 			if( isset( $texts['']['content'] ) ) {
-				$map['content'] = array_merge( $map['content'], $texts['']['content'] );
+				$map['content'] = array_merge( (array) $map['content'], (array) $texts['']['content'] );
 			}
 
 			if( !isset( $map['name'] ) ) {
 				$map['name'] = $texts['']['name'] ?? $item->getLabel();
 			}
 
-			$content = ' ' . join( ' ', $map['content'] ); // extra space for SQL POSITION() > 0
-			$this->saveText( $stmt, $item->getId(), $siteid, $langId, $url, $map['name'], $content, $date );
+			// @phpstan-ignore argument.type
+			$content = ' ' . join( ' ', (array) $map['content'] ); // extra space for SQL POSITION() > 0
+			$this->saveText( $stmt, (string) $item->getId(), $siteid, $langId, (string) $url, (string) $map['name'], $content, $date );
 		}
 	}
 
@@ -764,9 +771,10 @@ class Standard
 	 * @param string $name Name of the product
 	 * @param string $content Text content to store
 	 * @param string $date Current timestamp in "YYYY-MM-DD HH:mm:ss" format
+	 * @return void
 	 */
 	protected function saveText( \Aimeos\Base\DB\Statement\Iface $stmt, string $id, string $siteid, string $lang,
-		string $url, string $name, string $content, string $date )
+		string $url, string $name, string $content, string $date ) : void
 	{
 		$stmt->bind( 1, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, $lang );
@@ -785,7 +793,7 @@ class Standard
 	/**
 	 * Returns the list of sub-managers available for the index attribute manager.
 	 *
-	 * @return \Aimeos\MShop\Index\Manager\Iface[] Associative list of the sub-domain as key and the manager object as value
+	 * @return array Associative list of the sub-domain as key and the manager object as value
 	 */
 	protected function getSubManagers() : array
 	{
@@ -806,14 +814,15 @@ class Standard
 			 * This option configures the sub-managers that cares about
 			 * indexing data associated to product texts.
 			 *
-			 * @param string List of index sub-manager names
+			 * @type string List of index sub-manager names
 			 * @since 2014.09
 			 * @see mshop/index/manager/submanagers
 			 */
 			foreach( $config->get( 'mshop/index/manager/text/submanagers', [] ) as $domain )
 			{
 				$name = $config->get( 'mshop/index/manager/text/' . $domain . '/name' );
-				$this->subManagers[$domain] = $this->object()->getSubManager( $domain, $name );
+				// @phpstan-ignore argument.type, argument.type
+				$this->subManagers[(string) $domain] = $this->object()->getSubManager( (string) $domain, $name );
 			}
 
 			return $this->subManagers;

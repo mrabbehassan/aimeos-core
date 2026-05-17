@@ -49,16 +49,17 @@ trait Preview
 		foreach( $sizes as $entry )
 		{
 			$force = $entry['force-size'] ?? 0;
-			$maxwidth = $entry['maxwidth'] ?? null;
-			$maxheight = $entry['maxheight'] ?? null;
-			$bg = ltrim( $entry['background'] ?? 'ffffff00', '#' );
+			$maxwidth = isset( $entry['maxwidth'] ) ? (int) $entry['maxwidth'] : null;
+			$maxheight = isset( $entry['maxheight'] ) ? (int) $entry['maxheight'] : null;
+			$bg = ltrim( (string) ( $entry['background'] ?? 'ffffff00' ), '#' );
 
 			if( $this->call( 'filterPreviews', $image, $maxwidth, $maxheight, $force ) )
 			{
 				$file = match( $force ) {
 					0 => (clone $image)->scaleDown( $maxwidth, $maxheight ),
-					1 => (clone $image)->pad( $maxwidth, $maxheight, $bg, 'center' ),
-					2 => (clone $image)->cover( $maxwidth, $maxheight )
+					1 => (clone $image)->pad( $maxwidth ?? 0, $maxheight ?? 0, $bg, 'center' ),
+					2 => (clone $image)->cover( $maxwidth ?? 0, $maxheight ?? 0 ),
+					default => (clone $image)->scaleDown( $maxwidth, $maxheight )
 				};
 
 				$list[$file->width()] = $file;
@@ -73,7 +74,7 @@ trait Preview
 	 * Removes the previes images from the storage
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item which will contains the image URLs afterwards
-	 * @param array List of preview paths to remove
+	 * @param array $paths List of preview paths to remove
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item with preview images removed
 	 */
 	protected function deletePreviews( \Aimeos\MShop\Media\Item\Iface $item, array $paths ) : \Aimeos\MShop\Media\Item\Iface
@@ -84,8 +85,8 @@ trait Preview
 
 			foreach( $paths as $preview )
 			{
-				if( $preview && $fs->has( $preview ) ) {
-					$fs->rm( $preview );
+				if( $preview && $fs->has( (string) $preview ) ) {
+					$fs->rm( (string) $preview );
 				}
 			}
 		}
@@ -98,9 +99,9 @@ trait Preview
 	 * Tests if the preview image should be created
 	 *
 	 * @param \Intervention\Image\Interfaces\ImageInterface $image Media object
-	 * @param int|null $width New width of the image or null for automatic calculation
-	 * @param int|null $height New height of the image or null for automatic calculation
-	 * @param int $fit "0" keeps image ratio, "1" adds padding while "2" crops image to enforce image size
+	 * @param int|null $maxwidth New width of the image or null for automatic calculation
+	 * @param int|null $maxheight New height of the image or null for automatic calculation
+	 * @param int $force "0" keeps image ratio, "1" adds padding while "2" crops image to enforce image size
 	 */
 	protected function filterPreviews( ImageInterface $image, ?int $maxwidth, ?int $maxheight, int $force ) : bool
 	{
@@ -127,6 +128,7 @@ trait Preview
 				$driver = new \Intervention\Image\Drivers\Gd\Driver();
 			}
 
+			// @phpstan-ignore argument.type
 			$this->driver = new \Intervention\Image\ImageManager( $driver );
 		}
 
@@ -154,7 +156,7 @@ trait Preview
 	 * Returns the preview images to be deleted
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item with new preview URLs
-	 * @param array List of preview paths to remove
+	 * @param array $paths List of preview paths to remove
 	 * @return iterable List of preview URLs to remove
 	 */
 	protected function removePreviews( \Aimeos\MShop\Media\Item\Iface $item, array $paths ) : iterable

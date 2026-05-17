@@ -75,13 +75,13 @@ class Standard
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
-		$expr = $this->siteString( 'mindsu."siteid"', $level );
+		$expr = $this->siteString( 'mindsu."siteid"', (int) $level );
 
 		$name = 'index.supplier:position';
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, (string) $this->searchConfig[$name]['internalcode'] );
 
 		$name = 'index.supplier:radius';
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, (string) $this->searchConfig[$name]['internalcode'] );
 	}
 
 
@@ -104,9 +104,9 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		parent::clear( $siteids );
 
@@ -119,9 +119,9 @@ class Standard
 	 * This can be a long lasting operation.
 	 *
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface
+	public function cleanup( string $timestamp ) : static
 	{
 		/** mshop/index/manager/supplier/cleanup/mysql
 		 * Deletes the index supplier records that haven't been touched
@@ -145,7 +145,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for deleting the outdated index records
+		 * @type string SQL statement for deleting the outdated index records
 		 * @since 2018.07
 		 * @see mshop/index/manager/supplier/count/ansi
 		 * @see mshop/index/manager/supplier/delete/ansi
@@ -160,9 +160,9 @@ class Standard
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : static
 	{
 		/** mshop/index/manager/supplier/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -185,13 +185,14 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for deleting index supplier records
+		 * @type string SQL statement for deleting index supplier records
 		 * @since 2018.07
 		 * @see mshop/index/manager/supplier/count/ansi
 		 * @see mshop/index/manager/supplier/cleanup/ansi
 		 * @see mshop/index/manager/supplier/insert/ansi
 		 * @see mshop/index/manager/supplier/search/ansi
 		 */
+		// @phpstan-ignore argument.type
 		return $this->deleteItemsBase( $itemIds, 'mshop/index/manager/supplier/delete' );
 	}
 
@@ -219,7 +220,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @param array List of sub-manager names
+		 * @type array List of sub-manager names
 		 * @since 2018.07
 		 */
 		$path = 'mshop/index/manager/supplier/submanagers';
@@ -266,7 +267,7 @@ class Standard
 		 * name with an upper case character and continue only with lower case characters
 		 * or numbers. Avoid chamel case names like "MySupplier"!
 		 *
-		 * @param string Last part of the class name
+		 * @type string Last part of the class name
 		 * @since 2018.07
 		 */
 
@@ -288,7 +289,7 @@ class Standard
 		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the index supplier manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2018.07
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/supplier/decorators/global
@@ -313,7 +314,7 @@ class Standard
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the index
 		 * supplier manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2018.07
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/supplier/decorators/excludes
@@ -338,7 +339,7 @@ class Standard
 		 * "\Aimeos\MShop\Index\Manager\Supplier\Decorator\Decorator2" only to the
 		 * index supplier manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2018.07
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/supplier/decorators/excludes
@@ -354,9 +355,9 @@ class Standard
 	 * Execution of this operation can take a very long time and shouldn't be
 	 * called through a web server enviroment.
 	 *
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function optimize() : \Aimeos\MShop\Index\Manager\Iface
+	public function optimize() : static
 	{
 		/** mshop/index/manager/supplier/optimize/mysql
 		 * Optimizes the stored supplier data for retrieving the records faster
@@ -376,7 +377,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for optimizing the stored supplier data
+		 * @type string SQL statement for optimizing the stored supplier data
 		 * @since 2018.07
 		 * @see mshop/index/manager/supplier/count/ansi
 		 * @see mshop/index/manager/supplier/search/ansi
@@ -391,9 +392,9 @@ class Standard
 	 * This can be a long lasting operation.
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rebuild( iterable $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
+	public function rebuild( iterable $items = [] ) : static
 	{
 		if( ( $items = map( $items ) )->isEmpty() ) { return $this; }
 
@@ -429,7 +430,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for inserting records
+			 * @type string SQL statement for inserting records
 			 * @since 2018.07
 			 * @see mshop/index/manager/supplier/cleanup/ansi
 			 * @see mshop/index/manager/supplier/delete/ansi
@@ -486,10 +487,11 @@ class Standard
 	 * Removes the products from the product index.
 	 *
 	 * @param iterable|string $ids Product ID or list of IDs
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function remove( $ids ) : \Aimeos\MShop\Index\Manager\Iface
+	public function remove( $ids ) : static
 	{
+		// @phpstan-ignore argument.type
 		parent::remove( $ids )->delete( $ids );
 		return $this;
 	}
@@ -500,7 +502,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
+	 * @type int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -551,7 +553,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for searching items
+		 * @type string SQL statement for searching items
 		 * @since 2018.07
 		 * @see mshop/index/manager/supplier/count/ansi
 		 * @see mshop/index/manager/supplier/optimize/ansi
@@ -601,7 +603,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for counting items
+		 * @type string SQL statement for counting items
 		 * @since 2018.07
 		 * @see mshop/index/manager/supplier/search/ansi
 		 * @see mshop/index/manager/supplier/optimize/ansi
@@ -616,7 +618,7 @@ class Standard
 	/**
 	 * Returns the list of sub-managers available for the index supplier manager.
 	 *
-	 * @return \Aimeos\MShop\Index\Manager\Iface[] Associative list of the sub-domain as key and the manager object as value
+	 * @return array Associative list of the sub-domain as key and the manager object as value
 	 */
 	protected function getSubManagers() : array
 	{
@@ -637,14 +639,15 @@ class Standard
 			 * This option configures the sub-managers that cares about
 			 * indexing data associated to product categories.
 			 *
-			 * @param string List of index sub-manager names
+			 * @type string List of index sub-manager names
 			 * @since 2018.07
 			 * @see mshop/index/manager/submanagers
 			 */
 			foreach( $config->get( 'mshop/index/manager/supplier/submanagers', [] ) as $domain )
 			{
 				$name = $config->get( 'mshop/index/manager/supplier/' . $domain . '/name' );
-				$this->subManagers[$domain] = $this->object()->getSubManager( $domain, $name );
+				// @phpstan-ignore argument.type, argument.type
+				$this->subManagers[(string) $domain] = $this->object()->getSubManager( (string) $domain, $name );
 			}
 
 			return $this->subManagers;

@@ -52,7 +52,7 @@ abstract class Base
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" and
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2".
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 */
 		$decorators = $config->get( 'madmin/common/manager/decorators/default', [] );
@@ -60,20 +60,20 @@ abstract class Base
 
 		foreach( $decorators as $key => $name )
 		{
-			if( in_array( $name, $excludes ) ) {
+			if( in_array( $name, (array) $excludes ) ) {
 				unset( $decorators[$key] );
 			}
 		}
 
 		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
-		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::addDecorators( $context, $manager, (array) $decorators, $classprefix );
 
 		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
-		$decorators = $config->get( 'madmin/' . $domain . '/manager/decorators/global', [] );
+		$decorators = (array) $config->get( 'madmin/' . $domain . '/manager/decorators/global', [] );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = '\Aimeos\MShop\\' . ucfirst( $domain ) . '\Manager\Decorator\\';
-		$decorators = $config->get( 'madmin/' . $domain . '/manager/decorators/local', [] );
+		$decorators = (array) $config->get( 'madmin/' . $domain . '/manager/decorators/local', [] );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		return $manager;

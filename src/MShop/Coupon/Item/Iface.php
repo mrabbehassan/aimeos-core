@@ -33,9 +33,9 @@ interface Iface
 	 * Sets the label of the coupon item.
 	 *
 	 * @param string $name Name/label of the coupon item.
-	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
+	 * @return static Coupon item for chaining method calls
 	 */
-	public function setLabel( string $name ) : \Aimeos\MShop\Coupon\Item\Iface;
+	public function setLabel( string $name ) : static;
 
 	/**
 	 * Returns the provider of the coupon.
@@ -48,7 +48,7 @@ interface Iface
 	 * Sets the new provider of the coupon item which is the short name of the provider class name.
 	 *
 	 * @param string $provider Coupon provider, esp. short provider class name
-	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
+	 * @return static Coupon item for chaining method calls
 	 */
-	public function setProvider( string $provider ) : \Aimeos\MShop\Coupon\Item\Iface;
+	public function setProvider( string $provider ) : static;
 }

@@ -40,7 +40,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		 * uploaded files. Trying to upload and store a file not available in
 		 * the list of allowed mime types will result in an exception.
 		 *
-		 * @param array List of image mime types
+		 * @type array List of image mime types
 		 * @since 2024.01
 		 */
 		$default = [
@@ -51,7 +51,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		];
 		$allowed = $context->config()->get( 'mshop/media/manager/allowedtypes', $default );
 
-		if( !in_array( $mimetype, $allowed ) )
+		if( !in_array( $mimetype, (array) $allowed ) )
 		{
 			$msg = sprintf( $context->translate( 'mshop', 'Uploading mimetype "%1$s" is not allowed' ), $mimetype );
 			throw new \Aimeos\MShop\Media\Exception( $msg, 406 );
@@ -83,7 +83,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		 * provides the file extensions for the configured mime types. You can
 		 * add more mime type / file extension combinations if required.
 		 *
-		 * @param array Associative list of mime types as keys and file extensions as values
+		 * @type array Associative list of mime types as keys and file extensions as values
 		 * @since 2018.04
 		 */
 		$default = ['image/gif' => 'gif', 'image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
@@ -114,10 +114,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		 * Qualitity level must be an integer from 0 (worst) to 100 (best).
 		 * The higher the quality, the bigger the file size.
 		 *
-		 * @param int Quality level from 0 to 100
+		 * @type int Quality level from 0 to 100
 		 * @since 2024.01
 		 */
-		return $this->context()->config()->get( 'mshop/media/manager/quality', 75 );
+		return (int) $this->context()->config()->get( 'mshop/media/manager/quality', 75 );
 	}
 
 
@@ -146,7 +146,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			$content = $fcn( $content, $mimetype );
 		}
 
-		return $content;
+		return (string) $content;
 	}
 
 
@@ -156,8 +156,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 *
 	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item with new preview URLs
 	 * @param \Intervention\Image\Interfaces\ImageInterface $image Media object
+	 * @return void
 	 */
-	protected function scaled( \Aimeos\MShop\Media\Item\Iface $item, ImageInterface $image )
+	protected function scaled( \Aimeos\MShop\Media\Item\Iface $item, ImageInterface $image ) : void
 	{
 	}
 }

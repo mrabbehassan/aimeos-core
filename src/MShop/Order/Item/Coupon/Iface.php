@@ -31,9 +31,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the base ID of the order.
 	 *
 	 * @param string|null $parentid Order base ID.
-	 * @return \Aimeos\MShop\Order\Item\Coupon\Iface Order base coupon item for chaining method calls
+	 * @return static Order base coupon item for chaining method calls
 	 */
-	public function setParentId( ?string $parentid ) : \Aimeos\MShop\Order\Item\Coupon\Iface;
+	public function setParentId( ?string $parentid ) : static;
 
 	/**
 	 *	Returns the product id of the ordered product.
@@ -47,9 +47,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * 	Sets the product ID of the ordered product
 	 *
 	 *	@param string $productid The product ID of the ordered product
-	 * @return \Aimeos\MShop\Order\Item\Coupon\Iface Order base coupon item for chaining method calls
+	 * @return static Order base coupon item for chaining method calls
 	 */
-	public function setProductId( string $productid ) : \Aimeos\MShop\Order\Item\Coupon\Iface;
+	public function setProductId( string $productid ) : static;
 
 	/**
 	 * Returns the coupon code the customer has selected.
@@ -62,7 +62,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the code of a coupon the customer has selected.
 	 *
 	 * @param string $code The code of a coupon the customer has selected.
-	 * @return \Aimeos\MShop\Order\Item\Coupon\Iface Order base coupon item for chaining method calls
+	 * @return static Order base coupon item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Coupon\Iface;
+	public function setCode( string $code ) : static;
 }

@@ -78,7 +78,7 @@ class Standard
 		$level = $context->config()->get( 'mshop/stock/manager/sitemode', $level );
 
 		$search = $this->object()->filter();
-		$search->setConditions( $this->siteCondition( 'stock.siteid', $level ) );
+		$search->setConditions( $this->siteCondition( 'stock.siteid', (int) $level ) );
 		$conditions = $search->getConditionSource( $types, $translations );
 
 		$conn = $context->db( $this->getResourceName() );
@@ -107,7 +107,7 @@ class Standard
 		 * Each time the stock level is updated, the modify date/time is
 		 * set to the current timestamp and the editor field is updated.
 		 *
-		 * @param string SQL statement for increasing/decreasing the stock level
+		 * @type string SQL statement for increasing/decreasing the stock level
 		 * @since 2017.01
 		 * @see mshop/stock/manager/insert/ansi
 		 * @see mshop/stock/manager/update/ansi
@@ -120,7 +120,7 @@ class Standard
 
 		foreach( $pairs as $prodid => $qty )
 		{
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->getSqlConfig( $path ) ) );
+			$stmt = $conn->create( str_replace( ':cond', (string) $conditions, (string) $this->getSqlConfig( $path ) ) );
 
 			$stmt->bind( 1, $qty, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $context->datetime() ); //mtime
@@ -156,9 +156,10 @@ class Standard
 	public function increase( iterable $pairs, string $type = 'default' ) : \Aimeos\MShop\Stock\Manager\Iface
 	{
 		foreach( $pairs as $prodid => $qty ) {
-			$pairs[$prodid] = -$qty;
+			$pairs[$prodid] = -(int) $qty;
 		}
 
+		// @phpstan-ignore return.type
 		return $this->object()->decrease( $pairs, $type );
 	}
 
@@ -203,7 +204,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
-	 * @param string Last part of the class name
+	 * @type string Last part of the class name
 	 * @since 2020.10
 	 */
 
@@ -225,7 +226,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the stock manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2020.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/stock/manager/decorators/global
@@ -249,7 +250,7 @@ class Standard
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the stock
 	 * manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2020.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/stock/manager/decorators/excludes
@@ -273,7 +274,7 @@ class Standard
 	 * "\Aimeos\MShop\Stock\Manager\Decorator\Decorator2" only to the stock
 	 * manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2020.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/stock/manager/decorators/excludes
@@ -288,7 +289,7 @@ class Standard
 	 * It's also possible to use the same database connection for different
 	 * data domains by configuring the same connection name using this setting.
 	 *
-	 * @param string Database connection name
+	 * @type string Database connection name
 	 * @since 2023.04
 	 */
 
@@ -314,7 +315,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for deleting items
+	 * @type string SQL statement for deleting items
 	 * @since 2020.10
 	 * @see mshop/stock/manager/insert/ansi
 	 * @see mshop/stock/manager/update/ansi
@@ -336,7 +337,7 @@ class Standard
 	 * using the search keys of the sub-managers to further limit the
 	 * retrieved list of items.
 	 *
-	 * @param array List of sub-manager names
+	 * @type array List of sub-manager names
 	 * @since 2020.10
 	 */
 
@@ -366,7 +367,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for inserting records
+	 * @type string SQL statement for inserting records
 	 * @since 2020.10
 	 * @see mshop/stock/manager/update/ansi
 	 * @see mshop/stock/manager/newid/ansi
@@ -398,7 +399,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for updating records
+	 * @type string SQL statement for updating records
 	 * @since 2020.10
 	 * @see mshop/stock/manager/insert/ansi
 	 * @see mshop/stock/manager/newid/ansi
@@ -434,7 +435,7 @@ class Standard
 	 * fits for most database servers as they implement their own
 	 * specific way.
 	 *
-	 * @param string SQL statement for retrieving the last inserted record ID
+	 * @type string SQL statement for retrieving the last inserted record ID
 	 * @since 2020.10
 	 * @see mshop/stock/manager/insert/ansi
 	 * @see mshop/stock/manager/update/ansi
@@ -467,7 +468,7 @@ class Standard
 	 * this domain, then items wil be only inherited. Thus, you have full
 	 * control over inheritance and aggregation in each domain.
 	 *
-	 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
+	 * @type int Constant from Aimeos\MShop\Locale\Manager\Base class
 	 * @since 2018.01
 	 * @see mshop/locale/manager/sitelevel
 	 */
@@ -516,7 +517,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for searching items
+	 * @type string SQL statement for searching items
 	 * @since 2020.10
 	 * @see mshop/stock/manager/insert/ansi
 	 * @see mshop/stock/manager/update/ansi
@@ -567,7 +568,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for counting items
+	 * @type string SQL statement for counting items
 	 * @since 2020.10
 	 * @see mshop/stock/manager/insert/ansi
 	 * @see mshop/stock/manager/update/ansi

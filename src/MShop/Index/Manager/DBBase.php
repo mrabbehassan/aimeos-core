@@ -41,10 +41,10 @@ abstract class DBBase
 		 * It's also possible to use the same database connection for different
 		 * data domains by configuring the same connection name using this setting.
 		 *
-		 * @param string Database connection name
+		 * @type string Database connection name
 		 * @since 2023.04
 		 */
-		$this->setResourceName( $context->config()->get( 'mshop/index/manager/resource', 'db-product' ) );
+		$this->setResourceName( (string) $context->config()->get( 'mshop/index/manager/resource', 'db-product' ) );
 		$this->manager = \Aimeos\MShop::create( $this->context(), 'product' );
 	}
 
@@ -53,9 +53,9 @@ abstract class DBBase
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->clear( $siteids );
@@ -73,7 +73,7 @@ abstract class DBBase
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->manager->create( $values );
+		return $this->manager->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -85,6 +85,7 @@ abstract class DBBase
 	 */
 	public function createListItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Lists\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->manager->createListItem( $values );
 	}
 
@@ -97,6 +98,7 @@ abstract class DBBase
 	 */
 	public function createPropertyItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Property\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->manager->createPropertyItem( $values );
 	}
 
@@ -104,10 +106,10 @@ abstract class DBBase
 	/**
 	 * Removes multiple items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items Item object, ID or a list of them
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $itemIds Item object, ID or a list of them
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : static
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->delete( $itemIds );
@@ -143,6 +145,7 @@ abstract class DBBase
 	public function find( string $code, array $ref = [], ?string $domain = null, ?string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->manager->find( $code, $ref, $domain, $type, $default );
 	}
 
@@ -157,7 +160,7 @@ abstract class DBBase
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->manager->get( $id, $ref, $default );
+		return $this->manager->get( $id, $ref, $default ); // @phpstan-ignore return.type
 	}
 
 
@@ -200,9 +203,9 @@ abstract class DBBase
 	 * @param string $id ID of the item
 	 * @param string $rating Decimal value of the rating
 	 * @param int $ratings Total number of ratings for the item
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rate( string $id, string $rating, int $ratings ) : \Aimeos\MShop\Common\Manager\Iface
+	public function rate( string $id, string $rating, int $ratings ) : static
 	{
 		$this->manager->rate( $id, $rating, $ratings );
 		return $this;
@@ -213,9 +216,9 @@ abstract class DBBase
 	 * Rebuilds the customer index
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs and items values
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rebuild( iterable $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
+	public function rebuild( iterable $items = [] ) : static
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuild( $items );
@@ -229,9 +232,9 @@ abstract class DBBase
 	 * Removes the products from the product index.
 	 *
 	 * @param iterable|string $ids Product ID or list of IDs
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	 public function remove( $ids ) : \Aimeos\MShop\Index\Manager\Iface
+	 public function remove( $ids ) : static
 	 {
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->remove( $ids );
@@ -260,9 +263,9 @@ abstract class DBBase
 	 *
 	 * @param string $id ID of the procuct item
 	 * @param int $value "0" or "1" if product is in stock or not
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function stock( string $id, int $value ) : \Aimeos\MShop\Common\Manager\Iface
+	public function stock( string $id, int $value ) : static
 	{
 		$this->manager->stock( $id, $value );
 		return $this;
@@ -274,9 +277,9 @@ abstract class DBBase
 	 *
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
 	 * @param string $path Configuration path to the SQL statement to execute
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	protected function cleanupBase( string $timestamp, string $path ) : \Aimeos\MShop\Index\Manager\Iface
+	protected function cleanupBase( string $timestamp, string $path ) : static
 	{
 		$context = $this->context();
 		$siteid = $context->locale()->getSiteId();
@@ -316,10 +319,10 @@ abstract class DBBase
 	 * @param string $path Configuration path to the SQL statement to execute
 	 * @param bool $siteidcheck If siteid should be used in the statement
 	 * @param string $name Name of the ID column
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
 	protected function deleteItemsBase( $ids, string $path, bool $siteidcheck = true,
-		string $name = 'prodid' ) : \Aimeos\MShop\Common\Manager\Iface
+		string $name = 'prodid' ) : static
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->delete( $ids );
@@ -336,7 +339,7 @@ abstract class DBBase
 	 */
 	protected function getManager() : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->manager;
+		return $this->manager; // @phpstan-ignore return.type
 	}
 
 
@@ -348,7 +351,6 @@ abstract class DBBase
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attronly Associative list of search keys and criteria attribute items as values for the base table
 	 * @param \Aimeos\Base\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
 	 * @param string[] $joins Associative list of SQL joins
-	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $columns Additional columns to retrieve values from
 	 * @return array Array of keys, find and replace arrays
 	 */
 	protected function getSQLReplacements( \Aimeos\Base\Criteria\Iface $search, array $attributes, array $attronly, array $plugins, array $joins ) : array
@@ -367,8 +369,8 @@ abstract class DBBase
 			$list = $translations = [];
 			foreach( $cols as $idx => $col )
 			{
-				if( strpos( $col, '"' ) === false ) {
-					$col = $this->alias( $names[$idx] ) . '."' . $col . '"';
+				if( strpos( (string) $col, '"' ) === false ) {
+					$col = $this->alias( (string) $names[$idx] ) . '."' . $col . '"';
 				}
 
 				$list[] = ( $ops[$idx] === '-' ? 'MAX' : 'MIN' ) . '(' . $col . ') AS "s' . $idx . '"';
@@ -389,15 +391,19 @@ abstract class DBBase
 	 * Optimizes the catalog customer index if necessary
 	 *
 	 * @param string $path Configuration path to the SQL statements to execute
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	protected function optimizeBase( string $path ) : \Aimeos\MShop\Index\Manager\Iface
+	protected function optimizeBase( string $path ) : static
 	{
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-		foreach( (array) $this->getSqlConfig( $path ) as $sql ) {
-			$conn->create( $sql )->execute()->finish();
+		$config = $context->config();
+		$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
+		$sqls = (array) $config->get( $path . '/' . $adapter, $config->get( $path . '/ansi', [] ) );
+
+		foreach( $sqls as $sql ) {
+			$conn->create( (string) $sql )->execute()->finish();
 		}
 
 		foreach( $this->getSubManagers() as $submanager ) {
@@ -413,10 +419,10 @@ abstract class DBBase
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int &$total Total number of items matched by the given criteria
+	 * @type int &$total Total number of items matched by the given criteria
 	 * @param string $cfgPathSearch Configuration path to the search SQL statement
 	 * @param string $cfgPathCount Configuration path to the count SQL statement
-	 * @return \Aimeos\MShop\Product\Item\Iface[] List of product items
+	 * @return \Aimeos\Map List of product items
 	 */
 	protected function searchItemsIndexBase( \Aimeos\Base\Criteria\Iface $search,
 		array $ref, ?int &$total, string $cfgPathSearch, string $cfgPathCount ) : \Aimeos\Map
@@ -451,14 +457,14 @@ abstract class DBBase
 		 * this domain, then items wil be only inherited. Thus, you have full
 		 * control over inheritance and aggregation in each domain.
 		 *
-		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
+		 * @type int Constant from Aimeos\MShop\Locale\Manager\Base class
 		 * @since 2018.01
 		 * @see mshop/locale/manager/sitelevel
 		 */
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
-		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, (int) $level );
 
 		while( $row = $results->fetch() ) {
 			$ids[] = $row['id'];

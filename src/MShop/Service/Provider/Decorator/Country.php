@@ -101,7 +101,7 @@ class Country
 		{
 			foreach( $addresses as $address )
 			{
-				$code = strtoupper( $address->getCountryId() );
+				$code = strtoupper( $address->getCountryId() ?? '' );
 
 				if( $this->checkCountryCode( $code, 'country.delivery-include' ) === false
 					|| $this->checkCountryCode( $code, 'country.delivery-exclude' ) === true
@@ -115,7 +115,7 @@ class Country
 			// use billing address if no delivery address is available
 			foreach( $addresses as $address )
 			{
-				$code = strtoupper( $address->getCountryId() );
+				$code = strtoupper( $address->getCountryId() ?? '' );
 
 				if( $this->checkCountryCode( $code, 'country.delivery-include' ) === false
 					|| $this->checkCountryCode( $code, 'country.delivery-exclude' ) === true
@@ -148,6 +148,6 @@ class Country
 			return null;
 		}
 
-		return in_array( $code, explode( ',', str_replace( ' ', '', strtoupper( $str ) ) ) );
+		return in_array( $code, explode( ',', str_replace( ' ', '', strtoupper( (string) $str ) ) ) );
 	}
 }

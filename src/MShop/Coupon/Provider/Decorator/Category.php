@@ -60,7 +60,7 @@ class Category
 			$catManager = \Aimeos\MShop::create( $context, 'catalog' );
 			$prodManager = \Aimeos\MShop::create( $context, 'product' );
 
-			$codes = explode( ',', $this->getConfigValue( 'category.code', '' ) );
+			$codes = explode( ',', (string) $this->getConfigValue( 'category.code', '' ) );
 			$filter = $catManager->filter( true )->add( ['catalog.code' => $codes] )->slice( 0, count( $codes ) );
 
 			$catIds = $catManager->search( $filter )->keys()->all();
@@ -88,6 +88,7 @@ class Category
 				unset( $prodIds[$item->getId()] );
 			}
 
+			// @phpstan-ignore return.type
 			return $price;
 		}
 
@@ -137,7 +138,7 @@ class Category
 			$catManager = \Aimeos\MShop::create( $context, 'catalog' );
 			$prodManager = \Aimeos\MShop::create( $context, 'product' );
 
-			$filter = $catManager->filter( true )->add( ['catalog.code' => explode( ',', $codes )] );
+			$filter = $catManager->filter( true )->add( ['catalog.code' => explode( ',', (string) $codes )] );
 			$catIds = $catManager->search( $filter )->keys()->all();
 
 			$filter = $prodManager->filter( true );

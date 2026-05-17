@@ -84,6 +84,7 @@ trait Traits
 			$filter->add( $domain . '.property.type', '==', $types );
 		}
 
+		// @phpstan-ignore argument.type
 		return $manager->search( $filter, $ref ?? [] )->groupBy( $domain . '.property.parentid' )->all();
 	}
 

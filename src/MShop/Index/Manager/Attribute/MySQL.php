@@ -42,7 +42,7 @@ class MySQL
 		$list = parent::getSearchAttributes( $withsub );
 
 		foreach( $this->searchConfig as $key => $fields ) {
-			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $fields );
+			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( (array) $fields );
 		}
 
 		return $list;

@@ -31,9 +31,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the new label of the attribute item.
 	 *
 	 * @param string|null $label Type label of the attribute item
-	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
+	 * @return static Job item for chaining method calls
 	 */
-	public function setLabel( ?string $label ) : \Aimeos\MAdmin\Job\Item\Iface;
+	public function setLabel( ?string $label ) : static;
 
 	/**
 	 * Returns the generated file path of the job.
@@ -46,7 +46,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the new generated file path of the job.
 	 *
 	 * @param string|null $path Relative filesystem path to the generated file
-	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
+	 * @return static Job item for chaining method calls
 	 */
-	public function setPath( ?string $path ) : \Aimeos\MAdmin\Job\Item\Iface;
+	public function setPath( ?string $path ) : static;
 }

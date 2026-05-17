@@ -39,7 +39,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 		$this->context = $context;
 		$domain = $this->domain();
 
-		$this->setResourceName( $context->config()->get( 'mshop/' . $domain . '/manager/resource', 'db-' . $domain ) );
+		$this->setResourceName( (string) $context->config()->get( 'mshop/' . $domain . '/manager/resource', 'db-' . $domain ) );
 	}
 
 
@@ -47,12 +47,12 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
-		foreach( $this->context()->config()->get( $this->getConfigKey( 'submanagers' ), [] ) as $domain ) {
-			$this->object()->getSubManager( $domain )->clear( $siteids );
+		foreach( (array) $this->context()->config()->get( $this->getConfigKey( 'submanagers' ), [] ) as $domain ) {
+			$this->object()->getSubManager( (string) $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, $this->getConfigKey( 'delete', 'mshop/common/manager/delete' ) );
@@ -78,9 +78,9 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : static
 	{
 		return $this->deleteItemsBase( $itemIds, $this->getConfigKey( 'delete', 'mshop/common/manager/delete' ) );
 	}
@@ -157,10 +157,10 @@ abstract class Base implements \Aimeos\Macro\Iface
 
 		if( $withsub )
 		{
-			$domains = $this->context()->config()->get( $this->getConfigKey( 'submanagers' ), [] );
+			$domains = (array) $this->context()->config()->get( $this->getConfigKey( 'submanagers' ), [] );
 
 			foreach( $domains as $domain ) {
-				$attr += $this->object()->getSubManager( $domain )->getSearchAttributes( true );
+				$attr += $this->object()->getSubManager( (string) $domain )->getSearchAttributes( true );
 			}
 		}
 
@@ -180,7 +180,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 		$type = $this->type();
 		$manager = trim( join( '/', array_slice( $type, 1 ) ) . '/' . $manager, '/' );
 
-		return $this->getSubManagerBase( current( $type ), $manager, $name );
+		return $this->getSubManagerBase( (string) current( $type ), $manager, $name );
 	}
 
 
@@ -223,6 +223,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 			if( method_exists( $this, 'saveItem' ) ) {
 				$this->saveItem( $item, $fetch );
 			} else {
+				// @phpstan-ignore argument.type
 				$this->saveBase( $item, $fetch );
 			}
 		}
@@ -236,7 +237,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int &$total Number of items that are available in total
+	 * @type int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -287,7 +288,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for searching items
+		 * @type string SQL statement for searching items
 		 * @since 2023.10
 		 * @see mshop/common/manager/insert/ansi
 		 * @see mshop/common/manager/update/ansi
@@ -339,7 +340,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for counting items
+		 * @type string SQL statement for counting items
 		 * @since 2023.10
 		 * @see mshop/common/manager/insert/ansi
 		 * @see mshop/common/manager/update/ansi
@@ -366,7 +367,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 			while( $row = $results->fetch() )
 			{
 				foreach( $attrs as $code => $attr ) {
-					$row[$code] = json_decode( $row[$code] ?? '{}', true );
+					$row[(string) $code] = json_decode( (string) ( $row[(string) $code] ?? '{}' ), true );
 				}
 
 				$map[$row[$prefix . 'id']] = $row;
@@ -380,7 +381,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 
 		foreach( $this->object()->searchRefs( $map, $ref ) as $id => $row )
 		{
-			if( $item = $this->applyFilter( $this->create( $row ) ) ) {
+			if( $item = $this->applyFilter( $this->create( (array) $row ) ) ) {
 				$items[$id] = $item;
 			}
 		}
@@ -392,9 +393,9 @@ abstract class Base implements \Aimeos\Macro\Iface
 	/**
 	 * Starts a database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function begin() : \Aimeos\MShop\Common\Manager\Iface
+	public function begin() : static
 	{
 		$this->context->db( $this->getResourceName() )->begin();
 		return $this;
@@ -404,9 +405,9 @@ abstract class Base implements \Aimeos\Macro\Iface
 	/**
 	 * Commits the running database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function commit() : \Aimeos\MShop\Common\Manager\Iface
+	public function commit() : static
 	{
 		$this->context->db( $this->getResourceName() )->commit();
 		return $this;
@@ -416,9 +417,9 @@ abstract class Base implements \Aimeos\Macro\Iface
 	/**
 	 * Rolls back the running database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rollback() : \Aimeos\MShop\Common\Manager\Iface
+	public function rollback() : static
 	{
 		$this->context->db( $this->getResourceName() )->rollback();
 		return $this;
@@ -455,7 +456,7 @@ abstract class Base implements \Aimeos\Macro\Iface
 	protected function getSiteMode() : int
 	{
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		return $this->context()->config()->get( $this->getConfigKey( 'sitemode', 'mshop/common/manager/sitemode' ), $level );
+		return (int) $this->context()->config()->get( $this->getConfigKey( 'sitemode', 'mshop/common/manager/sitemode' ), $level );
 	}
 
 

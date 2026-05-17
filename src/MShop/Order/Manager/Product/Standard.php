@@ -198,7 +198,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for aggregating order items
+		 * @type string SQL statement for aggregating order items
 		 * @since 2015.10
 		 * @see mshop/order/manager/product/insert/ansi
 		 * @see mshop/order/manager/product/update/ansi
@@ -211,7 +211,7 @@ class Standard
 		/** mshop/order/manager/product/aggregateavg/mysql
 		 * Computes the average of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @param string SQL statement for aggregating the order product items and computing the average value
+		 * @type string SQL statement for aggregating the order product items and computing the average value
 		 * @since 2017.10
 		 * @see mshop/order/manager/product/aggregateavg/ansi
 		 * @see mshop/order/manager/product/aggregate/mysql
@@ -220,7 +220,7 @@ class Standard
 		/** mshop/order/manager/product/aggregateavg/ansi
 		 * Computes the average of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @param string SQL statement for aggregating the order product items and computing the average value
+		 * @type string SQL statement for aggregating the order product items and computing the average value
 		 * @since 2017.10
 		 * @see mshop/order/manager/product/aggregate/ansi
 		 */
@@ -228,7 +228,7 @@ class Standard
 		/** mshop/order/manager/product/aggregatesum/mysql
 		 * Computes the sum of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @param string SQL statement for aggregating the order product items and computing the sum
+		 * @type string SQL statement for aggregating the order product items and computing the sum
 		 * @since 2017.10
 		 * @see mshop/order/manager/product/aggregatesum/ansi
 		 * @see mshop/order/manager/product/aggregate/mysql
@@ -237,7 +237,7 @@ class Standard
 		/** mshop/order/manager/product/aggregatesum/ansi
 		 * Computes the sum of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @param string SQL statement for aggregating the order product items and computing the sum
+		 * @type string SQL statement for aggregating the order product items and computing the sum
 		 * @since 2017.10
 		 * @see mshop/order/manager/product/aggregate/ansi
 		 */
@@ -271,7 +271,7 @@ class Standard
 	 */
 	public function createAttributeItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->object()->getSubManager( 'attribute' )->create( $values );
+		return $this->object()->getSubManager( 'attribute' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -395,9 +395,11 @@ class Standard
 	{
 		foreach( map( $items ) as $id => $item )
 		{
+			// @phpstan-ignore argument.type
 			$this->saveBase( $item, $item->getProducts()->isEmpty() ? $fetch : true );
 
 			foreach( $item->getProducts() as $subItem ) {
+				// @phpstan-ignore argument.type
 				$this->saveBase( $subItem->setOrderProductId( $item->getId() ), $fetch );
 			}
 		}
@@ -427,7 +429,9 @@ class Standard
 		}
 
 		$manager = $this->object()->getSubManager( 'attribute' );
+		// @phpstan-ignore argument.type
 		$manager->delete( $item->getAttributeItemsDeleted() );
+		// @phpstan-ignore argument.type
 		$manager->save( $attrItems, $fetch );
 
 		return $item;
@@ -450,6 +454,7 @@ class Standard
 		{
 			$ids = map( $entries )->col( 'order.product.productid' );
 			$ids->merge( map( $entries )->col( 'order.product.parentproductid' ) );
+			// @phpstan-ignore argument.type
 			$prodItems = $this->getProductItems( $ids->filter()->all(), $ref );
 		}
 
@@ -527,6 +532,7 @@ class Standard
 		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
 		$search = $manager->filter()->add( 'product.id', '==', array_unique( $ids ) )->slice( 0, 0x7fffffff );
 
+		// @phpstan-ignore argument.type
 		return $manager->search( $search, $ref );
 	}
 
@@ -575,7 +581,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for deleting items
+	 * @type string SQL statement for deleting items
 	 * @since 2015.10
 	 * @see mshop/order/manager/product/insert/ansi
 	 * @see mshop/order/manager/product/update/ansi
@@ -597,7 +603,7 @@ class Standard
 	 * using the search keys of the sub-managers to further limit the
 	 * retrieved list of items.
 	 *
-	 * @param array List of sub-manager names
+	 * @type array List of sub-manager names
 	 * @since 2015.10
 	 */
 
@@ -630,7 +636,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyProduct"!
 	 *
-	 * @param string Last part of the class name
+	 * @type string Last part of the class name
 	 * @since 2015.10
 	 */
 
@@ -652,7 +658,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the order base product manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/order/manager/product/decorators/global
@@ -677,7 +683,7 @@ class Standard
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the order base
 	 * product manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/order/manager/product/decorators/excludes
@@ -702,7 +708,7 @@ class Standard
 	 * "\Aimeos\MShop\Order\Manager\Product\Decorator\Decorator2" only
 	 * to the order base product manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/order/manager/product/decorators/excludes
@@ -735,7 +741,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for inserting records
+	 * @type string SQL statement for inserting records
 	 * @since 2015.10
 	 * @see mshop/order/manager/product/update/ansi
 	 * @see mshop/order/manager/product/newid/ansi
@@ -767,7 +773,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for updating records
+	 * @type string SQL statement for updating records
 	 * @since 2015.10
 	 * @see mshop/order/manager/product/insert/ansi
 	 * @see mshop/order/manager/product/newid/ansi
@@ -803,7 +809,7 @@ class Standard
 	 * fits for most database servers as they implement their own
 	 * specific way.
 	 *
-	 * @param string SQL statement for retrieving the last inserted record ID
+	 * @type string SQL statement for retrieving the last inserted record ID
 	 * @since 2015.10
 	 * @see mshop/order/manager/product/insert/ansi
 	 * @see mshop/order/manager/product/update/ansi
@@ -858,7 +864,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for searching items
+	 * @type string SQL statement for searching items
 	 * @since 2015.10
 	 * @see mshop/order/manager/product/insert/ansi
 	 * @see mshop/order/manager/product/update/ansi
@@ -909,7 +915,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for counting items
+	 * @type string SQL statement for counting items
 	 * @since 2015.10
 	 * @see mshop/order/manager/product/insert/ansi
 	 * @see mshop/order/manager/product/update/ansi

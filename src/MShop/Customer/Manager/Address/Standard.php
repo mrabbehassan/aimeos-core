@@ -25,13 +25,13 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Customer\Manager\Address\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		$path = 'mshop/customer/manager/address/submanagers';
 		foreach( $this->context()->config()->get( $path, [] ) as $domain ) {
-			$this->object()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( (string) $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/customer/manager/address/clear' );
@@ -42,7 +42,7 @@ class Standard
 	 * Creates a new empty item instance
 	 *
 	 * @param array $values Values the item should be initialized with
-	 * @return \Aimeos\MShop\Order\Item\Address\Iface New order address item object
+	 * @return \Aimeos\MShop\Customer\Item\Address\Standard New customer address item object
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
@@ -78,10 +78,10 @@ class Standard
 	 * @param string $cfgpath Configuration path to the SQL statement
 	 * @param bool $siteid If siteid should be used in the statement
 	 * @param string $name Name of the ID column
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
 	protected function deleteItemsBase( $items, string $cfgpath, bool $siteid = true,
-		string $name = 'id' ) : \Aimeos\MShop\Common\Manager\Iface
+		string $name = 'id' ) : static
 	{
 		if( map( $items )->isEmpty() ) {
 			return $this;
@@ -94,12 +94,12 @@ class Standard
 		$translations = array( $name => '"' . $name . '"' );
 
 		$cond = $search->getConditionSource( $types, $translations );
-		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( $cfgpath ) );
+		$sql = str_replace( ':cond', (string) $cond, (string) $this->getSqlConfig( $cfgpath ) );
 
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-		$stmt = $conn->create( $sql );
+		$stmt = $conn->create( (string) $sql );
 
 		if( $siteid )
 		{
@@ -157,12 +157,12 @@ class Standard
 		if( $id === null )
 		{
 			$path = 'mshop/customer/manager/address/insert';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+			$sql = $this->addSqlColumns( array_keys( $columns ), (string) $this->getSqlConfig( $path ) );
 		}
 		else
 		{
 			$path = 'mshop/customer/manager/address/update';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+			$sql = $this->addSqlColumns( array_keys( $columns ), (string) $this->getSqlConfig( $path ), false );
 		}
 
 		$idx = 1;
@@ -227,7 +227,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyAddress"!
 	 *
-	 * @param string Last part of the class name
+	 * @type string Last part of the class name
 	 * @since 2015.10
 	 */
 
@@ -249,7 +249,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the customer address manager.
 	 *
-	 * @param array Address of decorator names
+	 * @type array Address of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/customer/manager/address/decorators/global
@@ -273,7 +273,7 @@ class Standard
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the customer
 	 * address manager.
 	 *
-	 * @param array Address of decorator names
+	 * @type array Address of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/customer/manager/address/decorators/excludes
@@ -298,7 +298,7 @@ class Standard
 	 * "\Aimeos\MShop\Customer\Manager\Address\Decorator\Decorator2" only to the
 	 * customer address manager.
 	 *
-	 * @param array Address of decorator names
+	 * @type array Address of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/customer/manager/address/decorators/excludes
@@ -318,7 +318,7 @@ class Standard
 	 * using the search keys of the sub-managers to further limit the
 	 * retrieved list of items.
 	 *
-	 * @param array List of sub-manager names
+	 * @type array List of sub-manager names
 	 * @since 2015.10
 	 */
 
@@ -348,7 +348,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for inserting records
+	 * @type string SQL statement for inserting records
 	 * @since 2015.10
 	 * @see mshop/customer/manager/address/update/ansi
 	 * @see mshop/customer/manager/address/newid/ansi
@@ -380,7 +380,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for updating records
+	 * @type string SQL statement for updating records
 	 * @since 2015.10
 	 * @see mshop/customer/manager/address/insert/ansi
 	 * @see mshop/customer/manager/address/newid/ansi
@@ -416,7 +416,7 @@ class Standard
 	 * fits for most database servers as they implement their own
 	 * specific way.
 	 *
-	 * @param string SQL statement for retrieving the last inserted record ID
+	 * @type string SQL statement for retrieving the last inserted record ID
 	 * @since 2015.10
 	 * @see mshop/customer/manager/address/insert/ansi
 	 * @see mshop/customer/manager/address/update/ansi
@@ -446,7 +446,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for deleting items
+	 * @type string SQL statement for deleting items
 	 * @since 2015.10
 	 * @see mshop/customer/manager/address/insert/ansi
 	 * @see mshop/customer/manager/address/update/ansi
@@ -501,7 +501,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for searching items
+	 * @type string SQL statement for searching items
 	 * @since 2015.10
 	 * @see mshop/customer/manager/address/insert/ansi
 	 * @see mshop/customer/manager/address/update/ansi
@@ -552,7 +552,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for counting items
+	 * @type string SQL statement for counting items
 	 * @since 2015.10
 	 * @see mshop/customer/manager/address/insert/ansi
 	 * @see mshop/customer/manager/address/update/ansi

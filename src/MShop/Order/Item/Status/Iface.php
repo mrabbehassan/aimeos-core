@@ -29,7 +29,7 @@ interface Iface
 	 * Sets the value of the order status.
 	 *
 	 * @param string $value Value of the order status
-	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
+	 * @return static Order status item for chaining method calls
 	 */
-	public function setValue( string $value ) : \Aimeos\MShop\Order\Item\Status\Iface;
+	public function setValue( string $value ) : static;
 }

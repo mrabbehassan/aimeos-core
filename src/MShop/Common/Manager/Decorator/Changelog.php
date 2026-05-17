@@ -25,9 +25,9 @@ class Changelog
 	 * Deletes one or more items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items Item object, ID or a list of them
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : static
 	{
 		$this->getManager()->delete( $items );
 
@@ -48,8 +48,10 @@ class Changelog
 	 */
 	public function save( $items, bool $fetch = true )
 	{
+		// @phpstan-ignore argument.type
 		$items = $this->getManager()->save( $items, true );
 
+		// @phpstan-ignore argument.type
 		if( map( $items )->isModified()->some( true ) ) {
 			$this->context()->logger()->notice( $items, 'changelog:save' );
 		}

@@ -103,9 +103,9 @@ class BasketLimits
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
+	 * @return static Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static
 	{
 		$p->attach( $this->object(), 'check.after' );
 		return $this;
@@ -140,7 +140,7 @@ class BasketLimits
 		 * doesn't satisfy all requirements. It may be useful if you want to
 		 * allow them to send free or replacements for lost or damaged products.
 		 *
-		 * @param bool True to disable the check, false to keep it enabled
+		 * @type bool True to disable the check, false to keep it enabled
 		 * @since 2014.03
 		 */
 		if( $context->config()->get( 'mshop/plugin/provider/order/complete/disable', false ) != true )
@@ -151,9 +151,10 @@ class BasketLimits
 			foreach( $order->getProducts() as $product )
 			{
 				$sum->addItem( $product->getPrice(), $product->getQuantity() );
-				$count += $product->getQuantity();
+				$count += $product->getQuantity(); // @phpstan-ignore assignOp.invalid
 			}
 
+			// @phpstan-ignore argument.type
 			$this->checkLimits( $sum, $count );
 		}
 
@@ -166,9 +167,10 @@ class BasketLimits
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $sum Total sum of all product price items
 	 * @param int $count Total number of products in the basket
+	 * @return void
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one of the minimum or maximum limits is exceeded
 	 */
-	protected function checkLimits( \Aimeos\MShop\Price\Item\Iface $sum, int $count )
+	protected function checkLimits( \Aimeos\MShop\Price\Item\Iface $sum, int $count ) : void
 	{
 		$config = $this->getItemBase()->getConfig();
 
@@ -182,21 +184,22 @@ class BasketLimits
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $sum Total sum of all product price items
 	 * @param array $config Associative list of configuration key/value pairs
+	 * @return void
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one of the minimum or maximum limits is exceeded
 	 */
-	protected function checkLimitsValue( array $config, \Aimeos\MShop\Price\Item\Iface $sum )
+	protected function checkLimitsValue( array $config, \Aimeos\MShop\Price\Item\Iface $sum ) : void
 	{
 		$currencyId = $sum->getCurrencyId();
 
 		if( ( isset( $config['min-value'][$currencyId] ) ) && is_numeric( $config['min-value'][$currencyId] )
-			&& ( $sum->getValue() + $sum->getRebate() < $config['min-value'][$currencyId] )
+			&& ( $sum->getValue() + $sum->getRebate() < $config['min-value'][$currencyId] ) // @phpstan-ignore binaryOp.invalid
 		) {
 			$msg = $this->context()->translate( 'mshop', 'The minimum basket value of %1$s isn\'t reached' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['min-value'][$currencyId] ), 409 );
 		}
 
 		if( ( isset( $config['max-value'][$currencyId] ) ) && is_numeric( $config['max-value'][$currencyId] )
-			&& ( $sum->getValue() + $sum->getRebate() > $config['max-value'][$currencyId] )
+			&& ( $sum->getValue() + $sum->getRebate() > $config['max-value'][$currencyId] ) // @phpstan-ignore binaryOp.invalid
 		) {
 			$msg = $this->context()->translate( 'mshop', 'The maximum basket value of %1$s is exceeded' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['max-value'][$currencyId] ), 409 );
@@ -209,9 +212,10 @@ class BasketLimits
 	 *
 	 * @param array $config Associative list of configuration key/value pairs
 	 * @param int $count Total number of products in the basket
+	 * @return void
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one of the minimum or maximum limits is exceeded
 	 */
-	protected function checkLimitsProducts( array $config, $count )
+	protected function checkLimitsProducts( array $config, $count ) : void
 	{
 		if( ( isset( $config['min-products'] ) ) && is_numeric( $config['min-products'] )
 			&& ( $count < $config['min-products'] )

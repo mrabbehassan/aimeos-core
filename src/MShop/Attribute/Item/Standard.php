@@ -41,8 +41,9 @@ class Standard
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->initListItems( $values['.listitems'] ?? [] );
-		$this->initPropertyItems( $values['.propitems'] ?? [] );
+		$this->initListItems( (array) ( $values['.listitems'] ?? [] ) );
+		// @phpstan-ignore argument.type
+		$this->initPropertyItems( (array) ( $values['.propitems'] ?? [] ) );
 	}
 
 
@@ -83,9 +84,9 @@ class Standard
 	 * Set the name of the domain for this attribute item.
 	 *
 	 * @param string $domain Name of the domain e.g. text, media, price...
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
+	 * @return static Attribute item for chaining method calls
 	 */
-	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDomain( string $domain ) : static
 	{
 		return $this->set( 'attribute.domain', $domain );
 	}
@@ -106,9 +107,9 @@ class Standard
 	 * Sets a unique code for the attribute item.
 	 *
 	 * @param string $code Code of the attribute item
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
+	 * @return static Attribute item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Attribute\Item\Iface
+	public function setCode( string $code ) : static
 	{
 		return $this->set( 'attribute.code', \Aimeos\Utils::code( $code, 255 ) );
 	}
@@ -121,7 +122,8 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'attribute.label', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( 'attribute.label', '' );
 	}
 
 
@@ -129,9 +131,9 @@ class Standard
 	 * Sets the new label of the attribute item.
 	 *
 	 * @param string $label Type label of the attribute item
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
+	 * @return static Attribute item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Attribute\Item\Iface
+	public function setLabel( string $label ) : static
 	{
 		return $this->set( 'attribute.label', $label );
 	}
@@ -152,9 +154,9 @@ class Standard
 	 * Sets the new status of the attribute item.
 	 *
 	 * @param int $status Status of the item
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
+	 * @return static Attribute item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'attribute.status', $status );
 	}
@@ -167,7 +169,8 @@ class Standard
 	 */
 	public function getPosition() : int
 	{
-		return $this->get( 'attribute.position', 0 );
+		// @phpstan-ignore return.type
+		return (int) $this->get( 'attribute.position', 0 );
 	}
 
 
@@ -175,9 +178,9 @@ class Standard
 	 * Sets the position of the attribute item
 	 *
 	 * @param int $pos Position of the attribute item
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
+	 * @return static Attribute item for chaining method calls
 	 */
-	public function setPosition( int $pos ) : \Aimeos\MShop\Common\Item\Iface
+	public function setPosition( int $pos ) : static
 	{
 		return $this->set( 'attribute.position', $pos );
 	}
@@ -197,11 +200,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Attribute item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -209,12 +212,12 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'attribute.domain': $item->setDomain( $value ); break;
-				case 'attribute.code': $item->setCode( $value ); break;
-				case 'attribute.type': $item->setType( $value ); break;
+				case 'attribute.domain': $item->setDomain( (string) $value ); break;
+				case 'attribute.code': $item->setCode( (string) $value ); break;
+				case 'attribute.type': $item->setType( (string) $value ); break;
 				case 'attribute.status': $item->setStatus( (int) $value ); break;
 				case 'attribute.position': $item->setPosition( (int) $value ); break;
-				case 'attribute.label': $item->setLabel( $value ); break;
+				case 'attribute.label': $item->setLabel( (string) $value ); break;
 				default: continue 2;
 			}
 
@@ -228,7 +231,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

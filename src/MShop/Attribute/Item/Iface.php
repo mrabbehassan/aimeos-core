@@ -41,9 +41,9 @@ interface Iface
 	 * Sets the code for the attribute item.
 	 *
 	 * @param string $code Code of the attribute item
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
+	 * @return static Attribute item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Attribute\Item\Iface;
+	public function setCode( string $code ) : static;
 
 	/**
 	 * Returns the name of the attribute item.
@@ -56,8 +56,8 @@ interface Iface
 	 * Sets the new label of the attribute item.
 	 *
 	 * @param string $label Type label of the attribute item
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
+	 * @return static Attribute item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Attribute\Item\Iface;
+	public function setLabel( string $label ) : static;
 
 }

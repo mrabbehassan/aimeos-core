@@ -35,9 +35,9 @@ class ServicesUpdate
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
+	 * @return static Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static
 	{
 		$plugin = $this->object();
 
@@ -81,6 +81,7 @@ class ServicesUpdate
 				$services[$type] = $serviceItems;
 			}
 
+			// @phpstan-ignore argument.type
 			$order->setServices( $services->toArray() );
 			return $value;
 		}
@@ -94,6 +95,7 @@ class ServicesUpdate
 
 			foreach( $list as $key => $item )
 			{
+				// @phpstan-ignore argument.type
 				if( ( $serviceItem = $serviceItems->get( $item->getServiceId() ) ) !== null )
 				{
 					$provider = $serviceManager->getProvider( $serviceItem, $serviceItem->getType() );
@@ -111,6 +113,7 @@ class ServicesUpdate
 			$services[$type] = $orderServices;
 		}
 
+		// @phpstan-ignore argument.type
 		$order->setServices( $services->toArray() );
 		return $value;
 	}
@@ -127,6 +130,7 @@ class ServicesUpdate
 		$list = map();
 
 		foreach( $services as $type => $items ) {
+			// @phpstan-ignore argument.type
 			$list->concat( map( $items )->getServiceId() );
 		}
 

@@ -131,9 +131,9 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		if( empty( $siteids ) ) {
 			return $this;
@@ -156,14 +156,14 @@ class Standard
 		 * domains removed you would like to keep, e.g. the "order" domain to
 		 * keep all orders ever placed.
 		 *
-		 * @param array List of domain names in lower case
+		 * @type array List of domain names in lower case
 		 * @since 2015.10
 		 * @see mshop/locale/manager/site/cleanup/admin/domains
 		 */
 		$path = 'mshop/locale/manager/site/cleanup/shop/domains';
 
 		foreach( $config->get( $path, [] ) as $domain ) {
-			\Aimeos\MShop::create( $context, $domain )->clear( $siteids );
+			\Aimeos\MShop::create( $context, (string) $domain )->clear( $siteids );
 		}
 
 		/** mshop/locale/manager/site/cleanup/admin/domains
@@ -180,14 +180,14 @@ class Standard
 		 * domains removed you would like to keep, e.g. the "log" domain to
 		 * keep all log entries ever written.
 		 *
-		 * @param array List of domain names in lower case
+		 * @type array List of domain names in lower case
 		 * @since 2015.10
 		 * @see mshop/locale/manager/site/cleanup/shop/domains
 		 */
 		$path = 'mshop/locale/manager/site/cleanup/admin/domains';
 
 		foreach( $config->get( $path, [] ) as $domain ) {
-			\Aimeos\MAdmin::create( $context, $domain )->clear( $siteids );
+			\Aimeos\MAdmin::create( $context, (string) $domain )->clear( $siteids );
 		}
 
 		return $this;
@@ -210,9 +210,9 @@ class Standard
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|array|string $items List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Locale\Manager\Site\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : static
 	{
 		if( is_map( $items ) ) { $items = $items->toArray(); }
 		if( !is_array( $items ) ) { $items = [$items]; }
@@ -224,6 +224,7 @@ class Standard
 			->slice( 0, count( $items ) );
 
 		$siteIds = $this->object()->search( $filter )->getSiteId()->toArray();
+		// @phpstan-ignore argument.type
 		$this->object()->clear( $siteIds );
 
 
@@ -248,7 +249,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for deleting items
+		 * @type string SQL statement for deleting items
 		 * @since 2015.10
 		 * @see mshop/locale/manager/site/insert/ansi
 		 * @see mshop/locale/manager/site/update/ansi
@@ -303,7 +304,7 @@ class Standard
 	public function getPath( string $id, array $ref = [] ) : \Aimeos\Map
 	{
 		$item = $this->getTree( $id, $ref, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
-		return map( [$item->getId() => $item] );
+		return map( [($item->getId() ?? '') => $item] );
 	}
 
 
@@ -328,7 +329,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @param array List of sub-manager names
+		 * @type array List of sub-manager names
 		 * @since 2015.10
 		 */
 		$path = 'mshop/locale/manager/site/submanagers';
@@ -352,13 +353,14 @@ class Standard
 		if( $id !== null )
 		{
 			if( count( $ref ) > 0 ) {
-				return $this->object()->get( $id, $ref );
+				return $this->object()->get( $id, $ref ); // @phpstan-ignore return.type
 			}
 
 			if( !isset( $this->cache[$id] ) ) {
 				$this->cache[$id] = $this->object()->get( $id, $ref );
 			}
 
+			// @phpstan-ignore return.type
 			return $this->cache[$id];
 		}
 
@@ -373,6 +375,7 @@ class Standard
 
 		$this->cache[$item->getId() ?? ''] = $item;
 
+		// @phpstan-ignore return.type
 		return $item;
 	}
 
@@ -414,7 +417,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for inserting records
+		 * @type string SQL statement for inserting records
 		 * @since 2015.10
 		 * @see mshop/locale/manager/site/update/ansi
 		 * @see mshop/locale/manager/site/delete/ansi
@@ -424,7 +427,7 @@ class Standard
 		 * @see mshop/locale/manager/site/rate/ansi
 		 */
 		$path = 'mshop/locale/manager/site/insert';
-		$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+		$sql = $this->addSqlColumns( array_keys( $columns ), (string) $this->getSqlConfig( $path ) );
 
 		$idx = 1;
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
@@ -475,7 +478,7 @@ class Standard
 		 * fits for most database servers as they implement their own
 		 * specific way.
 		 *
-		 * @param string SQL statement for retrieving the last inserted record ID
+		 * @type string SQL statement for retrieving the last inserted record ID
 		 * @since 2015.10
 		 * @see mshop/locale/manager/site/insert/ansi
 		 * @see mshop/locale/manager/site/update/ansi
@@ -490,7 +493,7 @@ class Standard
 		// Add unique site identifier
 		$item = $this->object()->save( $item->setSiteId( $item->getId() . '.' ) );
 
-		return $item;
+		return $item; // @phpstan-ignore return.type
 	}
 
 
@@ -517,9 +520,9 @@ class Standard
 	 * @param string $id ID of the item
 	 * @param string $rating Decimal value of the rating
 	 * @param int $ratings Total number of ratings for the item
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rate( string $id, string $rating, int $ratings ) : \Aimeos\MShop\Common\Manager\Iface
+	public function rate( string $id, string $rating, int $ratings ) : static
 	{
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
@@ -544,7 +547,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for update ratings
+			 * @type string SQL statement for update ratings
 			 * @since 2022.10
 			 * @see mshop/locale/manager/site/update/ansi
 			 * @see mshop/locale/manager/site/delete/ansi
@@ -673,7 +676,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for updating records
+		 * @type string SQL statement for updating records
 		 * @since 2015.10
 		 * @see mshop/locale/manager/site/insert/ansi
 		 * @see mshop/locale/manager/site/delete/ansi
@@ -682,7 +685,7 @@ class Standard
 		 * @see mshop/locale/manager/site/newid/ansi
 		 */
 		$path = 'mshop/locale/manager/site/update';
-		$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+		$sql = $this->addSqlColumns( array_keys( $columns ), (string) $this->getSqlConfig( $path ), false );
 
 		$idx = 1;
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
@@ -740,7 +743,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MySite"!
 	 *
-	 * @param string Last part of the class name
+	 * @type string Last part of the class name
 	 * @since 2015.10
 	 */
 
@@ -762,7 +765,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the locale site manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/locale/manager/site/decorators/global
@@ -787,7 +790,7 @@ class Standard
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the locale
 	 * site manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/locale/manager/site/decorators/excludes
@@ -812,7 +815,7 @@ class Standard
 	 * "\Aimeos\MShop\Locale\Manager\Site\Decorator\Decorator2" only to the
 	 * locale site manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/locale/manager/site/decorators/excludes
@@ -865,7 +868,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for searching items
+	 * @type string SQL statement for searching items
 	 * @since 2015.10
 	 * @see mshop/locale/manager/site/insert/ansi
 	 * @see mshop/locale/manager/site/update/ansi
@@ -917,7 +920,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for counting items
+	 * @type string SQL statement for counting items
 	 * @since 2015.10
 	 * @see mshop/locale/manager/site/insert/ansi
 	 * @see mshop/locale/manager/site/update/ansi

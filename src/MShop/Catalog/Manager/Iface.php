@@ -35,7 +35,7 @@ interface Iface
 	 * Returns a node and its descendants depending on the given resource.
 	 *
 	 * @param string|null $id Retrieve nodes starting from the given ID
-	 * @param string[] List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
+	 * @param string[] $ref List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @param \Aimeos\Base\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes

@@ -32,7 +32,7 @@ class Standard
 	 */
 	public function getSiteId() : string
 	{
-		return $this->get( 'order.service.transaction.siteid', '' );
+		return (string) $this->get( 'order.service.transaction.siteid', '' );
 	}
 
 
@@ -40,9 +40,9 @@ class Standard
 	 * Sets the site ID of the item.
 	 *
 	 * @param string $value Unique site ID of the item
-	 * @return \Aimeos\MShop\Order\Item\Service\Transaction\Iface Order base service transaction item for chaining method calls
+	 * @return static Order base service transaction item for chaining method calls
 	 */
-	public function setSiteId( string $value ) : \Aimeos\MShop\Order\Item\Service\Transaction\Iface
+	public function setSiteId( string $value ) : static
 	{
 		return $this->set( 'order.service.transaction.siteid', $value );
 	}
@@ -55,6 +55,7 @@ class Standard
 	 */
 	public function getParentId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'order.service.transaction.parentid' );
 	}
 
@@ -63,9 +64,9 @@ class Standard
 	 * Sets the ID of the ordered service item as parent
 	 *
 	 * @param string|null $id ID of the ordered service item
-	 * @return \Aimeos\MShop\Order\Item\Service\Transaction\Iface Order base service transaction item for chaining method calls
+	 * @return static Order base service transaction item for chaining method calls
 	 */
-	public function setParentId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
+	public function setParentId( ?string $id ) : static
 	{
 		return $this->set( 'order.service.transaction.parentid', $id );
 	}
@@ -78,6 +79,7 @@ class Standard
 	 */
 	public function getPrice() : \Aimeos\MShop\Price\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->get( '.price' );
 	}
 
@@ -86,9 +88,9 @@ class Standard
 	 * Sets the price item for the transaction.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item containing price and additional costs
-	 * @return \Aimeos\MShop\Order\Item\Service\Transaction\Iface Order base service transaction item for chaining method calls
+	 * @return static Order base service transaction item for chaining method calls
 	 */
-	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : \Aimeos\MShop\Order\Item\Service\Transaction\Iface
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : static
 	{
 		return $this->set( '.price', $price );
 	}
@@ -101,7 +103,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'order.service.transaction.status', -1 );
+		return (int) $this->get( 'order.service.transaction.status', -1 );
 	}
 
 
@@ -109,9 +111,9 @@ class Standard
 	 * Sets the new status of the transaction
 	 *
 	 * @param int $status New status of the transaction
-	 * @return \Aimeos\MShop\Order\Item\Service\Transaction\Iface Order base service transaction item for chaining method calls
+	 * @return static Order base service transaction item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'order.service.transaction.status', $status );
 	}
@@ -120,11 +122,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Order\Item\Service\Transaction\Iface Order service transaction item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Order service transaction item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 		$price = $item->getPrice();
@@ -133,16 +135,16 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.service.transaction.parentid': !$private ?: $item->setParentId( $value ); break;
-				case 'order.service.transaction.siteid': !$private ?: $item->setSiteId( $value ); break;
+				case 'order.service.transaction.parentid': !$private ?: $item->setParentId( $value ? (string) $value : null ); break;
+				case 'order.service.transaction.siteid': !$private ?: $item->setSiteId( (string) $value ); break;
 				case 'order.service.transaction.config': $item->setConfig( (array) $value ); break;
 				case 'order.service.transaction.status': $item->setStatus( (int) $value ); break;
-				case 'order.service.transaction.currencyid': $price->setCurrencyId( $value ); break;
-				case 'order.service.transaction.type': $item->setType( $value ); break;
-				case 'order.service.transaction.price': $price->setValue( $value ); break;
-				case 'order.service.transaction.costs': $price->setCosts( $value ); break;
-				case 'order.service.transaction.rebate': $price->setRebate( $value ); break;
-				case 'order.service.transaction.taxvalue': $price->setTaxvalue( $value ); break;
+				case 'order.service.transaction.currencyid': $price->setCurrencyId( (string) $value ); break;
+				case 'order.service.transaction.type': $item->setType( (string) $value ); break;
+				case 'order.service.transaction.price': $price->setValue( (string) $value ); break;
+				case 'order.service.transaction.costs': $price->setCosts( (string) $value ); break;
+				case 'order.service.transaction.rebate': $price->setRebate( (string) $value ); break;
+				case 'order.service.transaction.taxvalue': $price->setTaxvalue( (string) $value ); break;
 				case 'order.service.transaction.taxflag': $price->setTaxflag( (bool) $value ); break;
 				default: continue 2;
 			}
@@ -157,7 +159,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

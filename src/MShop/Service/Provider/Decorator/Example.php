@@ -60,6 +60,7 @@ class Example
 		$list = $this->getProvider()->getConfigBE();
 
 		foreach( $this->beConfig as $key => $config ) {
+			// @phpstan-ignore argument.type
 			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $config );
 		}
 

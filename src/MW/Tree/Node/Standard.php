@@ -21,6 +21,7 @@ namespace Aimeos\MW\Tree\Node;
 class Standard implements \Aimeos\MW\Tree\Node\Iface, \Countable
 {
 	private array $values;
+	/** @var \Aimeos\MW\Tree\Node\Iface[] */
 	private array $children;
 	private bool $modified = false;
 
@@ -110,7 +111,7 @@ class Standard implements \Aimeos\MW\Tree\Node\Iface, \Countable
 	/**
 	 * Sets the unique ID of the node.
 	 *
-	 * @param mixed|null $id Unique ID of the node
+	 * @param string|null $id Unique ID of the node
 	 * @return \Aimeos\MW\Tree\Node\Iface Item object for method chaining
 	 */
 	public function setId( ?string $id ) : Iface

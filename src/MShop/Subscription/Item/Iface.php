@@ -53,9 +53,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the ID of the order item which the customer bought
 	 *
 	 * @param string $id ID of the order
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setOrderId( string $id ) : \Aimeos\MShop\Subscription\Item\Iface;
+	public function setOrderId( string $id ) : static;
 
 	/**
 	 * Returns the ID of the ordered product
@@ -68,9 +68,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the ID of the ordered product item which the customer subscribed for
 	 *
 	 * @param string $id ID of the ordered product
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setOrderProductId( string $id ) : \Aimeos\MShop\Subscription\Item\Iface;
+	public function setOrderProductId( string $id ) : static;
 
 	/**
 	 * Returns the date of the next subscription renewal
@@ -83,9 +83,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the date of the next subscription renewal
 	 *
 	 * @param string $date ISO date in "YYYY-MM-DD HH:mm:ss" format
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setDateNext( string $date ) : \Aimeos\MShop\Subscription\Item\Iface;
+	public function setDateNext( string $date ) : static;
 
 	/**
 	 * Returns the date when the subscription renewal ends
@@ -98,9 +98,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the delivery date of the invoice.
 	 *
 	 * @param string|null $date ISO date in "YYYY-MM-DD HH:mm:ss" format
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Subscription\Item\Iface;
+	public function setDateEnd( ?string $date ) : static;
 
 	/**
 	 * Returns the time interval to pass between the subscription renewals
@@ -113,9 +113,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the time interval to pass between the subscription renewals
 	 *
 	 * @param string $value PHP time interval, e.g. "P1M2W"
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setInterval( string $value ) : \Aimeos\MShop\Subscription\Item\Iface;
+	public function setInterval( string $value ) : static;
 
 	/**
 	 * Returns the current renewal period of the subscription product
@@ -128,9 +128,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the current renewal period of the subscription product
 	 *
 	 * @param int $value Current renewal period
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setPeriod( int $value ) : \Aimeos\MShop\Subscription\Item\Iface;
+	public function setPeriod( int $value ) : static;
 
 	/**
 	 * Returns the product ID of the subscription product
@@ -143,9 +143,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the product ID of the subscription product
 	 *
 	 * @param string $value Product ID
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setProductId( string $value ) : \Aimeos\MShop\Subscription\Item\Iface;
+	public function setProductId( string $value ) : static;
 
 	/**
 	 * Returns the reason for the end of the subscriptions
@@ -157,10 +157,10 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Sets the reason for the end of the subscriptions
 	 *
-	 * @param int|null Reason code or NULL for no reason
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @param int|null $status Reason code or NULL for no reason
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setReason( ?int $status ) : \Aimeos\MShop\Subscription\Item\Iface;
+	public function setReason( ?int $status ) : static;
 
 	/**
 	 * Returns the status of the subscriptions
@@ -172,8 +172,8 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Sets the status of the subscriptions
 	 *
-	 * @param int Subscription status, i.e. "1" for enabled, "0" for disabled
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @param int $status Subscription status, i.e. "1" for enabled, "0" for disabled
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Subscription\Item\Iface;
+	public function setStatus( int $status ) : static;
 }

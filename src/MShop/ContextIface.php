@@ -60,7 +60,7 @@ interface ContextIface
 	 *
 	 * @param string $resource Database resource name
 	 * @param bool $new Create a new database connection
-	 * @return \Aimeos\Base\DB\Manager\Iface Database manager object
+	 * @return \Aimeos\Base\DB\Connection\Iface Database connection object
 	 */
 	public function db( string $resource = 'db', bool $new = false ) : \Aimeos\Base\DB\Connection\Iface;
 
@@ -123,7 +123,7 @@ interface ContextIface
 	/**
 	 * Translates a string if possible
 	 *
-	 * @param string $name Name of the translation domain
+	 * @param string $domain Name of the translation domain
 	 * @param string $singular Singular string to translate
 	 * @param string $plural Plural string to translate if count is not one
 	 * @param int $number Number for plural translations

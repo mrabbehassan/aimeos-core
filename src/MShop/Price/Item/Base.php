@@ -83,6 +83,6 @@ abstract class Base
 	 */
 	protected function formatNumber( $number, ?int $precision = null ) : ?string
 	{
-		return $number !== null ? number_format( $number, $precision ?: $this->getPrecision(), '.', '' ) : null;
+		return $number !== null ? number_format( (float) $number, $precision ?: $this->getPrecision(), '.', '' ) : null;
 	}
 }

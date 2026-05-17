@@ -48,8 +48,8 @@ trait Update
 	 */
 	public function block( \Aimeos\MShop\Order\Item\Iface $orderItem ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, 1, -1 );
-		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, 1, -1 );
+		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, (string) 1, -1 );
+		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, (string) 1, -1 );
 
 		return $orderItem;
 	}
@@ -76,8 +76,8 @@ trait Update
 	 */
 	public function unblock( \Aimeos\MShop\Order\Item\Iface $orderItem ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, 0, +1 );
-		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, 0, +1 );
+		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, (string) 0, +1 );
+		$this->updateStatus( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, (string) 0, +1 );
 
 		return $orderItem;
 	}
@@ -126,7 +126,7 @@ trait Update
 	 * @param string $parentid Order ID
 	 * @param string $type Status type
 	 * @param string $value Status value
-	 * @return \Aimeos\MShop\Common\Manager\Iface Same manager for fluent interface
+	 * @return \Aimeos\MShop\Order\Manager\Iface Same manager for fluent interface
 	 */
 	protected function addStatusItem( string $parentid, string $type, string $value ) : Iface
 	{
@@ -195,9 +195,11 @@ trait Update
 			$search->compare( '==', 'order.status.value', $status ),
 		);
 		$search->setConditions( $search->and( $expr ) );
+		// @phpstan-ignore argument.type
 		$search->setSortations( array( $search->sort( '-', 'order.status.ctime' ) ) );
 		$search->slice( 0, 1 );
 
+		// @phpstan-ignore return.type
 		return $manager->search( $search )->first();
 	}
 
@@ -225,7 +227,7 @@ trait Update
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @param int $how Positive or negative integer number for increasing or decreasing the coupon count
-	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
+	 * @return static Self object for method chaining
 	 */
 	protected function updateCoupons( \Aimeos\MShop\Order\Item\Iface $orderItem, int $how = +1 )
 	{
@@ -275,14 +277,14 @@ trait Update
 	 * @param string $type Constant from \Aimeos\MShop\Order\Item\Status\Base, e.g. STOCK_UPDATE or COUPON_UPDATE
 	 * @param string $status New status value stored along with the order item
 	 * @param int $value Number to increse or decrease the stock level or coupon code count
-	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
+	 * @return static Self object for method chaining
 	 */
 	protected function updateStatus( \Aimeos\MShop\Order\Item\Iface $orderItem, string $type, string $status, int $value )
 	{
-		$statusItem = $this->getLastStatusItem( $orderItem->getId(), $type, $status );
+		$statusItem = $this->getLastStatusItem( (string) $orderItem->getId(), $type, $status );
 
 		if( $statusItem && $statusItem->getValue() == $status ) {
-			return;
+			return $this;
 		}
 
 		if( $type == \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE ) {
@@ -291,7 +293,8 @@ trait Update
 			$this->updateCoupons( $orderItem, $value );
 		}
 
-		return $this->addStatusItem( $orderItem->getId(), $type, $status );
+		// @phpstan-ignore return.type
+		return $this->addStatusItem( (string) $orderItem->getId(), $type, $status );
 	}
 
 
@@ -300,7 +303,7 @@ trait Update
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $orderItem Order item object
 	 * @param int $how Positive or negative integer number for increasing or decreasing the stock levels
-	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
+	 * @return static Self object for method chaining
 	 */
 	protected function updateStock( \Aimeos\MShop\Order\Item\Iface $orderItem, int $how = +1 )
 	{
@@ -323,13 +326,13 @@ trait Update
 
 				foreach( $items as $item )
 				{
-					$stockManager->decrease( [$item->getProductId() => -1 * $how * $item->getQuantity()], $item->getStockType() );
+					$stockManager->decrease( [(string) $item->getProductId() => -1 * $how * $item->getQuantity()], $item->getStockType() );
 
 					switch( $item->getType() ) {
 						case 'default':
-							$this->updateStockBundle( $item->getParentProductId(), $item->getStockType() ); break;
+							$this->updateStockBundle( (string) $item->getParentProductId(), (string) $item->getStockType() ); break;
 						case 'select':
-							$this->updateStockSelection( $item->getParentProductId(), $item->getStockType() ); break;
+							$this->updateStockSelection( (string) $item->getParentProductId(), (string) $item->getStockType() ); break;
 					}
 				}
 
@@ -356,12 +359,12 @@ trait Update
 	 *
 	 * @param string $prodId Unique product ID
 	 * @param string $stockType Unique stock type
-	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
+	 * @return static Self object for method chaining
 	 */
 	protected function updateStockBundle( string $prodId, string $stockType )
 	{
 		if( ( $bundleMap = $this->getBundleMap( $prodId ) ) === [] ) {
-			return;
+			return $this;
 		}
 
 
@@ -385,7 +388,7 @@ trait Update
 		}
 
 		if( empty( $stock ) ) {
-			return;
+			return $this;
 		}
 
 		$stockManager = \Aimeos\MShop::create( $this->context(), 'stock' );
@@ -395,6 +398,7 @@ trait Update
 			if( isset( $stock[$item->getProductId()] ) )
 			{
 				$item->setStockLevel( $stock[$item->getProductId()] );
+				// @phpstan-ignore argument.type
 				$stockManager->save( $item );
 			}
 		}
@@ -408,7 +412,7 @@ trait Update
 	 *
 	 * @param string $prodId Unique product ID
 	 * @param string $stocktype Unique stock type
-	 * @return \Aimeos\Controller\Common\Order\Iface Order controller for fluent interface
+	 * @return static Self object for method chaining
 	 */
 	protected function updateStockSelection( string $prodId, string $stocktype )
 	{
@@ -418,6 +422,7 @@ trait Update
 		$productItem = $productManager->get( $prodId, ['product'] );
 		$prodIds = $productItem->getRefItems( 'product', 'default', 'default' )->getId()->push( $productItem->getId() );
 
+		// @phpstan-ignore argument.type
 		$stockItems = $this->getStockItems( $prodIds, $stocktype );
 		$selStockItem = $stockItems->col( null, 'stock.productid' )->pull( $prodId ) ?: $stockManager->create();
 
@@ -426,6 +431,7 @@ trait Update
 		}, 0 );
 
 		$selStockItem->setProductId( $productItem->getId() )->setType( $stocktype )->setStockLevel( $sum );
+		// @phpstan-ignore argument.type
 		$stockManager->save( $selStockItem, false );
 
 		return $this;

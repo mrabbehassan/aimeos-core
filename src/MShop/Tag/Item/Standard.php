@@ -31,7 +31,7 @@ class Standard
 	 */
 	public function getDomain() : string
 	{
-		return $this->get( 'tag.domain', '' );
+		return (string) $this->get( 'tag.domain', '' );
 	}
 
 
@@ -39,9 +39,9 @@ class Standard
 	 * Sets the domain of the tag item.
 	 *
 	 * @param string $domain Domain of the tag item
-	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
+	 * @return static Tag item for chaining method calls
 	 */
-	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDomain( string $domain ) : static
 	{
 		return $this->set( 'tag.domain', $domain );
 	}
@@ -54,6 +54,7 @@ class Standard
 	 */
 	public function getLanguageId(): ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'tag.languageid' );
 	}
 
@@ -62,9 +63,9 @@ class Standard
 	 *  Sets the language ID of the product tag item.
 	 *
 	 * @param string|null $id Language ID of the product tag item
-	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
+	 * @return static Tag item for chaining method calls
 	 */
-	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Tag\Item\Iface
+	public function setLanguageId( ?string $id ) : static
 	{
 		return $this->set( 'tag.languageid', \Aimeos\Utils::language( $id ) );
 	}
@@ -77,7 +78,7 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'tag.label', '' );
+		return (string) $this->get( 'tag.label', '' );
 	}
 
 
@@ -85,9 +86,9 @@ class Standard
 	 * Sets the Label of the product tag item.
 	 *
 	 * @param string $label Label of the product tag item
-	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
+	 * @return static Tag item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Tag\Item\Iface
+	public function setLabel( string $label ) : static
 	{
 		return $this->set( 'tag.label', $label );
 	}
@@ -107,11 +108,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Tag item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -119,10 +120,10 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'tag.languageid': $item->setLanguageId( $value ); break;
-				case 'tag.domain': $item->setDomain( $value ); break;
-				case 'tag.label': $item->setLabel( $value ); break;
-				case 'tag.type': $item->setType( $value ); break;
+				case 'tag.languageid': $item->setLanguageId( $value ? (string) $value : null ); break;
+				case 'tag.domain': $item->setDomain( (string) $value ); break;
+				case 'tag.label': $item->setLabel( (string) $value ); break;
+				case 'tag.type': $item->setType( (string) $value ); break;
 				default: continue 2;
 			}
 
@@ -136,7 +137,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

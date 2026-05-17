@@ -27,9 +27,9 @@ class Standard
 	/**
 	 * Commits the running database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function commit() : \Aimeos\MShop\Common\Manager\Iface
+	public function commit() : static
 	{
 		parent::commit();
 
@@ -61,9 +61,9 @@ class Standard
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Product\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : static
 	{
 		parent::delete( $items );
 
@@ -110,13 +110,14 @@ class Standard
 			 * Setting this configuration option to false will display event products
 			 * that are already over and customers can still buy them.
 			 *
-			 * @param bool TRUE to hide events after they are over (default), FALSE to continue to show them
+			 * @type bool TRUE to hide events after they are over (default), FALSE to continue to show them
 			 * @since 2019.10
 			 */
 			if( !$this->context()->config()->get( 'mshop/product/manager/strict-events', true ) ) {
 				$end[] = $filter->compare( '==', 'product.type', 'event' );
 			}
 
+			// @phpstan-ignore argument.type
 			$filter->add( $filter->and( [
 				$filter->or( $start ),
 				$filter->or( $end ),
@@ -235,9 +236,9 @@ class Standard
 	 * @param string $id ID of the item
 	 * @param string $rating Decimal value of the rating
 	 * @param int $ratings Total number of ratings for the item
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rate( string $id, string $rating, int $ratings ) : \Aimeos\MShop\Common\Manager\Iface
+	public function rate( string $id, string $rating, int $ratings ) : static
 	{
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
@@ -262,7 +263,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for update ratings
+		 * @type string SQL statement for update ratings
 		 * @since 2020.10
 		 * @see mshop/product/manager/insert/ansi
 		 * @see mshop/product/manager/update/ansi
@@ -274,7 +275,7 @@ class Standard
 		 */
 		$path = 'mshop/product/manager/rate';
 
-		$stmt = $this->getCachedStatement( $conn, $path, $this->getSqlConfig( $path ) );
+		$stmt = $this->getCachedStatement( $conn, $path, (string) $this->getSqlConfig( $path ) );
 
 		$stmt->bind( 1, $rating );
 		$stmt->bind( 2, $ratings, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
@@ -292,9 +293,9 @@ class Standard
 	 *
 	 * @param string $id ID of the procuct item
 	 * @param int $value "0" or "1" if product is in stock or not
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function stock( string $id, int $value ) : \Aimeos\MShop\Common\Manager\Iface
+	public function stock( string $id, int $value ) : static
 	{
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
@@ -319,7 +320,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for update ratings
+		 * @type string SQL statement for update ratings
 		 * @since 2021.10
 		 * @see mshop/product/manager/insert/ansi
 		 * @see mshop/product/manager/update/ansi
@@ -331,7 +332,7 @@ class Standard
 		 */
 		$path = 'mshop/product/manager/stock';
 
-		$stmt = $this->getCachedStatement( $conn, $path, $this->getSqlConfig( $path ) );
+		$stmt = $this->getCachedStatement( $conn, $path, (string) $this->getSqlConfig( $path ) );
 
 		$stmt->bind( 1, $value, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, $context->locale()->getSiteId() );
@@ -374,7 +375,7 @@ class Standard
 	public function searchRefs( array $entries, array $ref ) : array
 	{
 		if( $this->hasRef( $ref, 'stock' ) ) {
-			$entries = $this->searchStocks( $entries );
+			$entries = $this->searchStocks( $entries, $ref );
 		}
 
 		if( $this->hasRef( $ref, 'parent' ) || $this->hasRef( $ref, 'product/parent' ) ) {
@@ -439,7 +440,9 @@ class Standard
 
 		foreach( $listItems as $listItem )
 		{
+			// @phpstan-ignore argument.type
 			if( $items->has( $listItem->getParentId() ) ) {
+				// @phpstan-ignore argument.type
 				$entries[$listItem->getRefId()]['.parent'][$listItem->getParentId()] = $items->get( $listItem->getParentId() );
 			}
 		}
@@ -454,7 +457,7 @@ class Standard
 	 * @param array $entries Associative list of product IDs as keys and product entries as values
 	 * @return array Associative list of product IDs as keys and product entries as values
 	 */
-	protected function searchStocks( array $entries ) : array
+	protected function searchStocks( array $entries, array $ref = [] ) : array
 	{
 		$manager = \Aimeos\MShop::create( $this->context(), 'stock' );
 		$filter = $manager->filter( true )->slice( 0, 0x7fffffff )
@@ -480,7 +483,7 @@ class Standard
 	 * It's also possible to use the same database connection for different
 	 * data domains by configuring the same connection name using this setting.
 	 *
-	 * @param string Database connection name
+	 * @type string Database connection name
 	 * @since 2023.04
 	 */
 
@@ -513,7 +516,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
-	 * @param string Last part of the class name
+	 * @type string Last part of the class name
 	 * @since 2014.03
 	 */
 
@@ -535,7 +538,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the product manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2014.03
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/product/manager/decorators/global
@@ -559,7 +562,7 @@ class Standard
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the product
 	 * manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2014.03
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/product/manager/decorators/excludes
@@ -583,7 +586,7 @@ class Standard
 	 * "\Aimeos\MShop\Product\Manager\Decorator\Decorator2" only to the product
 	 * manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2014.03
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/product/manager/decorators/excludes
@@ -603,7 +606,7 @@ class Standard
 	 * using the search keys of the sub-managers to further limit the
 	 * retrieved list of items.
 	 *
-	 * @param array List of sub-manager names
+	 * @type array List of sub-manager names
 	 * @since 2014.03
 	 */
 
@@ -628,7 +631,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for deleting items
+	 * @type string SQL statement for deleting items
 	 * @since 2014.03
 	 * @see mshop/product/manager/insert/ansi
 	 * @see mshop/product/manager/update/ansi
@@ -665,7 +668,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for inserting records
+	 * @type string SQL statement for inserting records
 	 * @since 2014.03
 	 * @see mshop/product/manager/update/ansi
 	 * @see mshop/product/manager/newid/ansi
@@ -699,7 +702,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for updating records
+	 * @type string SQL statement for updating records
 	 * @since 2014.03
 	 * @see mshop/product/manager/insert/ansi
 	 * @see mshop/product/manager/newid/ansi
@@ -737,7 +740,7 @@ class Standard
 	 * fits for most database servers as they implement their own
 	 * specific way.
 	 *
-	 * @param string SQL statement for retrieving the last inserted record ID
+	 * @type string SQL statement for retrieving the last inserted record ID
 	 * @since 2014.03
 	 * @see mshop/product/manager/insert/ansi
 	 * @see mshop/product/manager/update/ansi
@@ -772,7 +775,7 @@ class Standard
 	 * this domain, then items wil be only inherited. Thus, you have full
 	 * control over inheritance and aggregation in each domain.
 	 *
-	 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
+	 * @type int Constant from Aimeos\MShop\Locale\Manager\Base class
 	 * @since 2018.01
 	 * @see mshop/locale/manager/sitelevel
 	 */
@@ -823,7 +826,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for searching items
+	 * @type string SQL statement for searching items
 	 * @since 2014.03
 	 * @see mshop/product/manager/insert/ansi
 	 * @see mshop/product/manager/update/ansi
@@ -876,7 +879,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for counting items
+	 * @type string SQL statement for counting items
 	 * @since 2014.03
 	 * @see mshop/product/manager/insert/ansi
 	 * @see mshop/product/manager/update/ansi

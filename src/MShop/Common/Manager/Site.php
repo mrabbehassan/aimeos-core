@@ -64,7 +64,7 @@ trait Site
 		$values = [''];
 
 		if( isset( $sites[Locale::SITE_PATH] ) && $sitelevel & Locale::SITE_PATH ) {
-			$values = array_merge( $values, $sites[Locale::SITE_PATH] );
+			$values = array_merge( $values, (array) $sites[Locale::SITE_PATH] );
 		} elseif( $current ) {
 			$values[] = $current;
 		}
@@ -76,7 +76,8 @@ trait Site
 			$cond = $filter->or( [$cond, $filter->compare( '=~', $name, $sites[Locale::SITE_SUBTREE] )] );
 		}
 
-		if( $current && !( $inactive = $this->siteInactive( $current ) )->isEmpty() ) {
+		if( $current && !( $inactive = $this->siteInactive( (string) $current ) )->isEmpty() ) {
+			// @phpstan-ignore argument.type
 			$cond = $filter->and( [$cond, $filter->is( $name, '!=', $inactive )] );
 		}
 
@@ -113,13 +114,14 @@ trait Site
 			if( ( $siteId = (string) $context->user()?->getSiteId() ) || $context->access( 'super' ) )
 			{
 				$sites = $sites->filter( function( $item ) use ( $siteId ) {
-					return strncmp( $item, $siteId, strlen( $siteId ) );
+					return strncmp( (string) $item, $siteId, strlen( $siteId ) );
 				} );
 			}
 
 			self::$siteInactive[$current] = $sites;
 		}
 
+		// @phpstan-ignore return.type
 		return self::$siteInactive[$current];
 	}
 
@@ -136,20 +138,20 @@ trait Site
 	{
 		$sites = $this->context()->locale()->getSites();
 
-		if( ( $sitelevel & Locale::SITE_ONE ) && isset( $sites[Locale::SITE_ONE] )
+		if( $sitelevel === Locale::SITE_ONE && isset( $sites[Locale::SITE_ONE] )
 			&& $siteId === $sites[Locale::SITE_ONE]
 		) {
 			return $siteId;
 		}
 
 		if( ( $sitelevel & Locale::SITE_PATH ) && isset( $sites[Locale::SITE_PATH] )
-			&& in_array( $siteId, $sites[Locale::SITE_PATH] )
+			&& in_array( $siteId, (array) $sites[Locale::SITE_PATH] )
 		) {
 			return $siteId;
 		}
 
 		if( ( $sitelevel & Locale::SITE_SUBTREE ) && isset( $sites[Locale::SITE_SUBTREE] )
-			&& !strncmp( $sites[Locale::SITE_SUBTREE], $siteId, strlen( $sites[Locale::SITE_SUBTREE] ) )
+			&& !strncmp( (string) $sites[Locale::SITE_SUBTREE], $siteId, strlen( (string) $sites[Locale::SITE_SUBTREE] ) )
 		) {
 			return $siteId;
 		}
@@ -171,6 +173,7 @@ trait Site
 		$translation = ['marker' => $name];
 		$types = ['marker' => \Aimeos\Base\DB\Statement\Base::PARAM_STR];
 
-		return $this->siteCondition( 'marker', $sitelevel )->toSource( $types, $translation );
+		// @phpstan-ignore return.type
+		return (string) $this->siteCondition( 'marker', $sitelevel )->toSource( $types, $translation );
 	}
 }

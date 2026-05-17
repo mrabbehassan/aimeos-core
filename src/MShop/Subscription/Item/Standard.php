@@ -28,6 +28,7 @@ class Standard
 	 */
 	public function getOrderItem() : ?\Aimeos\MShop\Order\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->get( '.orderitem' );
 	}
 
@@ -39,6 +40,7 @@ class Standard
 	 */
 	public function getOrderId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'subscription.orderid' );
 	}
 
@@ -47,9 +49,9 @@ class Standard
 	 * Sets the ID of the order item which the customer bought
 	 *
 	 * @param string $id ID of the order
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setOrderId( string $id ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function setOrderId( string $id ) : static
 	{
 		return $this->set( 'subscription.orderid', $id );
 	}
@@ -62,6 +64,7 @@ class Standard
 	 */
 	public function getOrderProductId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'subscription.ordprodid' );
 	}
 
@@ -70,9 +73,9 @@ class Standard
 	 * Sets the ID of the ordered product item which the customer subscribed for
 	 *
 	 * @param string $id ID of the ordered product
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setOrderProductId( string $id ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function setOrderProductId( string $id ) : static
 	{
 		return $this->set( 'subscription.ordprodid', $id );
 	}
@@ -86,7 +89,7 @@ class Standard
 	public function getDateNext() : ?string
 	{
 		$value = $this->get( 'subscription.datenext' );
-		return $value ? substr( $value, 0, 19 ) : null;
+		return $value ? substr( (string) $value, 0, 19 ) : null;
 	}
 
 
@@ -94,9 +97,9 @@ class Standard
 	 * Sets the date of the next subscription renewal
 	 *
 	 * @param string $date ISO date in "YYYY-MM-DD HH:mm:ss" format
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setDateNext( string $date ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function setDateNext( string $date ) : static
 	{
 		return $this->set( 'subscription.datenext', \Aimeos\Utils::datetime( $date ) );
 	}
@@ -110,7 +113,7 @@ class Standard
 	public function getDateEnd() : ?string
 	{
 		$value = $this->get( 'subscription.dateend' );
-		return $value ? substr( $value, 0, 19 ) : null;
+		return $value ? substr( (string) $value, 0, 19 ) : null;
 	}
 
 
@@ -118,9 +121,9 @@ class Standard
 	 * Sets the delivery date of the invoice.
 	 *
 	 * @param string|null $date ISO date in "YYYY-MM-DD HH:mm:ss" format
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function setDateEnd( ?string $date ) : static
 	{
 		return $this->set( 'subscription.dateend', \Aimeos\Utils::datetime( $date ) );
 	}
@@ -133,7 +136,7 @@ class Standard
 	 */
 	public function getInterval() : string
 	{
-		return $this->get( 'subscription.interval', '' );
+		return (string) $this->get( 'subscription.interval', '' );
 	}
 
 
@@ -141,9 +144,9 @@ class Standard
 	 * Sets the time interval to pass between the subscription renewals
 	 *
 	 * @param string $value PHP time interval, e.g. "P1M2W"
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setInterval( string $value ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function setInterval( string $value ) : static
 	{
 		if( strlen( $value ) > 1 && preg_match( '/^P([0-9]+Y)?([0-9]+M)?([0-9]+W)?([0-9]+D)?(T?[0-9]+H)?$/', $value ) !== 1 ) {
 			throw new \Aimeos\MShop\Subscription\Exception( sprintf( 'Invalid time interval format "%1$s"', $value ) );
@@ -160,7 +163,7 @@ class Standard
 	 */
 	public function getPeriod() : int
 	{
-		return $this->get( 'subscription.period', 1 );
+		return (int) $this->get( 'subscription.period', 1 );
 	}
 
 
@@ -168,9 +171,9 @@ class Standard
 	 * Sets the current renewal period of the subscription product
 	 *
 	 * @param int $value Current renewal period
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setPeriod( int $value ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function setPeriod( int $value ) : static
 	{
 		return $this->set( 'subscription.period', $value );
 	}
@@ -183,7 +186,7 @@ class Standard
 	 */
 	public function getProductId() : string
 	{
-		return $this->get( 'subscription.productid', '' );
+		return (string) $this->get( 'subscription.productid', '' );
 	}
 
 
@@ -191,9 +194,9 @@ class Standard
 	 * Sets the product ID of the subscription product
 	 *
 	 * @param string $value Product ID
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setProductId( string $value ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function setProductId( string $value ) : static
 	{
 		return $this->set( 'subscription.productid', $value );
 	}
@@ -206,6 +209,7 @@ class Standard
 	 */
 	public function getReason() : ?int
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'subscription.reason' );
 	}
 
@@ -214,9 +218,9 @@ class Standard
 	 * Sets the reason for the end of the subscriptions
 	 *
 	 * @param int|null $value Reason code or NULL for no reason
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setReason( ?int $value ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function setReason( ?int $value ) : static
 	{
 		return $this->set( 'subscription.reason', $value );
 	}
@@ -229,7 +233,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'subscription.status', 1 );
+		return (int) $this->get( 'subscription.status', 1 );
 	}
 
 
@@ -237,9 +241,9 @@ class Standard
 	 * Sets the status of the subscriptions
 	 *
 	 * @return int Subscription status, i.e. "1" for enabled, "0" for disabled
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Subscription\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'subscription.status', $status );
 	}
@@ -248,11 +252,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Subscription item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -260,12 +264,12 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'subscription.orderid': $item->setOrderId( $value ); break;
-				case 'subscription.ordprodid': $item->setOrderProductId( $value ); break;
-				case 'subscription.productid': $item->setProductId( $value ); break;
-				case 'subscription.datenext': $item->setDateNext( $value ); break;
-				case 'subscription.dateend': $item->setDateEnd( $value ); break;
-				case 'subscription.interval': $item->setInterval( $value ); break;
+				case 'subscription.orderid': $item->setOrderId( (string) $value ); break;
+				case 'subscription.ordprodid': $item->setOrderProductId( (string) $value ); break;
+				case 'subscription.productid': $item->setProductId( (string) $value ); break;
+				case 'subscription.datenext': $item->setDateNext( (string) $value ); break;
+				case 'subscription.dateend': $item->setDateEnd( $value ? (string) $value : null ); break;
+				case 'subscription.interval': $item->setInterval( (string) $value ); break;
 				case 'subscription.period': $item->setPeriod( (int) $value ); break;
 				case 'subscription.status': $item->setStatus( (int) $value ); break;
 				case 'subscription.reason': $item->setReason( $value !== null ? (int) $value : null ); break;
@@ -282,7 +286,7 @@ class Standard
 	/**
 	 * Returns the item values as associative list.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

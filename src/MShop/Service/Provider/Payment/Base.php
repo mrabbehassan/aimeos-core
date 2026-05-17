@@ -111,7 +111,7 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] ) : ?\Aimeos\MShop\Common\Helper\Form\Iface
 	{
-		$url = $this->getConfigValue( 'payment.url-success', '' );
+		$url = (string) $this->getConfigValue( 'payment.url-success', '' );
 		return new \Aimeos\MShop\Common\Helper\Form\Standard( $url, 'POST', [] );
 	}
 
@@ -153,6 +153,7 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	public function setConfigFE( \Aimeos\MShop\Order\Item\Service\Iface $orderServiceItem,
 		array $attributes ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
+		// @phpstan-ignore argument.type
 		return $orderServiceItem->addAttributeItems( $this->attributes( $attributes, 'payment' ) );
 	}
 

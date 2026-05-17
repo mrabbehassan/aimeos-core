@@ -30,6 +30,7 @@ class Standard
 	 */
 	public function getParentId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'order.status.parentid' );
 	}
 
@@ -38,9 +39,9 @@ class Standard
 	 * Sets the parentid of the order status.
 	 *
 	 * @param string|null $parentid Parent ID of the order status
-	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
+	 * @return static Order status item for chaining method calls
 	 */
-	public function setParentId( ?string $parentid ) : \Aimeos\MShop\Common\Item\Iface
+	public function setParentId( ?string $parentid ) : static
 	{
 		return $this->set( 'order.status.parentid', $parentid );
 	}
@@ -61,9 +62,9 @@ class Standard
 	 * Sets the value of the order status.
 	 *
 	 * @param string $value Value of the order status
-	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
+	 * @return static Order status item for chaining method calls
 	 */
-	public function setValue( string $value ) : \Aimeos\MShop\Order\Item\Status\Iface
+	public function setValue( string $value ) : static
 	{
 		return $this->set( 'order.status.value', $value );
 	}
@@ -72,11 +73,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Order status item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -84,9 +85,9 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.status.parentid': !$private ?: $item->setParentId( $value ); break;
-				case 'order.status.type': $item->setType( $value ); break;
-				case 'order.status.value': $item->setValue( $value ); break;
+				case 'order.status.parentid': !$private ?: $item->setParentId( $value ? (string) $value : null ); break;
+				case 'order.status.type': $item->setType( (string) $value ); break;
+				case 'order.status.value': $item->setValue( (string) $value ); break;
 				default: continue 2;
 			}
 
@@ -101,7 +102,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

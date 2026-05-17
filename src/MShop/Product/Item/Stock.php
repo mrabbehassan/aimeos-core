@@ -34,16 +34,16 @@ trait Stock
 	/**
 	 * Creates a deep clone of all objects
 	 */
-	public function __clone()
+	public function __clone() : void
 	{
 		parent::__clone();
 
 		foreach( $this->stockItems as $key => $item ) {
-			$this->stockItems[$key] = clone $item;
+			$this->stockItems[$key] = clone $item; // @phpstan-ignore clone.nonObject
 		}
 
 		foreach( $this->stockRmItems as $key => $item ) {
-			$this->stockRmItems[$key] = clone $item;
+			$this->stockRmItems[$key] = clone $item; // @phpstan-ignore clone.nonObject
 		}
 	}
 
@@ -52,9 +52,9 @@ trait Stock
 	 * Adds a new stock item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Stock\Item\Iface $item New or existing stock item
-	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function addStockItem( \Aimeos\MShop\Stock\Item\Iface $item ) : \Aimeos\MShop\Product\Item\Iface
+	public function addStockItem( \Aimeos\MShop\Stock\Item\Iface $item ) : static
 	{
 		$id = $item->getId() ?: '_' . $this->getId() . '_' . $item->getType();
 		$this->stockItems[$id] = $item;
@@ -66,12 +66,13 @@ trait Stock
 	/**
 	 * Adds new stock items or overwrite existing ones
 	 *
-	 * @param \Aimeos\Map|\Aimeos\MShop\Stock\Item\Iface $item New or existing stock item
-	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 * @param iterable $items New or existing stock items
+	 * @return static Self object for method chaining
 	 */
-	public function addStockItems( iterable $items ) : \Aimeos\MShop\Product\Item\Iface
+	public function addStockItems( iterable $items ) : static
 	{
 		foreach( $items as $item ) {
+			// @phpstan-ignore argument.type
 			$this->addStockItem( $item );
 		}
 
@@ -83,9 +84,9 @@ trait Stock
 	 * Removes an existing stock item
 	 *
 	 * @param \Aimeos\MShop\Stock\Item\Iface $item Existing stock item
-	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function deleteStockItem( \Aimeos\MShop\Stock\Item\Iface $item ) : \Aimeos\MShop\Product\Item\Iface
+	public function deleteStockItem( \Aimeos\MShop\Stock\Item\Iface $item ) : static
 	{
 		$id = $item->getId() ?? '';
 
@@ -112,9 +113,9 @@ trait Stock
 	 * Removes a list of existing stock items
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Stock\Item\Iface[] $items Existing stock items
-	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function deleteStockItems( iterable $items ) : \Aimeos\MShop\Product\Item\Iface
+	public function deleteStockItems( iterable $items ) : static
 	{
 		foreach( $items as $item ) {
 			$this->deleteStockItem( $item );
@@ -160,9 +161,9 @@ trait Stock
 	 * Adds a new stock item or overwrite an existing one
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Stock\Item\Iface[] $items New list of stock items
-	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function setStockItems( iterable $items ) : \Aimeos\MShop\Product\Item\Iface
+	public function setStockItems( iterable $items ) : static
 	{
 		$list = [];
 
@@ -173,6 +174,7 @@ trait Stock
 			$list[$id] = $p;
 		}
 
+		// @phpstan-ignore argument.type
 		$this->deleteStockItems( $this->stockItems );
 		$this->stockItems = $list;
 
@@ -184,8 +186,9 @@ trait Stock
 	 * Sets the stock items in the trait
 	 *
 	 * @param \Aimeos\MShop\Stock\Item\Iface[] $items Stock items
+	 * @return void
 	 */
-	protected function initStockItems( array $items )
+	protected function initStockItems( array $items ) : void
 	{
 		$this->stockItems = $items;
 	}

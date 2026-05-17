@@ -31,9 +31,9 @@ interface Iface
 	 * Sets the code of the currency.
 	 *
 	 * @param string $key Code of the currency
-	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
+	 * @return static Locale currency item for chaining method calls
 	 */
-	public function setCode( string $key ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setCode( string $key ) : static;
 
 	/**
 	 * Returns the label or symbol of the currency.
@@ -46,7 +46,7 @@ interface Iface
 	 * Sets the label or symbol of the currency.
 	 *
 	 * @param string $label Label or symbol of the currency
-	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
+	 * @return static Locale currency item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Locale\Item\Currency\Iface;
+	public function setLabel( string $label ) : static;
 }

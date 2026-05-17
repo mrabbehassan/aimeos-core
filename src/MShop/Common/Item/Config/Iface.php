@@ -47,9 +47,9 @@ interface Iface
 	 * Sets the configuration values of the item
 	 *
 	 * @param array $config Configuration values
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setConfig( array $config ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setConfig( array $config ) : static;
 
 	/**
 	 * Sets the configuration value for the specified path
@@ -64,7 +64,7 @@ interface Iface
 	 *
 	 * @param string $key Key of the associative array or path to value like "path/to/value"
 	 * @param mixed $value Value to set for the key
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setConfigValue( string $key, $value ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setConfigValue( string $key, $value ) : static;
 }

@@ -56,9 +56,9 @@ interface Iface
 	 * Assigns multiple key/value pairs to the item
 	 *
 	 * @param iterable $pairs Associative list of key/value pairs
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for method chaining
+	 * @return static Item for method chaining
 	 */
-	public function assign( iterable $pairs ) : \Aimeos\MShop\Common\Item\Iface;
+	public function assign( iterable $pairs ) : static;
 
 	/**
 	 * Returns the item property for the given name
@@ -74,9 +74,9 @@ interface Iface
 	 *
 	 * @param string $name Name of the property
 	 * @param mixed $value New property value
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for method chaining
+	 * @return static Item for method chaining
 	 */
-	public function set( string $name, $value ) : \Aimeos\MShop\Common\Item\Iface;
+	public function set( string $name, $value ) : static;
 
 	/**
 	 * Returns the unique ID of the item.
@@ -89,9 +89,9 @@ interface Iface
 	 * Sets the unique ID of the item.
 	 *
 	 * @param string|null $id Unique ID of the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setId( ?string $id ) : static;
 
 	/**
 	 * Returns the ID of the site the item is stored
@@ -117,7 +117,7 @@ interface Iface
 	/**
 	 * Returns the user code of user who created/modified the item at last.
 	 *
-	 * @return string|null User code of user who created/modified the item at last
+	 * @return string User code of user who created/modified the item at last
 	 */
 	public function editor() : string;
 
@@ -139,9 +139,9 @@ interface Iface
 	 * Sets the general availability of the item
 	 *
 	 * @return bool $value True if available, false if not
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setAvailable( bool $value ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setAvailable( bool $value ) : static;
 
 	/**
 	 * Tests if the item was modified.
@@ -153,24 +153,24 @@ interface Iface
 	/**
 	 * Sets the modified flag of the object.
 	 *
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setModified() : \Aimeos\MShop\Common\Item\Iface;
+	public function setModified() : static;
 
 
 	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array $list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface;
+	public function fromArray( array &$list, bool $private = false ) : static;
 
 	/**
 	 * Returns an associative list of item properties.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array List of item properties
 	 */
 	public function toArray( bool $private = false ) : array;

@@ -92,9 +92,9 @@ class Taxrates
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
+	 * @return static Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static
 	{
 		$plugin = $this->object();
 
@@ -136,6 +136,7 @@ class Taxrates
 
 		if( $value instanceof \Aimeos\MShop\Order\Item\Product\Iface )
 		{
+			// @phpstan-ignore argument.type
 			$value->getPrice()->setTaxrate( $taxrate );
 			return $value;
 		}

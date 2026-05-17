@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Common\Factory;
  */
 abstract class Base
 {
-	private static $objects = [];
+	private static array $objects = [];
 
 
 	/**
@@ -30,8 +30,9 @@ abstract class Base
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
 	 * @param \Aimeos\MShop\Common\Manager\Iface|null $manager Manager object or null for removing the manager object
+	 * @return void
 	 */
-	public static function injectManager( string $classname, ?\Aimeos\MShop\Common\Manager\Iface $manager = null )
+	public static function injectManager( string $classname, ?\Aimeos\MShop\Common\Manager\Iface $manager = null ) : void
 	{
 		self::$objects[$classname] = $manager;
 	}
@@ -53,7 +54,7 @@ abstract class Base
 		foreach( $decorators as $name )
 		{
 			if( ctype_alnum( $name ) === false ) {
-				throw new \LogicException( sprintf( 'Invalid characters in class name "%1$s"', $name ), 400 );
+				throw new \LogicException( sprintf( 'Invalid characters in class name "%1$s"', (string) $name ), 400 );
 			}
 
 			$classname = $classprefix . $name;
@@ -62,6 +63,7 @@ abstract class Base
 			$manager = \Aimeos\Utils::create( $classname, [$manager, $context], $interface );
 		}
 
+		// @phpstan-ignore return.type
 		return $manager;
 	}
 
@@ -97,11 +99,11 @@ abstract class Base
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" and
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2".
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 */
-		$decorators = $config->get( 'mshop/common/manager/decorators/default', [] );
-		$excludes = $config->get( 'mshop/' . $domain . '/manager/decorators/excludes', [] );
+		$decorators = (array) $config->get( 'mshop/common/manager/decorators/default', [] );
+		$excludes = (array) $config->get( 'mshop/' . $domain . '/manager/decorators/excludes', [] );
 
 		foreach( $decorators as $key => $name )
 		{
@@ -114,11 +116,11 @@ abstract class Base
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
-		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/global', [] );
+		$decorators = (array) $config->get( 'mshop/' . $domain . '/manager/decorators/global', [] );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = '\Aimeos\MShop\\' . ucfirst( $domain ) . '\Manager\Decorator\\';
-		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/local', [] );
+		$decorators = (array) $config->get( 'mshop/' . $domain . '/manager/decorators/local', [] );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		return $manager->setObject( $manager );
@@ -136,9 +138,11 @@ abstract class Base
 	protected static function createManager( \Aimeos\MShop\ContextIface $context, string $classname, string $interface ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( isset( self::$objects[$classname] ) ) {
+			// @phpstan-ignore return.type
 			return self::$objects[$classname];
 		}
 
+		// @phpstan-ignore return.type
 		return \Aimeos\Utils::create( $classname, [$context], $interface );
 	}
 }

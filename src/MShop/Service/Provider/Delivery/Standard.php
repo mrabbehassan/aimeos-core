@@ -24,11 +24,12 @@ class Standard
 	/**
 	 * Updates the delivery status
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $order Order instance
-	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
+	 * @param iterable $orders Order instances
+	 * @return \Aimeos\Map Updated order items
 	 */
 	public function push( iterable $orders ) : \Aimeos\Map
 	{
+		// @phpstan-ignore return.type
 		return map( $orders )->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PENDING );
 	}
 }

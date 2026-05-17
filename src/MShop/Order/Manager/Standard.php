@@ -74,7 +74,7 @@ class Standard extends Base
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for aggregating order items
+		 * @type string SQL statement for aggregating order items
 		 * @since 2014.09
 		 * @see mshop/order/manager/insert/ansi
 		 * @see mshop/order/manager/update/ansi
@@ -87,7 +87,7 @@ class Standard extends Base
 		/** mshop/order/manager/aggregateavg/mysql
 		 * Computes the average of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @param string SQL statement for aggregating the order items and computing the average value
+		 * @type string SQL statement for aggregating the order items and computing the average value
 		 * @since 2017.10
 		 * @see mshop/order/manager/aggregateavg/ansi
 		 * @see mshop/order/manager/aggregate/mysql
@@ -96,7 +96,7 @@ class Standard extends Base
 		/** mshop/order/manager/aggregateavg/ansi
 		 * Computes the average of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @param string SQL statement for aggregating the order items and computing the average value
+		 * @type string SQL statement for aggregating the order items and computing the average value
 		 * @since 2017.10
 		 * @see mshop/order/manager/aggregate/ansi
 		 */
@@ -104,7 +104,7 @@ class Standard extends Base
 		/** mshop/order/manager/aggregatesum/mysql
 		 * Computes the sum of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @param string SQL statement for aggregating the order items and computing the sum
+		 * @type string SQL statement for aggregating the order items and computing the sum
 		 * @since 2017.10
 		 * @see mshop/order/manager/aggregatesum/ansi
 		 * @see mshop/order/manager/aggregate/mysql
@@ -113,7 +113,7 @@ class Standard extends Base
 		/** mshop/order/manager/aggregatesum/ansi
 		 * Computes the sum of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @param string SQL statement for aggregating the order items and computing the sum
+		 * @type string SQL statement for aggregating the order items and computing the sum
 		 * @since 2017.10
 		 * @see mshop/order/manager/aggregate/ansi
 		 */
@@ -153,7 +153,7 @@ class Standard extends Base
 	 */
 	public function createAddress( array $values = [] ) : \Aimeos\MShop\Order\Item\Address\Iface
 	{
-		return $this->object()->getSubManager( 'address' )->create( $values );
+		return $this->object()->getSubManager( 'address' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -165,7 +165,7 @@ class Standard extends Base
 	 */
 	public function createCoupon( array $values = [] ) : \Aimeos\MShop\Order\Item\Coupon\Iface
 	{
-		return $this->object()->getSubManager( 'coupon' )->create( $values );
+		return $this->object()->getSubManager( 'coupon' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -177,7 +177,7 @@ class Standard extends Base
 	 */
 	public function createProduct( array $values = [] ) : \Aimeos\MShop\Order\Item\Product\Iface
 	{
-		return $this->object()->getSubManager( 'product' )->create( $values );
+		return $this->object()->getSubManager( 'product' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -189,7 +189,7 @@ class Standard extends Base
 	 */
 	public function createProductAttribute( array $values = [] ) : \Aimeos\MShop\Order\Item\Product\Attribute\Iface
 	{
-		return $this->object()->getSubManager( 'product' )->getSubManager( 'attribute' )->create( $values );
+		return $this->object()->getSubManager( 'product' )->getSubManager( 'attribute' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -201,7 +201,7 @@ class Standard extends Base
 	 */
 	public function createService( array $values = [] ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
-		return $this->object()->getSubManager( 'service' )->create( $values );
+		return $this->object()->getSubManager( 'service' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -213,7 +213,7 @@ class Standard extends Base
 	 */
 	public function createServiceAttribute( array $values = [] ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface
 	{
-		return $this->object()->getSubManager( 'service' )->getSubManager( 'attribute' )->create( $values );
+		return $this->object()->getSubManager( 'service' )->getSubManager( 'attribute' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -225,7 +225,7 @@ class Standard extends Base
 	 */
 	public function createServiceTransaction( array $values = [] ) : \Aimeos\MShop\Order\Item\Service\Transaction\Iface
 	{
-		return $this->object()->getSubManager( 'service' )->getSubManager( 'transaction' )->create( $values );
+		return $this->object()->getSubManager( 'service' )->getSubManager( 'transaction' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -237,7 +237,7 @@ class Standard extends Base
 	 */
 	public function createStatus( array $values = [] ) : \Aimeos\MShop\Order\Item\Status\Iface
 	{
-		return $this->object()->getSubManager( 'status' )->create( $values );
+		return $this->object()->getSubManager( 'status' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -332,7 +332,7 @@ class Standard extends Base
 	{
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $this->context()->config()->get( 'mshop/order/manager/sitemode', $level );
-		$expr = $this->siteString( 'mordst_cs."siteid"', $level );
+		$expr = $this->siteString( 'mordst_cs."siteid"', (int) $level );
 
 		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
 			'order.sitecode' => [
@@ -411,11 +411,17 @@ class Standard extends Base
 	 */
 	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
+		// @phpstan-ignore argument.type
 		$this->addStatus( $item );
+		// @phpstan-ignore argument.type
 		$this->saveAddresses( $item );
+		// @phpstan-ignore argument.type
 		$this->saveServices( $item );
+		// @phpstan-ignore argument.type
 		$this->saveProducts( $item );
+		// @phpstan-ignore argument.type
 		$this->saveCoupons( $item );
+		// @phpstan-ignore argument.type
 		$this->saveStatuses( $item );
 
 		return $item;
@@ -442,6 +448,7 @@ class Standard extends Base
 		{
 			$manager = \Aimeos\MShop::create( $this->context(), 'customer' );
 			$search = $manager->filter()->slice( 0, 0x7fffffff )->add( ['customer.id' => $cids] );
+			// @phpstan-ignore argument.type
 			$customers = $manager->search( $search, $ref );
 		}
 
@@ -500,17 +507,19 @@ class Standard extends Base
 	 * Adds the new payment and delivery values to the order status log.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Order item object
-	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	protected function addStatus( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
+	protected function addStatus( \Aimeos\MShop\Order\Item\Iface $item ) : static
 	{
 		$object = $this->object();
 
 		if( ( $status = $item->get( '.statuspayment' ) ) !== null && $status != $item->getStatusPayment() ) {
+			// @phpstan-ignore argument.type
 			$item->addStatus( $object->createStatus()->setType( 'status-payment' )->setValue( $item->getStatusPayment() ) );
 		}
 
 		if( ( $status = $item->get( '.statusdelivery' ) ) !== null && $status != $item->getStatusDelivery() ) {
+			// @phpstan-ignore argument.type
 			$item->addStatus( $object->createStatus()->setType( 'status-delivery' )->setValue( $item->getStatusDelivery() ) );
 		}
 
@@ -586,7 +595,7 @@ class Standard extends Base
 			throw $e;
 		}
 
-		return $row['invoiceno'] ?? '';
+		return (string) ( $row['invoiceno'] ?? '' ); // @phpstan-ignore offsetAccess.notFound
 	}
 
 
@@ -613,8 +622,10 @@ class Standard extends Base
 		if( empty( $item->getInvoiceNumber() ) && $item->getStatusPayment() >= \Aimeos\MShop\Order\Item\Base::PAY_PENDING )
 		{
 			try {
+				// @phpstan-ignore argument.type
 				$item->setInvoiceNumber( $this->createInvoiceNumber( $item ) );
 			} catch( \Exception $e ) { // redo on transaction deadlock
+				// @phpstan-ignore argument.type
 				$item->setInvoiceNumber( $this->createInvoiceNumber( $item ) );
 			}
 		}
@@ -652,7 +663,7 @@ class Standard extends Base
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
-	 * @param string Last part of the class name
+	 * @type string Last part of the class name
 	 * @since 2015.10
 	 */
 
@@ -674,7 +685,7 @@ class Standard extends Base
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the order manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/order/manager/decorators/global
@@ -698,7 +709,7 @@ class Standard extends Base
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the order
 	 * manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/order/manager/decorators/excludes
@@ -722,7 +733,7 @@ class Standard extends Base
 	 * "\Aimeos\MShop\Order\Manager\Decorator\Decorator2" only to the order
 	 * manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2015.10
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/order/manager/decorators/excludes
@@ -737,7 +748,7 @@ class Standard extends Base
 	 * It's also possible to use the same database connection for different
 	 * data domains by configuring the same connection name using this setting.
 	 *
-	 * @param string Database connection name
+	 * @type string Database connection name
 	 * @since 2023.04
 	 */
 
@@ -763,7 +774,7 @@ class Standard extends Base
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for deleting items
+	 * @type string SQL statement for deleting items
 	 * @since 2015.10
 	 * @see mshop/order/manager/insert/ansi
 	 * @see mshop/order/manager/update/ansi
@@ -785,7 +796,7 @@ class Standard extends Base
 	 * using the search keys of the sub-managers to further limit the
 	 * retrieved list of items.
 	 *
-	 * @param array List of sub-manager names
+	 * @type array List of sub-manager names
 	 * @since 2015.10
 	 */
 
@@ -815,7 +826,7 @@ class Standard extends Base
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for inserting records
+	 * @type string SQL statement for inserting records
 	 * @since 2015.10
 	 * @see mshop/order/manager/update/ansi
 	 * @see mshop/order/manager/newid/ansi
@@ -847,7 +858,7 @@ class Standard extends Base
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for updating records
+	 * @type string SQL statement for updating records
 	 * @since 2015.10
 	 * @see mshop/order/manager/insert/ansi
 	 * @see mshop/order/manager/newid/ansi
@@ -883,7 +894,7 @@ class Standard extends Base
 	 * fits for most database servers as they implement their own
 	 * specific way.
 	 *
-	 * @param string SQL statement for retrieving the last inserted record ID
+	 * @type string SQL statement for retrieving the last inserted record ID
 	 * @since 2015.10
 	 * @see mshop/order/manager/insert/ansi
 	 * @see mshop/order/manager/update/ansi
@@ -916,7 +927,7 @@ class Standard extends Base
 	 * this domain, then items wil be only inherited. Thus, you have full
 	 * control over inheritance and aggregation in each domain.
 	 *
-	 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
+	 * @type int Constant from Aimeos\MShop\Locale\Manager\Base class
 	 * @since 2018.01
 	 * @see mshop/locale/manager/sitelevel
 	 */
@@ -965,7 +976,7 @@ class Standard extends Base
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for searching items
+	 * @type string SQL statement for searching items
 	 * @since 2015.10
 	 * @see mshop/order/manager/insert/ansi
 	 * @see mshop/order/manager/update/ansi
@@ -1016,7 +1027,7 @@ class Standard extends Base
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for counting items
+	 * @type string SQL statement for counting items
 	 * @since 2015.10
 	 * @see mshop/order/manager/insert/ansi
 	 * @see mshop/order/manager/update/ansi

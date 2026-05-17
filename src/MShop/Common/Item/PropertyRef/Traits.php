@@ -27,16 +27,16 @@ trait Traits
 	/**
 	 * Creates a deep clone of all objects
 	 */
-	public function __clone()
+	public function __clone() : void
 	{
 		parent::__clone();
 
 		foreach( $this->propItems as $key => $item ) {
-			$this->propItems[$key] = clone $item;
+			$this->propItems[$key] = clone $item; // @phpstan-ignore clone.nonObject
 		}
 
 		foreach( $this->propRmItems as $key => $item ) {
-			$this->propRmItems[$key] = clone $item;
+			$this->propRmItems[$key] = clone $item; // @phpstan-ignore clone.nonObject
 		}
 	}
 
@@ -45,9 +45,9 @@ trait Traits
 	 * Adds a new property item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item New or existing property item
-	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function addPropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
+	public function addPropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item ) : static
 	{
 		$id = $item->getId() ?: '_' . $this->getId() . '_' . $item->getType() . '_' . $item->getLanguageId() . '_' . $item->getValue();
 
@@ -61,12 +61,13 @@ trait Traits
 	/**
 	 * Adds new property items or overwrite existing ones
 	 *
-	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Property\Iface $item New or existing property item
-	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
+	 * @param iterable $items New or existing property items
+	 * @return static Self object for method chaining
 	 */
-	public function addPropertyItems( iterable $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
+	public function addPropertyItems( iterable $items ) : static
 	{
 		foreach( $items as $item ) {
+			/** @var \Aimeos\MShop\Common\Item\Property\Iface $item */
 			$this->addPropertyItem( $item );
 		}
 
@@ -78,9 +79,9 @@ trait Traits
 	 * Removes an existing property item
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item Existing property item
-	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function deletePropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
+	public function deletePropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item ) : static
 	{
 		$id = $item->getId() ?? '';
 
@@ -107,10 +108,10 @@ trait Traits
 	 * Removes a list of existing property items
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Property\Iface[] $items Existing property items
-	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 * @throws \Aimeos\MShop\Exception If an item isn't a property item or isn't found
 	 */
-	public function deletePropertyItems( iterable $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
+	public function deletePropertyItems( iterable $items ) : static
 	{
 		foreach( $items as $item ) {
 			$this->deletePropertyItem( $item );
@@ -166,6 +167,7 @@ trait Traits
 			if( $propItem->getType() === $type && $propItem->getLanguageId() === $langId
 				&& $propItem->getValue() === $value && ( $active === false || $propItem->isAvailable() )
 			) {
+				// @phpstan-ignore return.type
 				return $propItem;
 			}
 		}
@@ -202,9 +204,9 @@ trait Traits
 	 * Adds a new property item or overwrite an existing one
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Property\Iface[] $items New list of property items
-	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function setPropertyItems( iterable $items ) : \Aimeos\MShop\Common\Item\PropertyRef\Iface
+	public function setPropertyItems( iterable $items ) : static
 	{
 		$list = [];
 
@@ -215,6 +217,7 @@ trait Traits
 			$list[$id] = $p;
 		}
 
+		// @phpstan-ignore argument.type
 		$this->deletePropertyItems( $this->propItems );
 		$this->propItems = $list;
 
@@ -234,8 +237,9 @@ trait Traits
 	 * Sets the property items in the trait
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items Property items
+	 * @return void
 	 */
-	protected function initPropertyItems( array $items )
+	protected function initPropertyItems( array $items ) : void
 	{
 		$this->propItems = $items;
 	}

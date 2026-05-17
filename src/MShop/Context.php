@@ -34,8 +34,8 @@ class Context implements \Aimeos\MShop\ContextIface
 	private ?string $token = null;
 	private string $editor = '';
 	private array $i18n = [];
-	private $groups = null;
-	private $user = null;
+	private \Closure|array|null $groups = null;
+	private \Closure|\Aimeos\MShop\Customer\Item\Iface|null $user = null;
 
 
 	/**
@@ -77,7 +77,7 @@ class Context implements \Aimeos\MShop\ContextIface
 		// view is always cloned
 
 		foreach( $this->i18n as $locale => $object ) {
-			$this->i18n[$locale] = clone $this->i18n[$locale];
+			$this->i18n[$locale] = clone $this->i18n[$locale]; // @phpstan-ignore clone.nonObject
 		}
 	}
 
@@ -211,7 +211,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	 *
 	 * @param string $resource Database resource name
 	 * @param bool $new Create a new database connection
-	 * @return \Aimeos\Base\DB\Manager\Iface Database manager object
+	 * @return \Aimeos\Base\DB\Connection\Iface Database connection object
 	 */
 	public function db( string $resource = 'db', bool $new = false ) : \Aimeos\Base\DB\Connection\Iface
 	{
@@ -320,10 +320,12 @@ class Context implements \Aimeos\MShop\ContextIface
 		}
 
 		if( $locale !== null && isset( $this->i18n[$locale] ) ) {
+			// @phpstan-ignore return.type
 			return $this->i18n[$locale];
 		}
 
 		if( isset( $this->i18n['en'] ) ) {
+			// @phpstan-ignore return.type
 			return $this->i18n['en'];
 		}
 
@@ -335,7 +337,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	/**
 	 * Translates a string if possible
 	 *
-	 * @param string $name Name of the translation domain
+	 * @param string $domain Name of the translation domain
 	 * @param string $singular Singular string to translate
 	 * @param string $plural Plural string to translate if count is not one
 	 * @param int $number Number for plural translations
@@ -345,7 +347,7 @@ class Context implements \Aimeos\MShop\ContextIface
 	public function translate( string $domain, string $singular, ?string $plural = null, int $number = 1, ?string $locale = null ) : string
 	{
 		if( empty( $this->i18n ) ) {
-			return $number === 1 ? $singular : $plural;
+			return $number === 1 ? $singular : ( $plural ?? '' );
 		}
 
 		if( $plural ) {
@@ -675,7 +677,7 @@ class Context implements \Aimeos\MShop\ContextIface
 			$this->user = $fcn();
 		}
 
-		return $this->user;
+		return $this->user; // @phpstan-ignore return.type
 	}
 
 

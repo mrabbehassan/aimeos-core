@@ -28,7 +28,7 @@ class Standard
 	 */
 	public function getCode() : string
 	{
-		return $this->get( $this->prefix() . 'code', '' );
+		return (string) $this->get( $this->prefix() . 'code', '' );
 	}
 
 
@@ -36,9 +36,9 @@ class Standard
 	 * Sets the code of the type item
 	 *
 	 * @param string $code New code of the type item
-	 * @return \Aimeos\MShop\Type\Item\Iface Common type item for chaining method calls
+	 * @return static Common type item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Type\Item\Iface
+	public function setCode( string $code ) : static
 	{
 		return $this->set( $this->prefix() . 'code', \Aimeos\Utils::code( $code ) );
 	}
@@ -51,7 +51,7 @@ class Standard
 	 */
 	public function getDomain() : string
 	{
-		return $this->get( $this->prefix() . 'domain', '' );
+		return (string) $this->get( $this->prefix() . 'domain', '' );
 	}
 
 
@@ -59,9 +59,9 @@ class Standard
 	 * Sets the domain of the type item
 	 *
 	 * @param string $domain New domain of the type item
-	 * @return \Aimeos\MShop\Type\Item\Iface Common type item for chaining method calls
+	 * @return static Common type item for chaining method calls
 	 */
-	public function setDomain( string $domain ) : \Aimeos\MShop\Type\Item\Iface
+	public function setDomain( string $domain ) : static
 	{
 		return $this->set( $this->prefix() . 'domain', $domain );
 	}
@@ -82,9 +82,9 @@ class Standard
 	 * Sets the translations of the type item label
 	 *
 	 * @param array $value New translations of the type item label
-	 * @return \Aimeos\MShop\Type\Item\Iface Common type item for chaining method calls
+	 * @return static Common type item for chaining method calls
 	 */
-	public function setI18n( array $value ) : \Aimeos\MShop\Type\Item\Iface
+	public function setI18n( array $value ) : static
 	{
 		return $this->set( $this->prefix() . 'i18n', $value );
 	}
@@ -97,6 +97,7 @@ class Standard
 	 */
 	public function getName() : string
 	{
+		// @phpstan-ignore return.type
 		return $this->getI18n()[$this->get( '.language' )] ?? $this->getLabel();
 	}
 
@@ -108,7 +109,7 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( $this->prefix() . 'label', '' );
+		return (string) $this->get( $this->prefix() . 'label', '' );
 	}
 
 
@@ -116,9 +117,9 @@ class Standard
 	 * Sets the label of the type item
 	 *
 	 * @param string $label New label of the type item
-	 * @return \Aimeos\MShop\Type\Item\Iface Common type item for chaining method calls
+	 * @return static Common type item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Type\Item\Iface
+	public function setLabel( string $label ) : static
 	{
 		return $this->set( $this->prefix() . 'label', $label );
 	}
@@ -131,7 +132,7 @@ class Standard
 	 */
 	public function getPosition() : int
 	{
-		return $this->get( $this->prefix() . 'position', 0 );
+		return (int) $this->get( $this->prefix() . 'position', 0 );
 	}
 
 
@@ -139,9 +140,9 @@ class Standard
 	 * Sets the new position of the item in the list.
 	 *
 	 * @param int $pos position of the item in the list
-	 * @return \Aimeos\MShop\Type\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setPosition( int $pos ) : \Aimeos\MShop\Type\Item\Iface
+	public function setPosition( int $pos ) : static
 	{
 		return $this->set( $this->prefix() . 'position', $pos );
 	}
@@ -154,7 +155,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( $this->prefix() . 'status', 1 );
+		return (int) $this->get( $this->prefix() . 'status', 1 );
 	}
 
 
@@ -162,9 +163,9 @@ class Standard
 	 * Sets the status of the type item
 	 *
 	 * @param int $status New status of the type item
-	 * @return \Aimeos\MShop\Type\Item\Iface Common type item for chaining method calls
+	 * @return static Common type item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Type\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( $this->prefix() . 'status', $status );
 	}
@@ -195,11 +196,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Type\Item\Iface Type item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Type item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Type\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$prefix = $this->prefix();
 		$item = parent::fromArray( $list, $private );
@@ -208,10 +209,10 @@ class Standard
 		{
 			switch( $key )
 			{
-				case $prefix . 'code': $item->setCode( $value ); break;
-				case $prefix . 'domain': $item->setDomain( $value ); break;
+				case $prefix . 'code': $item->setCode( (string) $value ); break;
+				case $prefix . 'domain': $item->setDomain( (string) $value ); break;
 				case $prefix . 'i18n': $item->setI18n( (array) $value ); break;
-				case $prefix . 'label': $item->setLabel( $value ); break;
+				case $prefix . 'label': $item->setLabel( (string) $value ); break;
 				case $prefix . 'position': $item->setPosition( (int) $value ); break;
 				case $prefix . 'status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
@@ -227,7 +228,7 @@ class Standard
 	/**
 	 * Returns an associative list of item properties.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array List of item properties.
 	 */
 	public function toArray( bool $private = false ) : array

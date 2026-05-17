@@ -51,10 +51,10 @@ class MySQL
 		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
 		$func = $this->getFunctionRelevance();
-		$expr = $this->siteString( 'mindte."siteid"', $level );
+		$expr = $this->siteString( 'mindte."siteid"', (int) $level );
 		$sql = $this->searchConfig['index.text:relevance']['internalcode'];
 
-		$this->searchConfig['index.text:relevance']['internalcode'] = str_replace( ':site', $expr, $sql );
+		$this->searchConfig['index.text:relevance']['internalcode'] = str_replace( ':site', $expr, (string) $sql );
 		$this->searchConfig['sort:index.text:relevance']['function'] = $func;
 		$this->searchConfig['index.text:relevance']['function'] = $func;
 	}
@@ -71,7 +71,7 @@ class MySQL
 		$list = parent::getSearchAttributes( $withsub );
 
 		foreach( $this->searchConfig as $key => $fields ) {
-			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $fields );
+			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( (array) $fields );
 		}
 
 		return $list;
@@ -91,7 +91,7 @@ class MySQL
 			{
 				$str = '';
 				$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
-				$search = trim( mb_strtolower( preg_replace( $regex, ' ', $params[1] ) ), "' \t\n\r\0\x0B" );
+				$search = trim( mb_strtolower( (string) preg_replace( $regex, ' ', (string) $params[1] ) ), "' \t\n\r\0\x0B" );
 
 				foreach( explode( ' ', $search ) as $part )
 				{

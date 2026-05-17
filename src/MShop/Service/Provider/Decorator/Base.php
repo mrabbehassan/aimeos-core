@@ -162,6 +162,7 @@ abstract class Base
 	 */
 	public function cancel( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->provider->cancel( $order );
 	}
 
@@ -174,6 +175,7 @@ abstract class Base
 	 */
 	public function capture( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->provider->capture( $order );
 	}
 
@@ -187,6 +189,7 @@ abstract class Base
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] ) : ?\Aimeos\MShop\Common\Helper\Form\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->provider->process( $order, $params );
 	}
 
@@ -199,6 +202,7 @@ abstract class Base
 	 */
 	public function push( iterable $orders ) : \Aimeos\Map
 	{
+		// @phpstan-ignore return.type
 		return $this->provider->push( $orders );
 	}
 
@@ -211,6 +215,7 @@ abstract class Base
 	 */
 	public function refund( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->provider->refund( $order );
 	}
 
@@ -225,6 +230,7 @@ abstract class Base
 	 */
 	public function repay( \Aimeos\MShop\Order\Item\Iface $order ) : \Aimeos\MShop\Order\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->provider->repay( $order );
 	}
 
@@ -318,6 +324,7 @@ abstract class Base
 	 */
 	public function __call( string $name, array $param )
 	{
+		// @phpstan-ignore argument.type
 		return @call_user_func_array( array( $this->provider, $name ), $param );
 	}
 }

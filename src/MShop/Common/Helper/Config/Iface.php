@@ -22,14 +22,14 @@ interface Iface
 	/**
 	 * Initializes the object with the criteria objects to check against
 	 *
-	 * @param \Aimeos\Base\Criteria\Attribute\Iface $criteria Criteria attribute objects
+	 * @param array $criteria Criteria attribute objects
 	 */
 	public function __construct( array $criteria );
 
 	/**
 	 * Checks required fields and the types of the config array
 	 *
-	 * @param array $map Values to check agains the criteria
+	 * @param array $config Values to check agains the criteria
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */

@@ -31,9 +31,9 @@ interface Iface
 	 * Sets the site ID of the item.
 	 *
 	 * @param string $value Unique site ID of the item
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setSiteId( string $value ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function setSiteId( string $value ) : static;
 
 	/**
 	 * Returns the order base ID of the order service if available.
@@ -46,9 +46,9 @@ interface Iface
 	 * Sets the order service base ID of the order service item.
 	 *
 	 * @param string|null $id Order service base ID
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setParentId( ?string $id ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function setParentId( ?string $id ) : static;
 
 	/**
 	 * Returns the original ID of the service item used for the order.
@@ -61,9 +61,9 @@ interface Iface
 	 * Sets a new ID of the service item used for the order.
 	 *
 	 * @param string $servid ID of the service item used for the order
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setServiceId( string $servid ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function setServiceId( string $servid ) : static;
 
 	/**
 	 * Returns the code of the service item.
@@ -76,9 +76,9 @@ interface Iface
 	 * Sets a new code for the service item.
 	 *
 	 * @param string $code Code as defined by the service provider
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function setCode( string $code ) : static;
 
 	/**
 	 * Returns the location of the media.
@@ -91,9 +91,9 @@ interface Iface
 	 * Sets the media url of the service item.
 	 *
 	 * @param string $value Location of the media/picture
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setMediaUrl( string $value ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function setMediaUrl( string $value ) : static;
 
 	/**
 	 * Returns the name of the service item.
@@ -106,9 +106,9 @@ interface Iface
 	 * Sets a new name for the service item.
 	 *
 	 * @param string $name Service item name
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setName( string $name ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function setName( string $name ) : static;
 
 	/**
 	 * Returns the position of the product in the order.
@@ -121,9 +121,9 @@ interface Iface
 	 * Sets the position of the product within the list of ordered products.
 	 *
 	 * @param int|null $value Product position in the order from 0-n or null for resetting the position
-	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order base product item for chaining method calls
+	 * @return static Order base product item for chaining method calls
 	 */
-	public function setPosition( ?int $value ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function setPosition( ?int $value ) : static;
 
 	/**
 	 * Returns the price object which belongs to the service item.
@@ -136,17 +136,17 @@ interface Iface
 	 * Sets a new price object for the service item.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : static;
 
 	/**
 	 * Adds new and replaces existing attribute items for the service.
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Order\Item\Service\Attribute\Iface[] $attributes List of order service attribute items
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function addAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function addAttributeItems( iterable $attributes ) : static;
 
 	/**
 	 * Returns the value of the attribute item for the ordered product with the given code.
@@ -185,25 +185,25 @@ interface Iface
 	 * Adds or replaces the attribute item in the list of service attributes.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Service\Attribute\Iface $item Service attribute item
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setAttributeItem( \Aimeos\MShop\Order\Item\Service\Attribute\Iface $item ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function setAttributeItem( \Aimeos\MShop\Order\Item\Service\Attribute\Iface $item ) : static;
 
 	/**
 	 * Sets the new list of attribute items for the service.
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Order\Item\Service\Attribute\Iface[] $attributes List of order service attribute items
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function setAttributeItems( iterable $attributes ) : static;
 
 	/**
 	 * Adds a new transaction to the service.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Service\Transaction\Iface $item Transaction item
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function addTransaction( \Aimeos\MShop\Order\Item\Service\Transaction\Iface $item ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function addTransaction( \Aimeos\MShop\Order\Item\Service\Transaction\Iface $item ) : static;
 
 	/**
 	 * Returns the list of transactions items for the service.
@@ -217,15 +217,15 @@ interface Iface
 	 * Sets the new list of transactions items for the service.
 	 *
 	 * @param iterable $list List of order service transaction items
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setTransactions( iterable $list ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function setTransactions( iterable $list ) : static;
 
 	/**
 	 * Copys all data from a given service item.
 	 *
 	 * @param \Aimeos\MShop\Service\Item\Iface $service New service item
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function copyFrom( \Aimeos\MShop\Service\Item\Iface $service ) : \Aimeos\MShop\Order\Item\Service\Iface;
+	public function copyFrom( \Aimeos\MShop\Service\Item\Iface $service ) : static;
 }

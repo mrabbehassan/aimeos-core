@@ -25,8 +25,9 @@ interface Iface
 	 *
 	 * @param string $iface Interface name of the item to apply the filter to
 	 * @param \Closure $fcn Anonymous function receiving the item to check as first parameter
+	 * @return void
 	 */
-	public function addFilter( string $iface, \Closure $fcn );
+	public function addFilter( string $iface, \Closure $fcn ) : void;
 
 	/**
 	 * Returns the class names of the manager and used decorators.
@@ -39,9 +40,9 @@ interface Iface
 	 * Removes old entries from the storage
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface;
+	public function clear( iterable $siteids ) : static;
 
 	/**
 	 * Creates a new empty item instance
@@ -63,9 +64,9 @@ interface Iface
 	 * Deletes one or more items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items Item object, ID or a list of them
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface;
+	public function delete( $items ) : static;
 
 	/**
 	 * Creates a filter object.
@@ -142,7 +143,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int &$total Number of items that are available in total
+	 * @type int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], ?int &$total = null ) : \Aimeos\Map;
@@ -160,9 +161,9 @@ interface Iface
 	 * Injects the reference of the outmost object
 	 *
 	 * @param \Aimeos\MShop\Common\Manager\Iface $object Reference to the outmost manager or decorator
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object ) : \Aimeos\MShop\Common\Manager\Iface;
+	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object ) : static;
 
 	/**
 	 * Returns the type of the mananger as separate parts
@@ -174,21 +175,21 @@ interface Iface
 	/**
 	 * Starts a database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function begin() : \Aimeos\MShop\Common\Manager\Iface;
+	public function begin() : static;
 
 	/**
 	 * Commits the running database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function commit() : \Aimeos\MShop\Common\Manager\Iface;
+	public function commit() : static;
 
 	/**
 	 * Rolls back the running database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rollback() : \Aimeos\MShop\Common\Manager\Iface;
+	public function rollback() : static;
 }

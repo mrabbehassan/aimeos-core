@@ -149,7 +149,7 @@ class Postal
 			return null;
 		}
 
-		foreach( explode( ',', str_replace( ' ', '', $str ) ) as $prefix )
+		foreach( explode( ',', str_replace( ' ', '', (string) $str ) ) as $prefix )
 		{
 			if( !substr_compare( $code, $prefix, 0, strlen( $prefix ), true ) ) {
 				return true;

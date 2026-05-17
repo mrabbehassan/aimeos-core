@@ -40,7 +40,7 @@ class PgSQL
 	/**
 	 * Returns the list of sub-managers available for the index attribute manager.
 	 *
-	 * @return \Aimeos\MShop\Index\Manager\Iface[] Associative list of the sub-domain as key and the manager object as value
+	 * @return array Associative list of the sub-domain as key and the manager object as value
 	 */
 	protected function getSubManagers() : array
 	{
@@ -52,7 +52,7 @@ class PgSQL
 			foreach( $config->get( 'mshop/index/manager/submanagers', [] ) as $domain )
 			{
 				$name = $config->get( 'mshop/index/manager/' . $domain . '/name' );
-				$this->subManagers[$domain] = $this->object()->getSubManager( $domain, $name ?: 'PgSQL' );
+				$this->subManagers[(string) $domain] = $this->object()->getSubManager( (string) $domain, (string) ( $name ?: 'PgSQL' ) );
 			}
 
 			return $this->subManagers;

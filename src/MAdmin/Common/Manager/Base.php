@@ -51,7 +51,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" and
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2".
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 */
 		$decorators = $config->get( 'madmin/common/manager/decorators/default', [] );
@@ -59,23 +59,26 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 		foreach( $decorators as $key => $name )
 		{
-			if( in_array( $name, $excludes ) ) {
+			if( in_array( $name, (array) $excludes ) ) {
 				unset( $decorators[$key] );
 			}
 		}
 
 		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
-		$manager = $this->addDecorators( $context, $manager, $decorators, $classprefix );
+		// @phpstan-ignore argument.type
+		$manager = $this->addDecorators( $context, $manager, (array) $decorators, $classprefix );
 
 		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/global', [] );
-		$manager = $this->addDecorators( $context, $manager, $decorators, $classprefix );
+		// @phpstan-ignore argument.type
+		$manager = $this->addDecorators( $context, $manager, (array) $decorators, $classprefix );
 
 		$subpath = $this->createSubNames( $managerpath );
 		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_' . $subpath . '_Decorator_';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/local', [] );
 
-		return $this->addDecorators( $context, $manager, $decorators, $classprefix );
+		// @phpstan-ignore argument.type
+		return $this->addDecorators( $context, $manager, (array) $decorators, $classprefix );
 	}
 
 
@@ -100,7 +103,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		}
 
 		if( $name === null ) {
-			$name = $context->config()->get( 'mshop/' . $domain . '/manager/' . $manager . '/name', 'Standard' );
+			$name = (string) $context->config()->get( 'mshop/' . $domain . '/manager/' . $manager . '/name', 'Standard' );
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {
@@ -113,6 +116,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$classname = '\Aimeos\MAdmin\\' . $domainname . '\Manager\\' . $subnames . '\\' . $name;
 		$interface = '\Aimeos\MAdmin\\' . $domainname . '\Manager\\' . $subnames . '\Iface';
 
+		// @phpstan-ignore return.type
 		return \Aimeos\Utils::create( $classname, [$context], $interface );
 	}
 }

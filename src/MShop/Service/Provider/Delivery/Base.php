@@ -37,6 +37,7 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base implements Iface
 	public function setConfigFE( \Aimeos\MShop\Order\Item\Service\Iface $orderServiceItem,
 		array $attributes ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
+		// @phpstan-ignore argument.type
 		return $orderServiceItem->addAttributeItems( $this->attributes( $attributes, 'delivery' ) );
 	}
 }

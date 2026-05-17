@@ -74,16 +74,16 @@ class Standard
 		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
 		$this->searchConfig['index.attribute:allof']['function'] = function( $source, array $params ) {
-			return [$params[0], count( $params[0] )];
+			return [$params[0], count( (array) $params[0] )];
 		};
 
 		$name = 'index.attribute:allof';
-		$expr = $this->siteString( 'mindat_allof."siteid"', $level );
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+		$expr = $this->siteString( 'mindat_allof."siteid"', (int) $level );
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, (string) $this->searchConfig[$name]['internalcode'] );
 
 		$name = 'index.attribute:oneof';
-		$expr = $this->siteString( 'mindat_oneof."siteid"', $level );
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+		$expr = $this->siteString( 'mindat_oneof."siteid"', (int) $level );
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, (string) $this->searchConfig[$name]['internalcode'] );
 	}
 
 
@@ -106,9 +106,9 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		parent::clear( $siteids );
 
@@ -121,9 +121,9 @@ class Standard
 	 * This can be a long lasting operation.
 	 *
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface
+	public function cleanup( string $timestamp ) : static
 	{
 		/** mshop/index/manager/attribute/cleanup/mysql
 		 * Deletes the index attribute records that haven't been touched
@@ -147,7 +147,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for deleting the outdated attribute index records
+		 * @type string SQL statement for deleting the outdated attribute index records
 		 * @since 2014.03
 		 * @see mshop/index/manager/attribute/count/ansi
 		 * @see mshop/index/manager/attribute/delete/ansi
@@ -162,9 +162,9 @@ class Standard
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : static
 	{
 		/** mshop/index/manager/attribute/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -187,13 +187,14 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for deleting index attribute records
+		 * @type string SQL statement for deleting index attribute records
 		 * @since 2014.03
 		 * @see mshop/index/manager/attribute/count/ansi
 		 * @see mshop/index/manager/attribute/cleanup/ansi
 		 * @see mshop/index/manager/attribute/insert/ansi
 		 * @see mshop/index/manager/attribute/search/ansi
 		 */
+		// @phpstan-ignore argument.type
 		return $this->deleteItemsBase( $itemIds, 'mshop/index/manager/attribute/delete' );
 	}
 
@@ -221,7 +222,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @param array List of sub-manager names
+		 * @type array List of sub-manager names
 		 * @since 2014.03
 		 */
 		$path = 'mshop/index/manager/attribute/submanagers';
@@ -268,7 +269,7 @@ class Standard
 		 * name with an upper case character and continue only with lower case characters
 		 * or numbers. Avoid chamel case names like "MyAttribute"!
 		 *
-		 * @param string Last part of the class name
+		 * @type string Last part of the class name
 		 * @since 2014.03
 		 */
 
@@ -290,7 +291,7 @@ class Standard
 		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the index attribute manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/attribute/decorators/global
@@ -315,7 +316,7 @@ class Standard
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the index
 		 * attribute manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/attribute/decorators/excludes
@@ -340,7 +341,7 @@ class Standard
 		 * "\Aimeos\MShop\Index\Manager\Attribute\Decorator\Decorator2" only to th
 		 * index attribute manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/attribute/decorators/excludes
@@ -356,9 +357,9 @@ class Standard
 	 * Execution of this operation can take a very long time and shouldn't be
 	 * called through a web server enviroment.
 	 *
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function optimize() : \Aimeos\MShop\Index\Manager\Iface
+	public function optimize() : static
 	{
 		/** mshop/index/manager/attribute/optimize/mysql
 		 * Optimizes the stored attribute data for retrieving the records faster
@@ -378,7 +379,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for optimizing the stored attribute data
+		 * @type string SQL statement for optimizing the stored attribute data
 		 * @since 2014.09
 		 * @see mshop/index/manager/attribute/count/ansi
 		 * @see mshop/index/manager/attribute/search/ansi
@@ -393,9 +394,9 @@ class Standard
 	 * This can be a long lasting operation.
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rebuild( iterable $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
+	public function rebuild( iterable $items = [] ) : static
 	{
 		if( ( $items = map( $items ) )->isEmpty() ) { return $this; }
 
@@ -430,7 +431,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for inserting records
+			 * @type string SQL statement for inserting records
 			 * @since 2014.03
 			 * @see mshop/index/manager/attribute/cleanup/ansi
 			 * @see mshop/index/manager/attribute/delete/ansi
@@ -440,6 +441,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/attribute/insert' );
 
 			foreach( $items as $item ) {
+				// @phpstan-ignore argument.type
 				$this->saveAttributes( $stmt, $item );
 			}
 
@@ -455,10 +457,11 @@ class Standard
 	 * Removes the products from the product index.
 	 *
 	 * @param iterable|string $ids Product ID or list of IDs
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function remove( $ids ) : \Aimeos\MShop\Index\Manager\Iface
+	public function remove( $ids ) : static
 	{
+		// @phpstan-ignore argument.type
 		parent::remove( $ids )->delete( $ids );
 		return $this;
 	}
@@ -469,7 +472,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
+	 * @type int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -520,7 +523,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for searching items
+		 * @type string SQL statement for searching items
 		 * @since 2014.03
 		 * @see mshop/index/manager/attribute/count/ansi
 		 * @see mshop/index/manager/attribute/optimize/ansi
@@ -570,7 +573,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for counting items
+		 * @type string SQL statement for counting items
 		 * @since 2014.03
 		 * @see mshop/index/manager/attribute/search/ansi
 		 * @see mshop/index/manager/attribute/optimize/ansi
@@ -585,7 +588,7 @@ class Standard
 	/**
 	 * Returns the list of sub-managers available for the index attribute manager.
 	 *
-	 * @return \Aimeos\MShop\Index\Manager\Iface[] Associative list of the sub-domain as key and the manager object as value
+	 * @return array Associative list of the sub-domain as key and the manager object as value
 	 */
 	protected function getSubManagers() : array
 	{
@@ -606,14 +609,15 @@ class Standard
 			 * This option configures the sub-managers that cares about
 			 * indexing data associated to product attributes.
 			 *
-			 * @param string List of index sub-manager names
+			 * @type string List of index sub-manager names
 			 * @since 2014.09
 			 * @see mshop/index/manager/submanagers
 			 */
 			foreach( $config->get( 'mshop/index/manager/attribute/submanagers', [] ) as $domain )
 			{
 				$name = $config->get( 'mshop/index/manager/attribute/' . $domain . '/name' );
-				$this->subManagers[$domain] = $this->object()->getSubManager( $domain, $name );
+				// @phpstan-ignore argument.type, argument.type
+				$this->subManagers[(string) $domain] = $this->object()->getSubManager( (string) $domain, $name );
 			}
 
 			return $this->subManagers;
@@ -628,8 +632,9 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item containing associated attribute items
+	 * @return void
 	 */
-	protected function saveAttributes( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
+	protected function saveAttributes( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item ) : void
 	{
 		$context = $this->context();
 		$siteid = $context->locale()->getSiteId();

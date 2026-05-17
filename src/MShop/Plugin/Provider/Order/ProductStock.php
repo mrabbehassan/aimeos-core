@@ -38,9 +38,9 @@ class ProductStock
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
+	 * @return static Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static
 	{
 		$p->attach( $this->object(), 'addProduct.after' );
 		$p->attach( $this->object(), 'check.after' );
@@ -98,6 +98,7 @@ class ProductStock
 			] );
 		}
 
+		// @phpstan-ignore argument.type
 		$filter->add( $filter->or( $expr ) )->slice( 0, 0x7fffffff );
 
 		foreach( $manager->search( $filter ) as $item ) {
@@ -151,9 +152,11 @@ class ProductStock
 			}
 
 			if( $stocklevel > 0 ) { // update quantity to actual stock level
-				$order->addProduct( $orderProduct->setQuantity( $stocklevel ), $pos );
+				// @phpstan-ignore argument.type, argument.type
+				$order->addProduct( $orderProduct->setQuantity( $stocklevel ), (int) $pos );
 			} else {
-				$order->deleteProduct( $pos );
+				// @phpstan-ignore argument.type
+				$order->deleteProduct( (int) $pos );
 			}
 
 			$outOfStock[$pos] = 'stock.notenough';

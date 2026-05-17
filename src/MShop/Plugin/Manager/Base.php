@@ -52,6 +52,7 @@ abstract class Base
 		$classname = '\Aimeos\MShop\Plugin\Provider\\' . $type . '\\' . $provider;
 		$interface = \Aimeos\MShop\Plugin\Provider\Factory\Iface::class;
 
+		// @phpstan-ignore argument.type
 		$provider = \Aimeos\Utils::create( $classname, [$context, $item], $interface );
 
 		/** mshop/plugin/provider/order/decorators
@@ -71,14 +72,16 @@ abstract class Base
 		 * "\Aimeos\MShop\Plugin\Provider\Decorator\Decorator1" to all order provider
 		 * objects.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/plugin/provider/order/decorators
 		 */
 		$decorators = $context->config()->get( 'mshop/plugin/provider/' . $item->getType() . '/decorators', [] );
 
+		// @phpstan-ignore argument.type
 		$provider = $this->addPluginDecorators( $item, $provider, $names );
-		$provider = $this->addPluginDecorators( $item, $provider, $decorators );
+		// @phpstan-ignore argument.type
+		$provider = $this->addPluginDecorators( $item, $provider, (array) $decorators );
 
 		return $provider->setObject( $provider );
 	}
@@ -89,9 +92,9 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $publisher Publisher object
 	 * @param string $type Unique plugin type code
-	 * @return \Aimeos\MShop\Plugin\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $publisher, string $type ) : \Aimeos\MShop\Plugin\Manager\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $publisher, string $type ) : static
 	{
 		if( !isset( $this->plugins[$type] ) )
 		{
@@ -102,12 +105,15 @@ abstract class Base
 				$search->getConditions(),
 			);
 
+			// @phpstan-ignore argument.type
 			$search->setConditions( $search->and( $expr ) );
+			// @phpstan-ignore argument.type
 			$search->setSortations( array( $search->sort( '+', 'plugin.position' ) ) );
 
 			$this->plugins[$type] = [];
 
 			foreach( $this->object()->search( $search ) as $item ) {
+				// @phpstan-ignore argument.type
 				$this->plugins[$type][$item->getId()] = $this->getProvider( $item, $type );
 			}
 		}
@@ -135,10 +141,10 @@ abstract class Base
 
 		foreach( $names as $name )
 		{
-			if( ctype_alnum( $name ) === false )
+			if( ctype_alnum( (string) $name ) === false )
 			{
 				$msg = $context->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
-				throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, $name ) );
+				throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, (string) $name ) );
 			}
 
 			$classname = $classprefix . $name;
@@ -147,6 +153,7 @@ abstract class Base
 			$provider = \Aimeos\Utils::create( $classname, [$context, $pluginItem, $provider], $interface );
 		}
 
+		// @phpstan-ignore return.type
 		return $provider;
 	}
 }

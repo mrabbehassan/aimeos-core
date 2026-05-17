@@ -42,9 +42,9 @@ interface Iface
 	 * Sets the new reference id of the common list item, like the unique id of a text item or a media item.
 	 *
 	 * @param string $refid New reference id of the common list item
-	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
+	 * @return static Lists item for chaining method calls
 	 */
-	public function setRefId( string $refid ) : \Aimeos\MShop\Common\Item\Lists\Iface;
+	public function setRefId( string $refid ) : static;
 
 	/**
 	 * Returns the referenced item if it's available.
@@ -57,7 +57,7 @@ interface Iface
 	 * Stores the item referenced by the list item.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Item referenced by the list item or null for no reference
-	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
+	 * @return static Lists item for chaining method calls
 	 */
-	public function setRefItem( ?\Aimeos\MShop\Common\Item\Iface $refItem ) : \Aimeos\MShop\Common\Item\Lists\Iface;
+	public function setRefItem( ?\Aimeos\MShop\Common\Item\Iface $refItem ) : static;
 }

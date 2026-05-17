@@ -17,6 +17,7 @@ namespace Aimeos\MShop\Common\Item;
  *
  * @package MShop
  * @subpackage Common
+ * @implements \ArrayAccess<string, mixed>
  */
 class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \ArrayAccess, \JsonSerializable
 {
@@ -92,7 +93,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	/**
 	 * Specifies the data which should be serialized to JSON by json_encode().
 	 *
-	 * @return array<string,mixed> Data to serialize to JSON
+	 * @return array Data to serialize to JSON
 	 */
 	#[\ReturnTypeWillChange]
 	public function jsonSerialize()
@@ -166,12 +167,12 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 * Assigns multiple key/value pairs to the item
 	 *
 	 * @param iterable $pairs Associative list of key/value pairs
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for method chaining
+	 * @return static Item for method chaining
 	 */
-	public function assign( iterable $pairs ) : \Aimeos\MShop\Common\Item\Iface
+	public function assign( iterable $pairs ) : static
 	{
 		foreach( $pairs as $key => $value ) {
-			$this->set( $key, $value );
+			$this->set( (string) $key, $value );
 		}
 
 		return $this;
@@ -200,9 +201,9 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 *
 	 * @param string $name Name of the property
 	 * @param mixed $value New property value
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for method chaining
+	 * @return static Item for method chaining
 	 */
-	public function set( string $name, $value ) : \Aimeos\MShop\Common\Item\Iface
+	public function set( string $name, $value ) : static
 	{
 		// workaround for NULL values instead of empty strings and stringified integers from database
 		if( !array_key_exists( $name, $this->bdata ) || $this->bdata[$name] != $value
@@ -238,9 +239,9 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 * Sets the new ID of the item.
 	 *
 	 * @param string|null $id ID of the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $id ) : static
 	{
 		$this->bdata[$this->bprefix . 'id'] = $id;
 		$this->modified = ( $id === null );
@@ -256,7 +257,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 */
 	public function getSiteId() : string
 	{
-		return $this->get( $this->bprefix . 'siteid', $this->get( 'siteid', '' ) );
+		return (string) $this->get( $this->bprefix . 'siteid', $this->get( 'siteid', '' ) );
 	}
 
 
@@ -286,7 +287,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 */
 	public function getTimeModified() : ?string
 	{
-		return $this->get( $this->bprefix . 'mtime', $this->get( 'mtime' ) );
+		return (string) $this->get( $this->bprefix . 'mtime', $this->get( 'mtime' ) );
 	}
 
 
@@ -297,7 +298,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 */
 	public function getTimeCreated() : ?string
 	{
-		return $this->get( $this->bprefix . 'ctime', $this->get( 'ctime' ) );
+		return (string) $this->get( $this->bprefix . 'ctime', $this->get( 'ctime' ) );
 	}
 
 
@@ -308,7 +309,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 */
 	public function editor() : string
 	{
-		return $this->get( $this->bprefix . 'editor', $this->get( 'editor', '' ) );
+		return (string) $this->get( $this->bprefix . 'editor', $this->get( 'editor', '' ) );
 	}
 
 
@@ -327,9 +328,9 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 * Sets the general availability of the item
 	 *
 	 * @return bool $value True if available, false if not
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setAvailable( bool $value ) : \Aimeos\MShop\Common\Item\Iface
+	public function setAvailable( bool $value ) : static
 	{
 		$this->available = $value;
 		return $this;
@@ -350,9 +351,9 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	/**
 	 * Sets the modified flag of the object.
 	 *
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setModified() : \Aimeos\MShop\Common\Item\Iface
+	public function setModified() : static
 	{
 		$this->modified = true;
 		return $this;
@@ -387,14 +388,14 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
 	 * @param array $list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		if( $private && array_key_exists( $this->bprefix . 'id', $list ) )
 		{
-			$this->setId( $list[$this->bprefix . 'id'] );
+			$this->setId( $list[$this->bprefix . 'id'] !== null ? (string) $list[$this->bprefix . 'id'] : null );
 			unset( $list[$this->bprefix . 'id'] );
 		}
 
@@ -413,7 +414,7 @@ class Base implements \Aimeos\MShop\Common\Item\Iface, \Aimeos\Macro\Iface, \Arr
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

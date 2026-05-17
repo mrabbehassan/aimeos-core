@@ -68,7 +68,7 @@ trait Upload
 		$stream->rewind();
 
 		$finfo = new \finfo( FILEINFO_MIME_TYPE );
-		return $finfo->buffer( $content );
+		return $finfo->buffer( $content ) ?: 'application/octet-stream';
 	}
 
 
@@ -104,6 +104,7 @@ trait Upload
 			$fs->mkdir( $dirname );
 		}
 
+		// @phpstan-ignore argument.type
 		$fs->writes( $filepath, $file->getStream()->detach() );
 
 		return $this;

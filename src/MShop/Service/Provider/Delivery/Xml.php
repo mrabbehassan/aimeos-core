@@ -86,7 +86,7 @@ class Xml
 	 * Sends the details of all orders to the ERP system for further processing
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orders List of order invoice objects
-	 * @return \Aimeos\MShop\Order\Item\Iface[] Updated order items
+	 * @return \Aimeos\Map Updated order items
 	 */
 	public function push( iterable $orders ) : \Aimeos\Map
 	{
@@ -111,7 +111,7 @@ class Xml
 	{
 		$context = $this->context();
 		$logger = $context->logger();
-		$location = $this->require( 'xml.updatedir' );
+		$location = (string) $this->require( 'xml.updatedir' );
 
 		if( !file_exists( $location ) )
 		{
@@ -141,7 +141,7 @@ class Xml
 		sort( $files );
 
 		foreach( $files as $filepath ) {
-			$this->importFile( $filepath );
+			$this->importFile( (string) $filepath );
 		}
 
 		$msg = sprintf( 'Finished order status import from "%1$s"', $location );
@@ -159,7 +159,7 @@ class Xml
 	 */
 	protected function createFile( string $content ) : \Aimeos\MShop\Service\Provider\Delivery\Iface
 	{
-		$filepath = $this->getConfigValue( 'xml.exportpath', './order_%Y-%m-%d_%H:%i:%s_%v.xml' );
+		$filepath = (string) $this->getConfigValue( 'xml.exportpath', './order_%Y-%m-%d_%H:%i:%s_%v.xml' );
 		$filepath = sprintf( \Aimeos\Base\Str::strtime( $filepath ), $this->num++ );
 
 		if( file_put_contents( $filepath, $content ) === false )
@@ -224,13 +224,14 @@ class Xml
 			}
 		}
 
+		// @phpstan-ignore argument.type
 		$this->importNodes( $nodes );
 		unset( $nodes );
 
 		$msg = sprintf( 'Finished order status import from file "%1$s"', $filename );
 		$logger->info( $msg, 'core/service' );
 
-		$backup = \Aimeos\Base\Str::strtime( $this->getConfigValue( 'xml.backupdir', '' ) );
+		$backup = \Aimeos\Base\Str::strtime( (string) $this->getConfigValue( 'xml.backupdir', '' ) );
 
 		if( !empty( $backup ) && @rename( $filename, $backup ) === false )
 		{
@@ -245,7 +246,7 @@ class Xml
 	/**
 	 * Imports the orders from the given XML nodes
 	 *
-	 * @param \DomElement[] List of order DOM nodes
+	 * @param array<string, \DOMNode> $nodes List of order DOM nodes
 	 * @return \Aimeos\MShop\Service\Provider\Delivery\Iface Same object for fluent interface
 	 */
 	protected function importNodes( array $nodes ) : \Aimeos\MShop\Service\Provider\Delivery\Iface
@@ -263,13 +264,15 @@ class Xml
 				$list[$childNode->nodeName] = $childNode->nodeValue;
 			}
 
+			// @phpstan-ignore argument.type
 			if( ( $attr = $node->attributes->getNamedItem( 'ref' ) ) !== null
-				&& ( $item = $items->get( $attr->nodeValue ) ) !== null
+				&& ( $item = $items->get( (string) $attr->nodeValue ) ) !== null
 			) {
 				$item->fromArray( $list, true );
 			}
 		}
 
+		// @phpstan-ignore argument.type
 		$manager->save( $items->toArray() );
 		return $this;
 	}

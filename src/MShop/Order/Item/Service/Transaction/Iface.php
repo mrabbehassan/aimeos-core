@@ -26,9 +26,9 @@ interface Iface
 	 * Sets the site ID of the item.
 	 *
 	 * @param string $value Unique site ID of the item
-	 * @return \Aimeos\MShop\Order\Item\Service\Transaction\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setSiteId( string $value ) : \Aimeos\MShop\Order\Item\Service\Transaction\Iface;
+	public function setSiteId( string $value ) : static;
 
 	/**
 	 * Returns the price object which belongs to the service item.
@@ -41,7 +41,7 @@ interface Iface
 	 * Sets a new price object for the service item.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : \Aimeos\MShop\Order\Item\Service\Transaction\Iface;
+	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price ) : static;
 }

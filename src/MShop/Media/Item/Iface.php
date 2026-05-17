@@ -33,9 +33,9 @@ interface Iface
 	 * Sets the name of the file system the referenced file is stored.
 	 *
 	 * @param string $value Name of the file system
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setFileSystem( string $value ) : \Aimeos\MShop\Media\Item\Iface;
+	public function setFileSystem( string $value ) : static;
 
 	/**
 	 * Returns the ISO language code.
@@ -48,9 +48,9 @@ interface Iface
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setLanguageId( ?string $langid ) : \Aimeos\MShop\Media\Item\Iface;
+	public function setLanguageId( ?string $langid ) : static;
 
 	/**
 	 * Returns the name of the media item.
@@ -63,9 +63,9 @@ interface Iface
 	 * Sets the new label of the media item.
 	 *
 	 * @param string|null $label Type label of the media item
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setLabel( ?string $label ) : \Aimeos\MShop\Media\Item\Iface;
+	public function setLabel( ?string $label ) : static;
 
 	/**
 	 * Returns the mime type of the media item.
@@ -78,17 +78,17 @@ interface Iface
 	 * Sets the new mime type of the media.
 	 *
 	 * @param string $mimetype Mime type of the media item
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setMimeType( string $mimetype ) : \Aimeos\MShop\Media\Item\Iface;
+	public function setMimeType( string $mimetype ) : static;
 
 	/**
 	 * Returns the preview url of the media item.
 	 *
-	 * @param bool|int $size TRUE for the largest image, FALSE for the smallest or a concrete image width
+	 * @param bool|int $width TRUE for the largest image, FALSE for the smallest or a concrete image width
 	 * @return string Preview URL of the media file
 	 */
-	public function getPreview( $width = false ) : string;
+	public function getPreview( bool|int $width = false ) : string;
 
 	/**
 	 * Returns all preview urls for images of different sizes.
@@ -102,17 +102,17 @@ interface Iface
 	 * Sets the new preview url of the media item.
 	 *
 	 * @param string $url Preview URL of the media file
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setPreview( string $url ) : \Aimeos\MShop\Media\Item\Iface;
+	public function setPreview( string $url ) : static;
 
 	/**
 	 * Sets the new preview url of the media item.
 	 *
-	 * @param array $url Preview URL or list of URLs with widths of the media file in pixels as keys
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @param array $urls Preview URL or list of URLs with widths of the media file in pixels as keys
+	 * @return static Media item for chaining method calls
 	 */
-	public function setPreviews( array $urls ) : \Aimeos\MShop\Media\Item\Iface;
+	public function setPreviews( array $urls ) : static;
 
 	/**
 	 * Returns the url of the media item.
@@ -126,7 +126,7 @@ interface Iface
 	 * Sets the new url of the media item.
 	 *
 	 * @param string|null $url URL of the media file
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setUrl( ?string $url ) : \Aimeos\MShop\Media\Item\Iface;
+	public function setUrl( ?string $url ) : static;
 }

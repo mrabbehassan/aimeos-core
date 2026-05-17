@@ -36,41 +36,41 @@ interface Iface
 	 * This can be a long lasting operation.
 	 *
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface;
+	public function cleanup( string $timestamp ) : static;
 
 	/**
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface;
+	public function delete( $itemIds ) : static;
 
 	/**
 	 * Optimizes the index if necessary.
 	 * This operation can last very long and it shouldn't be called by a script
 	 * executed by a web server.
 	 *
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function optimize() : \Aimeos\MShop\Index\Manager\Iface;
+	public function optimize() : static;
 
 	/**
 	 * Rebuilds the index for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rebuild( iterable $items = [] ) : \Aimeos\MShop\Index\Manager\Iface;
+	public function rebuild( iterable $items = [] ) : static;
 
 	/**
 	 * Removes the products from the product index.
 	 *
 	 * @param array|string $ids Product ID or list of IDs
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function remove( $ids ) : \Aimeos\MShop\Index\Manager\Iface;
+	public function remove( $ids ) : static;
 }

@@ -209,13 +209,14 @@ class PayPalExpress
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
-		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
+		$rvals = $this->checkResponse( (string) $order->getId(), $response, __METHOD__ );
 
 		$default = 'https://www.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=%1$s';
-		$paypalUrl = sprintf( $this->getConfigValue( array( 'paypalexpress.PaypalUrl' ), $default ), $rvals['TOKEN'] );
+		$paypalUrl = sprintf( (string) $this->getConfigValue( array( 'paypalexpress.PaypalUrl' ), $default ), (string) $rvals['TOKEN'] );
 
 		$type = \Aimeos\MShop\Order\Item\Service\Base::TYPE_PAYMENT;
 		$serviceItem = $this->getBasketService( $order, $type, $this->getServiceItem()->getCode() );
+		// @phpstan-ignore argument.type
 		$serviceItem->addAttributeItems( $this->attributes( ['TOKEN' => $rvals['TOKEN']], 'tx' ) );
 
 		return new \Aimeos\MShop\Common\Helper\Form\Standard( $paypalUrl, 'POST', [] );
@@ -242,7 +243,7 @@ class PayPalExpress
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
-		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
+		$rvals = $this->checkResponse( (string) $order->getId(), $response, __METHOD__ );
 
 		return $this->setStatusPayment( $order, $rvals );
 	}
@@ -277,7 +278,7 @@ class PayPalExpress
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
-		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
+		$rvals = $this->checkResponse( (string) $order->getId(), $response, __METHOD__ );
 
 		$this->setStatusPayment( $order, $rvals );
 
@@ -288,6 +289,7 @@ class PayPalExpress
 
 		// updates the transaction id
 		$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
+		// @phpstan-ignore argument.type
 		$serviceItem->addAttributeItems( $this->attributes( $attributes, 'tx' ) );
 
 		return $order;
@@ -322,9 +324,10 @@ class PayPalExpress
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
-		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
+		$rvals = $this->checkResponse( (string) $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'REFUNDTRANSACTIONID' => $rvals['REFUNDTRANSACTIONID'] );
+		// @phpstan-ignore argument.type
 		$serviceItem->addAttributeItems( $this->attributes( $attributes, 'tx' ) );
 
 		return $order->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_REFUND );
@@ -351,7 +354,7 @@ class PayPalExpress
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
-		$this->checkResponse( $order->getId(), $response, __METHOD__ );
+		$this->checkResponse( (string) $order->getId(), $response, __METHOD__ );
 
 		return $order->setStatusPayment( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
 	}
@@ -376,7 +379,7 @@ class PayPalExpress
 		$urlQuery = http_build_query( $params, '', '&' );
 
 		//validation
-		$result = $this->send( $this->getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
+		$result = $this->send( (string) $this->getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
 
 		if( $result !== 'VERIFIED' ) {
 			return $response->withStatus( 400, sprintf( 'PayPal Express: Invalid request "%1$s"', $urlQuery ) );
@@ -384,11 +387,14 @@ class PayPalExpress
 
 
 		$manager = \Aimeos\MShop::create( $this->context(), 'order' );
+		// @phpstan-ignore argument.type
 		$order = $manager->get( $params['invoice'], ['order/base', 'order/service'] );
 
 		$type = \Aimeos\MShop\Order\Item\Service\Base::TYPE_PAYMENT;
+		// @phpstan-ignore argument.type
 		$serviceItem = $this->getBasketService( $order, $type, $this->getServiceItem()->getCode() );
 
+		// @phpstan-ignore argument.type
 		$this->checkIPN( $order, $params );
 
 		$status = array( 'PAYMENTSTATUS' => $params['payment_status'] );
@@ -397,9 +403,12 @@ class PayPalExpress
 			$status['PENDINGREASON'] = $params['pending_reason'];
 		}
 
+		// @phpstan-ignore argument.type
 		$serviceItem->addAttributeItems( $this->attributes( ['TRANSACTIONID' => $params['txn_id']], 'tx' ) )
-			->addAttributeItems( $this->attributes( [$params['txn_id'] => $params['payment_status']], 'paypal/txn' ) );
+			// @phpstan-ignore argument.type
+			->addAttributeItems( $this->attributes( [(string) $params['txn_id'] => $params['payment_status']], 'paypal/txn' ) );
 
+		// @phpstan-ignore argument.type
 		$manager->save( $this->setStatusPayment( $order, $status ) );
 
 		return $response->withStatus( 200 );
@@ -445,17 +454,19 @@ class PayPalExpress
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
-		$rvals = $this->checkResponse( $orderItem->getId(), $response, __METHOD__ );
+		$rvals = $this->checkResponse( (string) $orderItem->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'PAYERID' => $params['PayerID'] );
 
 		if( isset( $rvals['TRANSACTIONID'] ) )
 		{
 			$attributes['TRANSACTIONID'] = $rvals['TRANSACTIONID'];
-			$attrs = [$rvals['TRANSACTIONID'] => $rvals['PAYMENTSTATUS']];
+			$attrs = [(string) $rvals['TRANSACTIONID'] => $rvals['PAYMENTSTATUS']];
+			// @phpstan-ignore argument.type
 			$serviceItem->addAttributeItems( $this->attributes( $attrs, 'paypal/txn' ) );
 		}
 
+		// @phpstan-ignore argument.type
 		$serviceItem->addAttributeItems( $this->attributes( $attributes, 'tx' ) );
 		return $this->setStatusPayment( $orderItem, $rvals );
 	}
@@ -503,8 +514,9 @@ class PayPalExpress
 
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
-				$short = ( isset( $rvals['L_SHORTMESSAGE0'] ) ? $rvals['L_SHORTMESSAGE0'] : '<none>' );
-				$msg = $this->context()->translate( 'mshop', 'PayPal Express: Request for order ID "%1$s" failed with "%2$s"' );
+				$short = ( isset( $rvals['L_SHORTMESSAGE0'] ) ? (string) $rvals['L_SHORTMESSAGE0'] : '<none>' );
+				$msg = (string) $this->context()->translate( 'mshop', 'PayPal Express: Request for order ID "%1$s" failed with "%2$s"' );
+				// @phpstan-ignore argument.type
 				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $orderid, $short ) );
 			}
 		}
@@ -528,7 +540,7 @@ class PayPalExpress
 		if( $this->getConfigValue( array( 'paypalexpress.AccountEmail' ) ) !== $params['receiver_email'] )
 		{
 			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Wrong receiver email "%1$s"' );
-			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $params['receiver_email'] ) );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( (string) $msg, (string) $params['receiver_email'] ) );
 		}
 
 		$price = $basket->getPrice();
@@ -536,7 +548,7 @@ class PayPalExpress
 		if( $this->getAmount( $price ) != $params['payment_amount'] )
 		{
 			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Wrong payment amount "%1$s" for order ID "%2$s"' );
-			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $params['payment_amount'], $params['invoice'] ) );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( (string) $msg, (string) $params['payment_amount'], (string) $params['invoice'] ) );
 		}
 
 		$search = $attrManager->filter();
@@ -550,7 +562,7 @@ class PayPalExpress
 		if( !$attrManager->search( $search )->isEmpty() )
 		{
 			$msg = $this->context()->translate( 'mshop', 'PayPal Express: Duplicate transaction with ID "%1$s" and status "%2$s"' );
-			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $params['txn_id'], $params['txn_status'] ) );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( (string) $msg, (string) $params['txn_id'], (string) $params['txn_status'] ) );
 		}
 
 		return $this;
@@ -665,17 +677,19 @@ class PayPalExpress
 				$price = $product->getPrice();
 				$lastPos = $product->getPosition();
 
-				$deliveryPrice = clone $price;
+				$deliveryPrice = clone $price; // @phpstan-ignore clone.nonObject
+				// @phpstan-ignore argument.type, argument.type, method.notFound
 				$deliveryPrices = $this->addPrice( $deliveryPrices, $deliveryPrice->setValue( '0.00' ), $product->getQuantity() );
 
 				$values['L_PAYMENTREQUEST_0_NUMBER' . $lastPos] = $product->getId();
 				$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
 				$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = $product->getQuantity();
+				// @phpstan-ignore argument.type
 				$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $this->getAmount( $price, false );
 			}
 
 			foreach( $deliveryPrices as $priceItem ) {
-				$itemDeliveryCosts += $this->getAmount( $priceItem, true, true, $precision );
+				$itemDeliveryCosts += $this->getAmount( $priceItem, true, true, $precision ); // @phpstan-ignore assignOp.invalid
 			}
 		}
 
@@ -688,7 +702,7 @@ class PayPalExpress
 
 				if( ( $paymentCosts = $this->getAmount( $price ) ) > '0.00' )
 				{
-					$lastPos++;
+					$lastPos = (int) $lastPos + 1;
 					$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $this->context()->translate( 'mshop', 'Payment costs' );
 					$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = '1';
 					$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $paymentCosts;
@@ -702,7 +716,7 @@ class PayPalExpress
 				{
 					$deliveryPrices = $this->addPrice( $deliveryPrices, $service->getPrice() );
 
-					$values['L_SHIPPINGOPTIONAMOUNT' . $lastPos] = number_format( $service->getPrice()->getCosts() + $itemDeliveryCosts, $precision, '.', '' );
+					$values['L_SHIPPINGOPTIONAMOUNT' . $lastPos] = number_format( (float) ( $service->getPrice()->getCosts() + $itemDeliveryCosts ), $precision, '.', '' );
 					$values['L_SHIPPINGOPTIONLABEL' . $lastPos] = $service->getCode();
 					$values['L_SHIPPINGOPTIONNAME' . $lastPos] = $service->getName();
 					$values['L_SHIPPINGOPTIONISDEFAULT' . $lastPos] = 'true';
@@ -719,13 +733,13 @@ class PayPalExpress
 		$amount = $this->getAmount( $price );
 
 		foreach( $deliveryPrices as $priceItem ) {
-			$deliveryCosts += $this->getAmount( $priceItem, true, true, $precision );
+			$deliveryCosts += $this->getAmount( $priceItem, true, true, $precision ); // @phpstan-ignore assignOp.invalid
 		}
 
-		$values['MAXAMT'] = $amount + 1 / pow( 10, $precision ); // possible rounding error
+		$values['MAXAMT'] = $amount + 1 / pow( 10, $precision ); // possible rounding error // @phpstan-ignore binaryOp.invalid
 		$values['PAYMENTREQUEST_0_AMT'] = $amount;
-		$values['PAYMENTREQUEST_0_ITEMAMT'] = number_format( $amount - $deliveryCosts, $precision, '.', '' );
-		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format( $deliveryCosts, $precision, '.', '' );
+		$values['PAYMENTREQUEST_0_ITEMAMT'] = number_format( (float) ( $amount - $deliveryCosts ), $precision, '.', '' );
+		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format( (float) $deliveryCosts, $precision, '.', '' );
 		$values['PAYMENTREQUEST_0_INSURANCEAMT'] = '0.00';
 		$values['PAYMENTREQUEST_0_INSURANCEOPTIONOFFERED'] = 'false';
 		$values['PAYMENTREQUEST_0_SHIPDISCAMT'] = '0.00';
@@ -783,8 +797,9 @@ class PayPalExpress
 
 		if( !isset( $prices[$taxrate] ) )
 		{
-			$prices[$taxrate] = \Aimeos\MShop::create( $this->context(), 'price' )->create();
-			$prices[$taxrate]->setTaxRate( $taxrate );
+			/** @var \Aimeos\MShop\Price\Item\Iface $item */
+			$item = \Aimeos\MShop::create( $this->context(), 'price' )->create();
+			$prices[$taxrate] = $item->setTaxRate( $taxrate );
 		}
 
 		$prices[$taxrate]->addItem( $price, $quantity );
@@ -809,8 +824,9 @@ class PayPalExpress
 
 		try
 		{
+			// @phpstan-ignore argument.type
 			curl_setopt( $curl, CURLOPT_URL, $target );
-
+			// @phpstan-ignore argument.type
 			curl_setopt( $curl, CURLOPT_CUSTOMREQUEST, strtoupper( $method ) );
 			curl_setopt( $curl, CURLOPT_POSTFIELDS, $payload );
 			curl_setopt( $curl, CURLOPT_CONNECTTIMEOUT, 25 );
@@ -838,6 +854,6 @@ class PayPalExpress
 			throw $e;
 		}
 
-		return $response;
+		return (string) $response;
 	}
 }

@@ -32,9 +32,9 @@ interface Iface
 	 * Sets the code of the type item
 	 *
 	 * @param string $code New code of the type item
-	 * @return \Aimeos\MShop\Type\Item\Iface Common type item for chaining method calls
+	 * @return static Common type item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setCode( string $code ) : static;
 
 	/**
 	 * Returns the translated name for the type item
@@ -54,9 +54,9 @@ interface Iface
 	 * Sets the label of the type item
 	 *
 	 * @param string $label New label of the type item
-	 * @return \Aimeos\MShop\Type\Item\Iface Common type item for chaining method calls
+	 * @return static Common type item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Type\Item\Iface;
+	public function setLabel( string $label ) : static;
 
 	/**
 	 * Returns the translations of the type item label
@@ -69,7 +69,7 @@ interface Iface
 	 * Sets the translations of the type item label
 	 *
 	 * @param array $value New translations of the type item label
-	 * @return \Aimeos\MShop\Type\Item\Iface Common type item for chaining method calls
+	 * @return static Common type item for chaining method calls
 	 */
-	public function setI18n( array $value ) : \Aimeos\MShop\Type\Item\Iface;
+	public function setI18n( array $value ) : static;
 }

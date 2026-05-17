@@ -46,9 +46,11 @@ abstract class Base
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->initListItems( $values['.listitems'] ?? [] );
-		$this->initAddressItems( $values['.addritems'] ?? [] );
-		$this->initPropertyItems( $values['.propitems'] ?? [] );
+		$this->initListItems( (array) ( $values['.listitems'] ?? [] ) );
+		// @phpstan-ignore argument.type
+		$this->initAddressItems( (array) ( $values['.addritems'] ?? [] ) );
+		// @phpstan-ignore argument.type
+		$this->initPropertyItems( (array) ( $values['.propitems'] ?? [] ) );
 
 		$this->payaddress = $address->setId( $this->getId() ); // set modified flag to false
 	}
@@ -83,9 +85,9 @@ abstract class Base
 	 * Sets the payaddress of the customer item.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Billingaddress of the customer item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address ) : \Aimeos\MShop\Customer\Item\Iface
+	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address ) : static
 	{
 		if( $address === $this->payaddress && $address->isModified() === false ) { return $this; }
 
@@ -110,11 +112,11 @@ abstract class Base
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Customer item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 		$addr = $item->getPaymentAddress()->fromArray( $list, $private );
@@ -126,7 +128,7 @@ abstract class Base
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

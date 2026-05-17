@@ -121,7 +121,7 @@ class Delivery
 			$service = $this->getBasketService( $basket, $type, $this->getServiceItem()->getCode() );
 
 			if( ( $value = $service->getAttribute( 'delivery.type', 'delivery' ) ) != '' ) {
-				$feconfig['delivery.type']['default'] = $this->sort( $values, (int) $value );
+				$feconfig['delivery.type']['default'] = $this->sort( (array) $values, (int) $value );
 			} else {
 				$feconfig['delivery.type']['default'] = $values;
 			}

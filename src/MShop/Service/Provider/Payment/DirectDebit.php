@@ -102,11 +102,13 @@ class DirectDebit
 	public function setConfigFE( \Aimeos\MShop\Order\Item\Service\Iface $orderServiceItem,
 		array $attributes ) : \Aimeos\MShop\Order\Item\Service\Iface
 	{
+		// @phpstan-ignore argument.type
 		$orderServiceItem->addAttributeItems( $this->attributes( $attributes ) );
 
 		if( ( $attrItem = $orderServiceItem->getAttributeItem( 'directdebit.accountno' ) ) !== null )
 		{
 			$attrList = [$attrItem->getCode() => $attrItem->getValue()];
+			// @phpstan-ignore argument.type
 			$orderServiceItem->addAttributeItems( $this->attributes( $attrList, 'hidden' ) );
 
 			if( is_string( $value = $attrItem->getValue() ) )

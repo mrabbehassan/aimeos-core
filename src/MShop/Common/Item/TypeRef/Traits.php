@@ -33,9 +33,9 @@ trait Traits
 	 *
 	 * @param string $name Name of the property
 	 * @param mixed $value New property value
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for method chaining
+	 * @return static Item for method chaining
 	 */
-	abstract public function set( string $name, $value ) : \Aimeos\MShop\Common\Item\Iface;
+	abstract public function set( string $name, $value ) : static;
 
 	/**
 	 * Returns the prefix for the item properties
@@ -52,6 +52,7 @@ trait Traits
 	 */
 	public function getTypeItem() : ?\Aimeos\MShop\Type\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->get( '.type' );
 	}
 
@@ -63,7 +64,7 @@ trait Traits
 	 */
 	public function getType() : string
 	{
-		return $this->get( $this->prefix() . 'type', '' );
+		return (string) $this->get( $this->prefix() . 'type', '' );
 	}
 
 
@@ -71,9 +72,9 @@ trait Traits
 	 * Sets the new type of the item.
 	 *
 	 * @param string $type Type of the item
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
+	 * @return static Attribute item for chaining method calls
 	 */
-	public function setType( string $type ) : \Aimeos\MShop\Common\Item\Iface
+	public function setType( string $type ) : static
 	{
 		return $this->set( $this->prefix() . 'type', \Aimeos\Utils::code( $type ) );
 	}

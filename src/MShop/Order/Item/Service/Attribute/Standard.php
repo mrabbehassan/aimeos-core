@@ -31,7 +31,7 @@ class Standard
 	 */
 	public function getSiteId() : string
 	{
-		return $this->get( 'order.service.attribute.siteid', '' );
+		return (string) $this->get( 'order.service.attribute.siteid', '' );
 	}
 
 
@@ -39,9 +39,9 @@ class Standard
 	 * Sets the site ID of the item.
 	 *
 	 * @param string $value Unique site ID of the item
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setSiteId( string $value ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface
+	public function setSiteId( string $value ) : static
 	{
 		return $this->set( 'order.service.attribute.siteid', $value );
 	}
@@ -54,7 +54,7 @@ class Standard
 	 */
 	public function getAttributeId() : string
 	{
-		return $this->get( 'order.service.attribute.attributeid', '' );
+		return (string) $this->get( 'order.service.attribute.attributeid', '' );
 	}
 
 
@@ -62,9 +62,9 @@ class Standard
 	 * Sets the original attribute ID of the service attribute item.
 	 *
 	 * @param string|null $id Attribute ID of the service attribute item
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setAttributeId( ?string $id ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface
+	public function setAttributeId( ?string $id ) : static
 	{
 		return $this->set( 'order.service.attribute.attributeid', (string) $id );
 	}
@@ -77,6 +77,7 @@ class Standard
 	 */
 	public function getParentId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'order.service.attribute.parentid' );
 	}
 
@@ -85,9 +86,9 @@ class Standard
 	 * Sets the ID of the ordered service item as parent
 	 *
 	 * @param string|null $id ID of the ordered service item
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setParentId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
+	public function setParentId( ?string $id ) : static
 	{
 		return $this->set( 'order.service.attribute.parentid', $id );
 	}
@@ -100,7 +101,7 @@ class Standard
 	 */
 	public function getCode() : string
 	{
-		return $this->get( 'order.service.attribute.code', '' );
+		return (string) $this->get( 'order.service.attribute.code', '' );
 	}
 
 
@@ -108,9 +109,9 @@ class Standard
 	 * Sets a new code for the service attribute item.
 	 *
 	 * @param string $code Code as defined by the service provider
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface
+	public function setCode( string $code ) : static
 	{
 		return $this->set( 'order.service.attribute.code', \Aimeos\Utils::code( $code, 255 ) );
 	}
@@ -123,7 +124,7 @@ class Standard
 	 */
 	public function getName() : string
 	{
-		return $this->get( 'order.service.attribute.name', '' );
+		return (string) $this->get( 'order.service.attribute.name', '' );
 	}
 
 
@@ -131,9 +132,9 @@ class Standard
 	 * Sets a new name for the service attribute item.
 	 *
 	 * @param string|null $name Name as defined by the service provider
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setName( ?string $name ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface
+	public function setName( ?string $name ) : static
 	{
 		return $this->set( 'order.service.attribute.name', (string) $name );
 	}
@@ -146,6 +147,7 @@ class Standard
 	 */
 	public function getValue()
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'order.service.attribute.value', '' );
 	}
 
@@ -154,9 +156,9 @@ class Standard
 	 * Sets a new value for the service item.
 	 *
 	 * @param string|array $value service attribute item value
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setValue( $value ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface
+	public function setValue( $value ) : static
 	{
 		return $this->set( 'order.service.attribute.value', $value );
 	}
@@ -169,7 +171,7 @@ class Standard
 	 */
 	public function getQuantity() : float
 	{
-		return $this->get( 'order.service.attribute.quantity', 1 );
+		return (float) $this->get( 'order.service.attribute.quantity', 1 );
 	}
 
 
@@ -177,9 +179,9 @@ class Standard
 	 * Sets the quantity of the service attribute.
 	 *
 	 * @param float $value Quantity of the service attribute
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setQuantity( float $value ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface
+	public function setQuantity( float $value ) : static
 	{
 		return $this->set( 'order.service.attribute.quantity', $value );
 	}
@@ -192,6 +194,7 @@ class Standard
 	 */
 	public function getPrice() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'order.service.attribute.price' );
 	}
 
@@ -200,9 +203,9 @@ class Standard
 	 * Sets the price of the service attribute.
 	 *
 	 * @param string|null $value Price of the service attribute
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setPrice( ?string $value ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface
+	public function setPrice( ?string $value ) : static
 	{
 		return $this->set( 'order.service.attribute.price', $value );
 	}
@@ -212,9 +215,9 @@ class Standard
 	 * Copys all data from a given attribute item.
 	 *
 	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item to copy from
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface
+	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item ) : static
 	{
 		$this->setSiteId( $item->getSiteId() );
 		$this->setAttributeId( $item->getId() );
@@ -231,11 +234,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order service attribute item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Order service attribute item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -243,15 +246,15 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.service.attribute.attributeid': !$private ?: $item->setAttributeId( $value ); break;
-				case 'order.service.attribute.parentid': !$private ?: $item->setParentId( $value ); break;
-				case 'order.service.attribute.siteid': !$private ?: $item->setSiteId( $value ); break;
-				case 'order.service.attribute.type': $item->setType( $value ); break;
-				case 'order.service.attribute.name': $item->setName( $value ); break;
-				case 'order.service.attribute.code': $item->setCode( $value ); break;
-				case 'order.service.attribute.value': $item->setValue( $value ); break;
-				case 'order.service.attribute.price': $item->setPrice( $value ); break;
-				case 'order.service.attribute.quantity': $item->setQuantity( $value ); break;
+				case 'order.service.attribute.attributeid': !$private ?: $item->setAttributeId( $value ? (string) $value : null ); break;
+				case 'order.service.attribute.parentid': !$private ?: $item->setParentId( $value ? (string) $value : null ); break;
+				case 'order.service.attribute.siteid': !$private ?: $item->setSiteId( (string) $value ); break;
+				case 'order.service.attribute.type': $item->setType( (string) $value ); break;
+				case 'order.service.attribute.name': $item->setName( $value ? (string) $value : null ); break;
+				case 'order.service.attribute.code': $item->setCode( (string) $value ); break;
+				case 'order.service.attribute.value': $item->setValue( is_array( $value ) ? $value : (string) $value ); break;
+				case 'order.service.attribute.price': $item->setPrice( $value ? (string) $value : null ); break;
+				case 'order.service.attribute.quantity': $item->setQuantity( (float) $value ); break;
 				default: continue 2;
 			}
 
@@ -265,7 +268,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

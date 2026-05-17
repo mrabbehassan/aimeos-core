@@ -44,9 +44,11 @@ class Standard
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->initPropertyItems( $values['.propitems'] ?? [] );
-		$this->initListItems( $values['.listitems'] ?? [] );
-		$this->initStockItems( $values['.stock'] ?? [] );
+		// @phpstan-ignore argument.type
+		$this->initPropertyItems( (array) ( $values['.propitems'] ?? [] ) );
+		$this->initListItems( (array) ( $values['.listitems'] ?? [] ) );
+		// @phpstan-ignore argument.type
+		$this->initStockItems( (array) ( $values['.stock'] ?? [] ) );
 	}
 
 
@@ -76,10 +78,11 @@ class Standard
 	/**
 	 * Returns the supplier items referencing the product
 	 *
-	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Supplier\Item\Iface
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface|null Site item or null if not available
 	 */
 	public function getSiteItem() : ?\Aimeos\MShop\Locale\Item\Site\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->get( '.locale/site' );
 	}
 
@@ -91,7 +94,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'product.status', 1 );
+		return (int) $this->get( 'product.status', 1 );
 	}
 
 
@@ -99,9 +102,9 @@ class Standard
 	 * Sets the new status of the product item.
 	 *
 	 * @param int $status New status of the product item
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'product.status', $status );
 	}
@@ -114,7 +117,7 @@ class Standard
 	 */
 	public function getCode() : string
 	{
-		return $this->get( 'product.code', '' );
+		return (string) $this->get( 'product.code', '' );
 	}
 
 
@@ -122,9 +125,9 @@ class Standard
 	 * Sets the new code of the product item.
 	 *
 	 * @param string $code New code of product item
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Product\Item\Iface
+	public function setCode( string $code ) : static
 	{
 		return $this->set( 'product.code', \Aimeos\Utils::code( $code ) );
 	}
@@ -137,7 +140,7 @@ class Standard
 	 */
 	public function getDataset() : string
 	{
-		return $this->get( 'product.dataset', '' );
+		return (string) $this->get( 'product.dataset', '' );
 	}
 
 
@@ -145,9 +148,9 @@ class Standard
 	 * Sets a new data set name assignd to the product item.
 	 *
 	 * @param string $name New data set name
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setDataset( ?string $name ) : \Aimeos\MShop\Product\Item\Iface
+	public function setDataset( ?string $name ) : static
 	{
 		return $this->set( 'product.dataset', \Aimeos\Utils::code( (string) $name ) );
 	}
@@ -160,7 +163,7 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'product.label', '' );
+		return (string) $this->get( 'product.label', '' );
 	}
 
 
@@ -168,9 +171,9 @@ class Standard
 	 * Sets a new label of the product item.
 	 *
 	 * @param string $label New label of the product item
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Product\Item\Iface
+	public function setLabel( string $label ) : static
 	{
 		return $this->set( 'product.label', $label );
 	}
@@ -210,9 +213,9 @@ class Standard
 	 * Sets a new URL segment for the product.
 	 *
 	 * @param string|null $url New URL segment of the product item
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setUrl( ?string $url ) : \Aimeos\MShop\Product\Item\Iface
+	public function setUrl( ?string $url ) : static
 	{
 		return $this->set( 'product.url', \Aimeos\Base\Str::slug( $url ) );
 	}
@@ -226,7 +229,7 @@ class Standard
 	public function getDateStart() : ?string
 	{
 		$value = $this->get( 'product.datestart' );
-		return $value ? substr( $value, 0, 19 ) : null;
+		return $value ? substr( (string) $value, 0, 19 ) : null;
 	}
 
 
@@ -234,9 +237,9 @@ class Standard
 	 * Sets a new starting point of time, in which the product is available.
 	 *
 	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setDateStart( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDateStart( ?string $date ) : static
 	{
 		return $this->set( 'product.datestart', \Aimeos\Utils::datetime( $date ) );
 	}
@@ -250,7 +253,7 @@ class Standard
 	public function getDateEnd() : ?string
 	{
 		$value = $this->get( 'product.dateend' );
-		return $value ? substr( $value, 0, 19 ) : null;
+		return $value ? substr( (string) $value, 0, 19 ) : null;
 	}
 
 
@@ -258,9 +261,9 @@ class Standard
 	 * Sets a new ending point of time, in which the product is available.
 	 *
 	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDateEnd( ?string $date ) : static
 	{
 		return $this->set( 'product.dateend', \Aimeos\Utils::datetime( $date ) );
 	}
@@ -303,9 +306,9 @@ class Standard
 	 * Sets a new quantity scale of the product item.
 	 *
 	 * @param float $value New quantity scale
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setScale( float $value ) : \Aimeos\MShop\Product\Item\Iface
+	public function setScale( float $value ) : static
 	{
 		return $this->set( 'product.scale', $value > 0 ? $value : 1 );
 	}
@@ -318,7 +321,7 @@ class Standard
 	 */
 	public function getTarget() : string
 	{
-		return $this->get( 'product.target', '' );
+		return (string) $this->get( 'product.target', '' );
 	}
 
 
@@ -326,9 +329,9 @@ class Standard
 	 * Sets a new URL target specific for that product
 	 *
 	 * @param string $value New URL target specific for that product
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setTarget( ?string $value ) : \Aimeos\MShop\Product\Item\Iface
+	public function setTarget( ?string $value ) : static
 	{
 		return $this->set( 'product.target', (string) $value );
 	}
@@ -341,6 +344,7 @@ class Standard
 	 */
 	public function getTimeCreated() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'product.ctime' );
 	}
 
@@ -349,9 +353,9 @@ class Standard
 	 * Sets the create date of the item
 	 *
 	 * @param string|null $value ISO date in YYYY-MM-DD hh:mm:ss format
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setTimeCreated( ?string $value ) : \Aimeos\MShop\Product\Item\Iface
+	public function setTimeCreated( ?string $value ) : static
 	{
 		return $this->set( 'product.ctime', \Aimeos\Utils::datetime( $value ) );
 	}
@@ -365,7 +369,7 @@ class Standard
 	 */
 	public function getType() : string
 	{
-		return $this->get( 'product.type', 'default' );
+		return (string) $this->get( 'product.type', 'default' );
 	}
 
 
@@ -399,9 +403,9 @@ class Standard
 	 * Sets the flag if stock is available for that product.
 	 *
 	 * @param int $value "1" if product is in stock, "0" if product is out of stock
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setInStock( int $value ) : \Aimeos\MShop\Product\Item\Iface
+	public function setInStock( int $value ) : static
 	{
 		return $this->set( 'product.instock', $value );
 	}
@@ -420,9 +424,9 @@ class Standard
 	 * Sets the boost factor for that product.
 	 *
 	 * @param float $value Boost factor
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setBoost( float $value ) : \Aimeos\MShop\Product\Item\Iface
+	public function setBoost( float $value ) : static
 	{
 		return $this->set( 'product.boost', $value );
 	}
@@ -431,11 +435,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Product item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -443,19 +447,19 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'product.url': $item->setUrl( $value ); break;
-				case 'product.type': $item->setType( $value ); break;
-				case 'product.code': $item->setCode( $value ); break;
-				case 'product.label': $item->setLabel( $value ); break;
-				case 'product.dataset': $item->setDataset( $value ); break;
+				case 'product.url': $item->setUrl( $value ? (string) $value : null ); break;
+				case 'product.type': $item->setType( (string) $value ); break;
+				case 'product.code': $item->setCode( (string) $value ); break;
+				case 'product.label': $item->setLabel( (string) $value ); break;
+				case 'product.dataset': $item->setDataset( $value ? (string) $value : null ); break;
 				case 'product.scale': $item->setScale( (float) $value ); break;
 				case 'product.status': $item->setStatus( (int) $value ); break;
-				case 'product.datestart': $item->setDateStart( $value ); break;
-				case 'product.dateend': $item->setDateEnd( $value ); break;
-				case 'product.config': $item->setConfig( $value ); break;
-				case 'product.target': $item->setTarget( $value ); break;
-				case 'product.ctime': $item->setTimeCreated( $value ); break;
-				case 'product.instock': $item->setInStock( (bool) $value ); break;
+				case 'product.datestart': $item->setDateStart( $value ? (string) $value : null ); break;
+				case 'product.dateend': $item->setDateEnd( $value ? (string) $value : null ); break;
+				case 'product.config': $item->setConfig( (array) $value ); break;
+				case 'product.target': $item->setTarget( $value ? (string) $value : null ); break;
+				case 'product.ctime': $item->setTimeCreated( $value ? (string) $value : null ); break;
+				case 'product.instock': $item->setInStock( (int) $value ); break;
 				case 'product.boost': $item->setBoost( (float) $value ); break;
 				default: continue 2;
 			}
@@ -470,7 +474,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

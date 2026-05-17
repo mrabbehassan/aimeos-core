@@ -40,8 +40,9 @@ class Standard
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->initListItems( $values['.listitems'] ?? [] );
-		$this->initAddressItems( $values['.addritems'] ?? [] );
+		$this->initListItems( (array) ( $values['.listitems'] ?? [] ) );
+		// @phpstan-ignore argument.type
+		$this->initAddressItems( (array) ( $values['.addritems'] ?? [] ) );
 	}
 
 
@@ -63,7 +64,7 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'supplier.label', '' );
+		return (string) $this->get( 'supplier.label', '' );
 	}
 
 
@@ -71,9 +72,9 @@ class Standard
 	 * Sets the new label of the supplier item.
 	 *
 	 * @param string $value label of the supplier item
-	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
+	 * @return static Supplier item for chaining method calls
 	 */
-	public function setLabel( string $value ) : \Aimeos\MShop\Supplier\Item\Iface
+	public function setLabel( string $value ) : static
 	{
 		return $this->set( 'supplier.label', $value );
 	}
@@ -86,7 +87,7 @@ class Standard
 	 */
 	public function getCode() : string
 	{
-		return $this->get( 'supplier.code', '' );
+		return (string) $this->get( 'supplier.code', '' );
 	}
 
 
@@ -94,9 +95,9 @@ class Standard
 	 * Sets the new code of the supplier item.
 	 *
 	 * @param string $value Code of the supplier item
-	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
+	 * @return static Supplier item for chaining method calls
 	 */
-	public function setCode( string $value ) : \Aimeos\MShop\Supplier\Item\Iface
+	public function setCode( string $value ) : static
 	{
 		return $this->set( 'supplier.code', \Aimeos\Utils::code( $value ) );
 	}
@@ -109,7 +110,7 @@ class Standard
 	 */
 	public function getPosition() : int
 	{
-		return $this->get( 'supplier.position', 0 );
+		return (int) $this->get( 'supplier.position', 0 );
 	}
 
 
@@ -117,9 +118,9 @@ class Standard
 	 * Sets the new position of the supplier item.
 	 *
 	 * @param int $position Position of the item
-	 * @return \Aimeos\MShop\Rule\Item\Iface Rule item for chaining method calls
+	 * @return static Rule item for chaining method calls
 	 */
-	public function setPosition( int $position ) : \Aimeos\MShop\Common\Item\Iface
+	public function setPosition( int $position ) : static
 	{
 		return $this->set( 'supplier.position', $position );
 	}
@@ -133,7 +134,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'supplier.status', 1 );
+		return (int) $this->get( 'supplier.status', 1 );
 	}
 
 
@@ -141,9 +142,9 @@ class Standard
 	 * Sets the new status of the supplier item.
 	 *
 	 * @param int $value status of the supplier item
-	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
+	 * @return static Supplier item for chaining method calls
 	 */
-	public function setStatus( int $value ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $value ) : static
 	{
 		return $this->set( 'supplier.status', $value );
 	}
@@ -163,11 +164,11 @@ class Standard
 	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Supplier item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -175,8 +176,8 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'supplier.code': $item->setCode( $value ); break;
-				case 'supplier.label': $item->setLabel( $value ); break;
+				case 'supplier.code': $item->setCode( (string) $value ); break;
+				case 'supplier.label': $item->setLabel( (string) $value ); break;
 				case 'supplier.status': $item->setStatus( (int) $value ); break;
 				case 'supplier.position': $item->setPosition( (int) $value ); break;
 				default: continue 2;
@@ -192,7 +193,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

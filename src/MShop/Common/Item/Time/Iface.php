@@ -31,9 +31,9 @@ interface Iface
 	 * Sets the date/time, the availability of the item will start
 	 *
 	 * @return string|null $date ISO date in "YYYY-MM-DD hh:mm:ss" format or null for no date
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setDateStart( ?string $date ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setDateStart( ?string $date ) : static;
 
 
 	/**
@@ -48,7 +48,7 @@ interface Iface
 	 * Sets the date/time, the availability of the item will end
 	 *
 	 * @return string|null $date ISO date in "YYYY-MM-DD hh:mm:ss" format or null for no date
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setDateEnd( ?string $date ) : static;
 }

@@ -78,10 +78,10 @@ class Voucher
 		$orderProductId = $manager->find( $this->getCode() )->getRef();
 
 		$status = [\Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED];
-		$this->checkVoucher( $orderProductId, $status );
+		$this->checkVoucher( (string) $orderProductId, $status );
 
-		$orderProduct = $this->getOrderProductItem( $orderProductId, $order->getPrice()->getCurrencyId() );
-		$value = $orderProduct->getPrice()->getValue() + $orderProduct->getPrice()->getRebate();
+		$orderProduct = $this->getOrderProductItem( (string) $orderProductId, (string) $order->getPrice()->getCurrencyId() );
+		$value = $orderProduct->getPrice()->getValue() + $orderProduct->getPrice()->getRebate(); // @phpstan-ignore binaryOp.invalid
 		$usedRebate = $this->getUsedRebate( $this->getCode() );
 		$rebate = $value - $usedRebate;
 
@@ -91,7 +91,7 @@ class Voucher
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $this->getCode() ) );
 		}
 
-		$orderProducts = $this->createRebateProducts( $order, $prodcode, $rebate );
+		$orderProducts = $this->createRebateProducts( $order, (string) $prodcode, $rebate );
 		$orderProducts = $this->setOrderAttributeRebate( $orderProducts, $rebate );
 
 		$order->setCoupon( $this->getCode(), $orderProducts );
@@ -104,9 +104,10 @@ class Voucher
 	 *
 	 * @param string $orderProductId Order product ID of the bought voucher
 	 * @param integer[] $status List of allowed payment status values
+	 * @return void
 	 * @throws \Aimeos\MShop\Coupon\Exception If voucher isn't available any more
 	 */
-	protected function checkVoucher( string $orderProductId, array $status )
+	protected function checkVoucher( string $orderProductId, array $status ) : void
 	{
 		$context = $this->context();
 		$manager = \Aimeos\MShop::create( $context, 'order' );
@@ -139,6 +140,7 @@ class Voucher
 		$search = $manager->filter()->add( 'order.id', '==', $ids )
 			->add( 'order.statuspayment', '>=', \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
 
+		// @phpstan-ignore return.type
 		return $manager->search( $search )->getId()->all();
 	}
 
@@ -162,10 +164,10 @@ class Voucher
 		if( $currencyId !== $currency )
 		{
 			$msg = $context->translate( 'mshop', 'Bought voucher is in currency "%1$s", basket uses "%2$s"' );
-			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $currency, $currencyId ) );
+			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, (string) $currency, $currencyId ) );
 		}
 
-		return $orderProduct;
+		return $orderProduct; // @phpstan-ignore return.type
 	}
 
 
@@ -189,6 +191,7 @@ class Voucher
 			$prodIds[] = $orderCouponItem->getProductId();
 			$orderIds[] = $orderCouponItem->getParentId();
 		}
+		// @phpstan-ignore argument.type
 		$orderIds = $this->filterOrderIds( $orderIds );
 
 
@@ -203,7 +206,7 @@ class Voucher
 
 		$rebate = 0;
 		foreach( $manager->search( $search ) as $orderProductItem ) {
-			$rebate += $orderProductItem->getPrice()->getRebate();
+			$rebate += $orderProductItem->getPrice()->getRebate(); // @phpstan-ignore assignOp.invalid
 		}
 
 		return $rebate;
@@ -227,6 +230,7 @@ class Voucher
 		$orderAttrItem->setType( 'coupon' );
 
 		foreach( $orderProducts as $orderProduct ) {
+			// @phpstan-ignore argument.type
 			$orderProduct->setAttributeItem( clone $orderAttrItem );
 		}
 

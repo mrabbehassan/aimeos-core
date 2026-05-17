@@ -35,6 +35,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			->order( ['order.address.type', 'order.address.position', 'order.address.id'] )
 			->slice( 0, 0x7fffffff );
 
+		// @phpstan-ignore argument.type
 		return $manager->search( $filter, $ref )->groupBy( 'order.address.parentid' );
 	}
 
@@ -55,6 +56,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			->order( 'order.coupon.code' )
 			->slice( 0, 0x7fffffff );
 
+		// @phpstan-ignore argument.type
 		return $manager->search( $filter, $ref )->groupBy( 'order.coupon.parentid' );
 	}
 
@@ -74,6 +76,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			->add( 'order.product.parentid', '==', $ids )
 			->order( 'order.product.position' )
 			->slice( 0, 0x7fffffff );
+		// @phpstan-ignore argument.type
 		$items = $manager->search( $filter, $ref );
 		$map = $items->groupBy( 'order.product.orderproductid' );
 
@@ -101,6 +104,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			->order( ['order.service.type', 'order.service.position', 'order.service.id'] )
 			->slice( 0, 0x7fffffff );
 
+		// @phpstan-ignore argument.type
 		return $manager->search( $filter, $ref )->groupBy( 'order.service.parentid' );
 	}
 
@@ -120,6 +124,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			->add( 'order.status.parentid', '==', $ids )
 			->slice( 0, 0x7fffffff );
 
+		// @phpstan-ignore argument.type
 		return $manager->search( $filter, $ref )->groupBy( 'order.status.parentid' );
 	}
 
@@ -128,9 +133,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Saves the addresses of the order to the storage.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Order containing address items
-	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	protected function saveAddresses( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
+	protected function saveAddresses( \Aimeos\MShop\Order\Item\Iface $item ) : static
 	{
 		$addresses = $item->getAddresses();
 
@@ -158,9 +163,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Saves the coupons of the order to the storage.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Order containing coupon items
-	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	protected function saveCoupons( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
+	protected function saveCoupons( \Aimeos\MShop\Order\Item\Iface $item ) : static
 	{
 		$list = [];
 		$manager = $this->object()->getSubManager( 'coupon' );
@@ -171,7 +176,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		{
 			if( empty( $products ) )
 			{
-				$list[] = current( $items[$code] ) ?: $manager->create()->setParentId( $item->getId() )->setCode( $code );
+				$list[] = current( (array) $items[$code] ) ?: $manager->create()->setParentId( $item->getId() )->setCode( $code );
 				continue;
 			}
 
@@ -188,6 +193,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			}
 		}
 
+		// @phpstan-ignore argument.type
 		$manager->save( $list );
 		return $this;
 	}
@@ -197,11 +203,12 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Saves the ordered products to the storage.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Order containing ordered products or bundles
-	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	protected function saveProducts( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
+	protected function saveProducts( \Aimeos\MShop\Order\Item\Iface $item ) : static
 	{
 		$products = $item->getProducts();
+		// @phpstan-ignore argument.type
 		$pos = (int) $products->merge( $products->getProducts()->flat( 1 ) )->max( 'order.product.position' );
 
 		foreach( $products as $product )
@@ -240,9 +247,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Saves the services of the order to the storage.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Order containing service items
-	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	protected function saveServices( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
+	protected function saveServices( \Aimeos\MShop\Order\Item\Iface $item ) : static
 	{
 		$services = $item->getServices();
 
@@ -270,9 +277,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * Saves the statuses of the order to the storage.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Order containing status items
-	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	protected function saveStatuses( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Manager\Iface
+	protected function saveStatuses( \Aimeos\MShop\Order\Item\Iface $item ) : static
 	{
 		$statuses = $item->getStatuses();
 

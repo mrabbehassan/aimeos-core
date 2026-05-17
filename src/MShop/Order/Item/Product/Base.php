@@ -41,9 +41,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * Adds new and replaces existing attribute items for the product.
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Order\Item\Product\Attribute\Iface[] $attributes List of order product attribute items
-	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order base product item for chaining method calls
+	 * @return static Order base product item for chaining method calls
 	 */
-	public function addAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Product\Iface
+	public function addAttributeItems( iterable $attributes ) : static
 	{
 		map( $attributes )->implements( \Aimeos\MShop\Order\Item\Product\Attribute\Iface::class, true );
 
@@ -77,6 +77,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			}
 		}
 
+		// @phpstan-ignore return.type
 		return count( $list ) > 1 ? $list : ( reset( $list ) ?: null );
 	}
 
@@ -104,6 +105,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			}
 		}
 
+		// @phpstan-ignore return.type
 		return count( $list ) > 1 ? $list : ( reset( $list ) ?: null );
 	}
 
@@ -148,9 +150,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * Adds or replaces the attribute item in the list of service attributes.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Product\Attribute\Iface $item Service attribute item
-	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order base product item for chaining method calls
+	 * @return static Order base product item for chaining method calls
 	 */
-	public function setAttributeItem( \Aimeos\MShop\Order\Item\Product\Attribute\Iface $item ) : \Aimeos\MShop\Order\Item\Product\Iface
+	public function setAttributeItem( \Aimeos\MShop\Order\Item\Product\Attribute\Iface $item ) : static
 	{
 		$this->getAttributeMap();
 
@@ -174,9 +176,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * Sets the new list of attribute items for the product.
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Order\Item\Product\Attribute\Iface[] $attributes List of order product attribute items
-	 * @return \Aimeos\MShop\Order\Item\Product\Iface Order base product item for chaining method calls
+	 * @return static Order base product item for chaining method calls
 	 */
-	public function setAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Product\Iface
+	public function setAttributeItems( iterable $attributes ) : static
 	{
 		( $attributes = map( $attributes ) )->implements( \Aimeos\MShop\Order\Item\Product\Attribute\Iface::class, true );
 
@@ -197,8 +199,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * Checks if the given flag constant is valid.
 	 *
 	 * @param int $value Flag constant value
+	 * @return int The validated flags value
 	 */
-	protected function checkFlags( int $value )
+	protected function checkFlags( int $value ) : int
 	{
 		if( $value < \Aimeos\MShop\Order\Item\Product\Base::FLAG_NONE ||
 			$value > \Aimeos\MShop\Order\Item\Product\Base::FLAG_IMMUTABLE

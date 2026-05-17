@@ -28,6 +28,7 @@ class Standard
 	 */
 	public function getParentId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'order.coupon.parentid' );
 	}
 
@@ -36,9 +37,9 @@ class Standard
 	 * Sets the Base ID of the order.
 	 *
 	 * @param string|null $parentid Order base ID.
-	 * @return \Aimeos\MShop\Order\Item\Coupon\Iface Order base coupon item for chaining method calls
+	 * @return static Order base coupon item for chaining method calls
 	 */
-	public function setParentId( ?string $parentid ) : \Aimeos\MShop\Order\Item\Coupon\Iface
+	public function setParentId( ?string $parentid ) : static
 	{
 		return $this->set( 'order.coupon.parentid', (string) $parentid );
 	}
@@ -51,6 +52,7 @@ class Standard
 	 */
 	public function getProductId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'order.coupon.productid' );
 	}
 
@@ -59,9 +61,9 @@ class Standard
 	 * Sets the ID of the ordered product.
 	 *
 	 * @param string $productid ID of the ordered product
-	 * @return \Aimeos\MShop\Order\Item\Coupon\Iface Order base coupon item for chaining method calls
+	 * @return static Order base coupon item for chaining method calls
 	 */
-	public function setProductId( string $productid ) : \Aimeos\MShop\Order\Item\Coupon\Iface
+	public function setProductId( string $productid ) : static
 	{
 		return $this->set( 'order.coupon.productid', (string) $productid );
 	}
@@ -74,6 +76,7 @@ class Standard
 	 */
 	public function getCode() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'order.coupon.code' );
 	}
 
@@ -82,9 +85,9 @@ class Standard
 	 * Sets the coupon code.
 	 *
 	 * @param string $code Coupon code
-	 * @return \Aimeos\MShop\Order\Item\Coupon\Iface Order base coupon item for chaining method calls
+	 * @return static Order base coupon item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Coupon\Iface
+	public function setCode( string $code ) : static
 	{
 		return $this->set( 'order.coupon.code', \Aimeos\Utils::code( $code ) );
 	}
@@ -93,11 +96,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Order\Item\Coupon\Iface Order coupon item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Order coupon item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -105,9 +108,9 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.coupon.parentid': !$private ?: $item->setParentId( $value ); break;
-				case 'order.coupon.productid': !$private ?: $item->setProductId( $value ); break;
-				case 'order.coupon.code': $item->setCode( $value ); break;
+				case 'order.coupon.parentid': !$private ?: $item->setParentId( $value ? (string) $value : null ); break;
+				case 'order.coupon.productid': !$private ?: $item->setProductId( (string) $value ); break;
+				case 'order.coupon.code': $item->setCode( (string) $value ); break;
 				default: continue 2;
 			}
 
@@ -121,7 +124,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

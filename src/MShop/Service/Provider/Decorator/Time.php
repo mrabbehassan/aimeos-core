@@ -99,7 +99,7 @@ class Time
 	{
 		$minute = date( 'i' );
 		$feconfig = $this->feConfig;
-		$feconfig['time.hourminute']['default'] = date( 'H:i', time() + ( $minute + 15 - ( $minute % 15 ) ) * 60 );
+		$feconfig['time.hourminute']['default'] = date( 'H:i', (int) ( time() + ( $minute + 15 - ( $minute % 15 ) ) * 60 ) );
 
 		try
 		{
@@ -132,20 +132,20 @@ class Time
 			return $result;
 		}
 
-		$time = \DateTime::createFromFormat( 'H:i', $attributes['time.hourminute'] );
-		$days = explode( ',', $this->getConfigValue( 'time.weekdays', '1,2,3,4,5,6,7' ) );
+		$time = \DateTime::createFromFormat( 'H:i', (string) $attributes['time.hourminute'] );
+		$days = explode( ',', (string) $this->getConfigValue( 'time.weekdays', '1,2,3,4,5,6,7' ) );
 
 		if( in_array( date( 'N' ), $days, true ) )
 		{
 			$start = $this->getConfigValue( 'time.start', '00:00' );
 			$end = $this->getConfigValue( 'time.end', '23:59' );
 
-			if( $time->getTimeStamp() < \DateTime::createFromFormat( 'H:i', $start )->getTimeStamp() ) {
-				$result['time.hourminute'] = sprintf( 'Time value before "%1$s"', $start );
+			if( $time->getTimeStamp() < \DateTime::createFromFormat( 'H:i', (string) $start )->getTimeStamp() ) {
+				$result['time.hourminute'] = sprintf( 'Time value before "%1$s"', (string) $start );
 			}
 
-			if( $time->getTimeStamp() > \DateTime::createFromFormat( 'H:i', $end )->getTimeStamp() ) {
-				$result['time.hourminute'] = sprintf( 'Time value after "%1$s"', $end );
+			if( $time->getTimeStamp() > \DateTime::createFromFormat( 'H:i', (string) $end )->getTimeStamp() ) {
+				$result['time.hourminute'] = sprintf( 'Time value after "%1$s"', (string) $end );
 			}
 		}
 

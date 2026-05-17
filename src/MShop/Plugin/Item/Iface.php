@@ -34,9 +34,9 @@ interface Iface
 	 * Sets the new label of the plugin item.
 	 *
 	 * @param string $label New label of the plugin item
-	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
+	 * @return static Plugin item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Plugin\Item\Iface;
+	public function setLabel( string $label ) : static;
 
 	/**
 	 * Returns the provider of the plugin.
@@ -49,7 +49,7 @@ interface Iface
 	 * Sets the new provider of the plugin item which is the short name of the plugin class name.
 	 *
 	 * @param string $provider Plugin provider, esp. short plugin class name
-	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
+	 * @return static Plugin item for chaining method calls
 	 */
-	public function setProvider( string $provider ) : \Aimeos\MShop\Plugin\Item\Iface;
+	public function setProvider( string $provider ) : static;
 }

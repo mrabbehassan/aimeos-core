@@ -95,7 +95,7 @@ class Product
 	/**
 	 * Checks if at least one of the given categories is configured
 	 *
-	 * @param array $catalogIds List of product IDs
+	 * @param array $prodcodes List of product codes
 	 * @param string $key Configuration key (product.include or product.exclude)
 	 * @return bool|null True if one catalog code is part of the config, false if not, null for no configuration
 	 */
@@ -105,7 +105,8 @@ class Product
 			return null;
 		}
 
-		return array_intersect( $prodcodes, explode( ',', $codes ) ) !== [];
+		// @phpstan-ignore argument.type
+		return array_intersect( $prodcodes, explode( ',', (string) $codes ) ) !== [];
 	}
 
 

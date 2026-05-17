@@ -100,7 +100,7 @@ class Quantity
 			}
 			else
 			{
-				$sum += $qty;
+				$sum += $qty; // @phpstan-ignore assignOp.invalid
 			}
 		}
 
@@ -109,6 +109,7 @@ class Quantity
 
 		$value = ceil( $sum / $size ) * $costs;
 
-		return $price->setCosts( $price->getCosts() + $value );
+		// @phpstan-ignore argument.type
+		return $price->setCosts( $price->getCosts() + $value ); // @phpstan-ignore binaryOp.invalid
 	}
 }

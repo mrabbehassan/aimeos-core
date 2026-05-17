@@ -50,6 +50,7 @@ abstract class Base
 		$classname = '\Aimeos\MShop\Service\Provider\\' . $type . '\\' . $provider;
 		$interface = \Aimeos\MShop\Service\Provider\Factory\Iface::class;
 
+		// @phpstan-ignore argument.type
 		$provider = \Aimeos\Utils::create( $classname, [$context, $item], $interface );
 
 		/** mshop/service/provider/delivery/decorators
@@ -69,7 +70,7 @@ abstract class Base
 		 * "\Aimeos\MShop\Service\Provider\Decorator\Decorator1" to all delivery provider
 		 * objects.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/service/provider/payment/decorators
 		 */
@@ -91,14 +92,16 @@ abstract class Base
 		 * "\Aimeos\MShop\Service\Provider\Decorator\Decorator1" to all payment provider
 		 * objects.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/service/provider/delivery/decorators
 		 */
 		$decorators = $context->config()->get( 'mshop/service/provider/' . $item->getType() . '/decorators', [] );
 
+		// @phpstan-ignore argument.type
 		$provider = $this->addServiceDecorators( $item, $provider, $names );
-		return $this->addServiceDecorators( $item, $provider, $decorators );
+		// @phpstan-ignore argument.type
+		return $this->addServiceDecorators( $item, $provider, (array) $decorators );
 	}
 
 
@@ -121,7 +124,7 @@ abstract class Base
 			if( ctype_alnum( $name ) === false )
 			{
 				$msg = $context->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
-				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $name ), 400 );
+				throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, (string) $name ), 400 );
 			}
 
 			$classname = $classprefix . $name;
@@ -130,6 +133,7 @@ abstract class Base
 			$provider = \Aimeos\Utils::create( $classname, [$provider, $context, $serviceItem], $interface );
 		}
 
+		// @phpstan-ignore return.type
 		return $provider;
 	}
 }

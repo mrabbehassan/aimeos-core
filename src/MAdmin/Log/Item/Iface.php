@@ -31,9 +31,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new facility of the item.
 	 *
 	 * @param string $facility Facility of the item
-	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
+	 * @return static Log item for chaining method calls
 	 */
-	public function setFacility( string $facility ) : \Aimeos\MAdmin\Log\Item\Iface;
+	public function setFacility( string $facility ) : static;
 
 	/**
 	 * Returns the timestamp of the item.
@@ -53,9 +53,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new priority of the item.
 	 *
 	 * @param int $priority Priority of the item
-	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
+	 * @return static Log item for chaining method calls
 	 */
-	public function setPriority( int $priority ) : \Aimeos\MAdmin\Log\Item\Iface;
+	public function setPriority( int $priority ) : static;
 
 	/**
 	 * Returns the message of the item.
@@ -68,9 +68,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new message of the item.
 	 *
 	 * @param string $message Message of the item
-	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
+	 * @return static Log item for chaining method calls
 	 */
-	public function setMessage( string $message ) : \Aimeos\MAdmin\Log\Item\Iface;
+	public function setMessage( string $message ) : static;
 
 	/**
 	 * Returns the request of the item.
@@ -83,7 +83,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new request of the item.
 	 *
 	 * @param string $request Request of the item
-	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
+	 * @return static Log item for chaining method calls
 	 */
-	public function setRequest( string $request ) : \Aimeos\MAdmin\Log\Item\Iface;
+	public function setRequest( string $request ) : static;
 }

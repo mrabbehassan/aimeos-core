@@ -28,19 +28,19 @@ trait Traits
 	/**
 	 * Creates a deep clone of all objects
 	 */
-	public function __clone()
+	public function __clone() : void
 	{
 		parent::__clone();
 
 		foreach( $this->listItems as $domain => $list )
 		{
 			foreach( $list as $id => $item ) {
-				$this->listItems[$domain][$id] = clone $item;
+				$this->listItems[$domain][$id] = clone $item; // @phpstan-ignore clone.nonObject
 			}
 		}
 
 		foreach( $this->listRmItems as $key => $item ) {
-			$this->listRmItems[$key] = clone $item;
+			$this->listRmItems[$key] = clone $item; // @phpstan-ignore clone.nonObject
 		}
 	}
 
@@ -74,9 +74,9 @@ trait Traits
 	/**
 	 * Sets the modified flag of the object.
 	 *
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	abstract public function setModified() : \Aimeos\MShop\Common\Item\Iface;
+	abstract public function setModified() : static;
 
 
 	/**
@@ -85,9 +85,9 @@ trait Traits
 	 * @param string $domain Name of the domain (e.g. media, text, etc.)
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the new domain item
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem New item added to the given domain or null if no item should be referenced
-	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function addListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, ?\Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
+	public function addListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, ?\Aimeos\MShop\Common\Item\Iface $refItem = null ) : static
 	{
 		$id = '_' . $this->listMax++;
 
@@ -121,11 +121,11 @@ trait Traits
 	 * @param string $domain Name of the domain (e.g. media, text, etc.)
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the domain item
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Existing item removed from the given domain or null if item shouldn't be removed
-	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function deleteListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, ?\Aimeos\MShop\Common\Item\Iface $refItem = null ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
+	public function deleteListItem( string $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, ?\Aimeos\MShop\Common\Item\Iface $refItem = null ) : static
 	{
-		if( ( $key = array_search( $listItem, $this->listItems[$domain] ?? [], true ) ) !== false ) {
+		if( ( $key = array_search( $listItem, (array) ( $this->listItems[$domain] ?? [] ), true ) ) !== false ) {
 			$this->listRmItems[] = $listItem->setRefItem( $refItem );
 
 			unset( $this->listMap[$domain][$listItem->getType()][$listItem->getRefId()] );
@@ -141,10 +141,10 @@ trait Traits
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $items Existing list items
 	 * @param bool $all True to delete referenced items as well, false for list items only
-	 * @return \Aimeos\MShop\Common\Item\ListsRef\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 * @throws \Aimeos\MShop\Exception If an item isn't a list item or isn't found
 	 */
-	public function deleteListItems( iterable $items, bool $all = false ) : \Aimeos\MShop\Common\Item\ListsRef\Iface
+	public function deleteListItems( iterable $items, bool $all = false ) : static
 	{
 		map( $items )->implements( \Aimeos\MShop\Common\Item\Lists\Iface::class, true );
 
@@ -215,6 +215,7 @@ trait Traits
 				return null;
 			}
 
+			// @phpstan-ignore return.type
 			return $listItem;
 		}
 
@@ -272,7 +273,7 @@ trait Traits
 				$set[$id] = $item;
 			}
 
-			$result = array_replace( $result, $fcn ? $fcn( $set ) : $set );
+			$result = array_replace( $result, $fcn ? (array) $fcn( $set ) : $set );
 		}
 
 		return map( $result );
@@ -339,6 +340,7 @@ trait Traits
 		foreach( $this->getRefItems( 'text', $type ) as $textItem )
 		{
 			if( $textItem->getLanguageId() === $langId || $langId === null ) {
+				// @phpstan-ignore return.type
 				return $textItem->getContent();
 			}
 		}
@@ -351,8 +353,9 @@ trait Traits
 	 * Initializes the list items in the trait
 	 *
 	 * @param array $listItems Two dimensional associative list of domain / ID / list items that implement \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @return void
 	 */
-	protected function initListItems( array $listItems )
+	protected function initListItems( array $listItems ) : void
 	{
 		$this->listMax = count( $listItems );
 

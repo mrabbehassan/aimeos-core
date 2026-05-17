@@ -101,8 +101,8 @@ class PercentRebate
 		}
 
 		$price = $this->object()->calcPrice( $order->setCoupon( $this->getCode(), [] ) );
-		$rebate = $this->round( ( $price->getValue() + $price->getCosts() + $price->getRebate() ) * $percent / 100 );
-		$order->setCoupon( $this->getCode(), $this->createRebateProducts( $order, $prodcode, $rebate ) );
+		$rebate = $this->round( ( $price->getValue() + $price->getCosts() + $price->getRebate() ) * $percent / 100 ); // @phpstan-ignore binaryOp.invalid
+		$order->setCoupon( $this->getCode(), $this->createRebateProducts( $order, (string) $prodcode, $rebate ) );
 
 		return $this;
 	}
@@ -116,7 +116,7 @@ class PercentRebate
 	 */
 	protected function round( float $number ) : float
 	{
-		$prec = $this->getConfigValue( 'percentrebate.precision', 2 );
+		$prec = (int) $this->getConfigValue( 'percentrebate.precision', 2 );
 		$value = $this->getConfigValue( 'percentrebate.roundvalue', 0 );
 
 		if( $value == 0 ) {

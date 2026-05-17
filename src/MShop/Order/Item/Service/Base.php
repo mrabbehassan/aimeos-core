@@ -38,9 +38,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * Adds new and replaces existing attribute items for the service.
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Order\Item\Service\Attribute\Iface[] $attributes List of order service attribute items
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function addAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Service\Iface
+	public function addAttributeItems( iterable $attributes ) : static
 	{
 		map( $attributes )->implements( \Aimeos\MShop\Order\Item\Service\Attribute\Iface::class, true );
 
@@ -74,6 +74,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 			}
 		}
 
+		// @phpstan-ignore return.type
 		return count( $list ) > 1 ? $list : ( reset( $list ) ?: null );
 	}
 
@@ -101,6 +102,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 			}
 		}
 
+		// @phpstan-ignore return.type
 		return count( $list ) > 1 ? $list : ( reset( $list ) ?: null );
 	}
 
@@ -145,9 +147,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * Adds or replaces the attribute item in the list of service attributes.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Service\Attribute\Iface $item Service attribute item
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setAttributeItem( \Aimeos\MShop\Order\Item\Service\Attribute\Iface $item ) : \Aimeos\MShop\Order\Item\Service\Iface
+	public function setAttributeItem( \Aimeos\MShop\Order\Item\Service\Attribute\Iface $item ) : static
 	{
 		$this->getAttributeMap();
 
@@ -171,9 +173,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * Sets the new list of attribute items for the service.
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Order\Item\Service\Attribute\Iface[] $attributes List of order service attribute items
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setAttributeItems( iterable $attributes ) : \Aimeos\MShop\Order\Item\Service\Iface
+	public function setAttributeItems( iterable $attributes ) : static
 	{
 		( $attributes = map( $attributes ) )->implements( \Aimeos\MShop\Order\Item\Service\Attribute\Iface::class, true );
 
@@ -194,9 +196,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * Adds a new transaction to the service.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Service\Transaction\Iface $item Transaction item
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function addTransaction( \Aimeos\MShop\Order\Item\Service\Transaction\Iface $item ) : \Aimeos\MShop\Order\Item\Service\Iface
+	public function addTransaction( \Aimeos\MShop\Order\Item\Service\Transaction\Iface $item ) : static
 	{
 		return $this->set( '.transactions', map( $this->get( '.transactions', [] ) )->push( $item ) );
 	}
@@ -218,9 +220,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * Sets the new list of transactions items for the service.
 	 *
 	 * @param iterable $list List of order service transaction items
-	 * @return \Aimeos\MShop\Order\Item\Service\Iface Order base service item for chaining method calls
+	 * @return static Order base service item for chaining method calls
 	 */
-	public function setTransactions( iterable $list ) : \Aimeos\MShop\Order\Item\Service\Iface
+	public function setTransactions( iterable $list ) : static
 	{
 		return $this->set( '.transactions', $list );
 	}

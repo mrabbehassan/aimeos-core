@@ -57,9 +57,9 @@ abstract class Base
 	 * Sets a new company name.
 	 *
 	 * @param string|null $company New company name
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setCompany( ?string $company ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setCompany( ?string $company ) : static
 	{
 		return $this->set( $this->prefix . 'company', (string) $company );
 	}
@@ -80,9 +80,9 @@ abstract class Base
 	 * Sets a new vatid.
 	 *
 	 * @param string|null $vatid New vatid
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setVatID( ?string $vatid ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setVatID( ?string $vatid ) : static
 	{
 		return $this->set( $this->prefix . 'vatid', str_replace( ' ', '', (string) $vatid ) );
 	}
@@ -95,7 +95,8 @@ abstract class Base
 	 */
 	public function getSalutation() : string
 	{
-		return $this->get( $this->prefix . 'salutation', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'salutation', '' );
 	}
 
 
@@ -103,9 +104,9 @@ abstract class Base
 	 * Sets the new salutation for the person described by the address.
 	 *
 	 * @param string|null $salutation Salutation constant defined in \Aimeos\MShop\Common\Item\Address\Base
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setSalutation( ?string $salutation ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setSalutation( ?string $salutation ) : static
 	{
 		return $this->set( $this->prefix . 'salutation', $this->checkSalutation( (string) $salutation ) );
 	}
@@ -118,7 +119,8 @@ abstract class Base
 	 */
 	public function getTitle() : string
 	{
-		return $this->get( $this->prefix . 'title', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'title', '' );
 	}
 
 
@@ -126,9 +128,9 @@ abstract class Base
 	 * Sets a new title of the person.
 	 *
 	 * @param string|null $title New title of the person
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setTitle( ?string $title ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setTitle( ?string $title ) : static
 	{
 		return $this->set( $this->prefix . 'title', (string) $title );
 	}
@@ -141,7 +143,8 @@ abstract class Base
 	 */
 	public function getFirstname() : string
 	{
-		return $this->get( $this->prefix . 'firstname', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'firstname', '' );
 	}
 
 
@@ -149,9 +152,9 @@ abstract class Base
 	 * Sets a new first name of the person.
 	 *
 	 * @param string|null $firstname New first name of the person
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setFirstname( ?string $firstname ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setFirstname( ?string $firstname ) : static
 	{
 		return $this->set( $this->prefix . 'firstname', (string) $firstname );
 	}
@@ -164,7 +167,8 @@ abstract class Base
 	 */
 	public function getLastname() : string
 	{
-		return $this->get( $this->prefix . 'lastname', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'lastname', '' );
 	}
 
 
@@ -172,9 +176,9 @@ abstract class Base
 	 * Sets a new last name of the person.
 	 *
 	 * @param string|null $lastname New last name of the person
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setLastname( ?string $lastname ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setLastname( ?string $lastname ) : static
 	{
 		return $this->set( $this->prefix . 'lastname', (string) $lastname );
 	}
@@ -187,7 +191,8 @@ abstract class Base
 	 */
 	public function getAddress1() : string
 	{
-		return $this->get( $this->prefix . 'address1', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'address1', '' );
 	}
 
 
@@ -195,9 +200,9 @@ abstract class Base
 	 * Sets a new first address part, e.g. the street name.
 	 *
 	 * @param string|null $address1 New first address part
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setAddress1( ?string $address1 ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setAddress1( ?string $address1 ) : static
 	{
 		return $this->set( $this->prefix . 'address1', (string) $address1 );
 	}
@@ -210,7 +215,8 @@ abstract class Base
 	 */
 	public function getAddress2() : string
 	{
-		return $this->get( $this->prefix . 'address2', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'address2', '' );
 	}
 
 
@@ -218,9 +224,9 @@ abstract class Base
 	 * Sets a new second address part, e.g. the house number.
 	 *
 	 * @param string|null $address2 New second address part
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setAddress2( ?string $address2 ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setAddress2( ?string $address2 ) : static
 	{
 		return $this->set( $this->prefix . 'address2', (string) $address2 );
 	}
@@ -233,7 +239,8 @@ abstract class Base
 	 */
 	public function getAddress3() : string
 	{
-		return $this->get( $this->prefix . 'address3', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'address3', '' );
 	}
 
 
@@ -241,9 +248,9 @@ abstract class Base
 	 * Sets a new third address part, e.g. the house name or floor number.
 	 *
 	 * @param string|null $address3 New third address part
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setAddress3( ?string $address3 ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setAddress3( ?string $address3 ) : static
 	{
 		return $this->set( $this->prefix . 'address3', (string) $address3 );
 	}
@@ -256,7 +263,8 @@ abstract class Base
 	 */
 	public function getPostal() : string
 	{
-		return $this->get( $this->prefix . 'postal', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'postal', '' );
 	}
 
 
@@ -264,9 +272,9 @@ abstract class Base
 	 * Sets a new postal code.
 	 *
 	 * @param string|null $postal New postal code
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setPostal( ?string $postal ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setPostal( ?string $postal ) : static
 	{
 		return $this->set( $this->prefix . 'postal', (string) $postal );
 	}
@@ -279,7 +287,8 @@ abstract class Base
 	 */
 	public function getCity() : string
 	{
-		return $this->get( $this->prefix . 'city', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'city', '' );
 	}
 
 
@@ -287,9 +296,9 @@ abstract class Base
 	 * Sets a new city name.
 	 *
 	 * @param string|null $city New city name
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setCity( ?string $city ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setCity( ?string $city ) : static
 	{
 		return $this->set( $this->prefix . 'city', (string) $city );
 	}
@@ -302,7 +311,8 @@ abstract class Base
 	 */
 	public function getState() : string
 	{
-		return $this->get( $this->prefix . 'state', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'state', '' );
 	}
 
 
@@ -310,9 +320,9 @@ abstract class Base
 	 * Sets a new state name.
 	 *
 	 * @param string|null $state New state name
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setState( ?string $state ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setState( ?string $state ) : static
 	{
 		return $this->set( $this->prefix . 'state', (string) $state );
 	}
@@ -325,6 +335,7 @@ abstract class Base
 	 */
 	public function getCountryId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( $this->prefix . 'countryid' );
 	}
 
@@ -333,9 +344,9 @@ abstract class Base
 	 * Sets the ID of the country the address is in.
 	 *
 	 * @param string|null $countryid Unique ID of the country
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setCountryId( ?string $countryid ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setCountryId( ?string $countryid ) : static
 	{
 		return $this->set( $this->prefix . 'countryid', \Aimeos\Utils::country( $countryid ) );
 	}
@@ -348,6 +359,7 @@ abstract class Base
 	 */
 	public function getLanguageId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( $this->prefix . 'languageid' );
 	}
 
@@ -356,9 +368,9 @@ abstract class Base
 	 * Sets the ID of the language.
 	 *
 	 * @param string|null $langid Unique ID of the language
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setLanguageId( ?string $langid ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setLanguageId( ?string $langid ) : static
 	{
 		return $this->set( $this->prefix . 'languageid', \Aimeos\Utils::language( $langid ) );
 	}
@@ -371,7 +383,8 @@ abstract class Base
 	 */
 	public function getTelephone() : string
 	{
-		return $this->get( $this->prefix . 'telephone', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'telephone', '' );
 	}
 
 
@@ -379,9 +392,9 @@ abstract class Base
 	 * Sets a new telephone number.
 	 *
 	 * @param string|null $telephone New telephone number
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setTelephone( ?string $telephone ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setTelephone( ?string $telephone ) : static
 	{
 		return $this->set( $this->prefix . 'telephone', (string) $telephone );
 	}
@@ -394,7 +407,8 @@ abstract class Base
 	 */
 	public function getTelefax() : string
 	{
-		return $this->get( $this->prefix . 'telefax', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'telefax', '' );
 	}
 
 
@@ -402,9 +416,9 @@ abstract class Base
 	 * Sets a new telefax number.
 	 *
 	 * @param string|null $telefax New telefax number
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setTelefax( ?string $telefax ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setTelefax( ?string $telefax ) : static
 	{
 		return $this->set( $this->prefix . 'telefax', (string) $telefax );
 	}
@@ -417,7 +431,8 @@ abstract class Base
 	 */
 	public function getMobile() : string
 	{
-		return $this->get( $this->prefix . 'mobile', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'mobile', '' );
 	}
 
 
@@ -425,9 +440,9 @@ abstract class Base
 	 * Sets a new mobile number.
 	 *
 	 * @param string|null $value New mobile number
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setMobile( ?string $value ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setMobile( ?string $value ) : static
 	{
 		return $this->set( $this->prefix . 'mobile', (string) $value );
 	}
@@ -440,7 +455,8 @@ abstract class Base
 	 */
 	public function getEmail() : string
 	{
-		return $this->get( $this->prefix . 'email', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'email', '' );
 	}
 
 
@@ -448,9 +464,9 @@ abstract class Base
 	 * Sets a new email address.
 	 *
 	 * @param string|null $email New email address
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setEmail( ?string $email ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setEmail( ?string $email ) : static
 	{
 		$email = (string) $email;
 		$regex = '/^(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){255,})(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){65,}@)(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22))(?:\.(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-[a-z0-9]+)*\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-[a-z0-9]+)*)|(?:\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\]))$/iD';
@@ -470,7 +486,8 @@ abstract class Base
 	 */
 	public function getWebsite() : string
 	{
-		return $this->get( $this->prefix . 'website', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'website', '' );
 	}
 
 
@@ -478,9 +495,9 @@ abstract class Base
 	 * Sets a new website URL.
 	 *
 	 * @param string|null $website New website URL
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setWebsite( ?string $website ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setWebsite( ?string $website ) : static
 	{
 		$website = (string) $website;
 		$pattern = '#^([a-z]+://)?[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+(:[0-9]+)?(/.*)?$#';
@@ -512,9 +529,9 @@ abstract class Base
 	 * Sets the longitude coordinate of the customer address
 	 *
 	 * @param string|null $value Longitude coordinate as decimal value or null
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer address item for chaining method calls
+	 * @return static Customer address item for chaining method calls
 	 */
-	public function setLongitude( ?string $value ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setLongitude( ?string $value ) : static
 	{
 		return $this->set( $this->prefix . 'longitude', $value !== '' && $value !== null ? $value : null );
 	}
@@ -539,9 +556,9 @@ abstract class Base
 	 * Sets the latitude coordinate of the customer address
 	 *
 	 * @param string|null $value Latitude coordinate as decimal value or null
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer address item for chaining method calls
+	 * @return static Customer address item for chaining method calls
 	 */
-	public function setLatitude( ?string $value ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setLatitude( ?string $value ) : static
 	{
 		return $this->set( $this->prefix . 'latitude', $value !== '' && $value !== null ? $value : null );
 	}
@@ -554,6 +571,7 @@ abstract class Base
 	 */
 	public function getBirthday() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( $this->prefix . 'birthday' );
 	}
 
@@ -562,9 +580,9 @@ abstract class Base
 	 * Sets the birthday of the customer item.
 	 *
 	 * @param string|null $value Birthday of the customer item
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Customer address item for chaining method calls
+	 * @return static Customer address item for chaining method calls
 	 */
-	public function setBirthday( ?string $value ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function setBirthday( ?string $value ) : static
 	{
 		return $this->set( $this->prefix . 'birthday', \Aimeos\Utils::date( $value ) );
 	}
@@ -577,6 +595,7 @@ abstract class Base
 	 */
 	public function getParentId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( $this->prefix . 'parentid' );
 	}
 
@@ -585,9 +604,9 @@ abstract class Base
 	 * Sets the new customer ID this address belongs to
 	 *
 	 * @param string|null $parentid New customer ID of the address
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setParentId( ?string $parentid ) : \Aimeos\MShop\Common\Item\Iface
+	public function setParentId( ?string $parentid ) : static
 	{
 		return $this->set( $this->prefix . 'parentid', $parentid );
 	}
@@ -600,7 +619,8 @@ abstract class Base
 	 */
 	public function getPosition() : int
 	{
-		return $this->get( $this->prefix . 'position', 0 );
+		// @phpstan-ignore return.type
+		return (int) $this->get( $this->prefix . 'position', 0 );
 	}
 
 
@@ -608,9 +628,9 @@ abstract class Base
 	 * Sets the Position of the address item.
 	 *
 	 * @param int $position Position of the address item
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function setPosition( int $position ) : \Aimeos\MShop\Common\Item\Iface
+	public function setPosition( int $position ) : static
 	{
 		return $this->set( $this->prefix . 'position', $position );
 	}
@@ -624,7 +644,8 @@ abstract class Base
 	 */
 	public function getType() : string
 	{
-		return $this->get( $this->prefix . 'type', 'delivery' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( $this->prefix . 'type', 'delivery' );
 	}
 
 
@@ -632,9 +653,9 @@ abstract class Base
 	 * Copies the values of the address item into another one.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item Address item
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
+	 * @return static Common address item for chaining method calls
 	 */
-	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item ) : static
 	{
 		$values = $item->toArray();
 		$this->fromArray( $values );
@@ -659,8 +680,8 @@ abstract class Base
 		$this->setMobile( $item->getMobile() );
 		$this->setEmail( $item->getEmail() );
 		$this->setWebsite( $item->getWebsite() );
-		$this->setLongitude( $item->getLongitude() );
-		$this->setLatitude( $item->getLatitude() );
+		$this->setLongitude( $item->getLongitude() !== null ? (string) $item->getLongitude() : null );
+		$this->setLatitude( $item->getLatitude() !== null ? (string) $item->getLatitude() : null );
 		$this->setBirthday( $item->getBirthday() );
 
 		return $this;
@@ -670,11 +691,11 @@ abstract class Base
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Address item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Address item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -685,31 +706,31 @@ abstract class Base
 
 			switch( $key )
 			{
-				case 'parentid': !$private ?: $item->setParentId( $value ); break;
-				case 'type': $item->setType( $value ); break;
-				case 'salutation': $item->setSalutation( $value ); break;
-				case 'company': $item->setCompany( $value ); break;
-				case 'vatid': $item->setVatID( $value ); break;
-				case 'title': $item->setTitle( $value ); break;
-				case 'firstname': $item->setFirstname( $value ); break;
-				case 'lastname': $item->setLastname( $value ); break;
-				case 'address1': $item->setAddress1( $value ); break;
-				case 'address2': $item->setAddress2( $value ); break;
-				case 'address3': $item->setAddress3( $value ); break;
-				case 'postal': $item->setPostal( $value ); break;
-				case 'city': $item->setCity( $value ); break;
-				case 'state': $item->setState( $value ); break;
-				case 'countryid': $item->setCountryId( $value ); break;
-				case 'languageid': $item->setLanguageId( $value ); break;
-				case 'telephone': $item->setTelephone( $value ); break;
-				case 'telefax': $item->setTelefax( $value ); break;
-				case 'mobile': $item->setMobile( $value ); break;
-				case 'email': $item->setEmail( $value ); break;
-				case 'website': $item->setWebsite( $value ); break;
-				case 'longitude': $item->setLongitude( $value ); break;
-				case 'latitude': $item->setLatitude( $value ); break;
-				case 'birthday': $item->setBirthday( $value ); break;
-				case 'position': $item->setPosition( $value ); break;
+				case 'parentid': !$private ?: $item->setParentId( (string) $value ); break;
+				case 'type': $item->setType( (string) $value ); break;
+				case 'salutation': $item->setSalutation( (string) $value ); break;
+				case 'company': $item->setCompany( (string) $value ); break;
+				case 'vatid': $item->setVatID( (string) $value ); break;
+				case 'title': $item->setTitle( (string) $value ); break;
+				case 'firstname': $item->setFirstname( (string) $value ); break;
+				case 'lastname': $item->setLastname( (string) $value ); break;
+				case 'address1': $item->setAddress1( (string) $value ); break;
+				case 'address2': $item->setAddress2( (string) $value ); break;
+				case 'address3': $item->setAddress3( (string) $value ); break;
+				case 'postal': $item->setPostal( (string) $value ); break;
+				case 'city': $item->setCity( (string) $value ); break;
+				case 'state': $item->setState( (string) $value ); break;
+				case 'countryid': $item->setCountryId( (string) $value ); break;
+				case 'languageid': $item->setLanguageId( (string) $value ); break;
+				case 'telephone': $item->setTelephone( (string) $value ); break;
+				case 'telefax': $item->setTelefax( (string) $value ); break;
+				case 'mobile': $item->setMobile( (string) $value ); break;
+				case 'email': $item->setEmail( (string) $value ); break;
+				case 'website': $item->setWebsite( (string) $value ); break;
+				case 'longitude': $item->setLongitude( $value !== null ? (string) $value : null ); break;
+				case 'latitude': $item->setLatitude( $value !== null ? (string) $value : null ); break;
+				case 'birthday': $item->setBirthday( $value !== null ? (string) $value : null ); break;
+				case 'position': $item->setPosition( (int) $value ); break;
 				default: continue 2;
 			}
 
@@ -723,7 +744,7 @@ abstract class Base
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array
@@ -767,9 +788,10 @@ abstract class Base
 	 * Checks the given address salutation is valid
 	 *
 	 * @param string $value Address salutation defined in \Aimeos\MShop\Common\Item\Address\Base
+	 * @return string The validated salutation value
 	 * @throws \Aimeos\MShop\Exception If salutation is invalid
 	 */
-	protected function checkSalutation( string $value )
+	protected function checkSalutation( string $value ) : string
 	{
 		if( strlen( $value ) > 8 ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Address salutation "%1$s" not within allowed range', $value ) );

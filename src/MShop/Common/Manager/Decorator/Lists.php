@@ -30,11 +30,12 @@ class Lists
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Attribute\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : static
 	{
 		$this->getManager()->delete( $items );
+		// @phpstan-ignore argument.type
 		return $this->deleteRefItems( $items );
 	}
 
@@ -50,6 +51,7 @@ class Lists
 	public function from( iterable $entries, array $refs = [], array $excludes = [] ) : \Aimeos\Map
 	{
 		$context = $this->context();
+		// @phpstan-ignore argument.type
 		$keys = array_flip( $excludes );
 		$excludes[] = 'lists';
 
@@ -63,9 +65,9 @@ class Lists
 				{
 					foreach( $list as $data )
 					{
-						$data = array_diff_key( $data, $keys );
+						$data = array_diff_key( (array) $data, $keys );
 						$listItem = $this->createListItem()->fromArray( $data, true );
-						$manager = \Aimeos\MShop::create( $context, $domain );
+						$manager = \Aimeos\MShop::create( $context, (string) $domain );
 
 						if( $refItem = $manager->from( [$data] )->first() ) {
 							$item->addListItem( $domain, $listItem, $refItem );
@@ -75,6 +77,7 @@ class Lists
 			}
 		}
 
+		// @phpstan-ignore return.type
 		return $items;
 	}
 
@@ -91,7 +94,7 @@ class Lists
 		$alias = $this->alias( $domain . '.lists.id' );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $this->context()->config()->get( 'mshop/' . $domain . '/manager/sitemode', $level );
+		$level = (int) $this->context()->config()->get( 'mshop/' . $domain . '/manager/sitemode', $level );
 
 		return $this->getManager()->getSearchAttributes( $withsub ) + $this->createAttributes( [
 			$domain . ':has' => [
@@ -112,9 +115,9 @@ class Lists
 						}
 					}
 
-					$sitestr = $this->siteString( $alias . '."siteid"', $level );
+					$sitestr = $this->siteString( $alias . '."siteid"', (int) $level );
 					$keystr = $this->toExpression( $alias . '."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
+					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], (string) $source );
 
 					return $params;
 				}
@@ -139,8 +142,8 @@ class Lists
 						$expr[] = $this->toExpression( $alias . '."start"', $params[3], '<=' );
 					}
 
-					$sitestr = $this->siteString( $alias . '."siteid"', $level );
-					$source = str_replace( [':site', ':expr'], [$sitestr, join( ' AND ', $expr )], $source );
+					$sitestr = $this->siteString( $alias . '."siteid"', (int) $level );
+					$source = str_replace( [':site', ':expr'], [$sitestr, join( ' AND ', $expr )], (string) $source );
 
 					return $params;
 				}
@@ -165,8 +168,8 @@ class Lists
 						$expr[] = $this->toExpression( $alias . '."end"', $params[3], '<=' );
 					}
 
-					$sitestr = $this->siteString( $alias . '."siteid"', $level );
-					$source = str_replace( [':site', ':expr'], [$sitestr, join( ' AND ', $expr )], $source );
+					$sitestr = $this->siteString( $alias . '."siteid"', (int) $level );
+					$source = str_replace( [':site', ':expr'], [$sitestr, join( ' AND ', $expr )], (string) $source );
 
 					return $params;
 				}
@@ -184,6 +187,7 @@ class Lists
 	 */
 	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
+		// @phpstan-ignore argument.type
 		$this->saveListItems( $item, $this->domain(), $fetch );
 
 		return $this->getManager()->saveRefs( $item );
@@ -201,6 +205,7 @@ class Lists
 	{
 		$entries = $this->getManager()->searchRefs( $entries, $ref );
 
+		// @phpstan-ignore argument.type
 		foreach( $this->getListItems( array_keys( $entries ), $ref, $this->domain() ) as $id => $listItem ) {
 			$entries[$listItem->getParentId()]['.listitems'][$id] = $listItem;
 		}

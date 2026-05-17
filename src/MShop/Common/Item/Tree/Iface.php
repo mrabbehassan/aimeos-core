@@ -30,9 +30,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Status\Iface
 	 * Sets the code of the item.
 	 *
 	 * @param string $name New code of the item
-	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setCode( string $name ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+	public function setCode( string $name ) : static;
 
 	/**
 	 * Returns the name of the item.
@@ -45,9 +45,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Status\Iface
 	 * Sets the new name of the item.
 	 *
 	 * @param string $name New name of the item
-	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setLabel( string $name ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+	public function setLabel( string $name ) : static;
 
 	/**
 	 * Returns the level of the item in the tree
@@ -67,25 +67,25 @@ interface Iface extends \Aimeos\MShop\Common\Item\Status\Iface
 	 * Adds a child node to this node.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
-	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Catalog item for chaining method calls
+	 * @return static Catalog item for chaining method calls
 	 */
-	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : static;
 
 	/**
 	 * Removes a child node from this node.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to remove
-	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
+	 * @return static Tree item for chaining method calls
 	 */
-	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : static;
 
 	/**
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param int $index Index of child node
-	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Selected node
+	 * @return static Selected node
 	 */
-	public function getChild( int $index ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+	public function getChild( int $index ) : static;
 
 	/**
 	 * Returns all children of this node.

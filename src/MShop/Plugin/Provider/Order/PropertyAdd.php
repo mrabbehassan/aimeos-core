@@ -91,9 +91,9 @@ class PropertyAdd
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
+	 * @return static Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static
 	{
 		$plugin = $this->object();
 
@@ -119,13 +119,16 @@ class PropertyAdd
 		}
 
 		$map = map( $value );
+		// @phpstan-ignore argument.type
 		$products = $this->getProductItems( $map->getProductId()->unique()->all() );
 
 		if( !is_array( $value ) ) {
+			// @phpstan-ignore argument.type, argument.type
 			return $this->addAttributes( $value, $products, $types );
 		}
 
 		foreach( $value as $key => $orderProduct ) {
+			// @phpstan-ignore argument.type, argument.type
 			$value[$key] = $this->addAttributes( $orderProduct, $products, $types );
 		}
 
@@ -159,8 +162,10 @@ class PropertyAdd
 				}
 
 				$attrItem = $attrItem->setType( 'product/property' )->setCode( $type )
+					// @phpstan-ignore argument.type
 					->setValue( count( $list ) > 1 ? $list->toArray() : $list->first() );
 
+				// @phpstan-ignore argument.type
 				$orderProduct = $orderProduct->setAttributeItem( $attrItem );
 			}
 		}

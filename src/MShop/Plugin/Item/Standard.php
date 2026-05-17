@@ -34,7 +34,7 @@ class Standard
 	 */
 	public function getType() : string
 	{
-		return $this->get( 'plugin.type', 'order' );
+		return (string) $this->get( 'plugin.type', 'order' );
 	}
 
 
@@ -45,7 +45,7 @@ class Standard
 	 */
 	public function getProvider() : string
 	{
-		return $this->get( 'plugin.provider', '' );
+		return (string) $this->get( 'plugin.provider', '' );
 	}
 
 
@@ -54,9 +54,9 @@ class Standard
 	 * name of the plugin class name.
 	 *
 	 * @param string $provider Plugin provider, esp. short plugin class name
-	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
+	 * @return static Plugin item for chaining method calls
 	 */
-	public function setProvider( string $provider ) : \Aimeos\MShop\Plugin\Item\Iface
+	public function setProvider( string $provider ) : static
 	{
 		if( preg_match( '/^[A-Za-z0-9]+(,[A-Za-z0-9]+)*$/', $provider ) !== 1 ) {
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Invalid provider name "%1$s"', $provider ) );
@@ -73,7 +73,7 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'plugin.label', '' );
+		return (string) $this->get( 'plugin.label', '' );
 	}
 
 
@@ -81,9 +81,9 @@ class Standard
 	 * Sets the new label of the plugin item.
 	 *
 	 * @param string $label New label of the plugin item
-	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
+	 * @return static Plugin item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Plugin\Item\Iface
+	public function setLabel( string $label ) : static
 	{
 		return $this->set( 'plugin.label', $label );
 	}
@@ -96,7 +96,7 @@ class Standard
 	 */
 	public function getPosition() : int
 	{
-		return $this->get( 'plugin.position', 0 );
+		return (int) $this->get( 'plugin.position', 0 );
 	}
 
 
@@ -104,9 +104,9 @@ class Standard
 	 * Sets the new position of the plugin item.
 	 *
 	 * @param int $position Position of the item
-	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
+	 * @return static Plugin item for chaining method calls
 	 */
-	public function setPosition( int $position ) : \Aimeos\MShop\Common\Item\Iface
+	public function setPosition( int $position ) : static
 	{
 		return $this->set( 'plugin.position', $position );
 	}
@@ -119,7 +119,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'plugin.status', 1 );
+		return (int) $this->get( 'plugin.status', 1 );
 	}
 
 
@@ -127,9 +127,9 @@ class Standard
 	 * Sets the new status of the plugin item.
 	 *
 	 * @param int $status Status of the item
-	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
+	 * @return static Plugin item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'plugin.status', $status );
 	}
@@ -149,11 +149,11 @@ class Standard
 	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Plugin item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -161,9 +161,9 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'plugin.type': $item->setType( $value ); break;
-				case 'plugin.label': $item->setLabel( $value ); break;
-				case 'plugin.provider': $item->setProvider( $value ); break;
+				case 'plugin.type': $item->setType( (string) $value ); break;
+				case 'plugin.label': $item->setLabel( (string) $value ); break;
+				case 'plugin.provider': $item->setProvider( (string) $value ); break;
 				case 'plugin.status': $item->setStatus( (int) $value ); break;
 				case 'plugin.config': $item->setConfig( (array) $value ); break;
 				case 'plugin.position': $item->setPosition( (int) $value ); break;
@@ -180,7 +180,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

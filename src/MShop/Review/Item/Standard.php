@@ -36,11 +36,11 @@ class Standard
 	 * Sets the new comment for the reviewed item
 	 *
 	 * @param string|null $value New comment for the reviewed item
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setComment( ?string $value ) : \Aimeos\MShop\Review\Item\Iface
+	public function setComment( ?string $value ) : static
 	{
-		return $this->set( 'review.comment', strip_tags( $value ) );
+		return $this->set( 'review.comment', strip_tags( $value ?? '' ) );
 	}
 
 
@@ -51,7 +51,8 @@ class Standard
 	 */
 	public function getCustomerId() : ?string
 	{
-		return (string) $this->get( 'review.customerid' );
+		// @phpstan-ignore return.type
+		return $this->get( 'review.customerid' );
 	}
 
 
@@ -59,9 +60,9 @@ class Standard
 	 * Sets the ID of the reviewer
 	 *
 	 * @param string $value New ID of the customer item
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setCustomerId( string $value ) : \Aimeos\MShop\Review\Item\Iface
+	public function setCustomerId( string $value ) : static
 	{
 		return $this->set( 'review.customerid', $value );
 	}
@@ -82,9 +83,9 @@ class Standard
 	 * Sets the new domain the review is valid for.
 	 *
 	 * @param string $value Domain name
-	 * @return \Aimeos\MShop\Common\Item\Iface Common item for chaining method calls
+	 * @return static Common item for chaining method calls
 	 */
-	public function setDomain( string $value ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDomain( string $value ) : static
 	{
 		return $this->set( 'review.domain', $value );
 	}
@@ -105,9 +106,9 @@ class Standard
 	 * Sets the ID of the ordered review item which the customer subscribed for
 	 *
 	 * @param string $value ID of the ordered review
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setOrderProductId( string $value ) : \Aimeos\MShop\Review\Item\Iface
+	public function setOrderProductId( string $value ) : static
 	{
 		return $this->set( 'review.orderproductid', $value );
 	}
@@ -128,9 +129,9 @@ class Standard
 	 * Sets the new name of the reviewer
 	 *
 	 * @param string $value New name of the reviewer
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setName( string $value ) : \Aimeos\MShop\Review\Item\Iface
+	public function setName( string $value ) : static
 	{
 		return $this->set( 'review.name', strip_tags( $value ) );
 	}
@@ -151,9 +152,9 @@ class Standard
 	 * Sets the new rating for the reviewed item
 	 *
 	 * @param int $value Rating for the reviewed item (higher is better)
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setRating( int $value ) : \Aimeos\MShop\Review\Item\Iface
+	public function setRating( int $value ) : static
 	{
 		return $this->set( 'review.rating', min( 5, max( 0, $value ) ) );
 	}
@@ -174,9 +175,9 @@ class Standard
 	 * Sets the new reference ID of the common list item, like the unique ID of a product item or a customer item
 	 *
 	 * @param string $value New reference ID of the common list item
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setRefId( string $value ) : \Aimeos\MShop\Review\Item\Iface
+	public function setRefId( string $value ) : static
 	{
 		return $this->set( 'review.refid', $value );
 	}
@@ -197,11 +198,11 @@ class Standard
 	 * Sets the new response to the review
 	 *
 	 * @param string|null $value New response to the review
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setResponse( ?string $value ) : \Aimeos\MShop\Review\Item\Iface
+	public function setResponse( ?string $value ) : static
 	{
-		return $this->set( 'review.response', strip_tags( $value ) );
+		return $this->set( 'review.response', strip_tags( $value ?? '' ) );
 	}
 
 
@@ -220,9 +221,9 @@ class Standard
 	 * Sets the new status of the review item.
 	 *
 	 * @param int $status New status of the review item
-	 * @return \Aimeos\MShop\Review\Item\Iface Review item for chaining method calls
+	 * @return static Review item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'review.status', $status );
 	}
@@ -242,11 +243,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Common\Item\Iface Common item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Common item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -254,15 +255,15 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'review.orderproductid': !$private ?: $item->setOrderProductId( $value ); break;
-				case 'review.customerid': !$private ?: $item->setCustomerId( $value ); break;
-				case 'review.refid': $item->setRefId( $value ); break;
-				case 'review.domain': $item->setDomain( $value ); break;
-				case 'review.comment': $item->setComment( $value ); break;
-				case 'review.response': $item->setResponse( $value ); break;
+				case 'review.orderproductid': !$private ?: $item->setOrderProductId( (string) $value ); break;
+				case 'review.customerid': !$private ?: $item->setCustomerId( (string) $value ); break;
+				case 'review.refid': $item->setRefId( (string) $value ); break;
+				case 'review.domain': $item->setDomain( (string) $value ); break;
+				case 'review.comment': $item->setComment( $value ? (string) $value : null ); break;
+				case 'review.response': $item->setResponse( $value ? (string) $value : null ); break;
 				case 'review.status': $item->setStatus( (int) $value ); break;
 				case 'review.rating': $item->setRating( (int) $value ); break;
-				case 'review.name': $item->setName( $value ); break;
+				case 'review.name': $item->setName( (string) $value ); break;
 				default: continue 2;
 			}
 
@@ -276,7 +277,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

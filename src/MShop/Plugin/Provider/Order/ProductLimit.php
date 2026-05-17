@@ -102,9 +102,9 @@ class ProductLimit
 	 * Subscribes itself to a publisher.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
+	 * @return static Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static
 	{
 		$plugin = $this->object();
 
@@ -131,7 +131,9 @@ class ProductLimit
 
 		foreach( $list as $entry )
 		{
+			// @phpstan-ignore argument.type, argument.type
 			$this->checkWithoutCurrency( $order, $entry );
+			// @phpstan-ignore argument.type
 			$this->checkWithCurrency( $order, $entry );
 		}
 
@@ -144,17 +146,18 @@ class ProductLimit
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Basket object
 	 * @param \Aimeos\MShop\Order\Item\Product\Iface $value Order product item
+	 * @return void
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one limit is exceeded
 	 */
 	protected function checkWithoutCurrency( \Aimeos\MShop\Order\Item\Iface $order,
-		\Aimeos\MShop\Order\Item\Product\Iface $value )
+		\Aimeos\MShop\Order\Item\Product\Iface $value ) : void
 	{
 		$config = $this->getItemBase()->getConfig();
 
 		if( isset( $config['single-number-max'] ) && !is_array( $config['single-number-max'] )
 			&& $value->getQuantity() > (int) $config['single-number-max']
 		) {
-			$value->setQuantity( $config['single-number-max'] ); // reset to allowed value
+			$value->setQuantity( (float) $config['single-number-max'] ); // reset to allowed value
 
 			$msg = $this->context()->translate( 'mshop', 'The maximum product quantity is %1$d' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (int) $config['single-number-max'] ), 409 );
@@ -166,7 +169,7 @@ class ProductLimit
 			$total = $value->getQuantity();
 
 			foreach( $order->getProducts() as $product ) {
-				$total += $product->getQuantity();
+				$total += $product->getQuantity(); // @phpstan-ignore assignOp.invalid
 			}
 
 			if( $total > (int) $config['total-number-max'] )
@@ -183,35 +186,38 @@ class ProductLimit
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Basket object
 	 * @param \Aimeos\MShop\Order\Item\Product\Iface $value Order product item
+	 * @return void
 	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one limit is exceeded
 	 */
 	protected function checkWithCurrency( \Aimeos\MShop\Order\Item\Iface $order,
-		\Aimeos\MShop\Order\Item\Product\Iface $value )
+		\Aimeos\MShop\Order\Item\Product\Iface $value ) : void
 	{
 		$config = $this->getItemBase()->getConfig();
 		$currencyId = $value->getPrice()->getCurrencyId();
 
 		if( isset( $config['single-value-max'][$currencyId] )
-			&& $value->getPrice()->getValue() * $value->getQuantity() > (float) $config['single-value-max'][$currencyId]
+			&& $value->getPrice()->getValue() * $value->getQuantity() > (float) $config['single-value-max'][$currencyId] // @phpstan-ignore binaryOp.invalid
 		) {
 			$msg = $this->context()->translate( 'mshop', 'The maximum product value is %1$s' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['single-value-max'][$currencyId] ), 409 );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (string) $config['single-value-max'][$currencyId] ), 409 );
 		}
 
 
 		if( isset( $config['total-value-max'][$currencyId] ) )
 		{
 			$price = clone $value->getPrice();
-			$price->setValue( $price->getValue() * $value->getQuantity() );
+			// @phpstan-ignore argument.type
+			$price->setValue( $price->getValue() * $value->getQuantity() ); // @phpstan-ignore binaryOp.invalid
 
 			foreach( $order->getProducts() as $product ) {
+				// @phpstan-ignore argument.type, argument.type
 				$price->addItem( $product->getPrice(), $product->getQuantity() );
 			}
 
 			if( (float) $price->getValue() > (float) $config['total-value-max'][$currencyId] )
 			{
 				$msg = $this->context()->translate( 'mshop', 'The maximum value of all products is %1$s' );
-				throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['total-value-max'][$currencyId] ), 409 );
+				throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (string) $config['total-value-max'][$currencyId] ), 409 );
 			}
 		}
 	}

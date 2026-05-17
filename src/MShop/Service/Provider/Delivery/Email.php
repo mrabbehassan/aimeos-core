@@ -91,10 +91,11 @@ class Email
 	 * Sends the email with several orders and updates the delivery status
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orders List of order invoice objects
-	 * @return \Aimeos\MShop\Order\Item\Iface[] Updated order items
+	 * @return \Aimeos\Map Updated order items
 	 */
 	public function push( iterable $orders ) : \Aimeos\Map
 	{
+		// @phpstan-ignore return.type
 		return $this->send( $orders )->setStatusDelivery( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
 	}
 
@@ -103,8 +104,9 @@ class Email
 	 * Returns the content for the e-mail body
 	 *
 	 * @param iterable $orderItems List of order items to export
+	 * @return string Rendered e-mail body content
 	 */
-	protected function getEmailContent( iterable $orderItems )
+	protected function getEmailContent( iterable $orderItems ) : string
 	{
 		$template = $this->getConfigValue( 'email.template', 'service/provider/delivery/email-body' );
 
@@ -118,8 +120,9 @@ class Email
 	 * Returns the order content for the e-mail attachment
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface[] $orderItems List of order items to export
+	 * @return string Rendered order content for attachment
 	 */
-	protected function getOrderContent( iterable $orderItems )
+	protected function getOrderContent( iterable $orderItems ) : string
 	{
 		$template = $this->getConfigValue( 'email.order-template', 'service/provider/delivery/email-order' );
 
@@ -139,7 +142,7 @@ class Email
 	{
 		$this->context()->mail()->create()
 			->to( (string) $this->getConfigValue( 'email.to' ) )
-			->from( (string) $this->getConfigValue( 'email.from' ) ?: $this->context()->config()->get( 'resource/email/from-email' ) )
+			->from( (string) ( $this->getConfigValue( 'email.from' ) ?: $this->context()->config()->get( 'resource/email/from-email' ) ) )
 			->subject( (string) $this->getConfigValue( 'email.subject', 'New orders' ) )
 			->attach( $this->getOrderContent( $orderItems ), 'orders.csv', 'text/plain' )
 			->text( $this->getEmailContent( $orderItems ) )

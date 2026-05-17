@@ -59,9 +59,9 @@ interface Iface
 	 * Sets the identifier of the shop instance.
 	 *
 	 * @param string $id ID of the shop instance
-	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
+	 * @return static Locale item for chaining method calls
 	 */
-	public function setSiteId( string $id ) : \Aimeos\MShop\Locale\Item\Iface;
+	public function setSiteId( string $id ) : static;
 
 	/**
 	 * Returns the ISO language code.
@@ -74,9 +74,9 @@ interface Iface
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
-	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
+	 * @return static Locale item for chaining method calls
 	 */
-	public function setLanguageId( ?string $langid ) : \Aimeos\MShop\Locale\Item\Iface;
+	public function setLanguageId( ?string $langid ) : static;
 
 	/**
 	 * Returns the currency ID.
@@ -89,7 +89,7 @@ interface Iface
 	 * Sets the currency ID.
 	 *
 	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
-	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
+	 * @return static Locale item for chaining method calls
 	 */
-	public function setCurrencyId( ?string $currencyid ) : \Aimeos\MShop\Locale\Item\Iface;
+	public function setCurrencyId( ?string $currencyid ) : static;
 }

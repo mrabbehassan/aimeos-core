@@ -38,6 +38,7 @@ class Factory
 		$interface = \Aimeos\MW\Tree\Manager\Iface::class;
 		$classname = '\Aimeos\MW\Tree\Manager\\' . $name;
 
+		// @phpstan-ignore return.type
 		return \Aimeos\Utils::create( $classname, [$config, $resource], $interface );
 	}
 }

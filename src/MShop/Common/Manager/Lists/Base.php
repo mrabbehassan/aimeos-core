@@ -55,6 +55,7 @@ abstract class Base
 		{
 			$date = $this->context()->datetime();
 
+			// @phpstan-ignore argument.type
 			$filter->add( $filter->and( [
 				$filter->or( [
 					$filter->compare( '<=', $prefix . '.datestart', $date ),
@@ -140,7 +141,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
+	 * @type int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of list items implementing \Aimeos\MShop\Common\Item\Lists\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -156,11 +157,13 @@ abstract class Base
 
 		foreach( $refIdMap as $domain => $list )
 		{
+			// @phpstan-ignore argument.type
 			$manager = \Aimeos\MShop::create( $this->context(), $domain );
 			$attr = map( $manager->getSearchAttributes() );
 
-			$key = $attr->get( 'id' )?->getCode() === 'id' ? 'id' : str_replace( '/', '.', $domain ) . '.id';
+			$key = $attr->get( 'id' )?->getCode() === 'id' ? 'id' : str_replace( '/', '.', (string) $domain ) . '.id';
 
+			// @phpstan-ignore argument.type
 			$search = $manager->filter()->slice( 0, count( $list ) )
 				->add( [$key => map( $list )->getRefId()] );
 

@@ -32,9 +32,9 @@ interface Iface
 	 * Sets a new URL segment for the catalog.
 	 *
 	 * @param string|null $url New URL segment of the catalog item
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 * @return static Catalog item for chaining method calls
 	 */
-	public function setUrl( ?string $url ) : \Aimeos\MShop\Catalog\Item\Iface;
+	public function setUrl( ?string $url ) : static;
 
 	/**
 	 * Returns the URL target specific for that category
@@ -47,7 +47,7 @@ interface Iface
 	 * Sets a new URL target specific for that category
 	 *
 	 * @param string $value New URL target specific for that category
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 * @return static Catalog item for chaining method calls
 	 */
-	public function setTarget( ?string $value ) : \Aimeos\MShop\Catalog\Item\Iface;
+	public function setTarget( ?string $value ) : static;
 }

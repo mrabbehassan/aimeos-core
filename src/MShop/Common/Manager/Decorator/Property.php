@@ -36,6 +36,7 @@ class Property
 	 */
 	public function from( iterable $entries, array $refs = [], array $excludes = [] ) : \Aimeos\Map
 	{
+		// @phpstan-ignore argument.type
 		$keys = array_flip( $excludes );
 		$excludes[] = 'property';
 
@@ -47,12 +48,13 @@ class Property
 			{
 				foreach( $entry['property'] as $list )
 				{
-					$list = array_diff_key( $list, $keys );
+					$list = array_diff_key( (array) $list, $keys );
 					$item->addPropertyItem( $this->createPropertyItem()->fromArray( $list, true ) );
 				}
 			}
 		}
 
+		// @phpstan-ignore return.type
 		return $items;
 	}
 
@@ -91,9 +93,10 @@ class Property
 						}
 					}
 
+					// @phpstan-ignore argument.type
 					$sitestr = $this->siteString( $alias . '."siteid"', $level );
 					$keystr = $this->toExpression( $alias . '."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
+					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], (string) $source );
 
 					return $params;
 				}
@@ -111,6 +114,7 @@ class Property
 	 */
 	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
+		// @phpstan-ignore argument.type
 		$this->savePropertyItems( $item, $this->domain(), $fetch );
 
 		return $this->getManager()->saveRefs( $item );

@@ -56,8 +56,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 		if( !empty( $domains ) )
 		{
+			// @phpstan-ignore argument.type
 			$listItems = $this->getListItems( array_keys( $itemMap ), $domains, $prefix );
 
+			// @phpstan-ignore argument.type
 			foreach( $this->getListItems( array_keys( $itemMap ), $domains, $prefix ) as $id => $listItem ) {
 				$listItemMap[$listItem->getParentId()][$id] = $listItem;
 			}
@@ -67,6 +69,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		{
 			$listItems = $listItemMap[$id] ?? [];
 
+			// @phpstan-ignore argument.type
 			if( $item = $this->applyFilter( $this->createItemBase( [], $listItems, [], [], $node ) ) ) {
 				$items[$id] = $item;
 			}
@@ -95,14 +98,15 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 				throw new \Aimeos\MShop\Catalog\Exception( 'No site ID available for creating a catalog item' );
 			}
 
-			$node = $this->createTreeManager( $values['siteid'] )->createNode();
+			$node = $this->createTreeManager( (string) $values['siteid'] )->createNode();
 			$node->siteid = $values['siteid'];
 		}
 
-		if( isset( $node->config ) && ( $values['config'] = json_decode( $config = $node->config, true ) ) === null ) {
+		if( isset( $node->config ) && ( $values['config'] = json_decode( (string) $node->config, true ) ) === null ) {
 			$values['config'] = [];
 		}
 
+		// @phpstan-ignore argument.type, argument.type, argument.type
 		return new \Aimeos\MShop\Catalog\Item\Standard( $node, $values, $children, $listItems, $refItems );
 	}
 
@@ -114,20 +118,24 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Parent tree catalog Item
 	 * @param array $listItemMap Associative list of parent-item-ID / list items for the catalog item
 	 * @param array $refItemMap Associative list of parent-item-ID/domain/items key/value pairs
+	 * @return void
 	 */
 	protected function createTree( \Aimeos\MW\Tree\Node\Iface $node, \Aimeos\MShop\Catalog\Item\Iface $item,
-			array $listItemMap, array $refItemMap )
+			array $listItemMap, array $refItemMap ) : void
 	{
 		foreach( $node->getChildren() as $idx => $child )
 		{
 			$listItems = [];
-			if( array_key_exists( $child->getId(), $listItemMap ) ) {
-				$listItems = $listItemMap[$child->getId()];
+			if( array_key_exists( $child->getId() ?? '', $listItemMap ) ) {
+				$listItems = $listItemMap[$child->getId() ?? ''];
 			}
 
+			// @phpstan-ignore argument.type
 			if( $newItem = $this->applyFilter( $this->createItemBase( [], $listItems, [], [], $child ) ) )
 			{
+				// @phpstan-ignore argument.type
 				$item->addChild( $newItem );
+				// @phpstan-ignore argument.type
 				$this->createTree( $child, $newItem, $listItemMap, $refItemMap );
 			}
 		}
@@ -151,7 +159,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 			$colstring = '';
 			foreach( $this->object()->getSaveAttributes() as $name => $entry ) {
-				$colstring .= $entry->getInternalCode() . ', ';
+				$colstring .= $entry->getInternalCode() . ', '; // @phpstan-ignore assignOp.invalid, binaryOp.invalid
 			}
 
 			$treeConfig = array(
@@ -180,7 +188,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @param string SQL statement for deleting items
+					 * @type string SQL statement for deleting items
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/get/ansi
 					 * @see mshop/catalog/manager/insert/ansi
@@ -195,7 +203,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/insert-usage/ansi
 					 * @see mshop/catalog/manager/update-usage/ansi
 					 */
-					'delete' => str_replace( ':siteid', $sitestr, $this->getSqlConfig( 'mshop/catalog/manager/delete' ) ),
+					'delete' => str_replace( ':siteid', $sitestr, (string) $this->getSqlConfig( 'mshop/catalog/manager/delete' ) ),
 
 					/** mshop/catalog/manager/get/mysql
 					 * Returns a node record and its complete subtree optionally limited by the level
@@ -225,7 +233,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @param string SQL statement for searching items
+					 * @type string SQL statement for searching items
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/insert/ansi
@@ -240,7 +248,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/insert-usage/ansi
 					 * @see mshop/catalog/manager/update-usage/ansi
 					 */
-					'get' => str_replace( [':columns', ':siteid'], [$colstring, $sitestr], $this->getSqlConfig( 'mshop/catalog/manager/get' ) ),
+					'get' => str_replace( [':columns', ':siteid'], [$colstring, $sitestr], (string) $this->getSqlConfig( 'mshop/catalog/manager/get' ) ),
 
 					/** mshop/catalog/manager/insert/mysql
 					 * Inserts a new catalog node into the database table
@@ -268,7 +276,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @param string SQL statement for inserting records
+					 * @type string SQL statement for inserting records
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -283,7 +291,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/insert-usage/ansi
 					 * @see mshop/catalog/manager/update-usage/ansi
 					 */
-					'insert' => str_replace( ':siteid', $sitestr, $this->getSqlConfig( 'mshop/catalog/manager/insert' ) ),
+					'insert' => str_replace( ':siteid', $sitestr, (string) $this->getSqlConfig( 'mshop/catalog/manager/insert' ) ),
 
 					/** mshop/catalog/manager/move-left/mysql
 					 * Updates the left values of the nodes that are moved within the catalog tree
@@ -309,7 +317,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @param string SQL statement for updating records
+					 * @type string SQL statement for updating records
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -324,7 +332,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/insert-usage/ansi
 					 * @see mshop/catalog/manager/update-usage/ansi
 					 */
-					'move-left' => str_replace( ':siteid', $sitestr, $this->getSqlConfig( 'mshop/catalog/manager/move-left' ) ),
+					'move-left' => str_replace( ':siteid', $sitestr, (string) $this->getSqlConfig( 'mshop/catalog/manager/move-left' ) ),
 
 					/** mshop/catalog/manager/move-right/mysql
 					 * Updates the left values of the nodes that are moved within the catalog tree
@@ -350,7 +358,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @param string SQL statement for updating records
+					 * @type string SQL statement for updating records
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -365,7 +373,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/insert-usage/ansi
 					 * @see mshop/catalog/manager/update-usage/ansi
 					 */
-					'move-right' => str_replace( ':siteid', $sitestr, $this->getSqlConfig( 'mshop/catalog/manager/move-right' ) ),
+					'move-right' => str_replace( ':siteid', $sitestr, (string) $this->getSqlConfig( 'mshop/catalog/manager/move-right' ) ),
 
 					/** mshop/catalog/manager/search/mysql
 					 * Retrieves the records matched by the given criteria in the database
@@ -397,7 +405,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @param string SQL statement for searching items
+					 * @type string SQL statement for searching items
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -412,7 +420,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/insert-usage/ansi
 					 * @see mshop/catalog/manager/update-usage/ansi
 					 */
-					'search' => str_replace( [':columns', ':siteid'], [$colstring, $sitestr], $this->getSqlConfig( 'mshop/catalog/manager/search' ) ),
+					'search' => str_replace( [':columns', ':siteid'], [$colstring, $sitestr], (string) $this->getSqlConfig( 'mshop/catalog/manager/search' ) ),
 
 					/** mshop/catalog/manager/update/mysql
 					 * Updates an existing catalog node in the database
@@ -437,7 +445,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @param string SQL statement for updating records
+					 * @type string SQL statement for updating records
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -452,7 +460,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/insert-usage/ansi
 					 * @see mshop/catalog/manager/update-usage/ansi
 					 */
-					'update' => str_replace( ':siteid', $sitestr, $this->getSqlConfig( 'mshop/catalog/manager/update' ) ),
+					'update' => str_replace( ':siteid', $sitestr, (string) $this->getSqlConfig( 'mshop/catalog/manager/update' ) ),
 
 					/** mshop/catalog/manager/update-parentid/mysql
 					 * Updates the parent ID after moving a node record
@@ -477,7 +485,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * compatible with most relational database systems. This also
 					 * includes using double quotes for table and column names.
 					 *
-					 * @param string SQL statement for updating records
+					 * @type string SQL statement for updating records
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -492,7 +500,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * @see mshop/catalog/manager/insert-usage/ansi
 					 * @see mshop/catalog/manager/update-usage/ansi
 					 */
-					'update-parentid' => str_replace( ':siteid', $sitestr, $this->getSqlConfig( 'mshop/catalog/manager/update-parentid' ) ),
+					'update-parentid' => str_replace( ':siteid', $sitestr, (string) $this->getSqlConfig( 'mshop/catalog/manager/update-parentid' ) ),
 
 					/** mshop/catalog/manager/newid/mysql
 					 * Retrieves the ID generated by the database when inserting a new record
@@ -521,7 +529,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 					 * fits for most database servers as they implement their own
 					 * specific way.
 					 *
-					 * @param string SQL statement for retrieving the last inserted record ID
+					 * @type string SQL statement for retrieving the last inserted record ID
 					 * @since 2014.03
 					 * @see mshop/catalog/manager/delete/ansi
 					 * @see mshop/catalog/manager/get/ansi
@@ -543,6 +551,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			$this->treeManagers[$siteid] = \Aimeos\MW\Tree\Factory::create( 'DBNestedSet', $treeConfig, $conn );
 		}
 
+		// @phpstan-ignore return.type
 		return $this->treeManagers[$siteid];
 	}
 

@@ -109,7 +109,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for aggregating order items
+		 * @type string SQL statement for aggregating order items
 		 * @since 2014.09
 		 * @see mshop/order/manager/service/insert/ansi
 		 * @see mshop/order/manager/service/update/ansi
@@ -122,7 +122,7 @@ class Standard
 		/** mshop/order/manager/service/aggregateavg/mysql
 		 * Computes the average of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @param string SQL statement for aggregating the order service items and computing the average value
+		 * @type string SQL statement for aggregating the order service items and computing the average value
 		 * @since 2017.10
 		 * @see mshop/order/manager/service/aggregateavg/ansi
 		 * @see mshop/order/manager/service/aggregate/mysql
@@ -131,7 +131,7 @@ class Standard
 		/** mshop/order/manager/service/aggregateavg/ansi
 		 * Computes the average of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @param string SQL statement for aggregating the order service items and computing the average value
+		 * @type string SQL statement for aggregating the order service items and computing the average value
 		 * @since 2017.10
 		 * @see mshop/order/manager/service/aggregate/ansi
 		 */
@@ -139,7 +139,7 @@ class Standard
 		/** mshop/order/manager/service/aggregatesum/mysql
 		 * Computes the sum of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @param string SQL statement for aggregating the order service items and computing the sum
+		 * @type string SQL statement for aggregating the order service items and computing the sum
 		 * @since 2017.10
 		 * @see mshop/order/manager/service/aggregatesum/ansi
 		 * @see mshop/order/manager/service/aggregate/mysql
@@ -148,7 +148,7 @@ class Standard
 		/** mshop/order/manager/service/aggregatesum/ansi
 		 * Computes the sum of all values grouped by the key column and matched by the given criteria
 		 *
-		 * @param string SQL statement for aggregating the order service items and computing the sum
+		 * @type string SQL statement for aggregating the order service items and computing the sum
 		 * @since 2017.10
 		 * @see mshop/order/manager/service/aggregate/ansi
 		 */
@@ -183,7 +183,7 @@ class Standard
 	 */
 	public function createAttributeItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->object()->getSubManager( 'attribute' )->create( $values );
+		return $this->object()->getSubManager( 'attribute' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -195,7 +195,7 @@ class Standard
 	 */
 	public function createTransaction( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->object()->getSubManager( 'transaction' )->create( $values );
+		return $this->object()->getSubManager( 'transaction' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -286,7 +286,9 @@ class Standard
 	 */
 	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
+		// @phpstan-ignore argument.type
 		$this->saveAttributeItems( $item, $fetch );
+		// @phpstan-ignore argument.type
 		$this->saveTransactions( $item, $fetch );
 
 		return $item;
@@ -310,6 +312,7 @@ class Standard
 		$transactions = $this->getTransactions( $parentIds );
 
 		if( $this->hasRef( $ref, 'service' ) ) {
+			// @phpstan-ignore argument.type
 			$servItems = $this->getServiceItems( map( $entries )->col( 'order.service.serviceid' )->filter()->all(), $ref );
 		}
 
@@ -387,6 +390,7 @@ class Standard
 		$manager = \Aimeos\MShop::create( $this->context(), 'service' );
 		$search = $manager->filter()->add( 'service.id', '==', array_unique( $ids ) )->slice( 0, 0x7fffffff );
 
+		// @phpstan-ignore argument.type
 		return $manager->search( $search, $ref );
 	}
 

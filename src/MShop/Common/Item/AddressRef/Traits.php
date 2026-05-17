@@ -27,16 +27,16 @@ trait Traits
 	/**
 	 * Creates a deep clone of all objects
 	 */
-	public function __clone()
+	public function __clone() : void
 	{
 		parent::__clone();
 
 		foreach( $this->addrItems as $key => $item ) {
-			$this->addrItems[$key] = clone $item;
+			$this->addrItems[$key] = clone $item; // @phpstan-ignore clone.nonObject
 		}
 
 		foreach( $this->addrRmItems as $key => $item ) {
-			$this->addrRmItems[$key] = clone $item;
+			$this->addrRmItems[$key] = clone $item; // @phpstan-ignore clone.nonObject
 		}
 	}
 
@@ -46,9 +46,9 @@ trait Traits
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item New or existing address item
 	 * @param string|null $key Key in the list of address items or null to add the item at the end
-	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, ?string $key = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, ?string $key = null ) : static
 	{
 		$key !== null ? $this->addrItems[$key] = $item : $this->addrItems[] = $item;
 		return $this;
@@ -59,9 +59,9 @@ trait Traits
 	 * Removes an existing address item
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item Existing address item
-	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function deleteAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item ) : \Aimeos\MShop\Common\Item\Iface
+	public function deleteAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item ) : static
 	{
 		foreach( $this->addrItems as $key => $addrItem )
 		{
@@ -82,10 +82,10 @@ trait Traits
 	 * Removes a list of existing address items
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Address\Iface[] $items Existing address items
-	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 * @throws \Aimeos\MShop\Exception If an item isn't a address item or isn't found
 	 */
-	public function deleteAddressItems( iterable $items ) : \Aimeos\MShop\Common\Item\Iface
+	public function deleteAddressItems( iterable $items ) : static
 	{
 		foreach( $items as $item ) {
 			$this->deleteAddressItem( $item );
@@ -114,6 +114,7 @@ trait Traits
 	 */
 	public function getAddressItem( string $key ) : ?\Aimeos\MShop\Common\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->addrItems[$key] ?? null;
 	}
 
@@ -133,8 +134,9 @@ trait Traits
 	 * Initializes the address items in the trait
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $items Address items
+	 * @return void
 	 */
-	protected function initAddressItems( array $items )
+	protected function initAddressItems( array $items ) : void
 	{
 		$this->addrItems = $items;
 	}

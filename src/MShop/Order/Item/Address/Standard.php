@@ -28,7 +28,7 @@ class Standard
 	 */
 	public function getAddressId() : string
 	{
-		return $this->get( 'order.address.addressid', '' );
+		return (string) $this->get( 'order.address.addressid', '' );
 	}
 
 
@@ -36,9 +36,9 @@ class Standard
 	 * Sets the original customer address ID.
 	 *
 	 * @param string $addrid New customer address ID
-	 * @return \Aimeos\MShop\Order\Item\Address\Iface Order base address item for chaining method calls
+	 * @return static Order base address item for chaining method calls
 	 */
-	public function setAddressId( string $addrid ) : \Aimeos\MShop\Order\Item\Address\Iface
+	public function setAddressId( string $addrid ) : static
 	{
 		return $this->set( 'order.address.addressid', $addrid );
 	}
@@ -48,11 +48,12 @@ class Standard
 	 * Copys all data from a given address item.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item New address
-	 * @return \Aimeos\MShop\Order\Item\Address\Iface Order base address item for chaining method calls
+	 * @return static Order base address item for chaining method calls
 	 */
-	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item ) : \Aimeos\MShop\Common\Item\Address\Iface
+	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item ) : static
 	{
 		if( self::macro( 'copyFrom' ) ) {
+			// @phpstan-ignore return.type
 			return $this->call( 'copyFrom', $item );
 		}
 
@@ -68,11 +69,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Order\Item\Address\Iface Order address item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Order address item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -80,7 +81,7 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'order.address.addressid': $item->setAddressId( $value ); break;
+				case 'order.address.addressid': $item->setAddressId( (string) $value ); break;
 				default: continue 2;
 			}
 
@@ -94,7 +95,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

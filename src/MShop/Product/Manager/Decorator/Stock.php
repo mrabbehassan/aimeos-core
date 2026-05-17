@@ -29,7 +29,7 @@ class Stock
 	 */
 	public function createStockItem( array $values = [] ) : \Aimeos\MShop\Stock\Item\Iface
 	{
-		return \Aimeos\MShop::create( $this->context(), 'stock' )->create( $values );
+		return \Aimeos\MShop::create( $this->context(), 'stock' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -43,6 +43,7 @@ class Stock
 	 */
 	public function from( iterable $entries, array $refs = [], array $excludes = [] ) : \Aimeos\Map
 	{
+		// @phpstan-ignore argument.type
 		$keys = array_flip( $excludes );
 		$excludes[] = 'stock';
 
@@ -54,12 +55,13 @@ class Stock
 			{
 				foreach( $entry['stock'] as $list )
 				{
-					$list = array_diff_key( $list, $keys );
+					$list = array_diff_key( (array) $list, $keys );
 					$item->addStockItem( $this->createStockItem()->fromArray( $list, true ) );
 				}
 			}
 		}
 
+		// @phpstan-ignore return.type
 		return $items;
 	}
 
@@ -73,6 +75,7 @@ class Stock
 	 */
 	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
+		// @phpstan-ignore argument.type
 		$this->saveStockItems( $item, $fetch );
 
 		return $this->getManager()->saveRefs( $item );
@@ -124,7 +127,8 @@ class Stock
 			$filter->add( 'stock.type', '==', $types );
 		}
 
-		return $manager->search( $filter, $ref ?? [] )->groupBy( 'stock.productid' )->all();
+		// @phpstan-ignore argument.type
+		return $manager->search( $filter, $ref )->groupBy( 'stock.productid' )->all();
 	}
 
 

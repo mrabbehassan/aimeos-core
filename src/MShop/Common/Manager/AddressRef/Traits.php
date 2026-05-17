@@ -35,7 +35,7 @@ trait Traits
 	 */
 	public function createAddressItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Address\Iface
 	{
-		return $this->object()->getSubManager( 'address' )->create( $values );
+		return $this->object()->getSubManager( 'address' )->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -83,8 +83,10 @@ trait Traits
 				$addrItem = $addrItem->setId( null ); //create new address item if copied
 			}
 
+			// @phpstan-ignore argument.type
 			$addrItem = $manager->save( $addrItem->setParentId( $item->getId() ), $fetch );
-			$item->addAddressItem( $addrItem, $idx );
+			// @phpstan-ignore argument.type, argument.type
+			$item->addAddressItem( $addrItem, (string) $idx );
 		}
 
 		return $item;

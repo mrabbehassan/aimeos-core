@@ -47,8 +47,9 @@ class Standard
 
 		$this->langid = $values['.languageid'] ?? null;
 
-		$this->initListItems( $values['.listitems'] ?? [] );
-		$this->initPropertyItems( $values['.propitems'] ?? [] );
+		$this->initListItems( (array) ( $values['.listitems'] ?? [] ) );
+		// @phpstan-ignore argument.type
+		$this->initPropertyItems( (array) ( $values['.propitems'] ?? [] ) );
 	}
 
 
@@ -70,7 +71,7 @@ class Standard
 	 */
 	public function getFileSystem() : string
 	{
-		return $this->get( 'media.filesystem', 'fs-media' );
+		return (string) $this->get( 'media.filesystem', 'fs-media' );
 	}
 
 
@@ -78,9 +79,9 @@ class Standard
 	 * Sets the name of the file system the referenced file is stored.
 	 *
 	 * @param string $value Name of the file system
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setFileSystem( string $value ) : \Aimeos\MShop\Media\Item\Iface
+	public function setFileSystem( string $value ) : static
 	{
 		return $this->set( 'media.filesystem', $value );
 	}
@@ -93,6 +94,7 @@ class Standard
 	 */
 	public function getLanguageId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'media.languageid' );
 	}
 
@@ -101,10 +103,10 @@ class Standard
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $id ISO language code (e.g. de or de_DE)
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Media\Item\Iface
+	public function setLanguageId( ?string $id ) : static
 	{
 		return $this->set( 'media.languageid', \Aimeos\Utils::language( $id ) );
 	}
@@ -125,9 +127,9 @@ class Standard
 	 * Sets the domain of the media item.
 	 *
 	 * @param string $domain Domain of media item
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setDomain( string $domain ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDomain( string $domain ) : static
 	{
 		return $this->set( 'media.domain', (string) $domain );
 	}
@@ -148,9 +150,9 @@ class Standard
 	 * Sets the new label of the media item.
 	 *
 	 * @param string $label Label of the media item
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setLabel( ?string $label ) : \Aimeos\MShop\Media\Item\Iface
+	public function setLabel( ?string $label ) : static
 	{
 		return $this->set( 'media.label', (string) $label );
 	}
@@ -171,9 +173,9 @@ class Standard
 	 * Sets the new status of the media item.
 	 *
 	 * @param int $status Status of the item
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'media.status', $status );
 	}
@@ -194,9 +196,9 @@ class Standard
 	 * Sets the new mime type of the media.
 	 *
 	 * @param string $mimetype Mime type of the media item
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setMimeType( string $mimetype ) : \Aimeos\MShop\Media\Item\Iface
+	public function setMimeType( string $mimetype ) : static
 	{
 		if( preg_match( '/^[a-z\-]+\/[a-zA-Z0-9\.\-\+]+$/', $mimetype ) !== 1 ) {
 			throw new \Aimeos\MShop\Media\Exception( sprintf( 'Invalid mime type "%1$s"', $mimetype ) );
@@ -228,9 +230,9 @@ class Standard
 	 * Sets the new url of the media item.
 	 *
 	 * @param string|null $url URL of the media file
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setUrl( ?string $url ) : \Aimeos\MShop\Media\Item\Iface
+	public function setUrl( ?string $url ) : static
 	{
 		return $this->set( 'media.url', (string) $url );
 	}
@@ -239,10 +241,10 @@ class Standard
 	/**
 	 * Returns the preview url of the media item.
 	 *
-	 * @param bool|int $size TRUE for the largest image, FALSE for the smallest or a concrete image width
+	 * @param bool|int $width TRUE for the largest image, FALSE for the smallest or a concrete image width
 	 * @return string Preview URL of the media file
 	 */
-	public function getPreview( $width = false ) : string
+	public function getPreview( bool|int $width = false ) : string
 	{
 		if( ( $list = (array) $this->get( 'media.preview', [] ) ) === [] ) {
 			return $this->getUrl();
@@ -275,7 +277,7 @@ class Standard
 		}
 
 		if( $path && !\Aimeos\Base\Str::starts( $path, ['http', 'data:', '/'] ) && $this->getTimeModified() ) {
-			$path .= '?v=' . str_replace( ['-', ' ', ':'], '', $this->getTimeModified() );
+			$path .= '?v=' . str_replace( ['-', ' ', ':'], '', $this->getTimeModified() ); // @phpstan-ignore assignOp.invalid
 		}
 
 		return (string) $path;
@@ -310,9 +312,9 @@ class Standard
 	 * Sets the new preview url of the media item.
 	 *
 	 * @param string $url Preview URL of the media file
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @return static Media item for chaining method calls
 	 */
-	public function setPreview( string $url ) : \Aimeos\MShop\Media\Item\Iface
+	public function setPreview( string $url ) : static
 	{
 		return $this->set( 'media.preview', [1 => $url] );
 	}
@@ -321,10 +323,10 @@ class Standard
 	/**
 	 * Sets the new preview urls for images of different sizes.
 	 *
-	 * @param array $url List of preview URLs with widths of the media file in pixels as keys
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @param array $urls List of preview URLs with widths of the media file in pixels as keys
+	 * @return static Media item for chaining method calls
 	 */
-	public function setPreviews( array $urls ) : \Aimeos\MShop\Media\Item\Iface
+	public function setPreviews( array $urls ) : static
 	{
 		return $this->set( 'media.preview', $urls );
 	}
@@ -342,6 +344,7 @@ class Standard
 		foreach( $this->getPropertyItems( $type ) as $propItem )
 		{
 			if( $propItem->getLanguageId() === $langId || $langId === null ) {
+				// @phpstan-ignore return.type
 				return $propItem->getValue();
 			}
 		}
@@ -358,7 +361,7 @@ class Standard
 	 */
 	public function getType() : string
 	{
-		return $this->get( 'media.type', 'default' );
+		return (string) $this->get( 'media.type', 'default' );
 	}
 
 
@@ -378,11 +381,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Media item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -390,14 +393,14 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'media.filesystem': $item->setFileSystem( $value ); break;
-				case 'media.domain': $item->setDomain( $value ); break;
-				case 'media.label': $item->setLabel( $value ); break;
-				case 'media.languageid': $item->setLanguageId( $value ); break;
-				case 'media.mimetype': $item->setMimeType( $value ); break;
-				case 'media.type': $item->setType( $value ); break;
-				case 'media.url': $item->setUrl( $value ); break;
-				case 'media.preview': $item->setPreview( $value ); break;
+				case 'media.filesystem': $item->setFileSystem( (string) $value ); break;
+				case 'media.domain': $item->setDomain( (string) $value ); break;
+				case 'media.label': $item->setLabel( $value ? (string) $value : null ); break;
+				case 'media.languageid': $item->setLanguageId( $value ? (string) $value : null ); break;
+				case 'media.mimetype': $item->setMimeType( (string) $value ); break;
+				case 'media.type': $item->setType( (string) $value ); break;
+				case 'media.url': $item->setUrl( $value ? (string) $value : null ); break;
+				case 'media.preview': $item->setPreview( (string) $value ); break;
 				case 'media.previews': $item->setPreviews( (array) $value ); break;
 				case 'media.status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
@@ -413,7 +416,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

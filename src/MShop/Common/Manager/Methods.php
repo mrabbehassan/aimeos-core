@@ -21,6 +21,7 @@ trait Methods
 {
 	private ?\Aimeos\MShop\Common\Manager\Iface $object = null;
 	private array $filterFcn = [];
+	/** @var string[] */
 	private array $type;
 
 
@@ -29,8 +30,9 @@ trait Methods
 	 *
 	 * @param string $iface Interface name of the item to apply the filter to
 	 * @param \Closure $fcn Anonymous function receiving the item to check as first parameter
+	 * @return void
 	 */
-	public function addFilter( string $iface, \Closure $fcn )
+	public function addFilter( string $iface, \Closure $fcn ) : void
 	{
 		if( !isset( $this->filterFcn[$iface] ) ) {
 			$this->filterFcn[$iface] = [];
@@ -55,9 +57,9 @@ trait Methods
 	 * Removes old entries from the storage
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		return $this;
 	}
@@ -71,7 +73,7 @@ trait Methods
 	 */
 	public function create( array $values = [] ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return new \Aimeos\MShop\Common\Item\Base( $this->prefix(), $values );
+		return new \Aimeos\MShop\Common\Item\Base( $this->prefix(), $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -91,9 +93,9 @@ trait Methods
 	 * Deletes one or more items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $items Item object, ID or a list of them
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : static
 	{
 		return $this;
 	}
@@ -123,11 +125,12 @@ trait Methods
 	public function from( iterable $entries, array $refs = [], array $excludes = [] ) : \Aimeos\Map
 	{
 		$list = [];
+		// @phpstan-ignore argument.type
 		$keys = array_flip( $excludes );
 
 		foreach( $entries as $key => $entry )
 		{
-			$entry = array_diff_key( $entry, $keys );
+			$entry = array_diff_key( (array) $entry, $keys );
 			$list[$key] = $this->create()->fromArray( $entry, true );
 		}
 
@@ -229,7 +232,7 @@ trait Methods
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int &$total Number of items that are available in total
+	 * @type int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -255,9 +258,9 @@ trait Methods
 	 * Injects the reference of the outmost object
 	 *
 	 * @param \Aimeos\MShop\Common\Manager\Iface $object Reference to the outmost manager or decorator
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object ) : \Aimeos\MShop\Common\Manager\Iface
+	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object ) : static
 	{
 		$this->object = $object;
 		return $this;
@@ -285,9 +288,9 @@ trait Methods
 	/**
 	 * Starts a database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function begin() : \Aimeos\MShop\Common\Manager\Iface
+	public function begin() : static
 	{
 		return $this;
 	}
@@ -296,9 +299,9 @@ trait Methods
 	/**
 	 * Commits the running database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function commit() : \Aimeos\MShop\Common\Manager\Iface
+	public function commit() : static
 	{
 		return $this;
 	}
@@ -307,9 +310,9 @@ trait Methods
 	/**
 	 * Rolls back the running database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rollback() : \Aimeos\MShop\Common\Manager\Iface
+	public function rollback() : static
 	{
 		return $this;
 	}
@@ -325,11 +328,11 @@ trait Methods
 	{
 		foreach( $this->filterFcn as $iface => $fcnList )
 		{
-			if( $item instanceof $iface )
+			if( is_string( $iface ) && $item instanceof $iface )
 			{
 				foreach( $fcnList as $fcn )
 				{
-					if( $fcn( $item ) === null ) {
+					if( is_callable( $fcn ) && $fcn( $item ) === null ) {
 						return null;
 					}
 				}
@@ -352,6 +355,7 @@ trait Methods
 
 		foreach( $list as $key => $fields )
 		{
+			$fields = (array) $fields;
 			$fields['code'] = $fields['code'] ?? $key;
 			$fields['internalcode'] = $fields['internalcode'] ?? $key;
 			$attr[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $fields );
@@ -437,7 +441,7 @@ trait Methods
 	 */
 	protected function object() : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->object ?? $this;
+		return $this->object ?? $this; // @phpstan-ignore return.type
 	}
 
 

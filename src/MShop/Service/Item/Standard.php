@@ -36,7 +36,7 @@ class Standard
 	{
 		parent::__construct( $prefix, $values );
 
-		$this->initListItems( $values['.listitems'] ?? [] );
+		$this->initListItems( (array) ( $values['.listitems'] ?? [] ) );
 	}
 
 
@@ -47,7 +47,7 @@ class Standard
 	 */
 	public function getCode() : string
 	{
-		return $this->get( 'service.code', '' );
+		return (string) $this->get( 'service.code', '' );
 	}
 
 
@@ -55,9 +55,9 @@ class Standard
 	 * Sets the code of the service item
 	 *
 	 * @param string $code Code of the service item
-	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
+	 * @return static Service item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Service\Item\Iface
+	public function setCode( string $code ) : static
 	{
 		return $this->set( 'service.code', \Aimeos\Utils::code( $code ) );
 	}
@@ -70,7 +70,7 @@ class Standard
 	 */
 	public function getProvider() : string
 	{
-		return $this->get( 'service.provider', '' );
+		return (string) $this->get( 'service.provider', '' );
 	}
 
 
@@ -78,9 +78,9 @@ class Standard
 	 * Sets the new name of the service provider the item belongs to.
 	 *
 	 * @param string $provider Name of the service provider
-	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
+	 * @return static Service item for chaining method calls
 	 */
-	public function setProvider( string $provider ) : \Aimeos\MShop\Service\Item\Iface
+	public function setProvider( string $provider ) : static
 	{
 		if( preg_match( '/^[A-Za-z0-9]+(,[A-Za-z0-9]+)*$/', $provider ) !== 1 ) {
 			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid provider name "%1$s"', $provider ) );
@@ -97,7 +97,7 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'service.label', '' );
+		return (string) $this->get( 'service.label', '' );
 	}
 
 
@@ -105,9 +105,9 @@ class Standard
 	 * Sets the label of the service item
 	 *
 	 * @param string $label Label of the service item
-	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
+	 * @return static Service item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Service\Item\Iface
+	public function setLabel( string $label ) : static
 	{
 		return $this->set( 'service.label', $label );
 	}
@@ -121,7 +121,7 @@ class Standard
 	public function getDateStart() : ?string
 	{
 		$value = $this->get( 'service.datestart' );
-		return $value ? substr( $value, 0, 19 ) : null;
+		return $value ? substr( (string) $value, 0, 19 ) : null;
 	}
 
 
@@ -129,9 +129,9 @@ class Standard
 	 * Sets a new starting point of time, in which the service is available.
 	 *
 	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setDateStart( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDateStart( ?string $date ) : static
 	{
 		return $this->set( 'service.datestart', \Aimeos\Utils::datetime( $date ) );
 	}
@@ -145,7 +145,7 @@ class Standard
 	public function getDateEnd() : ?string
 	{
 		$value = $this->get( 'service.dateend' );
-		return $value ? substr( $value, 0, 19 ) : null;
+		return $value ? substr( (string) $value, 0, 19 ) : null;
 	}
 
 
@@ -153,9 +153,9 @@ class Standard
 	 * Sets a new ending point of time, in which the service is available.
 	 *
 	 * @param string|null $date New ISO date in YYYY-MM-DD hh:mm:ss format
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setDateEnd( ?string $date ) : \Aimeos\MShop\Common\Item\Iface
+	public function setDateEnd( ?string $date ) : static
 	{
 		return $this->set( 'service.dateend', \Aimeos\Utils::datetime( $date ) );
 	}
@@ -168,7 +168,7 @@ class Standard
 	 */
 	public function getPosition() : int
 	{
-		return $this->get( 'service.position', 0 );
+		return (int) $this->get( 'service.position', 0 );
 	}
 
 
@@ -176,9 +176,9 @@ class Standard
 	 * Sets the new position of the service item in the list of deliveries.
 	 *
 	 * @param int $pos Position in item list
-	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
+	 * @return static Service item for chaining method calls
 	 */
-	public function setPosition( int $pos ) : \Aimeos\MShop\Common\Item\Iface
+	public function setPosition( int $pos ) : static
 	{
 		return $this->set( 'service.position', $pos );
 	}
@@ -191,7 +191,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'service.status', 1 );
+		return (int) $this->get( 'service.status', 1 );
 	}
 
 
@@ -199,9 +199,9 @@ class Standard
 	 * Sets the status of the item.
 	 *
 	 * @param int $status Status of the item
-	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
+	 * @return static Service item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'service.status', $status );
 	}
@@ -225,11 +225,11 @@ class Standard
 	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Service item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -237,12 +237,12 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'service.type': $item->setType( $value ); break;
-				case 'service.code': $item->setCode( $value ); break;
-				case 'service.label': $item->setLabel( $value ); break;
-				case 'service.provider': $item->setProvider( $value ); break;
-				case 'service.datestart': $item->setDateStart( $value ); break;
-				case 'service.dateend': $item->setDateEnd( $value ); break;
+				case 'service.type': $item->setType( (string) $value ); break;
+				case 'service.code': $item->setCode( (string) $value ); break;
+				case 'service.label': $item->setLabel( (string) $value ); break;
+				case 'service.provider': $item->setProvider( (string) $value ); break;
+				case 'service.datestart': $item->setDateStart( $value ? (string) $value : null ); break;
+				case 'service.dateend': $item->setDateEnd( $value ? (string) $value : null ); break;
 				case 'service.status': $item->setStatus( (int) $value ); break;
 				case 'service.config': $item->setConfig( (array) $value ); break;
 				case 'service.position': $item->setPosition( (int) $value ); break;
@@ -259,7 +259,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

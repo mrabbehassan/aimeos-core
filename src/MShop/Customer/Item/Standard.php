@@ -44,9 +44,9 @@ class Standard extends Base implements Iface
 	 * Sets the new ID of the item.
 	 *
 	 * @param string|null $id ID of the item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $id ) : static
 	{
 		parent::setId( $id );
 
@@ -64,7 +64,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'customer.label', '' );
+		return (string) $this->get( 'customer.label', '' );
 	}
 
 
@@ -72,9 +72,9 @@ class Standard extends Base implements Iface
 	 * Sets the new label of the customer item.
 	 *
 	 * @param string $value Label of the customer item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setLabel( ?string $value ) : \Aimeos\MShop\Customer\Item\Iface
+	public function setLabel( ?string $value ) : static
 	{
 		return $this->set( 'customer.label', (string) $value );
 	}
@@ -87,7 +87,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'customer.status', 1 );
+		return (int) $this->get( 'customer.status', 1 );
 	}
 
 
@@ -95,9 +95,9 @@ class Standard extends Base implements Iface
 	 * Sets the status of the item.
 	 *
 	 * @param int $value Status of the item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setStatus( int $value ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $value ) : static
 	{
 		return $this->set( 'customer.status', $value );
 	}
@@ -118,9 +118,9 @@ class Standard extends Base implements Iface
 	 * Sets the new code of the customer item.
 	 *
 	 * @param string $value Code of the customer item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setCode( string $value ) : \Aimeos\MShop\Customer\Item\Iface
+	public function setCode( string $value ) : static
 	{
 		if( $value !== $this->get( 'customer.code' ) ) {
 			$this->setDateVerified( null );
@@ -145,9 +145,9 @@ class Standard extends Base implements Iface
 	 * Sets the password of the customer item.
 	 *
 	 * @param string $value password of the customer item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setPassword( string $value ) : \Aimeos\MShop\Customer\Item\Iface
+	public function setPassword( string $value ) : static
 	{
 		if( $this->passwd && $value !== $this->getPassword() ) {
 			$value = $this->passwd->hash( $value );
@@ -164,6 +164,7 @@ class Standard extends Base implements Iface
 	 */
 	public function getDateVerified() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'customer.dateverified' );
 	}
 
@@ -172,9 +173,9 @@ class Standard extends Base implements Iface
 	 * Sets the latest verification date of the customer.
 	 *
 	 * @param string|null $value Latest verification date of the customer (YYYY-MM-DD) or null if unknown
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setDateVerified( ?string $value ) : \Aimeos\MShop\Customer\Item\Iface
+	public function setDateVerified( ?string $value ) : static
 	{
 		return $this->set( 'customer.dateverified', \Aimeos\Utils::date( $value ) );
 	}
@@ -204,12 +205,13 @@ class Standard extends Base implements Iface
 	 * Sets the group IDs/codes the customer belongs to
 	 *
 	 * @param array $value List of group IDs
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setGroups( array $value ) : \Aimeos\MShop\Customer\Item\Iface
+	public function setGroups( array $value ) : static
 	{
 		$list = $this->getGroups();
 
+		// @phpstan-ignore argument.type, argument.type, argument.type, argument.type
 		if( array_diff( $value, $list ) !== [] || array_diff( $list, $value ) !== [] )
 		{
 			$this->groups = $value;
@@ -245,11 +247,11 @@ class Standard extends Base implements Iface
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Customer item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -257,12 +259,12 @@ class Standard extends Base implements Iface
 		{
 			switch( $key )
 			{
-				case 'customer.label': $item->setLabel( $value ); break;
-				case 'customer.code': !$private ?: $item->setCode( $value ); break;
+				case 'customer.label': $item->setLabel( $value ? (string) $value : null ); break;
+				case 'customer.code': !$private ?: $item->setCode( (string) $value ); break;
 				case 'customer.status': !$private ?: $item->setStatus( (int) $value ); break;
 				case 'customer.groups': !$private ?: $item->setGroups( (array) $value ); break;
-				case 'customer.password': !$private ?: $item->setPassword( $value ); break;
-				case 'customer.dateverified': !$private ?: $item->setDateVerified( $value ); break;
+				case 'customer.password': !$private ?: $item->setPassword( (string) $value ); break;
+				case 'customer.dateverified': !$private ?: $item->setDateVerified( $value ? (string) $value : null ); break;
 				default: continue 2;
 			}
 
@@ -276,7 +278,7 @@ class Standard extends Base implements Iface
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

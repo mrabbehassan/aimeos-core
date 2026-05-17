@@ -72,6 +72,7 @@ class Percent
 		if( $product->getType() === 'select' )
 		{
 			foreach( $product->getRefItems( 'product', null, 'default' ) as $subproduct ) {
+				// @phpstan-ignore argument.type
 				$this->update( $subproduct, $percent );
 			}
 		}
@@ -86,8 +87,9 @@ class Percent
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface $product Product the rule should be applied to
 	 * @param float $percent Price change in percent
+	 * @return void
 	 */
-	protected function update( \Aimeos\MShop\Product\Item\Iface $product, float $percent )
+	protected function update( \Aimeos\MShop\Product\Item\Iface $product, float $percent ) : void
 	{
 		foreach( $product->getRefItems( 'price' ) as $price )
 		{

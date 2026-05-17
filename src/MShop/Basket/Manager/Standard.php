@@ -88,10 +88,10 @@ class Standard
 		 * It's also possible to use the same database connection for different
 		 * data domains by configuring the same connection name using this setting.
 		 *
-		 * @param string Database connection name
+		 * @type string Database connection name
 		 * @since 2023.04
 		 */
-		$this->setResourceName( $context->config()->get( 'mshop/basket/manager/resource', 'db-basket' ) );
+		$this->setResourceName( (string) $context->config()->get( 'mshop/basket/manager/resource', 'db-basket' ) );
 	}
 
 
@@ -99,13 +99,13 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Basket\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		$path = 'mshop/basket/manager/submanagers';
 		foreach( $this->context()->config()->get( $path, [] ) as $domain ) {
-			$this->object()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( (string) $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/basket/manager/delete' );
@@ -178,7 +178,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for inserting or updating records
+		 * @type string SQL statement for inserting or updating records
 		 * @since 2022.10
 		 * @see mshop/basket/manager/newid/ansi
 		 * @see mshop/basket/manager/delete/ansi
@@ -187,7 +187,7 @@ class Standard
 		 */
 		$path = 'mshop/basket/manager/insert';
 
-		$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+		$sql = $this->addSqlColumns( array_keys( $columns ), (string) $this->getSqlConfig( $path ) );
 
 		$update = '';
 		foreach( array_keys( $columns ) as $name ) {
@@ -197,7 +197,7 @@ class Standard
 
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
-		$serialized = base64_encode( serialize( clone $item->getItem() ) );
+		$serialized = base64_encode( serialize( clone $item->getItem() ) ); // @phpstan-ignore clone.nonObject
 		$idx = 1;
 
 		foreach( $columns as $entry ) {
@@ -240,7 +240,7 @@ class Standard
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->getItemBase( 'basket.id', $id, $ref, $default );
+		return $this->getItemBase( 'basket.id', $id, $ref, $default ); // @phpstan-ignore return.type
 	}
 
 
@@ -248,9 +248,9 @@ class Standard
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Order\Manager\Basket\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : static
 	{
 		/** mshop/basket/manager/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -273,7 +273,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for deleting items
+		 * @type string SQL statement for deleting items
 		 * @since 2022.10
 		 * @see mshop/basket/manager/insert/ansi
 		 * @see mshop/basket/manager/update/ansi
@@ -308,7 +308,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @param array List of sub-manager names
+		 * @type array List of sub-manager names
 		 * @since 2022.10
 		 */
 		$path = 'mshop/basket/manager/submanagers';
@@ -355,7 +355,7 @@ class Standard
 		 * name with an upper case character and continue only with lower case characters
 		 * or numbers. Avoid chamel case names like "MyBasket"!
 		 *
-		 * @param string Last part of the class name
+		 * @type string Last part of the class name
 		 * @since 2022.10
 		 */
 
@@ -377,7 +377,7 @@ class Standard
 		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the basket manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2022.10
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/basket/manager/decorators/global
@@ -402,7 +402,7 @@ class Standard
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the
 		 * basket manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2022.10
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/basket/manager/decorators/excludes
@@ -427,7 +427,7 @@ class Standard
 		 * "\Aimeos\MShop\Order\Manager\Basket\Decorator\Decorator2" only to the
 		 * basket manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2022.10
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/basket/manager/decorators/excludes
@@ -443,7 +443,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
+	 * @type int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Basket\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -503,7 +503,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for searching items
+		 * @type string SQL statement for searching items
 		 * @since 2022.10
 		 * @see mshop/basket/manager/insert/ansi
 		 * @see mshop/basket/manager/update/ansi
@@ -555,7 +555,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for counting items
+		 * @type string SQL statement for counting items
 		 * @since 2022.10
 		 * @see mshop/basket/manager/insert/ansi
 		 * @see mshop/basket/manager/update/ansi
@@ -565,21 +565,21 @@ class Standard
 		 */
 		$cfgPathCount = 'mshop/basket/manager/count';
 
-		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, (int) $level );
 
 		while( $row = $results->fetch() )
 		{
-			$basket = unserialize( base64_decode( $row['basket.content'] ) );
+			$basket = unserialize( base64_decode( (string) $row['basket.content'] ) );
 
 			if( !( $basket instanceof \Aimeos\MShop\Order\Item\Iface ) )
 			{
-				$msg = sprintf( 'Invalid serialized basket. "%1$s" returned "%2$s".', __METHOD__, $row['basket.content'] );
+				$msg = sprintf( 'Invalid serialized basket. "%1$s" returned "%2$s".', __METHOD__, (string) $row['basket.content'] );
 				$context->logger()->warning( $msg, 'core/basket' );
 			}
 
-			if( $item = $this->createItemBase( $row, $basket ?: null ) ) {
-				$items[$row['basket.id']] = $item;
-			}
+			// @phpstan-ignore argument.type
+			$item = $this->createItemBase( $row, $basket ?: null );
+			$items[$row['basket.id']] = $item;
 		}
 
 		return map( $items );

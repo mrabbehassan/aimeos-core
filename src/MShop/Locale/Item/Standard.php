@@ -33,8 +33,7 @@ class Standard
 	 *
 	 * @param array $values Values to be set on initialisation
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface|null $siteItem Site item object
-	 * @param string[] $sitePath List of site IDs up to the root site item
-	 * @param string[]|string Site ID prefix or list of site IDs
+	 * @param array $sites List of site IDs up to the root site item
 	 */
 	public function __construct( array $values = [], ?\Aimeos\MShop\Locale\Item\Site\Iface $siteItem = null, array $sites = [] )
 	{
@@ -65,6 +64,7 @@ class Standard
 	 */
 	public function getSiteCode() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'locale.sitecode' );
 	}
 
@@ -108,6 +108,7 @@ class Standard
 			return $this->sites + [Locale::SITE_ONE => $this->get( 'locale.siteid', '' )];
 		}
 
+		// @phpstan-ignore return.type
 		return $this->sites[$level] ?? ( $this->sites[Locale::SITE_ONE] ?? $this->get( 'locale.siteid', '' ) );
 	}
 
@@ -119,7 +120,7 @@ class Standard
 	 */
 	public function getSiteId() : string
 	{
-		return $this->get( 'locale.siteid', '' );
+		return (string) $this->get( 'locale.siteid', '' );
 	}
 
 
@@ -127,9 +128,9 @@ class Standard
 	 * Sets the identifier of the shop instance.
 	 *
 	 * @param string $id ID of the shop instance
-	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
+	 * @return static Locale item for chaining method calls
 	 */
-	public function setSiteId( string $id ) : \Aimeos\MShop\Locale\Item\Iface
+	public function setSiteId( string $id ) : static
 	{
 		return $this->set( 'locale.siteid', (string) $id );
 	}
@@ -142,6 +143,7 @@ class Standard
 	 */
 	public function getLanguageId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'locale.languageid' );
 	}
 
@@ -150,10 +152,10 @@ class Standard
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $id ISO language code (e.g. de or de_DE)
-	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
+	 * @return static Locale item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	public function setLanguageId( ?string $id ) : \Aimeos\MShop\Locale\Item\Iface
+	public function setLanguageId( ?string $id ) : static
 	{
 		return $this->set( 'locale.languageid', \Aimeos\Utils::language( $id ) );
 	}
@@ -166,6 +168,7 @@ class Standard
 	 */
 	public function getCurrencyId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'locale.currencyid' );
 	}
 
@@ -174,10 +177,10 @@ class Standard
 	 * Sets the currency ID.
 	 *
 	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
-	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
+	 * @return static Locale item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 */
-	public function setCurrencyId( ?string $currencyid ) : \Aimeos\MShop\Locale\Item\Iface
+	public function setCurrencyId( ?string $currencyid ) : static
 	{
 		return $this->set( 'locale.currencyid', \Aimeos\Utils::currency( $currencyid ) );
 	}
@@ -198,9 +201,9 @@ class Standard
 	 * Sets the position of the item.
 	 *
 	 * @param int $pos Position of the item
-	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
+	 * @return static Locale item for chaining method calls
 	 */
-	public function setPosition( int $pos ) : \Aimeos\MShop\Common\Item\Iface
+	public function setPosition( int $pos ) : static
 	{
 		return $this->set( 'locale.position', $pos );
 	}
@@ -213,7 +216,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'locale.status', 1 );
+		return (int) $this->get( 'locale.status', 1 );
 	}
 
 
@@ -221,9 +224,9 @@ class Standard
 	 * Sets the status property
 	 *
 	 * @param int $status The status of the locale item
-	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
+	 * @return static Locale item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'locale.status', $status );
 	}
@@ -243,11 +246,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Locale item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -255,9 +258,9 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'locale.siteid': $item->setSiteId( $value ); break;
-				case 'locale.languageid': $item->setLanguageId( $value ); break;
-				case 'locale.currencyid': $item->setCurrencyId( $value ); break;
+				case 'locale.siteid': $item->setSiteId( (string) $value ); break;
+				case 'locale.languageid': $item->setLanguageId( $value ? (string) $value : null ); break;
+				case 'locale.currencyid': $item->setCurrencyId( $value ? (string) $value : null ); break;
 				case 'locale.position': $item->setPosition( (int) $value ); break;
 				case 'locale.status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
@@ -273,7 +276,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

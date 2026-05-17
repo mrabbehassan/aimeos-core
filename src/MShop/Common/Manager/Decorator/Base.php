@@ -47,6 +47,7 @@ abstract class Base
 	 */
 	public function __call( string $name, array $param )
 	{
+		// @phpstan-ignore argument.type
 		return call_user_func_array( [$this->manager, $name], $param );
 	}
 
@@ -56,8 +57,9 @@ abstract class Base
 	 *
 	 * @param string $iface Interface name of the item to apply the filter to
 	 * @param \Closure $fcn Anonymous function receiving the item to check as first parameter
+	 * @return void
 	 */
-	public function addFilter( string $iface, \Closure $fcn )
+	public function addFilter( string $iface, \Closure $fcn ) : void
 	{
 		$this->manager->addFilter( $iface, $fcn );
 	}
@@ -78,9 +80,9 @@ abstract class Base
 	 * Removes old entries from the storage
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		$this->manager->clear( $siteids );
 		return $this;
@@ -115,9 +117,9 @@ abstract class Base
 	 * Deletes one or more items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|array|string $items Item object, ID of the item or a list of them
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : static
 	{
 		$this->manager->delete( $items );
 		return $this;
@@ -149,6 +151,7 @@ abstract class Base
 	public function find( string $code, array $ref = [], ?string $domain = null, ?string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->manager->find( $code, $ref, $domain, $type, $default );
 	}
 
@@ -163,6 +166,7 @@ abstract class Base
 	 */
 	public function from( iterable $entries, array $domains = [], array $excludes = [] ) : \Aimeos\Map
 	{
+		// @phpstan-ignore return.type
 		return $this->manager->from( $entries, $domains );
 	}
 
@@ -238,7 +242,8 @@ abstract class Base
 	 */
 	public function save( $items, bool $fetch = true )
 	{
-		return $this->manager->save( $items, $fetch );
+		// @phpstan-ignore argument.type
+		return $this->manager->save( $items, $fetch ); // @phpstan-ignore return.type
 	}
 
 
@@ -260,7 +265,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $filter Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int &$total Number of items that are available in total
+	 * @type int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Common\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $filter, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -286,9 +291,9 @@ abstract class Base
 	 * Injects the reference of the outmost object
 	 *
 	 * @param \Aimeos\MShop\Common\Manager\Iface $object Reference to the outmost manager or decorator
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object ) : \Aimeos\MShop\Common\Manager\Iface
+	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object ) : static
 	{
 		parent::setObject( $object );
 
@@ -311,9 +316,9 @@ abstract class Base
 	/**
 	 * Starts a database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function begin() : \Aimeos\MShop\Common\Manager\Iface
+	public function begin() : static
 	{
 		$this->manager->begin();
 		return $this;
@@ -323,9 +328,9 @@ abstract class Base
 	/**
 	 * Commits the running database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function commit() : \Aimeos\MShop\Common\Manager\Iface
+	public function commit() : static
 	{
 		$this->manager->commit();
 		return $this;
@@ -335,9 +340,9 @@ abstract class Base
 	/**
 	 * Rolls back the running database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rollback() : \Aimeos\MShop\Common\Manager\Iface
+	public function rollback() : static
 	{
 		$this->manager->rollback();
 		return $this;

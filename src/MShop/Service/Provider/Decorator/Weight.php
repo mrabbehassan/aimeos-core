@@ -154,6 +154,7 @@ class Weight
 		$manager = \Aimeos\MShop::create( $this->context(), 'product' );
 		$search = $manager->filter()->add( ['product.code' => array_keys( $prodMap )] )->slice( 0, count( $prodMap ) );
 
+		// @phpstan-ignore argument.type
 		foreach( $manager->search( $search, ['product/property' => ['package-weight']] ) as $product )
 		{
 			foreach( $product->getProperties( 'package-weight' ) as $value ) {

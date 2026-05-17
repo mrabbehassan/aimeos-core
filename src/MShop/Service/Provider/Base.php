@@ -25,7 +25,7 @@ abstract class Base
 
 	private \Aimeos\MShop\ContextIface $context;
 	private \Aimeos\MShop\Service\Item\Iface $serviceItem;
-	private ?\Aimeos\MShop\Service\Provider\Iface $object;
+	private ?\Aimeos\MShop\Service\Provider\Iface $object = null;
 	private array $beGlobalConfig;
 
 
@@ -56,6 +56,7 @@ abstract class Base
 		$manager = \Aimeos\MShop::create( $this->context, 'price' );
 		$prices = $this->serviceItem->getRefItems( 'price', 'default', 'default' );
 
+		// @phpstan-ignore return.type
 		return $prices->isEmpty() ? $manager->create() : $manager->getLowestPrice( $prices, 1 );
 	}
 
@@ -297,6 +298,7 @@ abstract class Base
 			$item = \Aimeos\MShop::create( $this->context, 'customer' )->get( $customerId, ['service'] );
 
 			if( $listItem = $item->getListItem( 'service', 'default', $this->getServiceItem()->getId() ) ) {
+				// @phpstan-ignore return.type
 				return $listItem->getConfigValue( $key );
 			}
 		}
@@ -320,7 +322,7 @@ abstract class Base
 		$amount = $price->getValue();
 
 		if( $costs === true ) {
-			$amount += $price->getCosts();
+			$amount += $price->getCosts(); // @phpstan-ignore assignOp.invalid
 		}
 
 		if( $tax === true && $price->getTaxFlag() === false )
@@ -335,10 +337,10 @@ abstract class Base
 				$tmp->setQuantity( $price->getQuantity() );
 			}
 
-			$amount += $tmp->getTaxValue();
+			$amount += $tmp->getTaxValue(); // @phpstan-ignore assignOp.invalid
 		}
 
-		return number_format( $amount, $precision !== null ? $precision : $price->getPrecision(), '.', '' );
+		return number_format( (float) $amount, $precision !== null ? $precision : $price->getPrecision(), '.', '' );
 	}
 
 
@@ -356,6 +358,7 @@ abstract class Base
 	{
 		$msg = $this->context->translate( 'mshop', 'Service not available' );
 
+		// @phpstan-ignore return.type
 		return map( $basket->getService( $type ) )->find( function( $service ) use ( $code ) {
 				return $service->getCode() === $code;
 		}, new \Aimeos\MShop\Service\Exception( $msg ) );
@@ -374,7 +377,7 @@ abstract class Base
 		foreach( $configList as $key => $config )
 		{
 			$config['code'] = $config['code'] ?? $key;
-			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $config );
+			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( (array) $config );
 		}
 
 		return $list;
@@ -396,7 +399,7 @@ abstract class Base
 	{
 		foreach( (array) $keys as $key )
 		{
-			if( ( $value = $this->getServiceItem()->getConfigValue( $key ) ) !== null ) {
+			if( ( $value = $this->getServiceItem()->getConfigValue( (string) $key ) ) !== null ) {
 				return $value;
 			}
 
@@ -470,7 +473,7 @@ abstract class Base
 	 */
 	protected function save( \Aimeos\MShop\Order\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Iface
 	{
-		return \Aimeos\MShop::create( $this->context, 'order' )->save( $item );
+		return \Aimeos\MShop::create( $this->context, 'order' )->save( $item ); // @phpstan-ignore return.type
 	}
 
 
@@ -480,7 +483,7 @@ abstract class Base
 	 * @param string $customerId Unique customer ID the service token belongs to
 	 * @param string $key Key of the value that should be added
 	 * @param string|array $data Service data to store
-	 * @param \Aimeos\MShop\Service\Provider\Iface Provider object for chaining method calls
+	 * @type \Aimeos\MShop\Service\Provider\Iface Provider object for chaining method calls
 	 */
 	protected function setData( string $customerId, string $key, $data ) : \Aimeos\MShop\Service\Provider\Iface
 	{
@@ -496,6 +499,7 @@ abstract class Base
 				$listItem = $listManager->create()->setRefId( $serviceId );
 			}
 
+			// @phpstan-ignore argument.type
 			$manager->save( $item->addListItem( 'service', $listItem->setConfigValue( $key, $data ) ) );
 		}
 
@@ -509,8 +513,9 @@ abstract class Base
 	 * @param string $msg Message
 	 * @param string|null $domain Translation domain
 	 * @param int $code Custom error code
+	 * @return never
 	 */
-	protected function throw( string $msg, ?string $domain = null, int $code = 0 )
+	protected function throw( string $msg, ?string $domain = null, int $code = 0 ) : never
 	{
 		if( $domain ) {
 			$msg = $this->context->translate( $domain, $msg );

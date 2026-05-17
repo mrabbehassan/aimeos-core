@@ -28,7 +28,7 @@ class Standard
 	 */
 	public function getCode() : string
 	{
-		return $this->get( 'group.code', '' );
+		return (string) $this->get( 'group.code', '' );
 	}
 
 
@@ -36,9 +36,9 @@ class Standard
 	 * Sets the new code of the group
 	 *
 	 * @param string $value Code of the group
-	 * @return \Aimeos\MShop\Group\Item\Iface Customer group item for chaining method calls
+	 * @return static Customer group item for chaining method calls
 	 */
-	public function setCode( string $value ) : \Aimeos\MShop\Group\Item\Iface
+	public function setCode( string $value ) : static
 	{
 		return $this->set( 'group.code', $value );
 	}
@@ -51,7 +51,7 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'group.label', '' );
+		return (string) $this->get( 'group.label', '' );
 	}
 
 
@@ -59,9 +59,9 @@ class Standard
 	 * Sets the new label of the group
 	 *
 	 * @param string $value Label of the group
-	 * @return \Aimeos\MShop\Group\Item\Iface Customer group item for chaining method calls
+	 * @return static Customer group item for chaining method calls
 	 */
-	public function setLabel( string $value ) : \Aimeos\MShop\Group\Item\Iface
+	public function setLabel( string $value ) : static
 	{
 		return $this->set( 'group.label', $value );
 	}
@@ -70,11 +70,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Group\Item\Iface Group item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Group item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -82,8 +82,8 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'group.code': $item->setCode( $value ); break;
-				case 'group.label': $item->setLabel( $value ); break;
+				case 'group.code': $item->setCode( (string) $value ); break;
+				case 'group.label': $item->setLabel( (string) $value ); break;
 				default: continue 2;
 			}
 
@@ -97,7 +97,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

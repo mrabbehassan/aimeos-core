@@ -31,9 +31,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new value of the item.
 	 *
 	 * @param string $value Value of the item
-	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
+	 * @return static Cache item for chaining method calls
 	 */
-	public function setValue( string $value ) : \Aimeos\MAdmin\Cache\Item\Iface;
+	public function setValue( string $value ) : static;
 
 	/**
 	 * Returns the expiration time of the item.
@@ -46,9 +46,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new expiration time of the item.
 	 *
 	 * @param string|null $timestamp Expiration time of the item or null for no expiration
-	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
+	 * @return static Cache item for chaining method calls
 	 */
-	public function setTimeExpire( ?string $timestamp ) : \Aimeos\MAdmin\Cache\Item\Iface;
+	public function setTimeExpire( ?string $timestamp ) : static;
 
 	/**
 	 * Returns the tags associated to the item.
@@ -61,7 +61,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new tags associated to the item.
 	 *
 	 * @param array $tags Tags associated to the item
-	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
+	 * @return static Cache item for chaining method calls
 	 */
-	public function setTags( array $tags ) : \Aimeos\MAdmin\Cache\Item\Iface;
+	public function setTags( array $tags ) : static;
 }

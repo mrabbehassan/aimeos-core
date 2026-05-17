@@ -55,7 +55,7 @@ class Required
 		if( $this->getConfigValue( 'required.only' ) == true )
 		{
 			$price = \Aimeos\MShop::create( $this->context(), 'price' )->create();
-			$codes = explode( ',', $this->getConfigValue( 'required.productcode', '' ) );
+			$codes = explode( ',', (string) $this->getConfigValue( 'required.productcode', '' ) );
 
 			foreach( $order->getProducts() as $product )
 			{
@@ -64,6 +64,7 @@ class Required
 				}
 			}
 
+			// @phpstan-ignore return.type
 			return $price;
 		}
 
@@ -105,7 +106,7 @@ class Required
 	{
 		if( $prodcode = $this->getConfigValue( 'required.productcode', '' ) )
 		{
-			$codes = explode( ',', $prodcode );
+			$codes = explode( ',', (string) $prodcode );
 
 			foreach( $order->getProducts() as $product )
 			{

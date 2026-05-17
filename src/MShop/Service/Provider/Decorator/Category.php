@@ -105,7 +105,7 @@ class Category
 			return null;
 		}
 
-		$configCatalogIds = $this->getCatalogIds( explode( ',', $codes ) );
+		$configCatalogIds = $this->getCatalogIds( explode( ',', (string) $codes ) );
 
 		if( empty( $treeCatalogIds = $this->getTreeCatalogIds( $configCatalogIds ) ) ) {
 			return false;
@@ -152,6 +152,7 @@ class Category
 		foreach( $catalogItem->getChildren() as $childNode )
 		{
 			if( $childNode->getStatus() > 0 ) {
+				// @phpstan-ignore argument.type
 				$catalogIds = array_merge( $catalogIds, $this->getNodeCatalogIds( $childNode ) );
 			}
 		}
@@ -179,6 +180,7 @@ class Category
 			}
 		}
 
+		// @phpstan-ignore argument.type
 		return array_unique( $productIds );
 	}
 
@@ -197,9 +199,11 @@ class Category
 		foreach( $catalogIds as $catId )
 		{
 			$treeNode = $catalogManager->getTree( $catId );
+			// @phpstan-ignore argument.type
 			$ids = array_merge( $ids, $this->getNodeCatalogIds( $treeNode ) );
 		}
 
+		// @phpstan-ignore argument.type
 		return array_unique( $ids );
 	}
 }

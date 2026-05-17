@@ -24,25 +24,25 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item New or existing address item
 	 * @param string|null $key Key in the list of address items or null to add the item at the end
-	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, ?string $key = null ) : \Aimeos\MShop\Common\Item\Iface;
+	public function addAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item, ?string $key = null ) : static;
 
 	/**
 	 * Removes an existing address item
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item Existing address item
-	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function deleteAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item ) : \Aimeos\MShop\Common\Item\Iface;
+	public function deleteAddressItem( \Aimeos\MShop\Common\Item\Address\Iface $item ) : static;
 
 	/**
 	 * Removes a list of existing address items
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Common\Item\Address\Iface[] $items Existing address items
-	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function deleteAddressItems( iterable $items ) : \Aimeos\MShop\Common\Item\Iface;
+	public function deleteAddressItems( iterable $items ) : static;
 
 	/**
 	 * Returns the deleted address items

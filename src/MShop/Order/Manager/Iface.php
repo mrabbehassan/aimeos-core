@@ -98,7 +98,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Shopping basket
 	 * @param string $type Order type if a customer can have more than one order at once
-	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function setSession( \Aimeos\MShop\Order\Item\Iface $order, string $type = 'default' ) : \Aimeos\MShop\Order\Manager\Iface;
+	public function setSession( \Aimeos\MShop\Order\Item\Iface $order, string $type = 'default' ) : static;
 }

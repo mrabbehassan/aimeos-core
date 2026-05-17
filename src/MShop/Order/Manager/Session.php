@@ -55,16 +55,17 @@ trait Session
 		try
 		{
 			if( ( $order = \Aimeos\MShop::create( $context, 'basket' )->get( $key )->getItem() ) === null ) {
-				return $this->object()->create();
+				return $this->object()->create(); // @phpstan-ignore return.type
 			}
 
 			\Aimeos\MShop::create( $context, 'plugin' )->register( $order, 'order' );
 		}
 		catch( \Exception $e )
 		{
-			return $this->object()->create();
+			return $this->object()->create(); // @phpstan-ignore return.type
 		}
 
+		// @phpstan-ignore return.type
 		return $order;
 	}
 
@@ -74,9 +75,9 @@ trait Session
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Shopping basket
 	 * @param string $type Order type if a customer can have more than one order at once
-	 * @return \Aimeos\MShop\Order\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function setSession( \Aimeos\MShop\Order\Item\Iface $order, string $type = 'default' ) : \Aimeos\MShop\Order\Manager\Iface
+	public function setSession( \Aimeos\MShop\Order\Item\Iface $order, string $type = 'default' ) : static
 	{
 		$context = $this->context();
 		$token = $context->token();
@@ -95,6 +96,7 @@ trait Session
 		$session->set( 'aimeos/basket/list', $list );
 
 		$manager = \Aimeos\MShop::create( $context, 'basket' );
+		// @phpstan-ignore argument.type
 		$manager->save( $manager->create()->setId( $key )->setCustomerId( $context->user() )->setItem( clone $order ) );
 
 		return $this;

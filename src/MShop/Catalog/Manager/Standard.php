@@ -50,7 +50,7 @@ class Standard extends Base
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
-	 * @param string Last part of the class name
+	 * @type string Last part of the class name
 	 * @since 2014.03
 	 */
 
@@ -72,7 +72,7 @@ class Standard extends Base
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the catalog manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2014.03
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/catalog/manager/decorators/global
@@ -96,7 +96,7 @@ class Standard extends Base
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the catalog
 	 * manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2014.03
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/catalog/manager/decorators/excludes
@@ -120,7 +120,7 @@ class Standard extends Base
 	 * "\Aimeos\MShop\Catalog\Manager\Decorator\Decorator2" only to the catalog
 	 * manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2014.03
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/catalog/manager/decorators/excludes
@@ -270,9 +270,9 @@ class Standard extends Base
 				}
 			}
 
-			$sitestr = $this->siteString( 'mcatli."siteid"', $level );
+			$sitestr = $this->siteString( 'mcatli."siteid"', (int) $level );
 			$keystr = $this->toExpression( 'mcatli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
+			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], (string) $source );
 
 			return $params;
 		};
@@ -288,10 +288,10 @@ class Standard extends Base
 		 * It's also possible to use the same database connection for different
 		 * data domains by configuring the same connection name using this setting.
 		 *
-		 * @param string Database connection name
+		 * @type string Database connection name
 		 * @since 2023.04
 		 */
-		$this->setResourceName( $context->config()->get( 'mshop/catalog/manager/resource', 'db-catalog' ) );
+		$this->setResourceName( (string) $context->config()->get( 'mshop/catalog/manager/resource', 'db-catalog' ) );
 	}
 
 
@@ -299,16 +299,16 @@ class Standard extends Base
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		$context = $this->context();
 		$config = $context->config();
 		$search = $this->object()->filter();
 
 		foreach( $config->get( 'mshop/catalog/manager/submanagers', ['lists'] ) as $domain ) {
-			$this->object()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( (string) $domain )->clear( $siteids );
 		}
 
 		$conn = $context->db( $this->getResourceName() );
@@ -332,7 +332,7 @@ class Standard extends Base
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for removing the records
+		 * @type string SQL statement for removing the records
 		 * @since 2014.03
 		 * @see mshop/catalog/manager/delete/ansi
 		 * @see mshop/catalog/manager/insert/ansi
@@ -348,9 +348,9 @@ class Standard extends Base
 		$translations = array( 'siteid' => '"siteid"' );
 
 		$search->setConditions( $search->compare( '==', 'siteid', $siteids ) );
-		$sql = str_replace( ':siteid', $search->getConditionSource( $types, $translations ), $sql );
+		$sql = str_replace( ':siteid', (string) $search->getConditionSource( $types, $translations ), (string) $sql );
 
-		$stmt = $conn->create( $sql );
+		$stmt = $conn->create( (string) $sql );
 		$stmt->bind( 1, 0, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 2, 0x7FFFFFFF, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 		$stmt->execute()->finish();
@@ -362,9 +362,9 @@ class Standard extends Base
 	/**
 	 * Commits the running database transaction on the connection identified by the given name
 	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function commit() : \Aimeos\MShop\Common\Manager\Iface
+	public function commit() : static
 	{
 		parent::commit();
 
@@ -405,9 +405,9 @@ class Standard extends Base
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|array|string $items List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Catalog\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : static
 	{
 		if( is_map( $items ) ) { $items = $items->toArray(); }
 		if( !is_array( $items ) ) { $items = [$items]; }
@@ -436,6 +436,7 @@ class Standard extends Base
 			throw $e;
 		}
 
+		// @phpstan-ignore argument.type
 		return $this->deleteRefItems( $items );
 	}
 
@@ -453,7 +454,7 @@ class Standard extends Base
 	public function find( string $code, array $ref = [], ?string $domain = null, ?string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->findBase( array( 'catalog.code' => $code ), $ref, $default );
+		return $this->findBase( array( 'catalog.code' => $code ), $ref, $default ); // @phpstan-ignore return.type
 	}
 
 
@@ -468,7 +469,7 @@ class Standard extends Base
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->getItemBase( 'catalog.id', $id, $ref, $default );
+		return $this->getItemBase( 'catalog.id', $id, $ref, $default ); // @phpstan-ignore return.type
 	}
 
 
@@ -493,7 +494,7 @@ class Standard extends Base
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @param array List of sub-manager names
+		 * @type array List of sub-manager names
 		 * @since 2014.03
 		 */
 		$path = 'mshop/catalog/manager/submanagers';
@@ -521,8 +522,9 @@ class Standard extends Base
 			$node = $item->getNode();
 			$siteid = $this->context()->locale()->getSiteId();
 
+			// @phpstan-ignore argument.type
 			$this->createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
-			$this->updateUsage( $node->getId(), $item, true );
+			$this->updateUsage( (string) $node->getId(), $item, true );
 
 			$this->cacheTags[] = 'catalog';
 
@@ -537,6 +539,7 @@ class Standard extends Base
 		}
 
 		$item = $this->saveListItems( $item, 'catalog' );
+		// @phpstan-ignore argument.type
 		return $this->saveChildren( $item );
 	}
 
@@ -562,6 +565,7 @@ class Standard extends Base
 			$siteid = $this->context()->locale()->getSiteId();
 
 			$this->createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
+			// @phpstan-ignore argument.type
 			$this->updateUsage( $id, $item );
 
 			$this->cacheTags[] = 'catalog';
@@ -591,7 +595,7 @@ class Standard extends Base
 	{
 		$items = parent::save( $items, $fetch );
 
-		$this->cacheTags = array_merge( $this->cacheTags, map( $items )->getId()->prefix( 'catalog-' )->all() );
+		$this->cacheTags = array_merge( $this->cacheTags, (array) map( $items )->getId()->prefix( 'catalog-' )->all() );
 
 		return $items;
 	}
@@ -609,16 +613,19 @@ class Standard extends Base
 		if( !$item->isModified() )
 		{
 			$item = $this->saveListItems( $item, 'catalog', $fetch );
+			// @phpstan-ignore argument.type
 			return $this->saveChildren( $item );
 		}
 
 		$node = $item->getNode();
 		$siteid = $this->context()->locale()->getSiteId();
 
+		// @phpstan-ignore argument.type
 		$this->createTreeManager( $siteid )->saveNode( $node );
-		$this->updateUsage( $node->getId(), $item );
+		$this->updateUsage( (string) $node->getId(), $item );
 
 		$item = $this->saveListItems( $item, 'catalog', $fetch );
+		// @phpstan-ignore argument.type
 		return $this->saveChildren( $item );
 	}
 
@@ -628,7 +635,7 @@ class Standard extends Base
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
+	 * @type int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Catalog\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -662,7 +669,7 @@ class Standard extends Base
 		 * this domain, then items wil be only inherited. Thus, you have full
 		 * control over inheritance and aggregation in each domain.
 		 *
-		 * @param int Constant from Aimeos\MShop\Locale\Manager\Base class
+		 * @type int Constant from Aimeos\MShop\Locale\Manager\Base class
 		 * @since 2018.01
 		 * @see mshop/locale/manager/sitelevel
 		 */
@@ -715,7 +722,7 @@ class Standard extends Base
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for searching items
+		 * @type string SQL statement for searching items
 		 * @since 2014.03
 		 * @see mshop/catalog/manager/delete/ansi
 		 * @see mshop/catalog/manager/get/ansi
@@ -772,7 +779,7 @@ class Standard extends Base
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for counting items
+		 * @type string SQL statement for counting items
 		 * @since 2014.03
 		 * @see mshop/catalog/manager/delete/ansi
 		 * @see mshop/catalog/manager/get/ansi
@@ -788,10 +795,11 @@ class Standard extends Base
 		$cfgPathCount = 'mshop/catalog/manager/count';
 
 		if( $search->getSortations() === [] ) {
+			// @phpstan-ignore argument.type
 			$search->setSortations( [$search->sort( '+', 'sort:catalog:position' )] );
 		}
 
-		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, (int) $level );
 
 		while( $row = $results->fetch() ) {
 			$map[$row['id']] = new \Aimeos\MW\Tree\Node\DBNestedSet( $row );
@@ -822,7 +830,7 @@ class Standard extends Base
 		foreach( $sitePath as $siteId )
 		{
 			try {
-				$path = $this->createTreeManager( $siteId )->getPath( $id );
+				$path = $this->createTreeManager( (string) $siteId )->getPath( $id );
 			} catch( \Exception $e ) {
 				continue;
 			}
@@ -848,7 +856,7 @@ class Standard extends Base
 	 * Returns a node and its descendants depending on the given resource.
 	 *
 	 * @param string|null $id Retrieve nodes starting from the given ID
-	 * @param string[] List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
+	 * @param string[] $ref List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @param \Aimeos\Base\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes
@@ -868,7 +876,7 @@ class Standard extends Base
 		foreach( $sitePath as $siteId )
 		{
 			try {
-				$node = $this->createTreeManager( $siteId )->getNode( $id, $level, $criteria );
+				$node = $this->createTreeManager( (string) $siteId )->getNode( $id, $level, $criteria );
 			} catch( \Aimeos\MW\Tree\Exception $e ) {
 				continue;
 			}
@@ -879,13 +887,17 @@ class Standard extends Base
 
 			if( !empty( $ref ) )
 			{
+				// @phpstan-ignore argument.type
 				$listItems = map( $this->getListItems( array_keys( $nodeMap ), $ref, 'catalog' ) )
 					->groupBy( 'catalog.lists.parentid' )->all();
 			}
 
+			// @phpstan-ignore argument.type
 			if( $item = $this->applyFilter( $this->createItemBase( [], $listItems[$nodeid] ?? [], [], [], $node ) ) )
 			{
+				// @phpstan-ignore argument.type
 				$this->createTree( $node, $item, $listItems, [] );
+				// @phpstan-ignore return.type
 				return $item;
 			}
 		}
@@ -927,14 +939,17 @@ class Standard extends Base
 		{
 			if( $child->getId() !== null )
 			{
+				// @phpstan-ignore argument.type
 				$this->save( $child );
 
 				if( $child->getParentId() !== $item->getId() ) {
+					// @phpstan-ignore argument.type, argument.type
 					$this->move( $child->getId(), $item->getParentId(), $child->getParentId() );
 				}
 			}
 			else
 			{
+				// @phpstan-ignore argument.type
 				$this->insert( $child, $item->getId() );
 			}
 		}
@@ -963,7 +978,7 @@ class Standard extends Base
 		 * the whole table to avoid data corruption. This statement will be followed by
 		 * insert or update statements and closed by an unlock statement.
 		 *
-		 * @param string Lock SQL statement
+		 * @type string Lock SQL statement
 		 * @since 2019.04
 		 */
 		$path = 'mshop/catalog/manager/lock';
@@ -971,7 +986,7 @@ class Standard extends Base
 		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
 			$conn = $this->context()->db( $this->getResourceName() );
-			$conn->create( $sql )->execute()->finish();
+			$conn->create( (string) $sql )->execute()->finish();
 		}
 
 		return $this;
@@ -999,7 +1014,7 @@ class Standard extends Base
 		 * after the table is locked and insert or update statements have been sent to
 		 * the database.
 		 *
-		 * @param string Lock SQL statement
+		 * @type string Lock SQL statement
 		 * @since 2019.04
 		 */
 		 $path = 'mshop/catalog/manager/unlock';
@@ -1007,7 +1022,7 @@ class Standard extends Base
 		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
 			$conn = $this->context()->db( $this->getResourceName() );
-			$conn->create( $sql )->execute()->finish();
+			$conn->create( (string) $sql )->execute()->finish();
 		}
 
 		return $this;
@@ -1059,7 +1074,7 @@ class Standard extends Base
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for updating records
+			 * @type string SQL statement for updating records
 			 * @since 2014.03
 			 * @see mshop/catalog/manager/delete/ansi
 			 * @see mshop/catalog/manager/get/ansi
@@ -1103,7 +1118,7 @@ class Standard extends Base
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for updating records
+			 * @type string SQL statement for updating records
 			 * @since 2014.03
 			 * @see mshop/catalog/manager/delete/ansi
 			 * @see mshop/catalog/manager/get/ansi
@@ -1120,7 +1135,7 @@ class Standard extends Base
 			$path = 'mshop/catalog/manager/insert-usage';
 		}
 
-		$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+		$sql = $this->addSqlColumns( array_keys( $columns ), (string) $this->getSqlConfig( $path ), false );
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 		$idx = 1;
 

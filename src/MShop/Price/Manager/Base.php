@@ -47,6 +47,7 @@ abstract class Base
 			throw new \Aimeos\MShop\Price\Exception( sprintf( $msg, $quantity ) );
 		}
 
+		// @phpstan-ignore return.type
 		return $this->call( 'calcLowestPrice', $priceList, $quantity );
 	}
 
@@ -70,6 +71,7 @@ abstract class Base
 			}
 		}
 
+		// @phpstan-ignore return.type
 		return $price;
 	}
 

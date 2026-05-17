@@ -171,7 +171,7 @@ class Utils
 	{
 		foreach( (array) $iface as $name )
 		{
-			if( $name && $object instanceof $name ) {
+			if( is_string( $name ) && $name && $object instanceof $name ) {
 				return $object;
 			}
 		}

@@ -44,7 +44,7 @@ class Category
 		\Aimeos\MShop\Rule\Provider\Iface $provider )
 	{
 		parent::__construct( $context, $item, $provider );
-		$this->codes = array_filter( explode( ',', str_replace( ' ', '', $this->getConfigValue( 'category.code', '' ) ) ) );
+		$this->codes = array_filter( explode( ',', str_replace( ' ', '', (string) $this->getConfigValue( 'category.code', '' ) ) ) );
 	}
 
 
@@ -85,7 +85,7 @@ class Category
 		foreach( $product->getRefItems( 'catalog' ) as $catItem )
 		{
 			if( in_array( $catItem->getCode(), $this->codes ) ) {
-				return $this->getProvider()->apply( $product );
+				return (bool) $this->getProvider()->apply( $product );
 			}
 		}
 

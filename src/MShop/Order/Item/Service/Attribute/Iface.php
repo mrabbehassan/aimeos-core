@@ -24,9 +24,9 @@ interface Iface
 	 * Sets the site ID of the item.
 	 *
 	 * @param string $value Unique site ID of the item
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setSiteId( string $value ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface;
+	public function setSiteId( string $value ) : static;
 
 	/**
 	 * Returns the original attribute ID of the ordered service attribute.
@@ -39,9 +39,9 @@ interface Iface
 	 * Sets the original attribute ID of the ordered service attribute.
 	 *
 	 * @param string|null $id Attribute ID of the ordered service attribute
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setAttributeId( ?string $id ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface;
+	public function setAttributeId( ?string $id ) : static;
 
 	/**
 	 * Returns the code of the service attribute item.
@@ -54,9 +54,9 @@ interface Iface
 	 * Sets a new code for the service attribute item.
 	 *
 	 * @param string $code Code as defined by the service provider
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface;
+	public function setCode( string $code ) : static;
 
 	/**
 	 * Returns the name of the service attribute item.
@@ -69,9 +69,9 @@ interface Iface
 	 * Sets a new name for the service attribute item.
 	 *
 	 * @param string|null $name Name as defined by the service provider
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setName( ?string $name ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface;
+	public function setName( ?string $name ) : static;
 
 	/**
 	 * Returns the value of the service attribute item.
@@ -84,9 +84,9 @@ interface Iface
 	 * Sets a new value for the service attribute item.
 	 *
 	 * @param string|array $value Service attribute item value
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setValue( $value ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface;
+	public function setValue( $value ) : static;
 
 	/**
 	 * Returns the quantity of the service attribute.
@@ -99,9 +99,9 @@ interface Iface
 	 * Sets the quantity of the service attribute.
 	 *
 	 * @param float $value Quantity of the service attribute
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setQuantity( float $value ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface;
+	public function setQuantity( float $value ) : static;
 
 	/**
 	 * Returns the price of the service attribute.
@@ -114,15 +114,15 @@ interface Iface
 	 * Sets the price of the service attribute.
 	 *
 	 * @param string|null $value Price of the service attribute
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function setPrice( ?string $value ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface;
+	public function setPrice( ?string $value ) : static;
 
 	/**
 	 * Copys all data from a given attribute item.
 	 *
 	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item to copy from
-	 * @return \Aimeos\MShop\Order\Item\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 * @return static Order base service attribute item for chaining method calls
 	 */
-	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item ) : \Aimeos\MShop\Order\Item\Service\Attribute\Iface;
+	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item ) : static;
 }

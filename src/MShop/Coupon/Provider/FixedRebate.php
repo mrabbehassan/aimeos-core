@@ -89,9 +89,9 @@ class FixedRebate
 		if( isset( $rebate[$currency] ) )
 		{
 			$price = $this->object()->calcPrice( $order );
-			$sum = $price->getValue() + $price->getCosts() + $price->getRebate();
-			$rebate = $rebate[$currency] < $sum ? $rebate[$currency] : $sum;
-			$order->setCoupon( $this->getCode(), $this->createRebateProducts( $order, $prodcode, $rebate ) );
+			$sum = $price->getValue() + $price->getCosts() + $price->getRebate(); // @phpstan-ignore binaryOp.invalid
+			$rebateValue = (float) ( $rebate[$currency] < $sum ? $rebate[$currency] : $sum );
+			$order->setCoupon( $this->getCode(), $this->createRebateProducts( $order, (string) $prodcode, $rebateValue ) );
 		}
 
 		return $this;

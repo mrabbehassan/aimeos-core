@@ -25,9 +25,9 @@ class Standard
 	 * Sets the id of the language.
 	 *
 	 * @param string|null $key Id to set
-	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
+	 * @return static Locale language item for chaining method calls
 	 */
-	public function setId( ?string $key ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $key ) : static
 	{
 		return parent::setId( \Aimeos\Utils::language( $key ) );
 	}
@@ -48,9 +48,9 @@ class Standard
 	 * Sets the two letter ISO language code.
 	 *
 	 * @param string $code two letter ISO language code
-	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
+	 * @return static Locale language item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Iface
+	public function setCode( string $code ) : static
 	{
 		return $this->set( 'locale.language.code', \Aimeos\Utils::language( $code, false ) );
 	}
@@ -71,9 +71,9 @@ class Standard
 	 * Sets the label property.
 	 *
 	 * @param string $label Label of the language
-	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
+	 * @return static Locale language item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Locale\Item\Language\Iface
+	public function setLabel( string $label ) : static
 	{
 		return $this->set( 'locale.language.label', (string) $label );
 	}
@@ -86,7 +86,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'locale.language.status', 1 );
+		return (int) $this->get( 'locale.language.status', 1 );
 	}
 
 
@@ -94,9 +94,9 @@ class Standard
 	 * Sets the status of the item.
 	 *
 	 * @param int $status Status of the item
-	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
+	 * @return static Locale language item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'locale.language.status', $status );
 	}
@@ -116,11 +116,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Language item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Language item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -128,8 +128,8 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'locale.language.code': $item->setCode( $value ); break;
-				case 'locale.language.label': $item->setLabel( $value ); break;
+				case 'locale.language.code': $item->setCode( (string) $value ); break;
+				case 'locale.language.label': $item->setLabel( (string) $value ); break;
 				case 'locale.language.status': $item->setStatus( (int) $value ); break;
 				default: continue 2;
 			}
@@ -144,7 +144,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

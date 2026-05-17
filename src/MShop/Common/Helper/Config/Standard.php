@@ -25,7 +25,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 	/**
 	 * Initializes the object with the criteria objects to check against
 	 *
-	 * @param \Aimeos\Base\Criteria\Attribute\Iface $criteria Criteria attribute objects
+	 * @param array $criteria Criteria attribute objects
 	 */
 	public function __construct( array $criteria )
 	{
@@ -36,7 +36,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 	/**
 	 * Checks required fields and the types of the config array
 	 *
-	 * @param array $map Values to check agains the criteria
+	 * @param array $config Values to check agains the criteria
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
@@ -108,7 +108,7 @@ class Standard implements \Aimeos\MShop\Common\Helper\Config\Iface
 						}
 						break;
 					default:
-						throw new \Aimeos\MShop\Exception( sprintf( 'Invalid type "%1$s"', $attr->getType() ) );
+						throw new \Aimeos\MShop\Exception( sprintf( 'Invalid type "%1$s"', (string) $attr->getType() ) );
 				}
 			}
 

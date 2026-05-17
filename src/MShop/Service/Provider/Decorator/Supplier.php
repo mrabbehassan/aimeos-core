@@ -48,6 +48,7 @@ class Supplier
 
 		$manager = \Aimeos\MShop::create( $context, 'supplier' );
 		$search = $manager->filter( true );
+		// @phpstan-ignore argument.type
 		$search->setSortations( [$search->sort( '+', 'supplier.label' )] );
 
 		foreach( $manager->search( $search, ['supplier/address'] ) as $item )
@@ -60,8 +61,10 @@ class Supplier
 
 			foreach( $addresses as $id => $addr )
 			{
+				// @phpstan-ignore argument.type
 				$addrId = ( count( $addresses ) > 1 ) ? $item->getCode() . '-' . $id : $item->getCode();
 
+				// @phpstan-ignore argument.type
 				$this->feConfig['supplier.code']['default'][$addrId] = trim( preg_replace( "/\n+/m", "\n", sprintf(
 					/// Supplier address format with label (%1$s), company (%2$s),
 					/// address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
@@ -78,40 +81,43 @@ class Supplier
 %12$s
 %13$s'
 					),
-					$item->getLabel(),
-					$addr->getCompany(),
-					$addr->getAddress1(),
-					$addr->getAddress2(),
-					$addr->getAddress3(),
-					$addr->getPostal(),
-					$addr->getCity(),
-					$addr->getState(),
-					$context->translate( 'country', $addr->getCountryId() ),
-					$addr->getEmail(),
-					$addr->getTelephone(),
-					$addr->getTelefax(),
-					$addr->getWebsite()
+					(string) $item->getLabel(),
+					(string) $addr->getCompany(),
+					(string) $addr->getAddress1(),
+					(string) $addr->getAddress2(),
+					(string) $addr->getAddress3(),
+					(string) $addr->getPostal(),
+					(string) $addr->getCity(),
+					(string) $addr->getState(),
+					// @phpstan-ignore argument.type
+					(string) $context->translate( 'country', $addr->getCountryId() ),
+					(string) $addr->getEmail(),
+					(string) $addr->getTelephone(),
+					(string) $addr->getTelefax(),
+					(string) $addr->getWebsite()
 				) ) );
 
+				// @phpstan-ignore argument.type
 				$this->feConfig['supplier.code']['short'][$addrId] = trim( preg_replace( "/\n+/m", "\n", sprintf(
 					/// Supplier address format with label (%1$s), company (%2$s),
 					/// address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
 					/// postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
 					/// e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
 					$context->translate( 'mshop', '%1$s, %2$s, %3$s %4$s, %6$s %7$s' ),
-					$item->getLabel(),
-					$addr->getCompany(),
-					$addr->getAddress1(),
-					$addr->getAddress2(),
-					$addr->getAddress3(),
-					$addr->getPostal(),
-					$addr->getCity(),
-					$addr->getState(),
-					$context->translate( 'country', $addr->getCountryId() ),
-					$addr->getEmail(),
-					$addr->getTelephone(),
-					$addr->getTelefax(),
-					$addr->getWebsite()
+					(string) $item->getLabel(),
+					(string) $addr->getCompany(),
+					(string) $addr->getAddress1(),
+					(string) $addr->getAddress2(),
+					(string) $addr->getAddress3(),
+					(string) $addr->getPostal(),
+					(string) $addr->getCity(),
+					(string) $addr->getState(),
+					// @phpstan-ignore argument.type
+					(string) $context->translate( 'country', $addr->getCountryId() ),
+					(string) $addr->getEmail(),
+					(string) $addr->getTelephone(),
+					(string) $addr->getTelefax(),
+					(string) $addr->getWebsite()
 				) ) );
 			}
 		}
@@ -155,7 +161,7 @@ class Supplier
 				// move to first position so it's selected
 				$address = $feconfig['supplier.code']['default'][$value];
 				unset( $feconfig['supplier.code']['default'][$value] );
-				$feconfig['supplier.code']['default'] = [$value => $address] + $feconfig['supplier.code']['default'];
+				$feconfig['supplier.code']['default'] = [(string) $value => $address] + $feconfig['supplier.code']['default']; // @phpstan-ignore array.invalidKey
 			}
 		}
 		catch( \Aimeos\MShop\Service\Exception $e ) {} // If service isn't available
@@ -180,6 +186,7 @@ class Supplier
 			$attributes['supplier.address'] = $this->feConfig['supplier.code']['short'][$code];
 
 			// remove code attribute for summary page / customer email
+			// @phpstan-ignore argument.type
 			$orderServiceItem->addAttributeItems( $this->attributes( ['supplier.code' => $attributes['supplier.code']], 'hidden' ) );
 			unset( $attributes['supplier.code'] );
 		}

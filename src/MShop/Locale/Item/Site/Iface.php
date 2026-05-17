@@ -25,9 +25,9 @@ interface Iface
 	 * Sets the ID of the site.
 	 *
 	 * @param string $value Unique ID of the site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setSiteId( string $value ) : \Aimeos\MShop\Locale\Item\Site\Iface;
+	public function setSiteId( string $value ) : static;
 
 	/**
 	 * Returns the icon path of the site.
@@ -40,9 +40,9 @@ interface Iface
 	 * Sets the icon path of the site.
 	 *
 	 * @param string $value The icon of the site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setIcon( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+	public function setIcon( string $value ) : static;
 
 	/**
 	 * Returns the logo path of the site.
@@ -55,7 +55,7 @@ interface Iface
 	/**
 	 * Returns the logo path of the site.
 	 *
-	 * @return string Returns the logo of the site
+	 * @return array Returns the logos of the site
 	 */
 	public function getLogos() : array;
 
@@ -63,17 +63,17 @@ interface Iface
 	 * Sets the logo path of the site.
 	 *
 	 * @param string $value The logo of the site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setLogo( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+	public function setLogo( string $value ) : static;
 
 	/**
 	 * Sets the logo path of the site.
 	 *
 	 * @param array $value List of logo URLs with widths of the media file in pixels as keys
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setLogos( array $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+	public function setLogos( array $value ) : static;
 
 	/**
 	 * Returns the ID of the referenced customer/supplier related to the site.
@@ -86,9 +86,9 @@ interface Iface
 	 * Sets the ID of the referenced customer/supplier related to the site.
 	 *
 	 * @param string $value The referenced customer/supplier ID related to the site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setRefId( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+	public function setRefId( string $value ) : static;
 
 	/**
 	 * Returns the theme name for the site.
@@ -101,7 +101,7 @@ interface Iface
 	 * Sets the theme name for the site.
 	 *
 	 * @param string $value The theme name for the site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setTheme( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface;
+	public function setTheme( string $value ) : static;
 }

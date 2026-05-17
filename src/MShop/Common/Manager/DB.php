@@ -162,7 +162,7 @@ trait DB
 		 * lead to the situation that visitors see that no items are available despite
 		 * the fact that there would be at least one.
 		 *
-		 * @param integer Number of records
+		 * @type integer Number of records
 		 * @since 2021.04
 		 */
 		$limit = $this->context()->config()->get( 'mshop/common/manager/aggregate/limit', 10000 );
@@ -183,6 +183,7 @@ trait DB
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
+		$value = (string) $value;
 		if( ( $pos = strpos( $valkey = $value, '(' ) ) !== false ) {
 			$value = substr( $value, 0, $pos ) . '()'; // remove parameters from search function
 		}
@@ -193,47 +194,52 @@ trait DB
 			throw new \Aimeos\MShop\Exception( sprintf( $msg, $value ) );
 		}
 
-		$keys = (array) $keys;
+		// @phpstan-ignore argument.type
+		$keys = array_map( strval( ... ), (array) $keys );
 		$acols = $cols = $expr = [];
-		$search = (clone $search)->slice( $search->getOffset(), min( $search->getLimit(), $limit ) );
+		$search = (clone $search)->slice( $search->getOffset(), (int) min( $search->getLimit(), $limit ) );
 
 		foreach( $keys as $string )
 		{
 			if( ( $attrItem = $attrMap[$string] ?? null ) === null )
 			{
 				$msg = $this->context()->translate( 'mshop', 'Unknown search key "%1$s"' );
-				throw new \Aimeos\MShop\Exception( sprintf( $msg, $string ) );
+				throw new \Aimeos\MShop\Exception( sprintf( $msg, (string) $string ) );
 			}
 
-			if( strpos( $attrItem->getInternalCode(), '"' ) === false ) {
-				$prefixed = $this->alias( $attrItem->getCode() ) . '."' . $attrItem->getInternalCode() . '"';
+			$icode = (string) $attrItem->getInternalCode();
+			// @phpstan-ignore argument.type
+			if( strpos( $icode, '"' ) === false ) {
+				$prefixed = $this->alias( $attrItem->getCode() ) . '."' . $icode . '"';
 			} else { // @todo: Remove in 2025.01
-				$prefixed = $attrItem->getInternalCode();
+				$prefixed = $icode;
 			}
 
 			$acols[] = $prefixed . ' AS "' . $string . '"';
 			$cols[] = $prefixed;
 
-			$expr[] = $search->compare( '!=', $string, null ); // required for the joins
+			$expr[] = $search->compare( '!=', (string) $string, null ); // required for the joins
 		}
 
-		$expr[] = $search->compare( '!=', $valkey, null );
+		$expr[] = $search->compare( '!=', (string) $valkey, null );
 		$search->add( $search->and( $expr ) );
 
-		$val = $attrMap[$value]->getInternalCode();
-
+		$val = (string) $attrMap[$value]->getInternalCode();
+		// @phpstan-ignore argument.type
 		if( strpos( $val, '"' ) === false ) {
 			$val = $this->alias( $attrMap[$value]->getCode() ) . '."' . $val . '"';
 		}
 
-		$sql = $this->getSqlConfig( $cfgPath );
+		$sql = (string) $this->getSqlConfig( $cfgPath );
+		// @phpstan-ignore argument.type
 		$sql = str_replace( ':cols', join( ', ', $cols ), $sql );
 		$sql = str_replace( ':acols', join( ', ', $acols ), $sql );
 		$sql = str_replace( ':keys', '"' . join( '", "', $keys ) . '"', $sql );
-		$sql = str_replace( ':type', in_array( $type, ['avg', 'count', 'max', 'min', 'sum'] ) ? $type : 'count', $sql );
+		$sql = str_replace( ':type', in_array( $type, ['avg', 'count', 'max', 'min', 'sum'] ) ? (string) $type : 'count', $sql );
+		// @phpstan-ignore argument.type
 		$sql = str_replace( ':val', $val, $sql );
 
-		return $this->aggregateResult( $search, $sql, $required );
+		return $this->aggregateResult( $search, (string) $sql, $required );
 	}
 
 
@@ -308,7 +314,7 @@ trait DB
 	{
 		foreach( $map as $key => $value )
 		{
-			if( strpos( $value, '"' ) === false ) {
+			if( is_string( $value ) && strpos( $value, '"' ) === false ) {
 				$map[$key] = $this->alias( $key ) . '."' . $value . '"';
 			}
 		}
@@ -336,9 +342,9 @@ trait DB
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
 	 * @param string $cfgpath Configuration key to the cleanup statement
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	protected function clearBase( iterable $siteids, string $cfgpath ) : \Aimeos\MShop\Common\Manager\Iface
+	protected function clearBase( iterable $siteids, string $cfgpath ) : static
 	{
 		if( empty( $siteids ) ) {
 			return $this;
@@ -346,7 +352,7 @@ trait DB
 
 		$conn = $this->context()->db( $this->getResourceName() );
 
-		$sql = $this->getSqlConfig( $cfgpath );
+		$sql = (string) $this->getSqlConfig( $cfgpath );
 		$sql = str_replace( ':cond', '1=1', $sql );
 
 		$stmt = $conn->create( $sql );
@@ -368,10 +374,10 @@ trait DB
 	 * @param string $cfgpath Configuration path to the SQL statement
 	 * @param bool $siteid If siteid should be used in the statement
 	 * @param string $name Name of the ID column
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
 	protected function deleteItemsBase( $items, string $cfgpath, bool $siteid = true,
-		string $name = 'id' ) : \Aimeos\MShop\Common\Manager\Iface
+		string $name = 'id' ) : static
 	{
 		if( map( $items )->isEmpty() ) {
 			return $this;
@@ -383,8 +389,8 @@ trait DB
 		$types = array( $name => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
 		$translations = array( $name => '"' . $name . '"' );
 
-		$cond = $search->getConditionSource( $types, $translations );
-		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( $cfgpath ) );
+		$cond = (string) $search->getConditionSource( $types, $translations );
+		$sql = str_replace( ':cond', $cond, (string) $this->getSqlConfig( $cfgpath ) );
 
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
@@ -463,6 +469,7 @@ trait DB
 		$criteria->setConditions( $criteria->and( $expr ) );
 
 		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
+			// @phpstan-ignore return.type
 			return $item;
 		}
 
@@ -488,13 +495,14 @@ trait DB
 			|| $conn !== $this->cachedStmts['conn'][$cfgkey]
 		) {
 			if( $sql === null ) {
-				$sql = $this->getSqlConfig( $cfgkey );
+				$sql = (string) $this->getSqlConfig( $cfgkey );
 			}
 
-			$this->cachedStmts['stmt'][$cfgkey] = $conn->create( $sql );
+			$this->cachedStmts['stmt'][$cfgkey] = $conn->create( (string) $sql );
 			$this->cachedStmts['conn'][$cfgkey] = $conn;
 		}
 
+		// @phpstan-ignore return.type
 		return $this->cachedStmts['stmt'][$cfgkey];
 	}
 
@@ -525,19 +533,22 @@ trait DB
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $criteria Search criteria object
 	 * @param string[] $required List of prefixes of required search conditions
-	 * @return string[] Sorted list of criteria keys
+	 * @return array<string> Sorted list of criteria keys
 	 */
 	protected function getCriteriaKeyList( \Aimeos\Base\Criteria\Iface $criteria, array $required ) : array
 	{
 		$keys = array_merge( $required, $this->getCriteriaKeys( $required, $criteria->getConditions() ) );
 
 		foreach( $criteria->getSortations() as $sortation ) {
+			// @phpstan-ignore argument.type
 			$keys = array_merge( $keys, $this->getCriteriaKeys( $required, $sortation ) );
 		}
 
+		// @phpstan-ignore argument.type
 		$keys = array_unique( array_merge( $required, $keys ) );
 		sort( $keys );
 
+		// @phpstan-ignore return.type
 		return $keys;
 	}
 
@@ -557,6 +568,7 @@ trait DB
 		$criteria = $this->object()->filter( $default )->add( [$key => $id] )->slice( 0, 1 );
 
 		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
+			// @phpstan-ignore return.type
 			return $item;
 		}
 
@@ -593,8 +605,9 @@ trait DB
 	 * Returns the required SQL joins for the critera.
 	 *
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes List of criteria attribute items
-	 * @param string $prefix Search key prefix
-	 * @return array|null List of JOIN SQL strings
+	 * @param array $keys Search key list
+	 * @param string|null $basekey Base search key prefix
+	 * @return array List of JOIN SQL strings
 	 */
 	protected function getRequiredJoins( array $attributes, array $keys, ?string $basekey = null ) : array
 	{
@@ -603,10 +616,11 @@ trait DB
 		foreach( $keys as $key )
 		{
 			if( $key !== $basekey ) {
-				$joins = array_merge( $joins, $this->getJoins( $attributes, $key ) );
+				$joins = array_merge( $joins, $this->getJoins( $attributes, (string) $key ) );
 			}
 		}
 
+		// @phpstan-ignore argument.type
 		return array_unique( $joins );
 	}
 
@@ -622,7 +636,7 @@ trait DB
 			$this->setResourceName( 'db-' . current( $this->type() ) );
 		}
 
-		return $this->resourceName;
+		return $this->resourceName ?? '';
 	}
 
 
@@ -640,8 +654,9 @@ trait DB
 
 		foreach( $this->object()->getSaveAttributes() as $key => $entry )
 		{
-			$parts = explode( '.', (string) $entry->getInternalCode() );
-			$col = trim( end( $parts ), '"' );
+			$icode = $entry->getInternalCode();
+			$parts = explode( '.', is_string( $icode ) ? $icode : '' );
+			$col = trim( (string) end( $parts ), '"' );
 			$columns[$col] = $entry;
 		}
 
@@ -666,12 +681,12 @@ trait DB
 		if( $withsub === true )
 		{
 			$config = $this->context()->config();
-			$domains = $config->get( $path, $default );
+			$domains = (array) $config->get( $path, $default );
 
 			foreach( $domains as $domain )
 			{
-				$name = $config->get( substr( $path, 0, strrpos( $path, '/' ) ) . '/' . $domain . '/name' );
-				$attr += $this->object()->getSubManager( $domain, $name )->getSearchAttributes( true );
+				$name = $config->get( substr( $path, 0, (int) strrpos( $path, '/' ) ) . '/' . $domain . '/name' );
+				$attr += $this->object()->getSubManager( (string) $domain, $name !== null ? (string) $name : null )->getSearchAttributes( true );
 			}
 		}
 
@@ -707,9 +722,11 @@ trait DB
 
 		$level = \Aimeos\Base\Logger\Iface::DEBUG;
 		$time = ( microtime( true ) - $time ) * 1000;
+		// @phpstan-ignore argument.type
+		$stmtStr = trim( (string) $stmt );
 		$msg = 'Time: ' . $time . "ms\n"
 			. 'Class: ' . get_class( $this ) . "\n"
-			. str_replace( ["\t", "\n\n"], ['', "\n"], trim( (string) $stmt ) );
+			. str_replace( ["\t", "\n\n"], ['', "\n"], $stmtStr );
 
 		if( $time > 1000.0 )
 		{
@@ -761,9 +778,9 @@ trait DB
 	 *
 	 * @param string $sql Configuration path to the SQL statement
 	 * @param array $replace Associative list of keys with strings to replace by their values
-	 * @return array|string ANSI or database specific SQL statement
+	 * @return string ANSI or database specific SQL statement
 	 */
-	protected function getSqlConfig( string $sql, array $replace = [] )
+	protected function getSqlConfig( string $sql, array $replace = [] ) : string
 	{
 		if( preg_match( '#^[a-z0-9\-]+(/[a-z0-9\-]+)*$#', $sql ) === 1 )
 		{
@@ -777,11 +794,11 @@ trait DB
 				$str = $config->get( $cpath . '/' . $adapter, $config->get( $cpath . '/ansi', $sql ) );
 			}
 
-			$sql = $str;
+			$sql = (string) $str;
 		}
 
 		foreach( $replace as $key => $value ) {
-			$sql = str_replace( $key, $value, $sql );
+			$sql = str_replace( (string) $key, (string) $value, $sql );
 		}
 
 		return str_replace( [':alias', ':table'], [$this->alias(), $this->table()], $sql );
@@ -808,10 +825,9 @@ trait DB
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search critera object
 	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values
-	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attributes Associative list of search keys and criteria attribute items as values for the base table
+	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $attronly Associative list of search keys and criteria attribute items as values for the base table
 	 * @param \Aimeos\Base\Criteria\Plugin\Iface[] $plugins Associative list of search keys and criteria plugin items as values
 	 * @param string[] $joins Associative list of SQL joins
-	 * @param \Aimeos\Base\Criteria\Attribute\Iface[] $columns Additional columns to retrieve values from
 	 * @return array Array of keys, find and replace arrays
 	 */
 	protected function getSQLReplacements( \Aimeos\Base\Criteria\Iface $search, array $attributes, array $attronly, array $plugins, array $joins ) : array
@@ -822,22 +838,24 @@ trait DB
 		$trans = $this->aliasTranslations( $trans );
 
 		if( empty( $search->getSortations() ) && ( $attribute = reset( $attronly ) ) !== false ) {
-			$search = ( clone $search )->setSortations( [$search->sort( '+', $attribute->getCode() )] );
+			// @phpstan-ignore argument.type
+			$search = ( clone $search )->setSortations( [$search->sort( '+', (string) $attribute->getCode() )] );
 		}
 		$sorts = $search->translate( $search->getSortations(), $trans, $funcs );
 
 		$cols = $group = [];
 		foreach( $attronly as $name => $entry )
 		{
-			if( str_contains( $name, ':' ) || empty( $entry->getInternalCode() ) ) {
+			if( str_contains( (string) $name, ':' ) || empty( $entry->getInternalCode() ) ) {
 				continue;
 			}
 
-			$icode = $entry->getInternalCode();
+			$icode = (string) $entry->getInternalCode();
 
+			// @phpstan-ignore argument.type
 			if( !str_contains( $icode, '"' ) )
 			{
-				$alias = $this->alias( $entry->getCode() );
+				$alias = $this->alias( (string) $entry->getCode() );
 				$icode = $alias . '."' . $icode . '"';
 			}
 
@@ -847,7 +865,9 @@ trait DB
 
 		return [
 			':columns' => join( ', ', $cols ),
+			// @phpstan-ignore argument.type, argument.type
 			':joins' => join( "\n", array_unique( $joins ) ),
+			// @phpstan-ignore argument.type, argument.type
 			':group' => join( ', ', array_unique( array_merge( $group, $sorts ) ) ),
 			':cond' => $search->getConditionSource( $types, $trans, $plugins, $funcs ),
 			':order' => $search->getSortationSource( $types, $trans, $funcs ),
@@ -864,7 +884,7 @@ trait DB
 	 */
 	protected function getSubManagers() : array
 	{
-		return $this->context()->config()->get( $this->getConfigKey( 'submanagers' ), [] );
+		return (array) $this->context()->config()->get( $this->getConfigKey( 'submanagers' ), [] );
 	}
 
 
@@ -901,18 +921,18 @@ trait DB
 	 */
 	protected function newId( \Aimeos\Base\DB\Connection\Iface $conn, string $cfgpath ) : string
 	{
-		$sql = $this->getSqlConfig( $cfgpath );
+		$sql = (string) $this->getSqlConfig( $cfgpath );
 
 		$result = $conn->create( $sql )->execute();
 
-		if( ( $row = $result->fetch( \Aimeos\Base\DB\Result\Base::FETCH_NUM ) ) === false )
+		if( ( $row = $result->fetch( \Aimeos\Base\DB\Result\Base::FETCH_NUM ) ) === null )
 		{
 			$msg = $this->context()->translate( 'mshop', 'ID of last inserted database record not available' );
 			throw new \Aimeos\MShop\Exception( $msg );
 		}
 		$result->finish();
 
-		return $row[0];
+		return (string) $row[0];
 	}
 
 
@@ -963,7 +983,7 @@ trait DB
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for inserting records
+			 * @type string SQL statement for inserting records
 			 * @since 2023.10
 			 * @see mshop/common/manager/update/ansi
 			 * @see mshop/common/manager/newid/ansi
@@ -972,7 +992,7 @@ trait DB
 			 * @see mshop/common/manager/count/ansi
 			 */
 			$path = $this->getConfigKey( 'insert', 'mshop/common/manager/insert' );
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+			$sql = $this->addSqlColumns( array_keys( $columns ), (string) $this->getSqlConfig( $path ) );
 		}
 		else
 		{
@@ -999,7 +1019,7 @@ trait DB
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for updating records
+			 * @type string SQL statement for updating records
 			 * @since 2023.10
 			 * @see mshop/common/manager/insert/ansi
 			 * @see mshop/common/manager/newid/ansi
@@ -1008,7 +1028,7 @@ trait DB
 			 * @see mshop/common/manager/count/ansi
 			 */
 			$path = $this->getConfigKey( 'update', 'mshop/common/manager/update' );
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+			$sql = $this->addSqlColumns( array_keys( $columns ), (string) $this->getSqlConfig( $path ), false );
 		}
 
 		$idx = 1;
@@ -1066,7 +1086,7 @@ trait DB
 			 * fits for most database servers as they implement their own
 			 * specific way.
 			 *
-			 * @param string SQL statement for retrieving the last inserted record ID
+			 * @type string SQL statement for retrieving the last inserted record ID
 			 * @since 2023.10
 			 * @see mshop/common/manager/insert/ansi
 			 * @see mshop/common/manager/update/ansi
@@ -1104,15 +1124,17 @@ trait DB
 		$joins = $this->getRequiredJoins( $attributes, $keys, array_shift( $required ) );
 
 		if( !empty( $cond = $this->getSiteConditions( $keys, $attributes, $sitelevel ) ) ) {
+			// @phpstan-ignore argument.type
 			$search = ( clone $search )->add( $search->and( $cond ) );
 		}
 
 		$attronly = $this->object()->getSearchAttributes( false );
+		// @phpstan-ignore argument.type
 		$replace = $this->getSQLReplacements( $search, $attributes, $attronly, $plugins, $joins );
 
 		if( $total !== null )
 		{
-			$sql = $this->getSqlConfig( $cfgPathCount, $replace );
+			$sql = (string) $this->getSqlConfig( $cfgPathCount, $replace );
 			$result = $this->getSearchResults( $conn, $sql );
 			$row = $result->fetch();
 			$result->finish();
@@ -1126,7 +1148,7 @@ trait DB
 			$total = (int) $row['count'];
 		}
 
-		return $this->getSearchResults( $conn, $this->getSqlConfig( $cfgPathSearch, $replace ) );
+		return $this->getSearchResults( $conn, (string) $this->getSqlConfig( $cfgPathSearch, $replace ) );
 	}
 
 
@@ -1134,9 +1156,9 @@ trait DB
 	 * Sets the name of the database resource that should be used.
 	 *
 	 * @param string $name Name of the resource
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	protected function setResourceName( string $name ) : \Aimeos\MShop\Common\Manager\Iface
+	protected function setResourceName( string $name ) : static
 	{
 		$config = $this->context()->config();
 
@@ -1164,9 +1186,10 @@ trait DB
 	{
 		$types = ['marker' => $type];
 		$translations = ['marker' => $column];
+		// @phpstan-ignore argument.type
 		$value = ( is_array( $value ) ? array_unique( $value ) : $value );
 
-		return $this->getSearch()->compare( $op, 'marker', $value )->toSource( $types, $translations );
+		return (string) $this->getSearch()->compare( $op, 'marker', $value )->toSource( $types, $translations );
 	}
 
 
@@ -1243,6 +1266,8 @@ trait DB
 
 		foreach( $this->getCriteriaNames( $expr ) as $item )
 		{
+			$item = (string) $item;
+
 			if( strncmp( $item, 'sort:', 5 ) === 0 ) {
 				$item = substr( $item, 5 );
 			}
@@ -1261,7 +1286,7 @@ trait DB
 	/**
 	 * Returns a list of criteria names from a expression and its sub-expressions.
 	 *
-	 * @param \Aimeos\Base\Criteria\Expression\Iface Criteria object
+	 * @param \Aimeos\Base\Criteria\Expression\Iface $expr Criteria object
 	 * @return array List of criteria names
 	 */
 	private function getCriteriaNames( \Aimeos\Base\Criteria\Expression\Iface $expr ) : array
@@ -1274,6 +1299,7 @@ trait DB
 		{
 			$list = [];
 			foreach( $expr->getExpressions() as $item ) {
+				// @phpstan-ignore argument.type
 				$list = array_merge( $list, $this->getCriteriaNames( $item ) );
 			}
 			return $list;

@@ -31,7 +31,7 @@ class Standard
 	 */
 	public function getSiteId() : string
 	{
-		return $this->get( 'locale.site.siteid', '' );
+		return (string) $this->get( 'locale.site.siteid', '' );
 	}
 
 
@@ -39,9 +39,9 @@ class Standard
 	 * Sets the ID of the site.
 	 *
 	 * @param string $value Unique ID of the site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setSiteId( string $value ) : \Aimeos\MShop\Locale\Item\Site\Iface
+	public function setSiteId( string $value ) : static
 	{
 		return $this->set( 'locale.site.siteid', $value );
 	}
@@ -54,7 +54,7 @@ class Standard
 	 */
 	public function getCode() : string
 	{
-		return $this->get( 'locale.site.code', '' );
+		return (string) $this->get( 'locale.site.code', '' );
 	}
 
 
@@ -62,9 +62,9 @@ class Standard
 	 * Sets the code of the site.
 	 *
 	 * @param string $code The code to set
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function setCode( string $code ) : static
 	{
 		return $this->set( 'locale.site.code', \Aimeos\Utils::code( $code, 255 ) );
 	}
@@ -77,7 +77,7 @@ class Standard
 	 */
 	public function getLabel() : string
 	{
-		return $this->get( 'locale.site.label', '' );
+		return (string) $this->get( 'locale.site.label', '' );
 	}
 
 
@@ -85,9 +85,9 @@ class Standard
 	 * Sets the label property of the site.
 	 *
 	 * @param string $label The label of the Site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function setLabel( string $label ) : static
 	{
 		return $this->set( 'locale.site.label', $label );
 	}
@@ -123,7 +123,7 @@ class Standard
 	/**
 	 * Returns the logo path of the site.
 	 *
-	 * @return string Returns the logo of the site
+	 * @return array Returns the logos of the site
 	 */
 	public function getLogos() : array
 	{
@@ -138,7 +138,7 @@ class Standard
 	 */
 	public function getIcon() : string
 	{
-		return $this->get( 'locale.site.icon', '' );
+		return (string) $this->get( 'locale.site.icon', '' );
 	}
 
 
@@ -146,9 +146,9 @@ class Standard
 	 * Sets the icon path of the site.
 	 *
 	 * @param string $value The icon of the site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setIcon( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function setIcon( string $value ) : static
 	{
 		return $this->set( 'locale.site.icon', $value );
 	}
@@ -158,9 +158,9 @@ class Standard
 	 * Sets the logo path of the site.
 	 *
 	 * @param string $value The logo of the site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setLogo( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function setLogo( string $value ) : static
 	{
 		return $this->set( 'locale.site.logo', [1 => $value] );
 	}
@@ -170,9 +170,9 @@ class Standard
 	 * Sets the logo path of the site.
 	 *
 	 * @param array $value List of logo URLs with widths of the media file in pixels as keys
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setLogos( array $value ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function setLogos( array $value ) : static
 	{
 		return $this->set( 'locale.site.logo', $value );
 	}
@@ -218,7 +218,7 @@ class Standard
 	 */
 	public function getRefId() : string
 	{
-		return $this->get( 'locale.site.refid', '' );
+		return (string) $this->get( 'locale.site.refid', '' );
 	}
 
 
@@ -226,9 +226,9 @@ class Standard
 	 * Sets the ID of the referenced customer/supplier related to the site.
 	 *
 	 * @param string $value The referenced customer/supplier ID related to the site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setRefId( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function setRefId( string $value ) : static
 	{
 		return $this->set( 'locale.site.refid', $value );
 	}
@@ -241,7 +241,7 @@ class Standard
 	 */
 	public function getStatus() : int
 	{
-		return $this->get( 'locale.site.status', 1 );
+		return (int) $this->get( 'locale.site.status', 1 );
 	}
 
 
@@ -249,9 +249,9 @@ class Standard
 	 * Sets status property.
 	 *
 	 * @param int $status The status of the Site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		return $this->set( 'locale.site.status', $status );
 	}
@@ -264,6 +264,7 @@ class Standard
 	 */
 	public function getTheme() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'locale.site.theme' );
 	}
 
@@ -272,9 +273,9 @@ class Standard
 	 * Sets the theme name for the site.
 	 *
 	 * @param string $value The theme name for the site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return static Locale site item for chaining method calls
 	 */
-	public function setTheme( string $value ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function setTheme( string $value ) : static
 	{
 		return $this->set( 'locale.site.theme', $value );
 	}
@@ -294,11 +295,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Site item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -306,14 +307,14 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'locale.site.code': $item->setCode( $value ); break;
-				case 'locale.site.label': $item->setLabel( $value ); break;
+				case 'locale.site.code': $item->setCode( (string) $value ); break;
+				case 'locale.site.label': $item->setLabel( (string) $value ); break;
 				case 'locale.site.status': $item->setStatus( (int) $value ); break;
 				case 'locale.site.config': $item->setConfig( (array) $value ); break;
-				case 'locale.site.refid': $item->setRefId( $value ); break;
+				case 'locale.site.refid': $item->setRefId( (string) $value ); break;
 				case 'locale.site.logo': $item->setLogos( (array) $value ); break;
-				case 'locale.site.theme': $item->setTheme( $value ); break;
-				case 'locale.site.icon': $item->setIcon( $value ); break;
+				case 'locale.site.theme': $item->setTheme( (string) $value ); break;
+				case 'locale.site.icon': $item->setIcon( (string) $value ); break;
 				default: continue 2;
 			}
 
@@ -327,7 +328,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array
@@ -360,9 +361,9 @@ class Standard
 	 * Adds a child node to this node.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
-	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
+	 * @return static Tree item for chaining method calls
 	 */
-	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : static
 	{
 		return $this;
 	}
@@ -372,9 +373,9 @@ class Standard
 	 * Removes a child node from this node.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to remove
-	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
+	 * @return static Tree item for chaining method calls
 	 */
-	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : static
 	{
 		return $this;
 	}
@@ -384,9 +385,9 @@ class Standard
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param int $index Index of child node
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Selected node
+	 * @return static Selected node
 	 */
-	public function getChild( int $index ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function getChild( int $index ) : static
 	{
 		throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
 	}
@@ -432,6 +433,6 @@ class Standard
 	 */
 	public function toList() : \Aimeos\Map
 	{
-		return map( [$this->getId() => $this] );
+		return map( [($this->getId() ?? '') => $this] );
 	}
 }

@@ -40,6 +40,7 @@ class Standard
 	 */
 	public function getId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'id' );
 	}
 
@@ -48,9 +49,9 @@ class Standard
 	 * Sets the unique ID of the item.
 	 *
 	 * @param string|null $id Unique ID of the item
-	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
+	 * @return static Cache item for chaining method calls
 	 */
-	public function setId( ?string $id = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $id = null ) : static
 	{
 		return $this->set( 'id', $id );
 	}
@@ -63,7 +64,8 @@ class Standard
 	 */
 	public function getValue() : string
 	{
-		return $this->get( 'value', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( 'value', '' );
 	}
 
 
@@ -71,9 +73,9 @@ class Standard
 	 * Sets the new value of the item.
 	 *
 	 * @param string $value Value of the item or null for no expiration
-	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
+	 * @return static Cache item for chaining method calls
 	 */
-	public function setValue( string $value ) : \Aimeos\MAdmin\Cache\Item\Iface
+	public function setValue( string $value ) : static
 	{
 		return $this->set( 'value', $value );
 	}
@@ -86,6 +88,7 @@ class Standard
 	 */
 	public function getTimeExpire() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'expire' );
 	}
 
@@ -94,9 +97,9 @@ class Standard
 	 * Sets the new expiration time of the item.
 	 *
 	 * @param string|null $timestamp Expiration time of the item
-	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
+	 * @return static Cache item for chaining method calls
 	 */
-	public function setTimeExpire( ?string $timestamp ) : \Aimeos\MAdmin\Cache\Item\Iface
+	public function setTimeExpire( ?string $timestamp ) : static
 	{
 		return $this->set( 'expire', \Aimeos\Utils::datetime( $timestamp ) );
 	}
@@ -109,7 +112,8 @@ class Standard
 	 */
 	public function getTags() : array
 	{
-		return $this->get( 'tags', [] );
+		// @phpstan-ignore return.type
+		return (array) $this->get( 'tags', [] );
 	}
 
 
@@ -117,9 +121,9 @@ class Standard
 	 * Sets the new tags associated to the item.
 	 *
 	 * @param array $tags Tags associated to the item
-	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
+	 * @return static Cache item for chaining method calls
 	 */
-	public function setTags( array $tags ) : \Aimeos\MAdmin\Cache\Item\Iface
+	public function setTags( array $tags ) : static
 	{
 		return $this->set( 'tags', $tags );
 	}
@@ -128,11 +132,11 @@ class Standard
 	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MAdmin\Cache\Item\Iface Cache item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Cache item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -140,10 +144,10 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'cache.id': !$private ?: $item->setId( $value ); break;
-				case 'cache.value': $item->setValue( $value ); break;
-				case 'cache.expire': $item->setTimeExpire( $value ); break;
-				case 'cache.tags': $item->setTags( $value ); break;
+				case 'cache.id': !$private ?: $item->setId( (string) $value ); break;
+				case 'cache.value': $item->setValue( (string) $value ); break;
+				case 'cache.expire': $item->setTimeExpire( $value ? (string) $value : null ); break;
+				case 'cache.tags': $item->setTags( (array) $value ); break;
 				default: continue 2;
 			}
 
@@ -157,7 +161,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

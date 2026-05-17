@@ -70,7 +70,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static
 	{
 		$this->provider->register( $p );
 		return $this;
@@ -95,9 +95,9 @@ abstract class Base
 	 * Injects the outmost object into the decorator stack
 	 *
 	 * @param \Aimeos\MShop\Plugin\Provider\Iface $object First object of the decorator stack
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for chaining method calls
+	 * @return static Plugin object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object ) : \Aimeos\MShop\Plugin\Provider\Iface
+	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object ) : static
 	{
 		parent::setObject( $object );
 

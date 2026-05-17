@@ -67,8 +67,8 @@ class Standard
 		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
 		$name = 'index.price:value';
-		$expr = $this->siteString( 'mindpr."siteid"', $level );
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+		$expr = $this->siteString( 'mindpr."siteid"', (int) $level );
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, (string) $this->searchConfig[$name]['internalcode'] );
 	}
 
 
@@ -91,9 +91,9 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		parent::clear( $siteids );
 
@@ -106,9 +106,9 @@ class Standard
 	 * This can be a long lasting operation.
 	 *
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function cleanup( string $timestamp ) : \Aimeos\MShop\Index\Manager\Iface
+	public function cleanup( string $timestamp ) : static
 	{
 		/** mshop/index/manager/price/cleanup/mysql
 		 * Deletes the index price records that haven't been touched
@@ -132,7 +132,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for deleting the outdated price index records
+		 * @type string SQL statement for deleting the outdated price index records
 		 * @since 2014.03
 		 * @see mshop/index/manager/price/count/ansi
 		 * @see mshop/index/manager/price/delete/ansi
@@ -147,9 +147,9 @@ class Standard
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface|\Aimeos\Map|array|string $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Index\Manager\Price\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : static
 	{
 		/** mshop/index/manager/price/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -172,13 +172,14 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for deleting index price records
+		 * @type string SQL statement for deleting index price records
 		 * @since 2014.03
 		 * @see mshop/index/manager/price/count/ansi
 		 * @see mshop/index/manager/price/cleanup/ansi
 		 * @see mshop/index/manager/price/insert/ansi
 		 * @see mshop/index/manager/price/search/ansi
 		 */
+		// @phpstan-ignore argument.type
 		return $this->deleteItemsBase( $itemIds, 'mshop/index/manager/price/delete' );
 	}
 
@@ -206,7 +207,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @param array List of sub-manager names
+		 * @type array List of sub-manager names
 		 * @since 2014.03
 		 */
 		$path = 'mshop/index/manager/price/submanagers';
@@ -253,7 +254,7 @@ class Standard
 		 * name with an upper case character and continue only with lower case characters
 		 * or numbers. Avoid chamel case names like "MyPrice"!
 		 *
-		 * @param string Last part of the class name
+		 * @type string Last part of the class name
 		 * @since 2014.03
 		 */
 
@@ -275,7 +276,7 @@ class Standard
 		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the index price manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/price/decorators/global
@@ -300,7 +301,7 @@ class Standard
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the index
 		 * price manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/price/decorators/excludes
@@ -325,7 +326,7 @@ class Standard
 		 * "\Aimeos\MShop\Index\Manager\Price\Decorator\Decorator2" only to the
 		 * index price manager.
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/index/manager/price/decorators/excludes
@@ -341,9 +342,9 @@ class Standard
 	 * Execution of this operation can take a very long time and shouldn't be
 	 * called through a web server enviroment.
 	 *
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function optimize() : \Aimeos\MShop\Index\Manager\Iface
+	public function optimize() : static
 	{
 		/** mshop/index/manager/price/optimize/mysql
 		 * Optimizes the stored price data for retrieving the records faster
@@ -363,7 +364,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for optimizing the stored price data
+		 * @type string SQL statement for optimizing the stored price data
 		 * @since 2014.09
 		 * @see mshop/index/manager/price/count/ansi
 		 * @see mshop/index/manager/price/search/ansi
@@ -378,9 +379,9 @@ class Standard
 	 * This can be a long lasting operation.
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rebuild( iterable $items = [] ) : \Aimeos\MShop\Index\Manager\Iface
+	public function rebuild( iterable $items = [] ) : static
 	{
 		if( ( $items = map( $items ) )->isEmpty() ) { return $this; }
 
@@ -415,7 +416,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for inserting records
+			 * @type string SQL statement for inserting records
 			 * @since 2014.03
 			 * @see mshop/index/manager/price/cleanup/ansi
 			 * @see mshop/index/manager/price/delete/ansi
@@ -425,6 +426,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/price/insert' );
 
 			foreach( $items as $item ) {
+				// @phpstan-ignore argument.type
 				$this->savePrices( $stmt, $item );
 			}
 
@@ -440,10 +442,11 @@ class Standard
 	 * Removes the products from the product index.
 	 *
 	 * @param iterable|string $ids Product ID or list of IDs
-	 * @return \Aimeos\MShop\Index\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function remove( $ids ) : \Aimeos\MShop\Index\Manager\Iface
+	public function remove( $ids ) : static
 	{
+		// @phpstan-ignore argument.type
 		parent::remove( $ids )->delete( $ids );
 		return $this;
 	}
@@ -454,7 +457,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int|null &$total Number of items that are available in total
+	 * @type int|null &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -505,7 +508,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for searching items
+		 * @type string SQL statement for searching items
 		 * @since 2014.03
 		 * @see mshop/index/manager/price/count/ansi
 		 * @see mshop/index/manager/price/optimize/ansi
@@ -555,7 +558,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for counting items
+		 * @type string SQL statement for counting items
 		 * @since 2014.03
 		 * @see mshop/index/manager/price/search/ansi
 		 * @see mshop/index/manager/price/optimize/ansi
@@ -570,7 +573,7 @@ class Standard
 	/**
 	 * Returns the list of sub-managers available for the index attribute manager.
 	 *
-	 * @return \Aimeos\MShop\Index\Manager\Iface[] Associative list of the sub-domain as key and the manager object as value
+	 * @return array Associative list of the sub-domain as key and the manager object as value
 	 */
 	protected function getSubManagers() : array
 	{
@@ -591,14 +594,15 @@ class Standard
 			 * This option configures the sub-managers that cares about
 			 * indexing data associated to product prices.
 			 *
-			 * @param string List of index sub-manager names
+			 * @type string List of index sub-manager names
 			 * @since 2014.09
 			 * @see mshop/index/manager/submanagers
 			 */
 			foreach( $config->get( 'mshop/index/manager/price/submanagers', [] ) as $domain )
 			{
 				$name = $config->get( 'mshop/index/manager/price/' . $domain . '/name' );
-				$this->subManagers[$domain] = $this->object()->getSubManager( $domain, $name );
+				// @phpstan-ignore argument.type, argument.type
+				$this->subManagers[(string) $domain] = $this->object()->getSubManager( (string) $domain, $name );
 			}
 
 			return $this->subManagers;
@@ -613,8 +617,9 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item containing associated price items
+	 * @return void
 	 */
-	protected function savePrices( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListsRef\Iface $item )
+	protected function savePrices( \Aimeos\Base\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListsRef\Iface $item ) : void
 	{
 		$prices = [];
 		$context = $this->context();
@@ -630,7 +635,7 @@ class Standard
 		 * it will be indexed, otherwise the next lowest index price type. It is
 		 * highly recommended to add the price type 'default' with the highest index.
 		 *
-		 * @param array List of price types codes
+		 * @type array List of price types codes
 		 * @since 2019.04
 		 */
 		$types = $config->get( 'mshop/index/manager/price/types', ['default'] );
@@ -644,11 +649,12 @@ class Standard
 		 * will be indexed, otherwise the next lowest index list type. It is highly
 		 * recommended to add the list type 'default' with the highest index.
 		 *
-		 * @param array List of price list types
+		 * @type array List of price list types
 		 * @since 2026.04
 		 */
 		$listTypes = $config->get( 'mshop/index/manager/price/listtypes', ['default'] );
 
+		// @phpstan-ignore argument.type, argument.type
 		foreach( $item->getRefItems( 'price', $types, $listTypes ) as $refItem )
 		{
 			$currencyId = $refItem->getCurrencyId();

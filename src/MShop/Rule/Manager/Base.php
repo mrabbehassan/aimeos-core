@@ -41,6 +41,7 @@ abstract class Base
 				->order( 'rule.position' )->slice( 0, 10000 );
 
 			foreach( $manager->search( $filter ) as $id => $ruleItem ) {
+				// @phpstan-ignore argument.type
 				$this->rules[$type][$id] = $manager->getProvider( $ruleItem, $type );
 			}
 		}
@@ -51,6 +52,7 @@ abstract class Base
 			{
 				// Selection products are handled by rule providers
 				$articleIds = $item->getType() === 'select' ? $item->getRefItems( 'product', null, 'default' )->keys() : [];
+				// @phpstan-ignore argument.type
 				$this->apply( $item->getRefItems( 'product' )->except( $articleIds ), $type );
 
 				if( $rule->apply( $item ) ) {
@@ -92,7 +94,9 @@ abstract class Base
 		$classname = '\Aimeos\MShop\Rule\Provider\\' . $type . '\\' . $provider;
 		$interface = \Aimeos\MShop\Rule\Provider\Factory\Iface::class;
 
+		// @phpstan-ignore argument.type
 		$provider = \Aimeos\Utils::create( $classname, [$context, $item], $interface );
+		// @phpstan-ignore argument.type
 		$provider = $this->addRuleDecorators( $item, $provider, $names, $type );
 
 		return $provider->setObject( $provider );
@@ -118,7 +122,7 @@ abstract class Base
 			if( ctype_alnum( $name ) === false )
 			{
 				$msg = $this->context()->translate( 'mshop', 'Invalid characters in class name "%1$s"' );
-				throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, $name ), 400 );
+				throw new \Aimeos\MShop\Rule\Exception( sprintf( $msg, (string) $name ), 400 );
 			}
 
 			$classname = $classprefix . $name;
@@ -127,6 +131,7 @@ abstract class Base
 			$provider = \Aimeos\Utils::create( $classname, [$context, $ruleItem, $provider], $interface );
 		}
 
+		// @phpstan-ignore return.type
 		return $provider;
 	}
 }

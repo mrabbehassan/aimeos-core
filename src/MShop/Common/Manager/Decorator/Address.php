@@ -33,6 +33,7 @@ class Address
 	 */
 	public function from( iterable $entries, array $refs = [], array $excludes = [] ) : \Aimeos\Map
 	{
+		// @phpstan-ignore argument.type
 		$keys = array_flip( $excludes );
 		$excludes[] = 'address';
 
@@ -44,12 +45,13 @@ class Address
 			{
 				foreach( $entry['address'] as $list )
 				{
-					$list = array_diff_key( $list, $keys );
+					$list = array_diff_key( (array) $list, $keys );
 					$item->addAddressItem( $this->createAddressItem()->fromArray( $list, true ) );
 				}
 			}
 		}
 
+		// @phpstan-ignore return.type
 		return $items;
 	}
 
@@ -64,6 +66,7 @@ class Address
 	public function saveRefs( \Aimeos\MShop\Common\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Common\Item\Iface
 	{
 		$this->getManager()->saveRefs( $item, $fetch );
+		// @phpstan-ignore argument.type
 		$this->saveAddressItems( $item, $this->domain(), $fetch );
 
 		return $item;

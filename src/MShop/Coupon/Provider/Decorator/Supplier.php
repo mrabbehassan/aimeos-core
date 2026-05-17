@@ -60,7 +60,7 @@ class Supplier
 			$catManager = \Aimeos\MShop::create( $context, 'supplier' );
 			$prodManager = \Aimeos\MShop::create( $context, 'product' );
 
-			$codes = explode( ',', $this->getConfigValue( 'supplier.code', '' ) );
+			$codes = explode( ',', (string) $this->getConfigValue( 'supplier.code', '' ) );
 			$filter = $catManager->filter( true )->add( ['supplier.code' => $codes] )->slice( 0, count( $codes ) );
 
 			$catIds = $catManager->search( $filter )->keys()->all();
@@ -86,6 +86,7 @@ class Supplier
 				}
 			}
 
+			// @phpstan-ignore return.type
 			return $price;
 		}
 
@@ -135,7 +136,7 @@ class Supplier
 			$catManager = \Aimeos\MShop::create( $context, 'supplier' );
 			$prodManager = \Aimeos\MShop::create( $context, 'product' );
 
-			$filter = $catManager->filter( true )->add( ['supplier.code' => explode( ',', $codes )] );
+			$filter = $catManager->filter( true )->add( ['supplier.code' => explode( ',', (string) $codes )] );
 			$catIds = $catManager->search( $filter )->keys()->all();
 
 			$filter = $prodManager->filter( true );

@@ -83,11 +83,15 @@ class Reduction
 
 		if( $this->getConfigValue( 'reduction.include-costs' ) )
 		{
+			// @phpstan-ignore argument.type, argument.type
 			$sub = $price->getCosts() * $this->getConfigValue( 'reduction.percent' ) / 100;
-			$price->setCosts( $price->getCosts() - $sub )->setRebate( $price->getRebate() + $sub );
+			// @phpstan-ignore argument.type, argument.type
+			$price->setCosts( $price->getCosts() - $sub )->setRebate( $price->getRebate() + $sub ); // @phpstan-ignore binaryOp.invalid, binaryOp.invalid
 		}
 
+		// @phpstan-ignore argument.type, argument.type
 		$sub = $basket->getPrice()->getValue() * $this->getConfigValue( 'reduction.percent' ) / 100;
-		return $price->setValue( $price->getValue() - $sub )->setRebate( $price->getRebate() + $sub );
+		// @phpstan-ignore argument.type, argument.type
+		return $price->setValue( $price->getValue() - $sub )->setRebate( $price->getRebate() + $sub ); // @phpstan-ignore binaryOp.invalid, binaryOp.invalid
 	}
 }

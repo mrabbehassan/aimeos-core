@@ -51,8 +51,8 @@ class PgSQL
 		$level = $context->config()->get( 'mshop/index/manager/sitemode', $level );
 
 		$name = 'index.text:relevance';
-		$expr = $this->siteString( 'mindte."siteid"', $level );
-		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, $this->searchConfig[$name]['internalcode'] );
+		$expr = $this->siteString( 'mindte."siteid"', (int) $level );
+		$this->searchConfig[$name]['internalcode'] = str_replace( ':site', $expr, (string) $this->searchConfig[$name]['internalcode'] );
 		$this->searchConfig[$name]['function'] = $this->searchConfig['sort:' . $name]['function'] = $this->getFunctionRelevance();
 	}
 
@@ -68,7 +68,7 @@ class PgSQL
 		$list = parent::getSearchAttributes( $withsub );
 
 		foreach( $this->searchConfig as $key => $fields ) {
-			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $fields );
+			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( (array) $fields );
 		}
 
 		return $list;
@@ -88,7 +88,7 @@ class PgSQL
 			{
 				$strings = [];
 				$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
-				$search = trim( mb_strtolower( preg_replace( $regex, ' ', $params[1] ) ), "' \t\n\r\0\x0B" );
+				$search = trim( mb_strtolower( (string) preg_replace( $regex, ' ', (string) $params[1] ) ), "' \t\n\r\0\x0B" );
 
 				foreach( explode( ' ', $search ) as $part )
 				{

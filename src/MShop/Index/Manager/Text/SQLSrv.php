@@ -67,14 +67,14 @@ class SQLSrv
 			$func = function( $source, array $params ) {
 
 				if( isset( $params[1] ) ) {
-					$params[1] = mb_strtolower( $params[1] );
+					$params[1] = mb_strtolower( (string) $params[1] );
 				}
 
 				return $params;
 			};
 		}
 
-		$expr = $this->siteString( 'mindte."siteid"', $level );
+		$expr = $this->siteString( 'mindte."siteid"', (int) $level );
 
 		$this->searchConfig['index.text:relevance']['internalcode'] = str_replace( ':site', $expr, $search );
 		$this->searchConfig['sort:index.text:relevance']['internalcode'] = $sort;
@@ -93,7 +93,7 @@ class SQLSrv
 		$list = parent::getSearchAttributes( $withsub );
 
 		foreach( $this->searchConfig as $key => $fields ) {
-			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $fields );
+			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( (array) $fields );
 		}
 
 		return $list;
@@ -113,7 +113,7 @@ class SQLSrv
 			{
 				$strings = [];
 				$regex = '/(\&|\||\!|\-|\+|\>|\<|\(|\)|\~|\*|\:|\"|\'|\@|\\| )+/';
-				$search = trim( mb_strtolower( preg_replace( $regex, ' ', $params[1] ) ), "' \t\n\r\0\x0B" );
+				$search = trim( mb_strtolower( (string) preg_replace( $regex, ' ', (string) $params[1] ) ), "' \t\n\r\0\x0B" );
 
 				foreach( explode( ' ', $search ) as $part )
 				{

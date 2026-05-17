@@ -33,9 +33,9 @@ interface Iface
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
+	 * @return static Text item for chaining method calls
 	 */
-	public function setLanguageId( ?string $langid ) : \Aimeos\MShop\Text\Item\Iface;
+	public function setLanguageId( ?string $langid ) : static;
 
 	/**
 	 * Returns the content of the text item.
@@ -48,9 +48,9 @@ interface Iface
 	 * Sets the content of the text item.
 	 *
 	 * @param string $text Content of the text item
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
+	 * @return static Text item for chaining method calls
 	 */
-	public function setContent( string $text ) : \Aimeos\MShop\Text\Item\Iface;
+	public function setContent( string $text ) : static;
 
 	/**
 	 * Returns the name of the attribute item.
@@ -63,7 +63,7 @@ interface Iface
 	 * Sets the new label of the attribute item.
 	 *
 	 * @param string $label Type label of the attribute item
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
+	 * @return static Text item for chaining method calls
 	 */
-	public function setLabel( ?string $label ) : \Aimeos\MShop\Text\Item\Iface;
+	public function setLabel( ?string $label ) : static;
 }

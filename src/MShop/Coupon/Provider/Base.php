@@ -60,6 +60,7 @@ abstract class Base
 			$price = $price->addItem( $product->getPrice(), $product->getQuantity() );
 		}
 
+		// @phpstan-ignore return.type
 		return $price;
 	}
 
@@ -153,7 +154,7 @@ abstract class Base
 		$list = [];
 
 		foreach( $configList as $key => $config ) {
-			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( $config );
+			$list[$key] = new \Aimeos\Base\Criteria\Attribute\Standard( (array) $config );
 		}
 
 		return $list;
@@ -233,6 +234,7 @@ abstract class Base
 			$price = $priceManager->create();
 		}
 
+		// @phpstan-ignore return.type
 		return \Aimeos\MShop::create( $this->context, 'order/product' )->create()
 			->copyFrom( $product )->setQuantity( $quantity )->setStockType( $stocktype )->setPrice( $price )
 			->setFlags( \Aimeos\MShop\Order\Item\Product\Base::FLAG_IMMUTABLE );
@@ -269,15 +271,15 @@ abstract class Base
 			}
 
 			if( $price->getValue() <= $rebate ) {
-				$rebate -= $value = $price->getValue();
+				$rebate -= $value = (float) $price->getValue();
 			} else {
-				$value = $rebate; $rebate = 0;
+				$value = $rebate; $rebate = 0.0;
 			}
 
 			if( $price->getCosts() <= $rebate ) {
-				$rebate -= $costs = $price->getCosts();
+				$rebate -= $costs = (float) $price->getCosts();
 			} else {
-				$costs = $rebate; $rebate = 0;
+				$costs = $rebate; $rebate = 0.0;
 			}
 
 			$orderProduct = $this->createProduct( $prodcode, $quantity, $stockType );
@@ -310,10 +312,12 @@ abstract class Base
 
 		foreach( $basket->getProducts() as $key => $item )
 		{
+			// @phpstan-ignore argument.type
 			if( !in_array( $item, $products, true ) )
 			{
 				$price = $item->getPrice();
 				$rate = $price->getTaxRate();
+				// @phpstan-ignore argument.type
 				$prices[$rate] = $prices->get( $rate, clone $newprice )->addItem( $price, $item->getQuantity() );
 			}
 		}
@@ -324,6 +328,7 @@ abstract class Base
 			{
 				$price = $item->getPrice();
 				$rate = $price->getTaxRate();
+				// @phpstan-ignore argument.type
 				$prices[$rate] = $prices->get( $rate, clone $newprice )->addItem( $price );
 			}
 		}

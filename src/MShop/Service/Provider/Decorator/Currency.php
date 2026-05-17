@@ -82,7 +82,7 @@ class Currency
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Iface $basket ) : bool
 	{
-		$code = strtoupper( $basket->getPrice()->getCurrencyId() );
+		$code = strtoupper( $basket->getPrice()->getCurrencyId() ?? '' );
 
 		if( $this->checkCurrencyCode( $code, 'currency.include' ) === false
 			|| $this->checkCurrencyCode( $code, 'currency.exclude' ) === true
@@ -107,6 +107,6 @@ class Currency
 			return null;
 		}
 
-		return in_array( $code, explode( ',', str_replace( ' ', '', strtoupper( $str ) ) ) );
+		return in_array( $code, explode( ',', str_replace( ' ', '', strtoupper( (string) $str ) ) ) );
 	}
 }

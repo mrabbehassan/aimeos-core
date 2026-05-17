@@ -51,7 +51,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
-	 * @param string Last part of the class name
+	 * @type string Last part of the class name
 	 * @since 2014.03
 	 */
 
@@ -73,7 +73,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "madmin/common/manager/decorators/default" for the job manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2014.03
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/job/manager/decorators/global
@@ -96,7 +96,7 @@ class Standard
 	 * This would add the decorator named "decorator1" defined by
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the job controller.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2014.03
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/job/manager/decorators/excludes
@@ -120,7 +120,7 @@ class Standard
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the job
 	 * controller.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2014.03
 	 * @see madmin/common/manager/decorators/default
 	 * @see madmin/job/manager/decorators/excludes
@@ -194,10 +194,10 @@ class Standard
 		 * It's also possible to use the same database connection for different
 		 * data domains by configuring the same connection name using this setting.
 		 *
-		 * @param string Database connection name
+		 * @type string Database connection name
 		 * @since 2023.04
 		 */
-		$this->setResourceName( $context->config()->get( 'madmin/job/manager/resource', 'db-job' ) );
+		$this->setResourceName( (string) $context->config()->get( 'madmin/job/manager/resource', 'db-job' ) );
 	}
 
 
@@ -205,13 +205,13 @@ class Standard
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MAdmin\Job\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		$path = 'madmin/job/manager/submanagers';
 		foreach( $this->context()->config()->get( $path, [] ) as $domain ) {
-			$this->object()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( (string) $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'madmin/job/manager/delete' );
@@ -291,7 +291,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for inserting records
+			 * @type string SQL statement for inserting records
 			 * @since 2014.03
 			 * @see madmin/job/manager/update/ansi
 			 * @see madmin/job/manager/newid/ansi
@@ -300,7 +300,7 @@ class Standard
 			 * @see madmin/job/manager/count/ansi
 			 */
 			$path = 'madmin/job/manager/insert';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+			$sql = $this->addSqlColumns( array_keys( $columns ), (string) $this->getSqlConfig( $path ) );
 		}
 		else
 		{
@@ -327,7 +327,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for updating records
+			 * @type string SQL statement for updating records
 			 * @since 2014.03
 			 * @see madmin/job/manager/insert/ansi
 			 * @see madmin/job/manager/newid/ansi
@@ -336,7 +336,7 @@ class Standard
 			 * @see madmin/job/manager/count/ansi
 			 */
 			$path = 'madmin/job/manager/update';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+			$sql = $this->addSqlColumns( array_keys( $columns ), (string) $this->getSqlConfig( $path ), false );
 		}
 
 		$idx = 1;
@@ -391,7 +391,7 @@ class Standard
 			 * fits for most database servers as they implement their own
 			 * specific way.
 			 *
-			 * @param string SQL statement for retrieving the last inserted record ID
+			 * @type string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
 			 * @see madmin/job/manager/insert/ansi
 			 * @see madmin/job/manager/update/ansi
@@ -412,9 +412,9 @@ class Standard
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
-	 * @return \Aimeos\MAdmin\Job\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $itemIds ) : static
 	{
 		/** madmin/job/manager/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
@@ -437,7 +437,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for deleting items
+		 * @type string SQL statement for deleting items
 		 * @since 2014.03
 		 * @see madmin/job/manager/insert/ansi
 		 * @see madmin/job/manager/update/ansi
@@ -467,9 +467,11 @@ class Standard
 			$criteria->compare( '==', 'job.id', $id ),
 			$criteria->getConditions()
 		];
+		// @phpstan-ignore argument.type
 		$criteria->setConditions( $criteria->and( $expr ) );
 
 		if( ( $item = $this->object()->search( $criteria, $ref )->first() ) ) {
+			// @phpstan-ignore return.type
 			return $item;
 		}
 
@@ -483,7 +485,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Search object containing the conditions
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int &$total Number of items that are available in total
+	 * @type int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MAdmin\Job\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -542,7 +544,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for searching items
+		 * @type string SQL statement for searching items
 		 * @since 2014.03
 		 * @see madmin/job/manager/insert/ansi
 		 * @see madmin/job/manager/update/ansi
@@ -594,7 +596,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for counting items
+		 * @type string SQL statement for counting items
 		 * @since 2014.03
 		 * @see madmin/job/manager/insert/ansi
 		 * @see madmin/job/manager/update/ansi
@@ -638,7 +640,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @param array List of sub-manager names
+		 * @type array List of sub-manager names
 		 * @since 2014.03
 		 */
 		$path = 'madmin/job/manager/submanagers';

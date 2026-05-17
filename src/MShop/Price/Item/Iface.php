@@ -77,9 +77,9 @@ interface Iface
 	 * Sets the label of the item
 	 *
 	 * @param string $label Label of the item
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 * @return static Price item for chaining method calls
 	 */
-	public function setLabel( ?string $label ) : \Aimeos\MShop\Price\Item\Iface;
+	public function setLabel( ?string $label ) : static;
 
 	/**
 	 * Returns the quantity.
@@ -92,9 +92,9 @@ interface Iface
 	 * Sets the quantity.
 	 *
 	 * @param float $quantity Quantity
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 * @return static Price item for chaining method calls
 	 */
-	public function setQuantity( float $quantity ) : \Aimeos\MShop\Price\Item\Iface;
+	public function setQuantity( float $quantity ) : static;
 
 	/**
 	 * Returns the amount of money.
@@ -107,9 +107,9 @@ interface Iface
 	 * Sets the new amount of money.
 	 *
 	 * @param string|int|double|null $price Amount with configured precision or NULL if price is on request
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 * @return static Price item for chaining method calls
 	 */
-	public function setValue( $price ) : \Aimeos\MShop\Price\Item\Iface;
+	public function setValue( $price ) : static;
 
 	/**
 	 * Returns the costs.
@@ -122,9 +122,9 @@ interface Iface
 	 * Sets the new costs.
 	 *
 	 * @param string|int|double $price Amount with configured precision
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 * @return static Price item for chaining method calls
 	 */
-	public function setCosts( $price ) : \Aimeos\MShop\Price\Item\Iface;
+	public function setCosts( $price ) : static;
 
 	/**
 	 * Returns the rebate amount.
@@ -137,9 +137,9 @@ interface Iface
 	 * Sets the new rebate amount.
 	 *
 	 * @param string|integer|double $price Rebate amount with two digits precision
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 * @return static Price item for chaining method calls
 	 */
-	public function setRebate( $price ) : \Aimeos\MShop\Price\Item\Iface;
+	public function setRebate( $price ) : static;
 
 	/**
 	 * Returns the tax rate in percent.
@@ -159,9 +159,9 @@ interface Iface
 	 * Sets the new tax rate in percent.
 	 *
 	 * @param string|integer|double $taxrate Tax rate with two digits precision
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 * @return static Price item for chaining method calls
 	 */
-	public function setTaxRate( $taxrate ) : \Aimeos\MShop\Price\Item\Iface;
+	public function setTaxRate( $taxrate ) : static;
 
 	/**
 	 * Sets the new tax rates in percent
@@ -184,9 +184,9 @@ interface Iface
 	 * Sets the new tax flag.
 	 *
 	 * @param bool $flag True if tax is included in the price value, costs and rebate, false if not
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 * @return static Price item for chaining method calls
 	 */
-	public function setTaxFlag( bool $flag ) : \Aimeos\MShop\Price\Item\Iface;
+	public function setTaxFlag( bool $flag ) : static;
 
 	/**
 	 * Returns the tax for the price item
@@ -203,9 +203,9 @@ interface Iface
 	 * Sets the tax amount
 	 *
 	 * @param string|integer|double $value Tax value with up to four digits precision
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 * @return static Price item for chaining method calls
 	 */
-	public function setTaxValue( $value ) : \Aimeos\MShop\Price\Item\Iface;
+	public function setTaxValue( $value ) : static;
 
 	/**
 	 * Returns the currency ID.
@@ -218,8 +218,8 @@ interface Iface
 	 * Sets the currency ID.
 	 *
 	 * @param string $currencyid Three letter ISO currency code (e.g. EUR)
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 * @return static Price item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 */
-	public function setCurrencyId( string $currencyid ) : \Aimeos\MShop\Price\Item\Iface;
+	public function setCurrencyId( string $currencyid ) : static;
 }

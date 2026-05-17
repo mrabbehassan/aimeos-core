@@ -25,7 +25,7 @@ interface Iface
 	 * @param string $id ID of the item
 	 * @param string $rating Decimal value of the rating
 	 * @param int $ratings Total number of ratings for the item
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function rate( string $id, string $rating, int $ratings ) : \Aimeos\MShop\Common\Manager\Iface;
+	public function rate( string $id, string $rating, int $ratings ) : static;
 }

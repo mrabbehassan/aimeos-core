@@ -17,17 +17,18 @@ namespace Aimeos;
  */
 class MAdmin
 {
-	private static $context;
-	private static $cache = true;
-	private static $objects = [];
+	private static ?\Aimeos\MShop\ContextIface $context = null;
+	private static bool $cache = true;
+	private static array $objects = [];
 
 
 	/**
 	 * Enables or disables caching of class instances and clears cache
 	 *
 	 * @param bool $value True to enable caching, false to disable it
+	 * @return void
 	 */
-	public static function cache( bool $value )
+	public static function cache( bool $value ) : void
 	{
 		self::$cache = (bool) $value;
 		self::$context = null;
@@ -60,7 +61,7 @@ class MAdmin
 		}
 
 		if( preg_match( '/^[a-z0-9\/]+$/', $path ) !== 1 ) {
-			throw new \LogicException( sprintf( 'Invalid component path "%1$s"', $path, 400 ) );
+			throw new \LogicException( sprintf( 'Invalid component path "%1$s"', $path ), 400 );
 		}
 
 		if( self::$context !== null && self::$context !== $context ) {
@@ -71,7 +72,7 @@ class MAdmin
 		$parts = explode( '/', $path );
 
 		if( ( $domain = array_shift( $parts ) ) === null ) {
-			throw new \LogicException( sprintf( 'Manager path is empty', $path ), 400 );
+			throw new \LogicException( sprintf( 'Manager path "%1$s" is empty', $path ), 400 );
 		}
 
 		if( empty( $name ) ) {
@@ -90,6 +91,7 @@ class MAdmin
 			self::$objects[$classname] = $manager;
 		}
 
+		// @phpstan-ignore return.type
 		return self::$objects[$classname];
 	}
 
@@ -102,8 +104,9 @@ class MAdmin
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
 	 * @param \Aimeos\MShop\Common\Manager\Iface|null $object Manager object for the given manager path or null to clear
+	 * @return void
 	 */
-	public static function inject( string $classname, ?\Aimeos\MShop\Common\Manager\Iface $object = null )
+	public static function inject( string $classname, ?\Aimeos\MShop\Common\Manager\Iface $object = null ) : void
 	{
 		self::$objects['\\' . ltrim( $classname, '\\' )] = $object;
 	}
@@ -137,6 +140,7 @@ class MAdmin
 			$manager = \Aimeos\Utils::create( $classname, [$manager, $context], $interface );
 		}
 
+		// @phpstan-ignore return.type
 		return $manager;
 	}
 
@@ -155,11 +159,11 @@ class MAdmin
 		$config = $context->config();
 
 		$classprefix = '\Aimeos\MShop\\' . ucfirst( $domain ) . '\Manager\Decorator\\';
-		$decorators = array_reverse( $config->get( 'madmin/' . $domain . '/manager/decorators/local', [] ) );
+		$decorators = array_reverse( (array) $config->get( 'madmin/' . $domain . '/manager/decorators/local', [] ) );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
-		$decorators = array_reverse( $config->get( 'madmin/' . $domain . '/manager/decorators/global', [] ) );
+		$decorators = array_reverse( (array) $config->get( 'madmin/' . $domain . '/manager/decorators/global', [] ) );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		/** madmin/common/manager/decorators/default
@@ -180,11 +184,11 @@ class MAdmin
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" and
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2".
 		 *
-		 * @param array List of decorator names
+		 * @type array List of decorator names
 		 * @since 2014.03
 		 */
-		$decorators = array_reverse( $config->get( 'madmin/common/manager/decorators/default', [] ) );
-		$excludes = $config->get( 'madmin/' . $domain . '/manager/decorators/excludes', [] );
+		$decorators = array_reverse( (array) $config->get( 'madmin/common/manager/decorators/default', [] ) );
+		$excludes = (array) $config->get( 'madmin/' . $domain . '/manager/decorators/excludes', [] );
 
 		foreach( $decorators as $key => $name )
 		{
@@ -212,9 +216,11 @@ class MAdmin
 		string $classname, ?string $interface ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( isset( self::$objects[$classname] ) ) {
+			// @phpstan-ignore return.type
 			return self::$objects[$classname];
 		}
 
+		// @phpstan-ignore return.type
 		return \Aimeos\Utils::create( $classname, [$context], $interface );
 	}
 }

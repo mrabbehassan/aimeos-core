@@ -33,7 +33,7 @@ interface Iface
 	/**
 	 * Returns the supplier items referencing the product
 	 *
-	 * @return \Aimeos\Map Associative list of items implementing \Aimeos\MShop\Supplier\Item\Iface
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface|null Site item or null if not available
 	 */
 	public function getSiteItem() : ?\Aimeos\MShop\Locale\Item\Site\Iface;
 
@@ -41,33 +41,33 @@ interface Iface
 	 * Adds a new stock item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Stock\Item\Iface $item New or existing stock item
-	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function addStockItem( \Aimeos\MShop\Stock\Item\Iface $item ) : \Aimeos\MShop\Product\Item\Iface;
+	public function addStockItem( \Aimeos\MShop\Stock\Item\Iface $item ) : static;
 
 	/**
 	 * Adds new stock items or overwrite existing ones
 	 *
-	 * @param \Aimeos\Map|\Aimeos\MShop\Stock\Item\Iface $item New or existing stock item
-	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 * @param iterable $items New or existing stock items
+	 * @return static Self object for method chaining
 	 */
-	public function addStockItems( iterable $items ) : \Aimeos\MShop\Product\Item\Iface;
+	public function addStockItems( iterable $items ) : static;
 
 	/**
 	 * Removes an existing stock item
 	 *
 	 * @param \Aimeos\MShop\Stock\Item\Iface $item Existing stock item
-	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function deleteStockItem( \Aimeos\MShop\Stock\Item\Iface $item ) : \Aimeos\MShop\Product\Item\Iface;
+	public function deleteStockItem( \Aimeos\MShop\Stock\Item\Iface $item ) : static;
 
 	/**
 	 * Removes a list of existing stock items
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Stock\Item\Iface[] $items Existing stock items
-	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function deleteStockItems( iterable $items ) : \Aimeos\MShop\Product\Item\Iface;
+	public function deleteStockItems( iterable $items ) : static;
 
 	/**
 	 * Returns the deleted stock items
@@ -88,9 +88,9 @@ interface Iface
 	 * Adds a new stock item or overwrite an existing one
 	 *
 	 * @param \Aimeos\Map|\Aimeos\MShop\Stock\Item\Iface[] $items New list of stock items
-	 * @return \Aimeos\MShop\Product\Item\Iface Self object for method chaining
+	 * @return static Self object for method chaining
 	 */
-	public function setStockItems( iterable $items ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setStockItems( iterable $items ) : static;
 
 	/**
 	 * Returns the code of the product item.
@@ -103,9 +103,9 @@ interface Iface
 	 * Sets a new code of the product item.
 	 *
 	 * @param string $code New code of the product item
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setCode( string $code ) : static;
 
 	/**
 	 * Returns the data set name assigned to the product item.
@@ -118,9 +118,9 @@ interface Iface
 	 * Sets a new data set name assignd to the product item.
 	 *
 	 * @param string $name New data set name
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setDataset( ?string $name ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setDataset( ?string $name ) : static;
 
 	/**
 	 * Returns the label of the product item.
@@ -133,9 +133,9 @@ interface Iface
 	 * Sets a new label of the product.
 	 *
 	 * @param string $label New label of the product item
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setLabel( string $label ) : static;
 
 	/**
 	 * Returns the URL segment for the product item.
@@ -148,9 +148,9 @@ interface Iface
 	 * Sets a new URL segment for the product.
 	 *
 	 * @param string|null $url New URL segment of the product item
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setUrl( ?string $url ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setUrl( ?string $url ) : static;
 
 	/**
 	 * Returns the quantity scale of the product item.
@@ -163,9 +163,9 @@ interface Iface
 	 * Sets a new quantity scale of the product item.
 	 *
 	 * @param float $value New quantity scale
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setScale( float $value ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setScale( float $value ) : static;
 
 	/**
 	 * Returns the URL target specific for that product
@@ -178,9 +178,9 @@ interface Iface
 	 * Sets a new label of the product item.
 	 *
 	 * @param string $value New URL target specific for that product
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setTarget( ?string $value ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setTarget( ?string $value ) : static;
 
 	/**
 	 * Returns the flag if stock is available for that product.
@@ -193,9 +193,9 @@ interface Iface
 	 * Sets the flag if stock is available for that product.
 	 *
 	 * @param int $value "1" if product is in stock, "0" if product is out of stock
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setInStock( int $value ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setInStock( int $value ) : static;
 
 	/**
 	 * Returns the boost factor for that product.
@@ -208,7 +208,7 @@ interface Iface
 	 * Sets the boost factor for that product.
 	 *
 	 * @param float $value Boost factor
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 * @return static Product item for chaining method calls
 	 */
-	public function setBoost( float $value ) : \Aimeos\MShop\Product\Item\Iface;
+	public function setBoost( float $value ) : static;
 }

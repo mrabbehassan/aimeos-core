@@ -73,7 +73,7 @@ abstract class Base
 	 */
 	public function apply( \Aimeos\MShop\Product\Item\Iface $product ) : bool
 	{
-		return $this->provider->apply( $product );
+		return (bool) $this->provider->apply( $product );
 	}
 
 
@@ -81,9 +81,9 @@ abstract class Base
 	 * Injects the outmost object into the decorator stack
 	 *
 	 * @param \Aimeos\MShop\Rule\Provider\Iface $object First object of the decorator stack
-	 * @return \Aimeos\MShop\Rule\Provider\Iface Rule object for chaining method calls
+	 * @return static Rule object for chaining method calls
 	 */
-	public function setObject( \Aimeos\MShop\Rule\Provider\Iface $object ) : \Aimeos\MShop\Rule\Provider\Iface
+	public function setObject( \Aimeos\MShop\Rule\Provider\Iface $object ) : static
 	{
 		parent::setObject( $object );
 

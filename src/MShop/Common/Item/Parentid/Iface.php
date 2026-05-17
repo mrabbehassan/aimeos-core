@@ -31,7 +31,7 @@ interface Iface
 	 * Sets the new parent ID this item belongs to
 	 *
 	 * @param string|null $parentid New parent ID of the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setParentId( ?string $parentid ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setParentId( ?string $parentid ) : static;
 }

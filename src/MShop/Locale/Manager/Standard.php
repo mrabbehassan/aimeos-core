@@ -51,7 +51,7 @@ class Standard
 	 * name with an upper case character and continue only with lower case characters
 	 * or numbers. Avoid chamel case names like "MyManager"!
 	 *
-	 * @param string Last part of the class name
+	 * @type string Last part of the class name
 	 * @since 2014.03
 	 */
 
@@ -73,7 +73,7 @@ class Standard
 	 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 	 * "mshop/common/manager/decorators/default" for the locale manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2014.03
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/locale/manager/decorators/global
@@ -97,7 +97,7 @@ class Standard
 	 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the locale
 	 * manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2014.03
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/locale/manager/decorators/excludes
@@ -121,7 +121,7 @@ class Standard
 	 * "\Aimeos\MShop\Locale\Manager\Decorator\Decorator2" only to the locale
 	 * manager.
 	 *
-	 * @param array List of decorator names
+	 * @type array List of decorator names
 	 * @since 2014.03
 	 * @see mshop/common/manager/decorators/default
 	 * @see mshop/locale/manager/decorators/excludes
@@ -136,7 +136,7 @@ class Standard
 	 * It's also possible to use the same database connection for different
 	 * data domains by configuring the same connection name using this setting.
 	 *
-	 * @param string Database connection name
+	 * @type string Database connection name
 	 * @since 2023.04
 	 */
 
@@ -161,7 +161,7 @@ class Standard
 	 * compatible with most relational database systems. This also
 	 * includes using double quotes for table and column names.
 	 *
-	 * @param string SQL statement for deleting items
+	 * @type string SQL statement for deleting items
 	 * @since 2014.03
 	 * @see mshop/locale/manager/insert/ansi
 	 * @see mshop/locale/manager/update/ansi
@@ -247,7 +247,8 @@ class Standard
 		$siteId = $siteItem->getSiteId();
 		$sites = [Base::SITE_ONE => $siteId];
 
-		return $this->bootstrapBase( $site, $lang, $currency, $active, $siteItem, $siteId, $sites, $bare );
+		// @phpstan-ignore argument.type, argument.type
+		return $this->bootstrapBase( $site, $lang, $currency, $active, $siteItem, (string) $siteId, $sites, $bare );
 	}
 
 
@@ -301,7 +302,7 @@ class Standard
 		 * using the search keys of the sub-managers to further limit the
 		 * retrieved list of items.
 		 *
-		 * @param array List of sub-manager names
+		 * @type array List of sub-manager names
 		 * @since 2014.03
 		 */
 		$path = 'mshop/locale/manager/submanagers';
@@ -316,7 +317,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int &$total Number of items that are available in total
+	 * @type int &$total Number of items that are available in total
 	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Locale\Item\Iface with ids as keys
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : \Aimeos\Map
@@ -327,7 +328,7 @@ class Standard
 
 		foreach( $this->searchEntries( $search, $ref, $total ) as $row )
 		{
-			if( $item = $this->applyFilter( $this->createItemBase( $row ) ) ) {
+			if( $item = $this->applyFilter( $this->createItemBase( (array) $row ) ) ) {
 				$items[$row['locale.id']] = $item;
 			}
 		}
@@ -417,7 +418,9 @@ class Standard
 			$expr[] = $search->compare( '>', 'locale.site.status', 0 );
 		}
 
+		// @phpstan-ignore argument.type
 		$search->setConditions( $search->and( $expr ) );
+		// @phpstan-ignore argument.type
 		$search->setSortations( array( $search->sort( '+', 'locale.position' ) ) );
 		$result = $this->searchEntries( $search );
 
@@ -425,14 +428,14 @@ class Standard
 		foreach( $result as $row )
 		{
 			if( $row['locale.siteid'] === $siteId ) {
-				return $this->createItemBase( $row, $siteItem, $sites );
+				return $this->createItemBase( (array) $row, $siteItem, $sites );
 			}
 		}
 
 		if( ( $row = reset( $result ) ) !== false )
 		{
 			$row['locale.siteid'] = $siteId;
-			return $this->createItemBase( $row, $siteItem, $sites );
+			return $this->createItemBase( (array) $row, $siteItem, $sites );
 		}
 
 		return null;
@@ -471,7 +474,9 @@ class Standard
 			$expr[] = $search->compare( '>', 'locale.site.status', 0 );
 		}
 
+		// @phpstan-ignore argument.type
 		$search->setConditions( $search->and( $expr ) );
+		// @phpstan-ignore argument.type
 		$search->setSortations( array( $search->sort( '+', 'locale.position' ) ) );
 		$result = $this->searchEntries( $search );
 
@@ -479,7 +484,7 @@ class Standard
 		foreach( $result as $row )
 		{
 			if( $row['locale.siteid'] === $siteId && $row['locale.languageid'] === $lang ) {
-				return $this->createItemBase( $row, $siteItem, $sites );
+				return $this->createItemBase( (array) $row, $siteItem, $sites );
 			}
 		}
 
@@ -491,7 +496,7 @@ class Standard
 			foreach( $result as $row )
 			{
 				if( $row['locale.siteid'] === $siteId && $row['locale.languageid'] === $short ) {
-					return $this->createItemBase( $row, $siteItem, $sites );
+					return $this->createItemBase( (array) $row, $siteItem, $sites );
 				}
 			}
 		}
@@ -502,7 +507,7 @@ class Standard
 			if( $row['locale.languageid'] === $lang )
 			{
 				$row['locale.siteid'] = $siteId;
-				return $this->createItemBase( $row, $siteItem, $sites );
+				return $this->createItemBase( (array) $row, $siteItem, $sites );
 			}
 		}
 
@@ -512,7 +517,7 @@ class Standard
 			foreach( $result as $row )
 			{
 				if( $row['locale.siteid'] === $siteId && $row['locale.languageid'] === $short ) {
-					return $this->createItemBase( $row, $siteItem, $sites );
+					return $this->createItemBase( (array) $row, $siteItem, $sites );
 				}
 			}
 		}
@@ -521,7 +526,7 @@ class Standard
 		foreach( $result as $row )
 		{
 			if( $row['locale.siteid'] === $siteId ) {
-				return $this->createItemBase( $row, $siteItem, $sites );
+				return $this->createItemBase( (array) $row, $siteItem, $sites );
 			}
 		}
 
@@ -529,7 +534,7 @@ class Standard
 		if( ( $row = reset( $result ) ) !== false )
 		{
 			$row['locale.siteid'] = $siteId;
-			return $this->createItemBase( $row, $siteItem, $sites );
+			return $this->createItemBase( (array) $row, $siteItem, $sites );
 		}
 
 		return null;
@@ -623,7 +628,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for inserting records
+			 * @type string SQL statement for inserting records
 			 * @since 2014.03
 			 * @see mshop/locale/manager/update/ansi
 			 * @see mshop/locale/manager/newid/ansi
@@ -632,7 +637,7 @@ class Standard
 			 * @see mshop/locale/manager/count/ansi
 			 */
 			$path = 'mshop/locale/manager/insert';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
+			$sql = $this->addSqlColumns( array_keys( $columns ), (string) $this->getSqlConfig( $path ) );
 		}
 		else
 		{
@@ -659,7 +664,7 @@ class Standard
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for updating records
+			 * @type string SQL statement for updating records
 			 * @since 2014.03
 			 * @see mshop/locale/manager/insert/ansi
 			 * @see mshop/locale/manager/newid/ansi
@@ -668,7 +673,7 @@ class Standard
 			 * @see mshop/locale/manager/count/ansi
 			 */
 			$path = 'mshop/locale/manager/update';
-			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
+			$sql = $this->addSqlColumns( array_keys( $columns ), (string) $this->getSqlConfig( $path ), false );
 		}
 
 		$idx = 1;
@@ -725,7 +730,7 @@ class Standard
 			 * fits for most database servers as they implement their own
 			 * specific way.
 			 *
-			 * @param string SQL statement for retrieving the last inserted record ID
+			 * @type string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
 			 * @see mshop/locale/manager/insert/ansi
 			 * @see mshop/locale/manager/update/ansi
@@ -748,7 +753,7 @@ class Standard
 	 *
 	 * @param \Aimeos\Base\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param int &$total Number of items that are available in total
+	 * @type int &$total Number of items that are available in total
 	 * @return array Associative list of key/value pairs
 	 */
 	protected function searchEntries( \Aimeos\Base\Criteria\Iface $search, array $ref = [], ?int &$total = null ) : array
@@ -797,7 +802,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for searching items
+		 * @type string SQL statement for searching items
 		 * @since 2014.03
 		 * @see mshop/locale/manager/insert/ansi
 		 * @see mshop/locale/manager/update/ansi
@@ -841,7 +846,7 @@ class Standard
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for counting items
+		 * @type string SQL statement for counting items
 		 * @since 2014.03
 		 * @see mshop/locale/manager/insert/ansi
 		 * @see mshop/locale/manager/update/ansi

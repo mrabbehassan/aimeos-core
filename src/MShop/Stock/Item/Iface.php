@@ -32,9 +32,9 @@ interface Iface
 	 * Sets a new product ID the stock item belongs to.
 	 *
 	 * @param string $value New product ID
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
+	 * @return static Stock item for chaining method calls
 	 */
-	public function setProductId( string $value ) : \Aimeos\MShop\Stock\Item\Iface;
+	public function setProductId( string $value ) : static;
 
 	/**
 	 * Returns the stock level.
@@ -47,9 +47,9 @@ interface Iface
 	 * Sets the stock level.
 	 *
 	 * @param int|null $stocklevel New stock level
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
+	 * @return static Stock stock item for chaining method calls
 	 */
-	public function setStockLevel( $stocklevel = null ) : \Aimeos\MShop\Stock\Item\Iface;
+	public function setStockLevel( $stocklevel = null ) : static;
 
 	/**
 	 * Returns the back in stock date of the stock.
@@ -62,9 +62,9 @@ interface Iface
 	 * Sets the stock back in stock date.
 	 *
 	 * @param string|null $dateback New back in stock date of the stock
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
+	 * @return static Stock stock item for chaining method calls
 	 */
-	public function setDateBack( ?string $dateback ) : \Aimeos\MShop\Stock\Item\Iface;
+	public function setDateBack( ?string $dateback ) : static;
 
 	/**
 	 * Returns the expected delivery time frame
@@ -77,7 +77,7 @@ interface Iface
 	 * Sets the expected delivery time frame
 	 *
 	 * @param string $timeframe Expected delivery time frame
-	 * @return \Aimeos\MShop\Stock\Item\Iface Stock stock item for chaining method calls
+	 * @return static Stock stock item for chaining method calls
 	 */
-	public function setTimeframe( ?string $timeframe ) : \Aimeos\MShop\Stock\Item\Iface;
+	public function setTimeframe( ?string $timeframe ) : static;
 }

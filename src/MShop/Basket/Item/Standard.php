@@ -40,9 +40,9 @@ class Standard
 	 * Sets the new ID of the item.
 	 *
 	 * @param string|null $id ID of the item
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 * @return static Item for chaining method calls
 	 */
-	public function setId( ?string $id ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $id ) : static
 	{
 		return parent::setId( $id )->setModified();
 	}
@@ -63,9 +63,9 @@ class Standard
 	 * Sets the basket object.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $basket Basket object
-	 * @return \Aimeos\MShop\Basket\Item\Iface Basket item for chaining method calls
+	 * @return static Basket item for chaining method calls
 	 */
-	public function setItem( \Aimeos\MShop\Order\Item\Iface $basket ) : \Aimeos\MShop\Basket\Item\Iface
+	public function setItem( \Aimeos\MShop\Order\Item\Iface $basket ) : static
 	{
 		$this->item = $basket;
 		return $this->setModified();
@@ -86,10 +86,10 @@ class Standard
 	/**
 	 * Sets the ID of the customer who owned the basket.
 	 *
-	 * @param string $customerid Unique ID of the customer
-	 * @return \Aimeos\MShop\Basket\Item\Iface Basket item for chaining method calls
+	 * @param string|null $value Unique ID of the customer
+	 * @return static Basket item for chaining method calls
 	 */
-	public function setCustomerId( ?string $value ) : \Aimeos\MShop\Basket\Item\Iface
+	public function setCustomerId( ?string $value ) : static
 	{
 		return $this->set( 'basket.customerid', (string) $value );
 	}
@@ -110,9 +110,9 @@ class Standard
 	 * Sets the name of the basket.
 	 *
 	 * @param string $value Name for the basket
-	 * @return \Aimeos\MShop\Basket\Item\Iface Basket item for chaining method calls
+	 * @return static Basket item for chaining method calls
 	 */
-	public function setName( ?string $value ) : \Aimeos\MShop\Basket\Item\Iface
+	public function setName( ?string $value ) : static
 	{
 		return $this->set( 'basket.name', (string) $value );
 	}
@@ -121,11 +121,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Basket\Item\Iface Order status item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Order status item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -133,8 +133,8 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'basket.customerid': $item->setCustomerId( $value ); break;
-				case 'basket.name': $item->setName( $value ); break;
+				case 'basket.customerid': $item->setCustomerId( $value ? (string) $value : null ); break;
+				case 'basket.name': $item->setName( $value ? (string) $value : null ); break;
 				default: continue 2;
 			}
 
@@ -149,7 +149,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

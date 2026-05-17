@@ -30,6 +30,7 @@ abstract class Base
 	 */
 	public function createListItem( array $values = [] ) : \Aimeos\MShop\Common\Item\Lists\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->getManager()->createListItem( $values );
 	}
 
@@ -47,6 +48,7 @@ abstract class Base
 	public function find( string $code, array $ref = [], ?string $domain = null, ?string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->getManager()->find( $code, $ref, $domain, $type, $default );
 	}
 
@@ -60,6 +62,7 @@ abstract class Base
 	 */
 	public function getPath( string $id, array $ref = [] ) : \Aimeos\Map
 	{
+		// @phpstan-ignore return.type
 		return $this->getManager()->getPath( $id, $ref );
 	}
 
@@ -71,12 +74,13 @@ abstract class Base
 	 * @param string[] $ref List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @param \Aimeos\Base\Criteria\Iface|null $criteria Optional criteria object with conditions
-	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes
 	 */
 	public function getTree( ?string $id = null, array $ref = [],
 		int $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE,
 		?\Aimeos\Base\Criteria\Iface $criteria = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->getManager()->getTree( $id, $ref, $level, $criteria );
 	}
 
@@ -92,6 +96,7 @@ abstract class Base
 	public function insert( \Aimeos\MShop\Catalog\Item\Iface $item, ?string $parentId = null,
 		?string $refId = null ) : \Aimeos\MShop\Catalog\Item\Iface
 	{
+		// @phpstan-ignore return.type
 		return $this->getManager()->insert( $item, $parentId, $refId );
 	}
 

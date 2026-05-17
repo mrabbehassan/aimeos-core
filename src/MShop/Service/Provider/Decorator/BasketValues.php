@@ -78,7 +78,7 @@ class BasketValues
 	{
 		$price = $base->getPrice();
 		$currency = $price->getCurrencyId();
-		$value = $price->getValue() + $price->getRebate();
+		$value = $price->getValue() + $price->getRebate(); // @phpstan-ignore binaryOp.invalid
 
 		$minvalue = $this->getConfigValue( 'basketvalues.total-value-min', [] );
 

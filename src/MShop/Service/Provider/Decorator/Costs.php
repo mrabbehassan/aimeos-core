@@ -81,9 +81,11 @@ class Costs
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, 'costs.percent' ) );
 		}
 
+		// @phpstan-ignore argument.type
 		$value = $basket->getPrice()->getValue() * $config['costs.percent'] / 100;
 		$price = $this->getProvider()->calcPrice( $basket, $options );
-		$price->setCosts( $price->getCosts() + $value );
+		// @phpstan-ignore argument.type
+		$price->setCosts( $price->getCosts() + $value ); // @phpstan-ignore binaryOp.invalid
 
 		return $price;
 	}

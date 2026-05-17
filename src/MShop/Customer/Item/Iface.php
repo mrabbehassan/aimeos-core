@@ -34,9 +34,9 @@ interface Iface
 	 * Sets the new label of the customer item.
 	 *
 	 * @param string $value Label of the customer item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setLabel( ?string $value ) : \Aimeos\MShop\Customer\Item\Iface;
+	public function setLabel( ?string $value ) : static;
 
 	/**
 	 * Returns the unique code of the customer item.
@@ -50,9 +50,9 @@ interface Iface
 	 * Sets the code of the customer item.
 	 *
 	 * @param string $value Code of the customer item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setCode( string $value ) : \Aimeos\MShop\Customer\Item\Iface;
+	public function setCode( string $value ) : static;
 
 	/**
 	 * Returns the billing address of the customer item.
@@ -65,9 +65,9 @@ interface Iface
 	 * Sets the billing address of the customer item.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Billing address of the customer item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address ) : \Aimeos\MShop\Customer\Item\Iface;
+	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address ) : static;
 
 	/**
 	 * Returns the password of the customer item.
@@ -80,9 +80,9 @@ interface Iface
 	 * Sets the password of the customer item.
 	 *
 	 * @param string $value Password of the customer item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setPassword( string $value ) : \Aimeos\MShop\Customer\Item\Iface;
+	public function setPassword( string $value ) : static;
 
 	/**
 	 * Returns the last verification date of the customer.
@@ -95,9 +95,9 @@ interface Iface
 	 * Sets the latest verification date of the customer.
 	 *
 	 * @param string|null $value Latest verification date of the customer (YYYY-MM-DD format) or null if unknown
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setDateVerified( ?string $value ) : \Aimeos\MShop\Customer\Item\Iface;
+	public function setDateVerified( ?string $value ) : static;
 
 	/**
 	 * Returns the group IDs the customer belongs to
@@ -110,9 +110,9 @@ interface Iface
 	 * Sets the group IDs the customer belongs to
 	 *
 	 * @param string[] $ids List of group IDs
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 * @return static Customer item for chaining method calls
 	 */
-	public function setGroups( array $ids ) : \Aimeos\MShop\Customer\Item\Iface;
+	public function setGroups( array $ids ) : static;
 
 	/**
 	 * Tests if the user is a super user

@@ -48,9 +48,9 @@ class Standard
 	 * Sets the new facility of the of the item.
 	 *
 	 * @param string $facility Facility
-	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
+	 * @return static Log item for chaining method calls
 	 */
-	public function setFacility( string $facility ) : \Aimeos\MAdmin\Log\Item\Iface
+	public function setFacility( string $facility ) : static
 	{
 		return $this->set( 'log.facility', (string) $facility );
 	}
@@ -63,6 +63,7 @@ class Standard
 	 */
 	public function getTimestamp() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->get( 'log.timestamp' );
 	}
 
@@ -74,7 +75,8 @@ class Standard
 	 */
 	public function getPriority() : int
 	{
-		return $this->get( 'log.priority', 0 );
+		// @phpstan-ignore return.type
+		return (int) $this->get( 'log.priority', 0 );
 	}
 
 
@@ -82,9 +84,9 @@ class Standard
 	 * Sets the new priority of the item.
 	 *
 	 * @param int $priority Priority
-	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
+	 * @return static Log item for chaining method calls
 	 */
-	public function setPriority( int $priority ) : \Aimeos\MAdmin\Log\Item\Iface
+	public function setPriority( int $priority ) : static
 	{
 		return $this->set( 'log.priority', $priority );
 	}
@@ -97,7 +99,8 @@ class Standard
 	 */
 	public function getMessage() : string
 	{
-		return $this->get( 'log.message', '' );
+		// @phpstan-ignore return.type
+		return (string) $this->get( 'log.message', '' );
 	}
 
 
@@ -105,9 +108,9 @@ class Standard
 	 * Sets the new message of the item.
 	 *
 	 * @param string $message Message
-	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
+	 * @return static Log item for chaining method calls
 	 */
-	public function setMessage( string $message ) : \Aimeos\MAdmin\Log\Item\Iface
+	public function setMessage( string $message ) : static
 	{
 		return $this->set( 'log.message', $message );
 	}
@@ -128,9 +131,9 @@ class Standard
 	 * Sets the new request of the item.
 	 *
 	 * @param string $request Request
-	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
+	 * @return static Log item for chaining method calls
 	 */
-	public function setRequest( string $request ) : \Aimeos\MAdmin\Log\Item\Iface
+	public function setRequest( string $request ) : static
 	{
 		return $this->set( 'log.request', $request );
 	}
@@ -139,11 +142,11 @@ class Standard
 	/**
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Log item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -151,10 +154,10 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'log.facility': $item->setFacility( $value ); break;
-				case 'log.priority': $item->setPriority( $value ); break;
-				case 'log.message': $item->setMessage( $value ); break;
-				case 'log.request': $item->setRequest( $value ); break;
+				case 'log.facility': $item->setFacility( (string) $value ); break;
+				case 'log.priority': $item->setPriority( (int) $value ); break;
+				case 'log.message': $item->setMessage( (string) $value ); break;
+				case 'log.request': $item->setRequest( (string) $value ); break;
 				default: continue 2;
 			}
 
@@ -168,7 +171,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray( bool $private = false ) : array

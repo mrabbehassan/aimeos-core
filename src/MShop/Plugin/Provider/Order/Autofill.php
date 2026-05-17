@@ -140,9 +140,9 @@ class Autofill
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
+	 * @return static Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static
 	{
 		$plugin = $this->object();
 
@@ -185,7 +185,9 @@ class Autofill
 
 			if( ( $item = $orderManager->search( $search, ['order/address', 'order/service', 'service'] )->first() ) !== null )
 			{
+				// @phpstan-ignore argument.type
 				$this->setAddresses( $order, $item );
+				// @phpstan-ignore argument.type
 				$this->setServices( $order, $item );
 			}
 		}
@@ -223,6 +225,7 @@ class Autofill
 
 			if( $provider->isAvailable( $order ) === true )
 			{
+				// @phpstan-ignore return.type
 				return \Aimeos\MShop::create( $context, 'order/service' )->create()
 					->copyFrom( $item )->setPrice( $provider->calcPrice( $order ) );
 			}
@@ -296,6 +299,7 @@ class Autofill
 				}
 			}
 
+			// @phpstan-ignore argument.type
 			$order->setServices( $map );
 		}
 
@@ -324,6 +328,7 @@ class Autofill
 			$addrItem = \Aimeos\MShop::create( $context, 'order/address' )
 				->create()->copyFrom( $address );
 
+			// @phpstan-ignore argument.type
 			$order->addAddress( $addrItem, $type );
 		}
 
@@ -348,8 +353,9 @@ class Autofill
 			}
 		}
 
+		$deliverycode = $this->getConfigValue( 'deliverycode' );
 		if( $order->getService( $type ) === [] && (bool) $this->getConfigValue( 'delivery', false ) === true
-			&& ( ( $item = $this->getServiceItem( $order, $type, $this->getConfigValue( 'deliverycode' ) ) ) !== null
+			&& ( ( $item = $this->getServiceItem( $order, $type, $deliverycode !== null ? (string) $deliverycode : null ) ) !== null
 			|| ( $item = $this->getServiceItem( $order, $type ) ) !== null )
 		) {
 			$order->addService( $item, $type );
@@ -365,8 +371,9 @@ class Autofill
 			}
 		}
 
+		$paymentcode = $this->getConfigValue( 'paymentcode' );
 		if( $order->getService( $type ) === [] && (bool) $this->getConfigValue( 'payment', false ) === true
-			&& ( ( $item = $this->getServiceItem( $order, $type, $this->getConfigValue( 'paymentcode' ) ) ) !== null
+			&& ( ( $item = $this->getServiceItem( $order, $type, $paymentcode !== null ? (string) $paymentcode : null ) ) !== null
 			|| ( $item = $this->getServiceItem( $order, $type ) ) !== null )
 		) {
 			$order->addService( $item, $type );

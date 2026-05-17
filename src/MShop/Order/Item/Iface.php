@@ -54,9 +54,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the number of the invoice.
 	 *
 	 * @param string|null $value Invoice number
-	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
+	 * @return static Order item for chaining method calls
 	 */
-	public function setInvoiceNumber( ?string $value ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setInvoiceNumber( ?string $value ) : static;
 
 	/**
 	 * Returns the channel of the invoice (repeating, web, phone, etc).
@@ -69,9 +69,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the channel of the invoice.
 	 *
 	 * @param string|null $channel Invoice channel
-	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
+	 * @return static Order item for chaining method calls
 	 */
-	public function setChannel( ?string $channel ) : \Aimeos\MShop\Common\Item\Iface;
+	public function setChannel( ?string $channel ) : static;
 
 	/**
 	 * Returns the delivery date of the invoice.
@@ -84,9 +84,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the delivery date of the invoice.
 	 *
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
-	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
+	 * @return static Order item for chaining method calls
 	 */
-	public function setDateDelivery( ?string $date ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setDateDelivery( ?string $date ) : static;
 
 	/**
 	 * Returns the payment date of the invoice.
@@ -99,9 +99,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the payment date of the invoice.
 	 *
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
-	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
+	 * @return static Order item for chaining method calls
 	 */
-	public function setDatePayment( ?string $date ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setDatePayment( ?string $date ) : static;
 
 	/**
 	 * Returns the delivery status of the invoice.
@@ -114,9 +114,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the delivery status of the invoice.
 	 *
 	 * @param int $status Status code constant from \Aimeos\MShop\Order\Item\Base
-	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
+	 * @return static Order item for chaining method calls
 	 */
-	public function setStatusDelivery( int $status ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setStatusDelivery( int $status ) : static;
 
 	/**
 	 * Returns the payment status of the invoice.
@@ -129,9 +129,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the payment status of the invoice.
 	 *
 	 * @param int $status Payment constant from \Aimeos\MShop\Order\Item\Base
-	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
+	 * @return static Order item for chaining method calls
 	 */
-	public function setStatusPayment( int $status ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setStatusPayment( int $status ) : static;
 
 	/**
 	 * Returns the related invoice ID.
@@ -144,24 +144,24 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the related invoice ID.
 	 *
 	 * @param string|null $id Related invoice ID
-	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
+	 * @return static Order item for chaining method calls
 	 */
-	public function setRelatedId( ?string $id ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setRelatedId( ?string $id ) : static;
 
 	/**
 	 * Tests if all necessary items are available to create the order.
 	 *
 	 * @param array $what Type of data
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 * @return static Order base item for chaining method calls
 	 */
-	public function check( array $what = ['order/address', 'order/coupon', 'order/product', 'order/service'] ) : \Aimeos\MShop\Order\Item\Iface;
+	public function check( array $what = ['order/address', 'order/coupon', 'order/product', 'order/service'] ) : static;
 
 	/**
 	 * Notifies listeners before the basket becomes an order.
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 * @return static Order base item for chaining method calls
 	 */
-	public function finish() : \Aimeos\MShop\Order\Item\Iface;
+	public function finish() : static;
 
 	/**
 	 * Returns the associated customer item
@@ -181,9 +181,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the comment field of the order item
 	 *
 	 * @param string|null $comment Comment for the order
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 * @return static Order base item for chaining method calls
 	 */
-	public function setComment( ?string $comment ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setComment( ?string $comment ) : static;
 
 	/**
 	 * Returns the customer code of the customer who has ordered.
@@ -196,9 +196,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the customer code of the customer who has ordered.
 	 *
 	 * @param string|null $customerid Unique ID of the customer
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 * @return static Order base item for chaining method calls
 	 */
-	public function setCustomerId( ?string $customerid ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setCustomerId( ?string $customerid ) : static;
 
 	/**
 	 * Returns the customer reference field of the order item
@@ -211,9 +211,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the customer reference field of the order item
 	 *
 	 * @param string|null $value Customer reference for the order
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 * @return static Order base item for chaining method calls
 	 */
-	public function setCustomerReference( ?string $value ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setCustomerReference( ?string $value ) : static;
 
 	/**
 	 * Returns the locales for the basic order item.
@@ -226,9 +226,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the locales for the basic order item.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Object containing information about site, language, country and currency
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for chaining method calls
+	 * @return static Order base item for chaining method calls
 	 */
-	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale ) : static;
 
 	/**
 	 * Returns a price item with amounts calculated for the products, shipping costs and rebate.
@@ -250,18 +250,18 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param \Aimeos\MShop\Order\Item\Address\Iface $address Order address item for the given type
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Address\Base
 	 * @param int|null $position Position of the address in the list to overwrite
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function addAddress( \Aimeos\MShop\Order\Item\Address\Iface $address, string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function addAddress( \Aimeos\MShop\Order\Item\Address\Iface $address, string $type, ?int $position = null ) : static;
 
 	/**
 	 * Deleted a customer address for billing or delivery of an order.
 	 *
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Address\Base
 	 * @param int|null $position Position of the address in the list to overwrite
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function deleteAddress( string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function deleteAddress( string $type, ?int $position = null ) : static;
 
 	/**
 	 * Returns the billing or delivery address depending on the given type.
@@ -284,25 +284,25 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Replaces all addresses in the current basket with the new ones
 	 *
 	 * @param \Aimeos\Map|array $map Associative list of order addresses as returned by getAddresses()
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function setAddresses( iterable $map ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setAddresses( iterable $map ) : static;
 
 	/**
 	 * Adds a coupon code entered by the customer and the given product item to the basket.
 	 *
 	 * @param string $code Coupon code
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function addCoupon( string $code ) : \Aimeos\MShop\Order\Item\Iface;
+	public function addCoupon( string $code ) : static;
 
 	/**
 	 * Removes a coupon from the order.
 	 *
 	 * @param string $code Coupon code
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function deleteCoupon( string $code ) : \Aimeos\MShop\Order\Item\Iface;
+	public function deleteCoupon( string $code ) : static;
 
 	/**
 	 * Returns all coupon codes and the lists of affected product items.
@@ -316,34 +316,34 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 *
 	 * @param string $code Coupon code
 	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $products List of coupon products
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function setCoupon( string $code, iterable $products = [] ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setCoupon( string $code, iterable $products = [] ) : static;
 
 	/**
 	 * Replaces all coupons in the current basket with the new ones
 	 *
 	 * @param iterable $map Associative list of order coupons as returned by getCoupons()
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function setCoupons( iterable $map ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setCoupons( iterable $map ) : static;
 
 	/**
 	 * Adds an order product item to the (future) order.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Product\Iface $item Order product item to be added
 	 * @param int|null $position position of the new order product item
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function addProduct( \Aimeos\MShop\Order\Item\Product\Iface $item, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function addProduct( \Aimeos\MShop\Order\Item\Product\Iface $item, ?int $position = null ) : static;
 
 	/**
 	 * Deletes an order product item from the (future) order.
 	 *
 	 * @param int $position Position id of the order product item
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function deleteProduct( int $position ) : \Aimeos\MShop\Order\Item\Iface;
+	public function deleteProduct( int $position ) : static;
 
 	/**
 	 * Returns the product item of an (future) order specified by its key.
@@ -364,9 +364,9 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Replaces all products in the current basket with the new ones
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Product\Iface[] $map Associative list of ordered products as returned by getProducts()
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function setProducts( iterable $map ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setProducts( iterable $map ) : static;
 
 	/**
 	 * Adds an order service item as delivery or payment service to the basket
@@ -374,18 +374,18 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @param \Aimeos\MShop\Order\Item\Service\Iface $service Order service item for the given domain
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
 	 * @param int|null $position Position of the address in the list to overwrite
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function addService( \Aimeos\MShop\Order\Item\Service\Iface $service, string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function addService( \Aimeos\MShop\Order\Item\Service\Iface $service, string $type, ?int $position = null ) : static;
 
 	/**
 	 * Deletes the delivery or payment service from the basket.
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
 	 * @param int|null $position Position of the address in the list to overwrite
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function deleteService( string $type, ?int $position = null ) : \Aimeos\MShop\Order\Item\Iface;
+	public function deleteService( string $type, ?int $position = null ) : static;
 
 	/**
 	 * Returns the order services depending on the given type
@@ -409,17 +409,17 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Replaces all services in the current basket with the new ones
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Service\Iface[] $map Associative list of order services as returned by getServices()
-	 * @return \Aimeos\MShop\Order\Item\Iface Order base item for method chaining
+	 * @return static Order base item for method chaining
 	 */
-	public function setServices( iterable $map ) : \Aimeos\MShop\Order\Item\Iface;
+	public function setServices( iterable $map ) : static;
 
 	/**
 	 * Adds a status item to the order
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Status\Iface $item Order status item
-	 * @return \Aimeos\MShop\Order\Item\Iface Order item for method chaining
+	 * @return static Order item for method chaining
 	 */
-	public function addStatus( \Aimeos\MShop\Order\Item\Status\Iface $item ) : \Aimeos\MShop\Order\Item\Iface;
+	public function addStatus( \Aimeos\MShop\Order\Item\Status\Iface $item ) : static;
 
 	/**
 	 * Returns the status item specified by its type and value

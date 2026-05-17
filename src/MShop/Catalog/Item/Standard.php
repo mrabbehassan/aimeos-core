@@ -121,9 +121,9 @@ class Standard
 	 * Sets the unique ID of the node.
 	 *
 	 * @param string|null $id Unique ID of the node
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 * @return static Catalog item for chaining method calls
 	 */
-	public function setId( ?string $id = null ) : \Aimeos\MShop\Common\Item\Iface
+	public function setId( ?string $id = null ) : static
 	{
 		$this->node->setId( $id );
 		return $this;
@@ -156,9 +156,9 @@ class Standard
 	 * Sets the new internal name of the item.
 	 *
 	 * @param string $name New name of the item
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 * @return static Catalog item for chaining method calls
 	 */
-	public function setLabel( string $name ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function setLabel( string $name ) : static
 	{
 		$this->node->setLabel( $name );
 		return $this;
@@ -199,9 +199,9 @@ class Standard
 	 * Sets a new URL segment for the catalog.
 	 *
 	 * @param string|null $url New URL segment of the catalog item
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 * @return static Catalog item for chaining method calls
 	 */
-	public function setUrl( ?string $url ) : \Aimeos\MShop\Catalog\Item\Iface
+	public function setUrl( ?string $url ) : static
 	{
 		$this->node->url = (string) $url;
 		return $this;
@@ -223,9 +223,9 @@ class Standard
 	 * Sets the new code of the item.
 	 *
 	 * @param string $code New code of the item
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 * @return static Catalog item for chaining method calls
 	 */
-	public function setCode( string $code ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function setCode( string $code ) : static
 	{
 		$this->node->setCode( \Aimeos\Utils::code( $code ) );
 		return $this;
@@ -247,9 +247,9 @@ class Standard
 	 * Sets the new status of the item.
 	 *
 	 * @param int $status True if enabled, false if not
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 * @return static Catalog item for chaining method calls
 	 */
-	public function setStatus( int $status ) : \Aimeos\MShop\Common\Item\Iface
+	public function setStatus( int $status ) : static
 	{
 		$this->node->setStatus( $status );
 		return $this;
@@ -271,9 +271,9 @@ class Standard
 	 * Sets a new URL target specific for that category
 	 *
 	 * @param string $value New URL target specific for that category
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 * @return static Catalog item for chaining method calls
 	 */
-	public function setTarget( ?string $value ) : \Aimeos\MShop\Catalog\Item\Iface
+	public function setTarget( ?string $value ) : static
 	{
 		$this->node->target = (string) $value;
 		return $this;
@@ -287,6 +287,7 @@ class Standard
 	 */
 	public function getTimeModified() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->node->mtime;
 	}
 
@@ -298,6 +299,7 @@ class Standard
 	 */
 	public function getTimeCreated() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->node->ctime;
 	}
 
@@ -317,9 +319,9 @@ class Standard
 	 * Adds a child node to this node.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
-	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
+	 * @return static Tree item for chaining method calls
 	 */
-	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : static
 	{
 		// don't set the modified flag as it's only for the values
 		$this->children[] = $item;
@@ -332,9 +334,9 @@ class Standard
 	 * Removes a child node from this node.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to remove
-	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
+	 * @return static Tree item for chaining method calls
 	 */
-	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item ) : static
 	{
 		foreach( $this->children as $idx => $child )
 		{
@@ -353,11 +355,13 @@ class Standard
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param int $index Index of child node
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Selected node
+	 * @return static Selected node
 	 */
-	public function getChild( int $index ) : \Aimeos\MShop\Common\Item\Tree\Iface
+	public function getChild( int $index ) : static
+	// @phpstan-ignore return.type
 	{
 		if( isset( $this->children[$index] ) ) {
+			// @phpstan-ignore return.type
 			return $this->children[$index];
 		}
 
@@ -424,6 +428,7 @@ class Standard
 	 */
 	public function getLevel() : int
 	{
+		// @phpstan-ignore return.type
 		return $this->node->level ?: 0;
 	}
 
@@ -437,6 +442,7 @@ class Standard
 	 */
 	public function getParentId() : ?string
 	{
+		// @phpstan-ignore return.type
 		return $this->node->parentid;
 	}
 
@@ -466,11 +472,11 @@ class Standard
 	/*
 	 * Sets the item values from the given array and removes that entries from the list
 	 *
-	 * @param array &$list Associative list of item keys and their values
-	 * @param bool True to set private properties too, false for public only
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 * @type array &$list Associative list of item keys and their values
+	 * @param bool $private True to set private properties too, false for public only
+	 * @return static Catalog item for chaining method calls
 	 */
-	public function fromArray( array &$list, bool $private = false ) : \Aimeos\MShop\Common\Item\Iface
+	public function fromArray( array &$list, bool $private = false ) : static
 	{
 		$item = parent::fromArray( $list, $private );
 
@@ -478,13 +484,13 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'catalog.url': $item->setUrl( $value ); break;
-				case 'catalog.code': $item->setCode( $value ); break;
-				case 'catalog.label': $item->setLabel( $value ); break;
-				case 'catalog.target': $item->setTarget( $value ); break;
+				case 'catalog.url': $item->setUrl( $value ? (string) $value : null ); break;
+				case 'catalog.code': $item->setCode( (string) $value ); break;
+				case 'catalog.label': $item->setLabel( (string) $value ); break;
+				case 'catalog.target': $item->setTarget( $value ? (string) $value : null ); break;
 				case 'catalog.status': $item->setStatus( (int) $value ); break;
 				case 'catalog.config': $item->setConfig( (array) $value ); break;
-				case 'catalog.id': !$private ?: $item->setId( $value ); break;
+				case 'catalog.id': !$private ?: $item->setId( (string) $value ); break;
 				default: continue 2;
 			}
 
@@ -498,7 +504,7 @@ class Standard
 	/**
 	 * Returns the public values of the node as array.
 	 *
-	 * @param bool True to return private properties, false for public only
+	 * @param bool $private True to return private properties, false for public only
 	 * @return array Assciative list of key/value pairs
 	 */
 	public function toArray( bool $private = false ) : array
@@ -535,9 +541,10 @@ class Standard
 	 */
 	public function toList() : \Aimeos\Map
 	{
-		$list = map( [$this->getId() => $this] );
+		$list = map( [($this->getId() ?? '') => $this] );
 
 		foreach( $this->getChildren() as $child ) {
+			// @phpstan-ignore argument.type
 			$list = $list->union( $child->toList() );
 		}
 

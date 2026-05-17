@@ -90,9 +90,9 @@ class ProductPrice
 	 * Subscribes itself to a publisher
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $p Object implementing publisher interface
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for method chaining
+	 * @return static Plugin object for method chaining
 	 */
-	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : \Aimeos\MShop\Plugin\Provider\Iface
+	public function register( \Aimeos\MShop\Order\Item\Iface $p ) : static
 	{
 		$p->attach( $this->object(), 'check.after' );
 		return $this;
@@ -126,6 +126,7 @@ class ProductPrice
 				unset( $orderProducts[$pos] );
 			}
 
+			// @phpstan-ignore argument.type
 			$attrIds->merge( $item->getAttributeItems()->getAttributeId() );
 			$prodIds->push( $item->getParentProductId() )->push( $item->getProductId() );
 		}
@@ -137,7 +138,9 @@ class ProductPrice
 
 		foreach( $orderProducts as $pos => $orderProduct )
 		{
+			// @phpstan-ignore argument.type
 			$product = $products->get( $orderProduct->getProductId() );
+			// @phpstan-ignore argument.type
 			$parent = $products->get( $orderProduct->getParentProductId() );
 
 			if( !$product || !$product->getRefItems( 'attribute', 'price', 'custom' )->isEmpty()
@@ -147,11 +150,13 @@ class ProductPrice
 			}
 
 			// fetch price of articles/sub-products
-			$price = $this->getPrice( $orderProduct, $attributes, $this->prices( $product, $parent, $pos ) );
+			// @phpstan-ignore argument.type, argument.type, argument.type, argument.type
+			$price = $this->getPrice( $orderProduct, $attributes, $this->prices( $product, $parent, (int) $pos ) );
 
 			if( $orderProduct->getPrice()->compare( $price ) === false )
 			{
-				$order->addProduct( $orderProduct->setPrice( $price ), $pos );
+				// @phpstan-ignore argument.type, argument.type
+				$order->addProduct( $orderProduct->setPrice( $price ), (int) $pos );
 				$changedProducts[$pos] = 'price.changed';
 			}
 		}
@@ -201,7 +206,9 @@ class ProductPrice
 		$productManager = \Aimeos\MShop::create( $this->context(), 'product' );
 		$search = $productManager->filter( true )->add( ['product.id' => $prodIds] )->slice( 0, count( $prodIds ) );
 
+		// @phpstan-ignore argument.type
 		$items = $productManager->search( $search, ['catalog', 'price', 'attribute' => ['custom']] );
+		// @phpstan-ignore return.type
 		return \Aimeos\MShop::create( $this->context(), 'rule' )->apply( $items, 'catalog' );
 	}
 
@@ -221,11 +228,12 @@ class ProductPrice
 		$currency = $orderProduct->getPrice()->getCurrencyId();
 
 		$priceManager = \Aimeos\MShop::create( $this->context(), 'price' );
-		$price = clone $priceManager->getLowestPrice( $prices, $orderProduct->getQuantity(), $currency, $siteId );
+		$price = clone $priceManager->getLowestPrice( $prices, $orderProduct->getQuantity(), $currency, $siteId ); // @phpstan-ignore clone.nonObject
 
 		// add prices of product attributes to compute the end price for comparison
 		foreach( $orderProduct->getAttributeItems() as $orderAttribute )
 		{
+			// @phpstan-ignore argument.type
 			$attrItem = $attributes->get( $orderAttribute->getAttributeId() );
 			$attrPrices = $attrItem ? $attrItem->getRefItems( 'price', 'default', 'default' ) : map();
 
@@ -237,6 +245,7 @@ class ProductPrice
 		}
 
 		// reset product rebates like in the basket controller
+		// @phpstan-ignore return.type
 		return $price->setRebate( '0.00' );
 	}
 

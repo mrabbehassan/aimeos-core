@@ -70,7 +70,7 @@ abstract class Base
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for aggregating customer items
+		 * @type string SQL statement for aggregating customer items
 		 * @since 2021.04
 		 * @see mshop/customer/manager/insert/ansi
 		 * @see mshop/customer/manager/update/ansi
@@ -111,7 +111,7 @@ abstract class Base
 	public function find( string $code, array $ref = [], ?string $domain = null, ?string $type = null,
 		?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->findBase( ['customer.code' => $code], $ref, $default );
+		return $this->findBase( ['customer.code' => $code], $ref, $default ); // @phpstan-ignore return.type
 	}
 
 
@@ -126,7 +126,7 @@ abstract class Base
 	 */
 	public function get( string $id, array $ref = [], ?bool $default = false ) : \Aimeos\MShop\Common\Item\Iface
 	{
-		return $this->getItemBase( 'customer.id', $id, $ref, $default );
+		return $this->getItemBase( 'customer.id', $id, $ref, $default ); // @phpstan-ignore return.type
 	}
 
 
@@ -146,12 +146,14 @@ abstract class Base
 
 		foreach( $item->getGroups() as $refId )
 		{
+			// @phpstan-ignore argument.type
 			if( ( $litem = $item->getListItem( 'group', 'default', $refId, false ) ) !== null ) {
 				unset( $listItems[$litem->getId()], $listItems['__group_default_' . $refId] );
 			} else {
 				$litem = $manager->create()->setType( 'default' );
 			}
 
+			// @phpstan-ignore argument.type
 			$item->addListItem( 'group', $litem->setRefId( $refId )->setPosition( $pos++ ) );
 		}
 
@@ -176,7 +178,7 @@ abstract class Base
 		$values['.propitems'] = $propItems;
 		$values['.addritems'] = $addrItems;
 
-		return $this->create( $values );
+		return $this->create( $values ); // @phpstan-ignore return.type
 	}
 
 
@@ -187,10 +189,10 @@ abstract class Base
 	 * @param string $cfgpath Configuration path to the SQL statement
 	 * @param bool $siteid If siteid should be used in the statement
 	 * @param string $name Name of the ID column
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
 	protected function deleteItemsBase( $items, string $cfgpath, bool $siteid = true,
-		string $name = 'id' ) : \Aimeos\MShop\Common\Manager\Iface
+		string $name = 'id' ) : static
 	{
 		if( map( $items )->isEmpty() ) {
 			return $this;
@@ -203,12 +205,12 @@ abstract class Base
 		$translations = array( $name => '"' . $name . '"' );
 
 		$cond = $search->getConditionSource( $types, $translations );
-		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( $cfgpath ) );
+		$sql = str_replace( ':cond', (string) $cond, (string) $this->getSqlConfig( $cfgpath ) );
 
 		$context = $this->context();
 		$conn = $context->db( $this->getResourceName() );
 
-		$stmt = $conn->create( $sql );
+		$stmt = $conn->create( (string) $sql );
 
 		if( $siteid )
 		{

@@ -33,9 +33,9 @@ interface Iface
 	 * Sets the new label of the rule item.
 	 *
 	 * @param string $label New label of the rule item
-	 * @return \Aimeos\MShop\Rule\Item\Iface Rule item for chaining method calls
+	 * @return static Rule item for chaining method calls
 	 */
-	public function setLabel( string $label ) : \Aimeos\MShop\Rule\Item\Iface;
+	public function setLabel( string $label ) : static;
 
 	/**
 	 * Returns the provider of the rule.
@@ -48,7 +48,7 @@ interface Iface
 	 * Sets the new provider of the rule item which is the short name of the rule class name.
 	 *
 	 * @param string $provider Rule provider, esp. short rule class name
-	 * @return \Aimeos\MShop\Rule\Item\Iface Rule item for chaining method calls
+	 * @return static Rule item for chaining method calls
 	 */
-	public function setProvider( string $provider ) : \Aimeos\MShop\Rule\Item\Iface;
+	public function setProvider( string $provider ) : static;
 }

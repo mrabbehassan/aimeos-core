@@ -54,6 +54,7 @@ trait Traits
 			$manager = \Aimeos\Utils::create( $classname, [$manager, $context], $interface );
 		}
 
+		// @phpstan-ignore return.type
 		return $manager;
 	}
 
@@ -73,15 +74,17 @@ trait Traits
 
 		$subpath = $this->createSubNames( $managerpath );
 		$classprefix = '\Aimeos\MShop\\' . ucfirst( $domain ) . '\Manager\\' . $subpath . '\Decorator\\';
-		$decorators = array_reverse( $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', [] ) );
+		$decorators = array_reverse( (array) $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', [] ) );
+		// @phpstan-ignore argument.type
 		$manager = $this->addDecorators( $this->context(), $manager, $decorators, $classprefix );
 
 		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
-		$decorators = array_reverse( $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/global', [] ) );
+		$decorators = array_reverse( (array) $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/global', [] ) );
+		// @phpstan-ignore argument.type
 		$manager = $this->addDecorators( $this->context(), $manager, $decorators, $classprefix );
 
-		$decorators = array_reverse( $config->get( 'mshop/common/manager/decorators/default', [] ) );
-		$excludes = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/excludes', [] );
+		$decorators = array_reverse( (array) $config->get( 'mshop/common/manager/decorators/default', [] ) );
+		$excludes = (array) $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/excludes', [] );
 
 		foreach( $decorators as $key => $name )
 		{
@@ -91,6 +94,7 @@ trait Traits
 		}
 
 		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
+		// @phpstan-ignore argument.type
 		$manager = $this->addDecorators( $this->context(), $manager, $decorators, $classprefix );
 
 		return $manager;
@@ -148,8 +152,8 @@ trait Traits
 				throw new \LogicException( sprintf( 'Invalid characters in manager name "%1$s"', $manager ), 400 );
 			}
 
-			if( empty( $name ) || ctype_alnum( $name ) === false ) {
-				throw new \LogicException( sprintf( 'Invalid characters in manager name "%1$s"', $name ), 400 );
+			if( empty( $name ) || ctype_alnum( (string) $name ) === false ) {
+				throw new \LogicException( sprintf( 'Invalid characters in manager name "%1$s"', (string) $name ), 400 );
 			}
 
 			$domainname = ucfirst( $domain );
@@ -158,12 +162,15 @@ trait Traits
 			$class = '\Aimeos\MShop\\' . $domainname . '\Manager\\' . $subnames . '\\' . $name;
 			$iface = '\Aimeos\MShop\\' . $domainname . '\Manager\\' . $subnames . '\Iface';
 
+			// @phpstan-ignore argument.type
 			$subManager = \Aimeos\Utils::create( $class, [$context], interface_exists( $iface ) ? $iface : null );
 
+			// @phpstan-ignore argument.type
 			$subManager = $this->addManagerDecorators( $subManager, $manager, $domain );
 			$this->subManagers[$key] = $subManager->setObject( $subManager );
 		}
 
+		// @phpstan-ignore return.type
 		return $this->subManagers[$key];
 	}
 }

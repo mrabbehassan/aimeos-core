@@ -73,13 +73,15 @@ class FreeShipping
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		$orderProduct = $this->createProduct( $prodcode );
+		$orderProduct = $this->createProduct( (string) $prodcode );
 		$price = $orderProduct->getPrice()->clear();
 
 		foreach( $order->getService( \Aimeos\MShop\Order\Item\Service\Base::TYPE_DELIVERY ) as $service )
 		{
-			$price = $price->setRebate( $price->getRebate() + $service->getPrice()->getCosts() )
-				->setCosts( $price->getCosts() - $service->getPrice()->getCosts() )
+			// @phpstan-ignore argument.type, argument.type
+			$price = $price->setRebate( $price->getRebate() + $service->getPrice()->getCosts() ) // @phpstan-ignore binaryOp.invalid
+				// @phpstan-ignore argument.type
+				->setCosts( $price->getCosts() - $service->getPrice()->getCosts() ) // @phpstan-ignore binaryOp.invalid
 				->setTaxRates( $service->getPrice()->getTaxRates() );
 		}
 
